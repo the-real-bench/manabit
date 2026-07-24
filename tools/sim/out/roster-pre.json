@@ -1,0 +1,2031 @@
+{
+  "baseline_matrix": {
+    "order": [
+      "Nuke",
+      "Wall",
+      "Tempo",
+      "Swarm",
+      "Sniper"
+    ],
+    "rows": [
+      [
+        null,
+        0.533333333333333,
+        0.966666666666667,
+        0.533333333333333,
+        1.0
+      ],
+      [
+        0.783333333333333,
+        null,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        0.0,
+        0.0,
+        null,
+        0.0,
+        0.6
+      ],
+      [
+        0.866666666666667,
+        0.0666666666666667,
+        0.933333333333333,
+        null,
+        1.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0333333333333333,
+        0.0,
+        null
+      ]
+    ]
+  },
+  "bits": [
+    {
+      "family": "artificer_first",
+      "id": "core_ember",
+      "mean_delta": 0.0427083333333333,
+      "n": 480,
+      "name": "Ember Core",
+      "per_template": {
+        "Sniper": 0.05,
+        "Swarm": 0.108333333333333,
+        "Tempo": 0.0333333333333333,
+        "Wall": -0.0208333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "CORE"
+    },
+    {
+      "family": "artificer_first",
+      "id": "core_bulwark",
+      "mean_delta": 0.15,
+      "n": 480,
+      "name": "Bulwark Core",
+      "per_template": {
+        "Nuke": 0.183333333333333,
+        "Sniper": 0.125,
+        "Swarm": 0.241666666666667,
+        "Tempo": 0.05
+      },
+      "rarity": "COMMON",
+      "slot": "CORE"
+    },
+    {
+      "family": "artificer_first",
+      "id": "core_font",
+      "mean_delta": -0.0472222222222222,
+      "n": 360,
+      "name": "Font Core",
+      "per_template": {
+        "Nuke": -0.0166666666666667,
+        "Tempo": -0.025,
+        "Wall": -0.1
+      },
+      "rarity": "COMMON",
+      "slot": "CORE"
+    },
+    {
+      "family": "baseline",
+      "id": "head_optic",
+      "mean_delta": 0.0391666666666667,
+      "n": 600,
+      "name": "Optic Visor",
+      "per_template": {
+        "Nuke": 0.0333333333333333,
+        "Sniper": 0.158333333333333,
+        "Swarm": -0.0916666666666667,
+        "Tempo": 0.1,
+        "Wall": -0.00416666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "baseline",
+      "id": "head_hornet",
+      "mean_delta": 0.114166666666667,
+      "n": 600,
+      "name": "Hornet Crown",
+      "per_template": {
+        "Nuke": 0.0333333333333333,
+        "Sniper": 0.225,
+        "Swarm": 0.175,
+        "Tempo": 0.175,
+        "Wall": -0.0375
+      },
+      "rarity": "RARE",
+      "slot": "HEAD"
+    },
+    {
+      "family": "baseline",
+      "id": "arm_hammer",
+      "mean_delta": 0.0958333333333333,
+      "n": 600,
+      "name": "Iron Hammer",
+      "per_template": {
+        "Nuke": -0.1,
+        "Sniper": 0.283333333333333,
+        "Swarm": 0.00833333333333333,
+        "Tempo": 0.233333333333333,
+        "Wall": 0.0541666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "baseline",
+      "id": "arm_flail",
+      "mean_delta": 0.0425,
+      "n": 600,
+      "name": "Chain Flail",
+      "per_template": {
+        "Nuke": -0.116666666666667,
+        "Sniper": 0.1,
+        "Swarm": 0.025,
+        "Tempo": 0.208333333333333,
+        "Wall": -0.00416666666666667
+      },
+      "rarity": "RARE",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "baseline",
+      "id": "arm_buckler",
+      "mean_delta": -0.0233333333333333,
+      "n": 600,
+      "name": "Rune Buckler",
+      "per_template": {
+        "Nuke": 0.108333333333333,
+        "Sniper": 0.0666666666666667,
+        "Swarm": 0.1625,
+        "Tempo": -0.0291666666666667,
+        "Wall": -0.425
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "baseline",
+      "id": "arm_seer",
+      "mean_delta": -0.00583333333333333,
+      "n": 600,
+      "name": "Seer Gauntlet",
+      "per_template": {
+        "Nuke": -0.0333333333333333,
+        "Sniper": 0.116666666666667,
+        "Swarm": -0.025,
+        "Tempo": -0.0416666666666667,
+        "Wall": -0.0458333333333333
+      },
+      "rarity": "EPIC",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "baseline",
+      "id": "legs_light",
+      "mean_delta": 0.00666666666666667,
+      "n": 600,
+      "name": "Sprinter Legs",
+      "per_template": {
+        "Nuke": 0.00833333333333333,
+        "Sniper": 0.0833333333333333,
+        "Swarm": -0.108333333333333,
+        "Tempo": 0.075,
+        "Wall": -0.025
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "baseline",
+      "id": "legs_tread",
+      "mean_delta": 0.0583333333333333,
+      "n": 600,
+      "name": "Tread Legs",
+      "per_template": {
+        "Nuke": 0.1,
+        "Sniper": 0.183333333333333,
+        "Swarm": -0.116666666666667,
+        "Tempo": 0.108333333333333,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "LEGS"
+    },
+    {
+      "family": "baseline",
+      "id": "back_bellows",
+      "mean_delta": 0.0183333333333333,
+      "n": 600,
+      "name": "Mana Bellows",
+      "per_template": {
+        "Nuke": 0.125,
+        "Sniper": -0.00833333333333333,
+        "Swarm": -0.0166666666666667,
+        "Tempo": 0.00833333333333333,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "baseline",
+      "id": "back_wing",
+      "mean_delta": 0.0508333333333333,
+      "n": 600,
+      "name": "Glider Wing",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.1,
+        "Swarm": 0.0583333333333333,
+        "Tempo": -0.0666666666666667,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "EPIC",
+      "slot": "BACK"
+    },
+    {
+      "family": "whirligig",
+      "id": "whirligig_core_quickstart",
+      "mean_delta": 0.0302083333333333,
+      "n": 480,
+      "name": "Quickstart Core",
+      "per_template": {
+        "Nuke": 0.00833333333333333,
+        "Sniper": 0.0416666666666667,
+        "Swarm": 0.0916666666666667,
+        "Wall": -0.0208333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "CORE"
+    },
+    {
+      "family": "whirligig",
+      "id": "whirligig_head_windshear",
+      "mean_delta": -0.0989583333333333,
+      "n": 480,
+      "name": "Windshear Visor",
+      "per_template": {
+        "Nuke": -0.0333333333333333,
+        "Sniper": 0.0,
+        "Swarm": -0.241666666666667,
+        "Wall": -0.120833333333333
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "whirligig",
+      "id": "whirligig_arm_overdrive",
+      "mean_delta": 0.0541666666666667,
+      "n": 600,
+      "name": "Overdrive Driver",
+      "per_template": {
+        "Nuke": -0.116666666666667,
+        "Sniper": 0.116666666666667,
+        "Swarm": 0.05,
+        "Tempo": 0.216666666666667,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "EPIC",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "whirligig",
+      "id": "whirligig_arm_turbine",
+      "mean_delta": 0.0291666666666667,
+      "n": 600,
+      "name": "Turbine Fist",
+      "per_template": {
+        "Nuke": -0.0666666666666667,
+        "Sniper": 0.158333333333333,
+        "Swarm": 0.0666666666666667,
+        "Tempo": 0.05,
+        "Wall": -0.0625
+      },
+      "rarity": "RARE",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "whirligig",
+      "id": "whirligig_legs_zephyr",
+      "mean_delta": -0.075,
+      "n": 600,
+      "name": "Zephyr Tread",
+      "per_template": {
+        "Nuke": -0.1,
+        "Sniper": 0.0,
+        "Swarm": -0.191666666666667,
+        "Tempo": -0.0166666666666667,
+        "Wall": -0.0666666666666667
+      },
+      "rarity": "RARE",
+      "slot": "LEGS"
+    },
+    {
+      "family": "whirligig",
+      "id": "whirligig_back_slipfin",
+      "mean_delta": 0.0354166666666667,
+      "n": 480,
+      "name": "Slipstream Fin",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.0,
+        "Swarm": 0.0,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "errant",
+      "id": "errant_core_pledge",
+      "mean_delta": 0.165,
+      "n": 600,
+      "name": "Pledge Core",
+      "per_template": {
+        "Nuke": 0.225,
+        "Sniper": 0.216666666666667,
+        "Swarm": 0.275,
+        "Tempo": 0.0916666666666667,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "CORE"
+    },
+    {
+      "family": "errant",
+      "id": "errant_arm_warder",
+      "mean_delta": -0.0135416666666667,
+      "n": 480,
+      "name": "Warder",
+      "per_template": {
+        "Nuke": -0.158333333333333,
+        "Sniper": 0.0166666666666667,
+        "Swarm": 0.0333333333333333,
+        "Tempo": 0.0541666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "errant",
+      "id": "errant_arm_oathblade",
+      "mean_delta": -0.01,
+      "n": 600,
+      "name": "Oathblade",
+      "per_template": {
+        "Nuke": -0.05,
+        "Sniper": 0.1,
+        "Swarm": -0.025,
+        "Tempo": -0.0583333333333333,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "errant",
+      "id": "errant_arm_vowkeeper",
+      "mean_delta": 0.0725,
+      "n": 600,
+      "name": "Vowkeeper",
+      "per_template": {
+        "Nuke": -0.0166666666666667,
+        "Sniper": 0.216666666666667,
+        "Swarm": 0.025,
+        "Tempo": 0.125,
+        "Wall": 0.0125
+      },
+      "rarity": "RARE",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "errant",
+      "id": "errant_legs_vigil",
+      "mean_delta": 0.0266666666666667,
+      "n": 600,
+      "name": "Vigil Greaves",
+      "per_template": {
+        "Nuke": 0.0,
+        "Sniper": 0.116666666666667,
+        "Swarm": -0.075,
+        "Tempo": 0.0916666666666667,
+        "Wall": 0.0
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "errant",
+      "id": "errant_legs_rampart",
+      "mean_delta": 0.0933333333333333,
+      "n": 600,
+      "name": "Rampart Greaves",
+      "per_template": {
+        "Nuke": 0.1,
+        "Sniper": 0.2,
+        "Swarm": 0.0,
+        "Tempo": 0.15,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "LEGS"
+    },
+    {
+      "family": "pith_sinew",
+      "id": "pith_sinew_heartcore",
+      "mean_delta": 0.0483333333333333,
+      "n": 600,
+      "name": "Pith Heart-Core",
+      "per_template": {
+        "Nuke": 0.0666666666666667,
+        "Sniper": 0.116666666666667,
+        "Swarm": 0.125,
+        "Tempo": -0.0416666666666667,
+        "Wall": -0.025
+      },
+      "rarity": "COMMON",
+      "slot": "CORE"
+    },
+    {
+      "family": "pith_sinew",
+      "id": "pith_sinew_caul_hood",
+      "mean_delta": -0.0575,
+      "n": 600,
+      "name": "Caul Hood",
+      "per_template": {
+        "Nuke": -0.0166666666666667,
+        "Sniper": 0.025,
+        "Swarm": -0.2,
+        "Tempo": 0.0,
+        "Wall": -0.0958333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "pith_sinew",
+      "id": "pith_sinew_marrow_legs",
+      "mean_delta": 0.085,
+      "n": 600,
+      "name": "Marrow Legs",
+      "per_template": {
+        "Nuke": 0.1,
+        "Sniper": 0.225,
+        "Swarm": -0.0333333333333333,
+        "Tempo": 0.116666666666667,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "pith_sinew",
+      "id": "pith_sinew_deep_pulse_sac",
+      "mean_delta": 0.0516666666666667,
+      "n": 600,
+      "name": "Deep-Pulse Sac",
+      "per_template": {
+        "Nuke": 0.2,
+        "Sniper": 0.0583333333333333,
+        "Swarm": 0.0583333333333333,
+        "Tempo": -0.0583333333333333,
+        "Wall": 0.0
+      },
+      "rarity": "EPIC",
+      "slot": "BACK"
+    },
+    {
+      "family": "boldheart",
+      "id": "boldheart_core_sunheart",
+      "mean_delta": 0.100833333333333,
+      "n": 600,
+      "name": "Sunheart Core",
+      "per_template": {
+        "Nuke": 0.0416666666666667,
+        "Sniper": 0.108333333333333,
+        "Swarm": 0.225,
+        "Tempo": 0.116666666666667,
+        "Wall": 0.0125
+      },
+      "rarity": "RARE",
+      "slot": "CORE"
+    },
+    {
+      "family": "boldheart",
+      "id": "boldheart_arm_sunder",
+      "mean_delta": 0.1475,
+      "n": 600,
+      "name": "Sunder-Drill",
+      "per_template": {
+        "Nuke": -0.0666666666666667,
+        "Sniper": 0.45,
+        "Swarm": 0.125,
+        "Tempo": 0.175,
+        "Wall": 0.0541666666666667
+      },
+      "rarity": "RARE",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "boldheart",
+      "id": "boldheart_arm_meteor",
+      "mean_delta": 0.264166666666667,
+      "n": 600,
+      "name": "Meteor Knuckle",
+      "per_template": {
+        "Nuke": 0.0416666666666667,
+        "Sniper": 0.525,
+        "Swarm": 0.283333333333333,
+        "Tempo": 0.45,
+        "Wall": 0.0208333333333333
+      },
+      "rarity": "EPIC",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "boldheart",
+      "id": "boldheart_back_rocketspine",
+      "mean_delta": -0.04375,
+      "n": 480,
+      "name": "Rocketspine Booster",
+      "per_template": {
+        "Sniper": -0.00833333333333333,
+        "Swarm": -0.0333333333333333,
+        "Tempo": -0.0416666666666667,
+        "Wall": -0.0916666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "grumble_co",
+      "id": "grumble_co_keystone_core",
+      "mean_delta": 0.170833333333333,
+      "n": 600,
+      "name": "Keystone Core",
+      "per_template": {
+        "Nuke": 0.225,
+        "Sniper": 0.233333333333333,
+        "Swarm": 0.275,
+        "Tempo": 0.104166666666667,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "CORE"
+    },
+    {
+      "family": "grumble_co",
+      "id": "grumble_co_anvil_cowl",
+      "mean_delta": 0.0583333333333333,
+      "n": 480,
+      "name": "Grumble No.2 Anvil Cowl",
+      "per_template": {
+        "Nuke": 0.183333333333333,
+        "Sniper": 0.1,
+        "Swarm": -0.116666666666667,
+        "Tempo": 0.0666666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "grumble_co",
+      "id": "grumble_co_girder_fist",
+      "mean_delta": 0.190625,
+      "n": 480,
+      "name": "Grumble No.4 Girder Fist",
+      "per_template": {
+        "Sniper": 0.341666666666667,
+        "Swarm": 0.0666666666666667,
+        "Tempo": 0.3,
+        "Wall": 0.0541666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "grumble_co",
+      "id": "grumble_co_bastion_fist",
+      "mean_delta": 0.0733333333333333,
+      "n": 600,
+      "name": "Grumble No.9 Bastion Fist",
+      "per_template": {
+        "Nuke": -0.0125,
+        "Sniper": 0.129166666666667,
+        "Swarm": 0.0791666666666667,
+        "Tempo": 0.154166666666667,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "EPIC",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "grumble_co",
+      "id": "grumble_co_slab_pauldron",
+      "mean_delta": -0.115833333333333,
+      "n": 600,
+      "name": "Grumble No.6 Slab-Pauldron",
+      "per_template": {
+        "Nuke": 0.00833333333333333,
+        "Sniper": -0.00833333333333333,
+        "Swarm": 0.0583333333333333,
+        "Tempo": -0.133333333333333,
+        "Wall": -0.504166666666667
+      },
+      "rarity": "RARE",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "grumble_co",
+      "id": "grumble_co_furnace_pack",
+      "mean_delta": 0.114583333333333,
+      "n": 480,
+      "name": "Grumble No.3 Furnace Pack",
+      "per_template": {
+        "Nuke": 0.216666666666667,
+        "Sniper": 0.0833333333333333,
+        "Swarm": 0.1,
+        "Tempo": 0.0583333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "quivergear",
+      "id": "quivergear_magazine_core",
+      "mean_delta": 0.065,
+      "n": 600,
+      "name": "Magazine Core",
+      "per_template": {
+        "Nuke": 0.0666666666666667,
+        "Sniper": 0.125,
+        "Swarm": 0.15,
+        "Tempo": 0.00833333333333333,
+        "Wall": -0.025
+      },
+      "rarity": "RARE",
+      "slot": "CORE"
+    },
+    {
+      "family": "quivergear",
+      "id": "quivergear_salvo_fist",
+      "mean_delta": -0.0486111111111111,
+      "n": 360,
+      "name": "Salvo Fist",
+      "per_template": {
+        "Nuke": -0.075,
+        "Sniper": -0.00833333333333333,
+        "Wall": -0.0625
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "quivergear",
+      "id": "quivergear_volley_pod",
+      "mean_delta": 0.0395833333333333,
+      "n": 480,
+      "name": "Volley Pod",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.0,
+        "Tempo": 0.0166666666666667,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "quivergear",
+      "id": "quivergear_payload_rack",
+      "mean_delta": 0.104166666666667,
+      "n": 600,
+      "name": "Payload Rack",
+      "per_template": {
+        "Nuke": 0.216666666666667,
+        "Sniper": 0.0583333333333333,
+        "Swarm": 0.158333333333333,
+        "Tempo": 0.075,
+        "Wall": 0.0125
+      },
+      "rarity": "RARE",
+      "slot": "BACK"
+    },
+    {
+      "family": "quivergear",
+      "id": "quivergear_sky_rack",
+      "mean_delta": 0.0166666666666667,
+      "n": 600,
+      "name": "Sky-Rack",
+      "per_template": {
+        "Nuke": 0.125,
+        "Sniper": 0.0583333333333333,
+        "Swarm": 0.00833333333333333,
+        "Tempo": -0.0916666666666667,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "EPIC",
+      "slot": "BACK"
+    },
+    {
+      "family": "everykit_standard",
+      "id": "everykit_standard_cowl",
+      "mean_delta": -0.015625,
+      "n": 480,
+      "name": "Everykit Standard Cowl",
+      "per_template": {
+        "Sniper": 0.0416666666666667,
+        "Swarm": -0.15,
+        "Tempo": 0.0833333333333333,
+        "Wall": -0.0375
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "everykit_standard",
+      "id": "everykit_standard_cowl_mk2",
+      "mean_delta": 0.0708333333333333,
+      "n": 600,
+      "name": "Everykit Mk. II Cowl",
+      "per_template": {
+        "Nuke": 0.0333333333333333,
+        "Sniper": 0.166666666666667,
+        "Swarm": 0.025,
+        "Tempo": 0.125,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "RARE",
+      "slot": "HEAD"
+    },
+    {
+      "family": "everykit_standard",
+      "id": "everykit_standard_piston",
+      "mean_delta": 0.0791666666666667,
+      "n": 600,
+      "name": "Everykit Standard Piston",
+      "per_template": {
+        "Nuke": -0.0583333333333333,
+        "Sniper": 0.125,
+        "Swarm": 0.05,
+        "Tempo": 0.258333333333333,
+        "Wall": 0.0208333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "everykit_standard",
+      "id": "everykit_standard_fist",
+      "mean_delta": 0.0283333333333333,
+      "n": 600,
+      "name": "Everykit Standard Fist",
+      "per_template": {
+        "Nuke": -0.00833333333333333,
+        "Sniper": 0.0916666666666667,
+        "Swarm": -0.0166666666666667,
+        "Tempo": 0.0666666666666667,
+        "Wall": 0.00833333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "everykit_standard",
+      "id": "everykit_standard_strider_legs",
+      "mean_delta": 0.0916666666666667,
+      "n": 600,
+      "name": "Everykit Strider Legs",
+      "per_template": {
+        "Nuke": 0.1,
+        "Sniper": 0.225,
+        "Swarm": -0.0166666666666667,
+        "Tempo": 0.133333333333333,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "everykit_standard",
+      "id": "everykit_standard_cell",
+      "mean_delta": 0.0316666666666667,
+      "n": 600,
+      "name": "Everykit Standard Cell",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.0,
+        "Swarm": 0.0,
+        "Tempo": 0.0166666666666667,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "silksteel",
+      "id": "silksteel_head_gauze",
+      "mean_delta": -0.0645833333333333,
+      "n": 480,
+      "name": "Gauze Visor",
+      "per_template": {
+        "Nuke": -0.0166666666666667,
+        "Swarm": -0.2,
+        "Tempo": 0.025,
+        "Wall": -0.0666666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "silksteel",
+      "id": "silksteel_head_whisper",
+      "mean_delta": -0.000833333333333333,
+      "n": 600,
+      "name": "Whisper Visor",
+      "per_template": {
+        "Nuke": 0.0166666666666667,
+        "Sniper": 0.0666666666666667,
+        "Swarm": -0.141666666666667,
+        "Tempo": 0.0833333333333333,
+        "Wall": -0.0291666666666667
+      },
+      "rarity": "RARE",
+      "slot": "HEAD"
+    },
+    {
+      "family": "silksteel",
+      "id": "silksteel_head_oracle",
+      "mean_delta": 0.0125,
+      "n": 600,
+      "name": "Oracle Lens",
+      "per_template": {
+        "Nuke": 0.0166666666666667,
+        "Sniper": 0.0666666666666667,
+        "Swarm": -0.1,
+        "Tempo": 0.108333333333333,
+        "Wall": -0.0291666666666667
+      },
+      "rarity": "EPIC",
+      "slot": "HEAD"
+    },
+    {
+      "family": "silksteel",
+      "id": "silksteel_arm_needle",
+      "mean_delta": -0.101041666666667,
+      "n": 480,
+      "name": "Needle-Arm",
+      "per_template": {
+        "Nuke": -0.05,
+        "Swarm": -0.0666666666666667,
+        "Tempo": -0.1,
+        "Wall": -0.1875
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "silksteel",
+      "id": "silksteel_legs_slip",
+      "mean_delta": -0.105555555555556,
+      "n": 360,
+      "name": "Slip Greaves",
+      "per_template": {
+        "Nuke": -0.0416666666666667,
+        "Swarm": -0.208333333333333,
+        "Wall": -0.0666666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "chatterbox",
+      "id": "chatterbox_prattle_dome",
+      "mean_delta": 0.0395833333333333,
+      "n": 480,
+      "name": "Chatterbox Unit-2 Prattle Dome",
+      "per_template": {
+        "Nuke": 0.025,
+        "Sniper": 0.116666666666667,
+        "Tempo": 0.108333333333333,
+        "Wall": -0.0916666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "chatterbox",
+      "id": "chatterbox_bigeye_dome",
+      "mean_delta": 0.100833333333333,
+      "n": 600,
+      "name": "Chatterbox Unit-7 Big-Eye Dome",
+      "per_template": {
+        "Nuke": 0.025,
+        "Sniper": 0.225,
+        "Swarm": 0.141666666666667,
+        "Tempo": 0.158333333333333,
+        "Wall": -0.0458333333333333
+      },
+      "rarity": "RARE",
+      "slot": "HEAD"
+    },
+    {
+      "family": "chatterbox",
+      "id": "chatterbox_skitter_legs_6",
+      "mean_delta": 0.0283333333333333,
+      "n": 600,
+      "name": "Chatterbox Unit-6 Skitter-Legs",
+      "per_template": {
+        "Nuke": 0.0,
+        "Sniper": 0.133333333333333,
+        "Swarm": -0.0666666666666667,
+        "Tempo": 0.075,
+        "Wall": 0.0
+      },
+      "rarity": "RARE",
+      "slot": "LEGS"
+    },
+    {
+      "family": "chatterbox",
+      "id": "chatterbox_notion_pack",
+      "mean_delta": 0.0395833333333333,
+      "n": 480,
+      "name": "Chatterbox Unit-5 Notion Pack",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Swarm": 0.0,
+        "Tempo": 0.0166666666666667,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "pocketful",
+      "id": "pocketful_head_bonce",
+      "mean_delta": -0.05,
+      "n": 600,
+      "name": "Pocketful Series 2 Big-Bonce Head",
+      "per_template": {
+        "Nuke": -0.00833333333333333,
+        "Sniper": 0.0,
+        "Swarm": -0.2,
+        "Tempo": 0.025,
+        "Wall": -0.0666666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "HEAD"
+    },
+    {
+      "family": "pocketful",
+      "id": "pocketful_arm_weefist",
+      "mean_delta": -0.165277777777778,
+      "n": 360,
+      "name": "Pocketful Series 2 Wee Fist",
+      "per_template": {
+        "Nuke": -0.233333333333333,
+        "Swarm": -0.233333333333333,
+        "Wall": -0.0291666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "pocketful",
+      "id": "pocketful_arm_grinlet",
+      "mean_delta": -0.1225,
+      "n": 600,
+      "name": "Pocketful Series 12 Grinlet's Paw",
+      "per_template": {
+        "Nuke": -0.25,
+        "Sniper": -0.00833333333333333,
+        "Swarm": -0.233333333333333,
+        "Tempo": -0.0833333333333333,
+        "Wall": -0.0375
+      },
+      "rarity": "EPIC",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "pocketful",
+      "id": "pocketful_legs_stubby",
+      "mean_delta": 0.03125,
+      "n": 480,
+      "name": "Pocketful Series 2 Stubby Legs",
+      "per_template": {
+        "Sniper": 0.125,
+        "Swarm": -0.0833333333333333,
+        "Tempo": 0.0833333333333333,
+        "Wall": 0.0
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "pocketful",
+      "id": "pocketful_back_pippack",
+      "mean_delta": 0.0316666666666667,
+      "n": 600,
+      "name": "Pocketful Series 3 Pip Pack",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.0,
+        "Swarm": 0.0,
+        "Tempo": 0.0166666666666667,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "BACK"
+    },
+    {
+      "family": "thicket_fang",
+      "id": "thicket_fang_arm_rendclaw",
+      "mean_delta": 0.028125,
+      "n": 480,
+      "name": "Rend-Claw",
+      "per_template": {
+        "Nuke": -0.116666666666667,
+        "Sniper": 0.0583333333333333,
+        "Tempo": 0.166666666666667,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "thicket_fang",
+      "id": "thicket_fang_arm_goreclaw",
+      "mean_delta": 0.0875,
+      "n": 600,
+      "name": "Gore-Claw",
+      "per_template": {
+        "Nuke": -0.108333333333333,
+        "Sniper": 0.116666666666667,
+        "Swarm": 0.158333333333333,
+        "Tempo": 0.266666666666667,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "RARE",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "thicket_fang",
+      "id": "thicket_fang_arm_gnashmaw",
+      "mean_delta": 0.0739583333333333,
+      "n": 480,
+      "name": "Gnash Maw",
+      "per_template": {
+        "Sniper": 0.191666666666667,
+        "Swarm": -0.0333333333333333,
+        "Tempo": 0.116666666666667,
+        "Wall": 0.0208333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "thicket_fang",
+      "id": "thicket_fang_arm_flenseclaw",
+      "mean_delta": 0.0816666666666667,
+      "n": 600,
+      "name": "Flense-Claw",
+      "per_template": {
+        "Nuke": -0.025,
+        "Sniper": 0.275,
+        "Swarm": 0.183333333333333,
+        "Tempo": 0.1,
+        "Wall": -0.125
+      },
+      "rarity": "EPIC",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "thicket_fang",
+      "id": "thicket_fang_legs_haunch",
+      "mean_delta": 0.119791666666667,
+      "n": 480,
+      "name": "Haunch Legs",
+      "per_template": {
+        "Nuke": 0.05,
+        "Sniper": 0.175,
+        "Tempo": 0.233333333333333,
+        "Wall": 0.0208333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    },
+    {
+      "family": "cobble_sons",
+      "id": "cobble_sons_arm_mendclaw",
+      "mean_delta": -0.0133333333333333,
+      "n": 600,
+      "name": "Cobble & Sons No.4 Mendclaw",
+      "per_template": {
+        "Nuke": -0.116666666666667,
+        "Sniper": 0.00833333333333333,
+        "Swarm": 0.00416666666666667,
+        "Tempo": 0.0333333333333333,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "cobble_sons",
+      "id": "cobble_sons_arm_mendclaw_no7",
+      "mean_delta": 0.0341666666666667,
+      "n": 600,
+      "name": "Cobble & Sons No.7 Mendclaw",
+      "per_template": {
+        "Nuke": -0.0833333333333333,
+        "Sniper": 0.0791666666666667,
+        "Swarm": 0.0458333333333333,
+        "Tempo": 0.116666666666667,
+        "Wall": 0.0125
+      },
+      "rarity": "RARE",
+      "slot": "ARM_L"
+    },
+    {
+      "family": "cobble_sons",
+      "id": "cobble_sons_arm_ratchet",
+      "mean_delta": 0.0416666666666667,
+      "n": 480,
+      "name": "Cobble & Sons No.3 Ratchet Grip",
+      "per_template": {
+        "Nuke": -0.00833333333333333,
+        "Sniper": 0.0916666666666667,
+        "Swarm": 0.025,
+        "Tempo": 0.0583333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "cobble_sons",
+      "id": "cobble_sons_legs_bedrock",
+      "mean_delta": 0.34,
+      "n": 600,
+      "name": "Cobble & Sons Bedrock Legs",
+      "per_template": {
+        "Nuke": 0.233333333333333,
+        "Sniper": 0.6,
+        "Swarm": 0.258333333333333,
+        "Tempo": 0.558333333333333,
+        "Wall": 0.05
+      },
+      "rarity": "EPIC",
+      "slot": "LEGS"
+    },
+    {
+      "family": "cobble_sons",
+      "id": "cobble_sons_back_toolrack",
+      "mean_delta": 0.005,
+      "n": 600,
+      "name": "Cobble & Sons No.5 Toolrack Pack",
+      "per_template": {
+        "Nuke": 0.116666666666667,
+        "Sniper": 0.0583333333333333,
+        "Swarm": 0.00833333333333333,
+        "Tempo": -0.116666666666667,
+        "Wall": -0.0416666666666667
+      },
+      "rarity": "COMMON",
+      "slot": "BACK"
+    },
+    {
+      "family": "sovereign_brass",
+      "id": "sovereign_brass_arm_pistonfist",
+      "mean_delta": 0.2,
+      "n": 600,
+      "name": "Pistonfist",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.308333333333333,
+        "Swarm": 0.233333333333333,
+        "Tempo": 0.283333333333333,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "ARM_R"
+    },
+    {
+      "family": "sovereign_brass",
+      "id": "sovereign_brass_back_mantle",
+      "mean_delta": 0.0316666666666667,
+      "n": 600,
+      "name": "Mantle of State",
+      "per_template": {
+        "Nuke": 0.158333333333333,
+        "Sniper": 0.0,
+        "Swarm": 0.0,
+        "Tempo": 0.0166666666666667,
+        "Wall": -0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "BACK"
+    },
+    {
+      "family": "sovereign_brass",
+      "id": "sovereign_brass_head_herald",
+      "mean_delta": 0.149166666666667,
+      "n": 600,
+      "name": "Herald Crown",
+      "per_template": {
+        "Nuke": 0.208333333333333,
+        "Sniper": 0.108333333333333,
+        "Swarm": 0.225,
+        "Tempo": 0.2,
+        "Wall": 0.00416666666666667
+      },
+      "rarity": "RARE",
+      "slot": "HEAD"
+    },
+    {
+      "family": "sovereign_brass",
+      "id": "sovereign_brass_core_regalia",
+      "mean_delta": 0.230833333333333,
+      "n": 600,
+      "name": "Regalia Core",
+      "per_template": {
+        "Nuke": 0.225,
+        "Sniper": 0.425,
+        "Swarm": 0.275,
+        "Tempo": 0.183333333333333,
+        "Wall": 0.0458333333333333
+      },
+      "rarity": "EPIC",
+      "slot": "CORE"
+    },
+    {
+      "family": "sovereign_brass",
+      "id": "sovereign_brass_legs_colonnade",
+      "mean_delta": 0.0916666666666667,
+      "n": 600,
+      "name": "Colonnade Greaves",
+      "per_template": {
+        "Nuke": 0.1,
+        "Sniper": 0.225,
+        "Swarm": -0.0166666666666667,
+        "Tempo": 0.133333333333333,
+        "Wall": 0.0166666666666667
+      },
+      "rarity": "RARE",
+      "slot": "LEGS"
+    },
+    {
+      "family": "tinbox",
+      "id": "tinbox_legs_trusty",
+      "mean_delta": 0.0291666666666667,
+      "n": 480,
+      "name": "Tinbox Chum #05 Trusty Legs",
+      "per_template": {
+        "Nuke": -0.00833333333333333,
+        "Sniper": 0.125,
+        "Swarm": -0.0833333333333333,
+        "Tempo": 0.0833333333333333
+      },
+      "rarity": "COMMON",
+      "slot": "LEGS"
+    }
+  ],
+  "family_builds": {
+    "artificer_first": {
+      "capacity": 106,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_bulwark",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "owned": {
+        "CORE": true
+      },
+      "weight": 52
+    },
+    "baseline": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "arm_seer",
+        "BACK": "back_wing",
+        "CORE": "core_ember",
+        "HEAD": "head_hornet",
+        "LEGS": "legs_tread"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_R": true,
+        "BACK": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 98
+    },
+    "boldheart": {
+      "capacity": 104,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "boldheart_arm_meteor",
+        "BACK": "boldheart_back_rocketspine",
+        "CORE": "boldheart_core_sunheart",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_R": true,
+        "BACK": true,
+        "CORE": true
+      },
+      "weight": 92
+    },
+    "chatterbox": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_ember",
+        "HEAD": "chatterbox_bigeye_dome",
+        "LEGS": "chatterbox_skitter_legs_6"
+      },
+      "legal": true,
+      "owned": {
+        "BACK": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 65
+    },
+    "cobble_sons": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "cobble_sons_arm_mendclaw_no7",
+        "ARM_R": "cobble_sons_arm_ratchet",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_ember",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "cobble_sons_legs_bedrock"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_L": true,
+        "ARM_R": true,
+        "LEGS": true
+      },
+      "weight": 98
+    },
+    "errant": {
+      "capacity": 104,
+      "ids": {
+        "ARM_L": "errant_arm_warder",
+        "ARM_R": "errant_arm_vowkeeper",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "errant_core_pledge",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "errant_legs_rampart"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_L": true,
+        "ARM_R": true,
+        "CORE": true,
+        "LEGS": true
+      },
+      "weight": 98
+    },
+    "everykit_standard": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "everykit_standard_fist",
+        "BACK": "everykit_standard_cell",
+        "CORE": "core_ember",
+        "HEAD": "everykit_standard_cowl_mk2",
+        "LEGS": "everykit_standard_strider_legs"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_R": true,
+        "BACK": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 90
+    },
+    "grumble_co": {
+      "capacity": 110,
+      "ids": {
+        "ARM_L": "grumble_co_bastion_fist",
+        "ARM_R": "grumble_co_slab_pauldron",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "grumble_co_keystone_core",
+        "HEAD": "grumble_co_anvil_cowl",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_L": true,
+        "ARM_R": true,
+        "CORE": true,
+        "HEAD": true
+      },
+      "weight": 106
+    },
+    "pith_sinew": {
+      "capacity": 102,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "pith_sinew_deep_pulse_sac",
+        "CORE": "pith_sinew_heartcore",
+        "HEAD": "pith_sinew_caul_hood",
+        "LEGS": "pith_sinew_marrow_legs"
+      },
+      "legal": true,
+      "owned": {
+        "BACK": true,
+        "CORE": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 83
+    },
+    "pocketful": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_grinlet",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "pocketful_back_pippack",
+        "CORE": "core_ember",
+        "HEAD": "pocketful_head_bonce",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_L": true,
+        "BACK": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 42
+    },
+    "quivergear": {
+      "capacity": 104,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "quivergear_sky_rack",
+        "CORE": "quivergear_magazine_core",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_R": true,
+        "BACK": true,
+        "CORE": true
+      },
+      "weight": 68
+    },
+    "silksteel": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "silksteel_arm_needle",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_ember",
+        "HEAD": "silksteel_head_oracle",
+        "LEGS": "silksteel_legs_slip"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_R": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 58
+    },
+    "sovereign_brass": {
+      "capacity": 106,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "sovereign_brass_back_mantle",
+        "CORE": "sovereign_brass_core_regalia",
+        "HEAD": "sovereign_brass_head_herald",
+        "LEGS": "sovereign_brass_legs_colonnade"
+      },
+      "legal": true,
+      "owned": {
+        "BACK": true,
+        "CORE": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 86
+    },
+    "thicket_fang": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "thicket_fang_arm_goreclaw",
+        "ARM_R": "thicket_fang_arm_flenseclaw",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_ember",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_L": true,
+        "ARM_R": true
+      },
+      "weight": 94
+    },
+    "tinbox": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_ember",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "tinbox_legs_trusty"
+      },
+      "legal": true,
+      "owned": {
+        "LEGS": true
+      },
+      "weight": 62
+    },
+    "whirligig": {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "whirligig_arm_overdrive",
+        "ARM_R": "whirligig_arm_turbine",
+        "BACK": "whirligig_back_slipfin",
+        "CORE": "whirligig_core_quickstart",
+        "HEAD": "whirligig_head_windshear",
+        "LEGS": "whirligig_legs_zephyr"
+      },
+      "legal": true,
+      "owned": {
+        "ARM_L": true,
+        "ARM_R": true,
+        "BACK": true,
+        "CORE": true,
+        "HEAD": true,
+        "LEGS": true
+      },
+      "weight": 70
+    }
+  },
+  "family_matrix": {
+    "artificer_first": {
+      "baseline": 0.0666666666666667,
+      "boldheart": 0.133333333333333,
+      "chatterbox": 0.433333333333333,
+      "cobble_sons": 0.0333333333333333,
+      "errant": 0.0,
+      "everykit_standard": 0.0333333333333333,
+      "grumble_co": 0.716666666666667,
+      "pith_sinew": 0.633333333333333,
+      "pocketful": 0.566666666666667,
+      "quivergear": 0.766666666666667,
+      "silksteel": 0.966666666666667,
+      "sovereign_brass": 0.05,
+      "thicket_fang": 0.0,
+      "tinbox": 0.6,
+      "whirligig": 0.7
+    },
+    "baseline": {
+      "artificer_first": 0.833333333333333,
+      "boldheart": 0.6,
+      "chatterbox": 0.5,
+      "cobble_sons": 0.0666666666666667,
+      "errant": 0.1,
+      "everykit_standard": 0.5,
+      "grumble_co": 0.816666666666667,
+      "pith_sinew": 1.0,
+      "pocketful": 1.0,
+      "quivergear": 1.0,
+      "silksteel": 0.933333333333333,
+      "sovereign_brass": 0.0666666666666667,
+      "thicket_fang": 0.366666666666667,
+      "tinbox": 0.866666666666667,
+      "whirligig": 1.0
+    },
+    "boldheart": {
+      "artificer_first": 0.8,
+      "baseline": 0.366666666666667,
+      "chatterbox": 0.366666666666667,
+      "cobble_sons": 0.5,
+      "errant": 0.466666666666667,
+      "everykit_standard": 0.433333333333333,
+      "grumble_co": 0.866666666666667,
+      "pith_sinew": 0.966666666666667,
+      "pocketful": 0.9,
+      "quivergear": 0.8,
+      "silksteel": 0.9,
+      "sovereign_brass": 0.133333333333333,
+      "thicket_fang": 0.366666666666667,
+      "tinbox": 0.8,
+      "whirligig": 0.366666666666667
+    },
+    "chatterbox": {
+      "artificer_first": 0.466666666666667,
+      "baseline": 0.433333333333333,
+      "boldheart": 0.566666666666667,
+      "cobble_sons": 0.0,
+      "errant": 0.0,
+      "everykit_standard": 0.266666666666667,
+      "grumble_co": 0.866666666666667,
+      "pith_sinew": 0.55,
+      "pocketful": 0.833333333333333,
+      "quivergear": 0.933333333333333,
+      "silksteel": 0.933333333333333,
+      "sovereign_brass": 0.0,
+      "thicket_fang": 0.133333333333333,
+      "tinbox": 0.533333333333333,
+      "whirligig": 0.733333333333333
+    },
+    "cobble_sons": {
+      "artificer_first": 0.95,
+      "baseline": 0.95,
+      "boldheart": 0.666666666666667,
+      "chatterbox": 1.0,
+      "errant": 0.8,
+      "everykit_standard": 0.933333333333333,
+      "grumble_co": 0.5,
+      "pith_sinew": 0.933333333333333,
+      "pocketful": 1.0,
+      "quivergear": 1.0,
+      "silksteel": 1.0,
+      "sovereign_brass": 0.216666666666667,
+      "thicket_fang": 0.433333333333333,
+      "tinbox": 1.0,
+      "whirligig": 1.0
+    },
+    "errant": {
+      "artificer_first": 1.0,
+      "baseline": 0.833333333333333,
+      "boldheart": 0.433333333333333,
+      "chatterbox": 1.0,
+      "cobble_sons": 0.166666666666667,
+      "everykit_standard": 0.8,
+      "grumble_co": 0.5,
+      "pith_sinew": 0.966666666666667,
+      "pocketful": 1.0,
+      "quivergear": 1.0,
+      "silksteel": 1.0,
+      "sovereign_brass": 0.0333333333333333,
+      "thicket_fang": 0.566666666666667,
+      "tinbox": 1.0,
+      "whirligig": 1.0
+    },
+    "everykit_standard": {
+      "artificer_first": 0.8,
+      "baseline": 0.5,
+      "boldheart": 0.466666666666667,
+      "chatterbox": 0.7,
+      "cobble_sons": 0.15,
+      "errant": 0.1,
+      "grumble_co": 0.5,
+      "pith_sinew": 0.966666666666667,
+      "pocketful": 1.0,
+      "quivergear": 0.933333333333333,
+      "silksteel": 0.7,
+      "sovereign_brass": 0.0666666666666667,
+      "thicket_fang": 0.166666666666667,
+      "tinbox": 0.966666666666667,
+      "whirligig": 0.6
+    },
+    "grumble_co": {
+      "artificer_first": 0.316666666666667,
+      "baseline": 0.2,
+      "boldheart": 0.1,
+      "chatterbox": 0.0833333333333333,
+      "cobble_sons": 0.5,
+      "errant": 0.5,
+      "everykit_standard": 0.5,
+      "pith_sinew": 0.3,
+      "pocketful": 0.483333333333333,
+      "quivergear": 0.25,
+      "silksteel": 0.85,
+      "sovereign_brass": 0.2,
+      "thicket_fang": 0.1,
+      "tinbox": 0.333333333333333,
+      "whirligig": 0.5
+    },
+    "pith_sinew": {
+      "artificer_first": 0.266666666666667,
+      "baseline": 0.0,
+      "boldheart": 0.1,
+      "chatterbox": 0.5,
+      "cobble_sons": 0.0333333333333333,
+      "errant": 0.0,
+      "everykit_standard": 0.0,
+      "grumble_co": 0.75,
+      "pocketful": 0.666666666666667,
+      "quivergear": 0.483333333333333,
+      "silksteel": 0.866666666666667,
+      "sovereign_brass": 0.0166666666666667,
+      "thicket_fang": 0.0,
+      "tinbox": 0.633333333333333,
+      "whirligig": 0.666666666666667
+    },
+    "pocketful": {
+      "artificer_first": 0.366666666666667,
+      "baseline": 0.0,
+      "boldheart": 0.133333333333333,
+      "chatterbox": 0.233333333333333,
+      "cobble_sons": 0.0,
+      "errant": 0.0,
+      "everykit_standard": 0.0,
+      "grumble_co": 0.616666666666667,
+      "pith_sinew": 0.333333333333333,
+      "quivergear": 0.5,
+      "silksteel": 0.9,
+      "sovereign_brass": 0.0,
+      "thicket_fang": 0.0,
+      "tinbox": 0.366666666666667,
+      "whirligig": 0.1
+    },
+    "quivergear": {
+      "artificer_first": 0.5,
+      "baseline": 0.0333333333333333,
+      "boldheart": 0.166666666666667,
+      "chatterbox": 0.133333333333333,
+      "cobble_sons": 0.0,
+      "errant": 0.0,
+      "everykit_standard": 0.0,
+      "grumble_co": 0.716666666666667,
+      "pith_sinew": 0.433333333333333,
+      "pocketful": 0.533333333333333,
+      "silksteel": 0.533333333333333,
+      "sovereign_brass": 0.0166666666666667,
+      "thicket_fang": 0.0333333333333333,
+      "tinbox": 0.416666666666667,
+      "whirligig": 0.1
+    },
+    "silksteel": {
+      "artificer_first": 0.0,
+      "baseline": 0.0,
+      "boldheart": 0.0666666666666667,
+      "chatterbox": 0.0666666666666667,
+      "cobble_sons": 0.0,
+      "errant": 0.0,
+      "everykit_standard": 0.333333333333333,
+      "grumble_co": 0.166666666666667,
+      "pith_sinew": 0.116666666666667,
+      "pocketful": 0.2,
+      "quivergear": 0.433333333333333,
+      "sovereign_brass": 0.0,
+      "thicket_fang": 0.1,
+      "tinbox": 0.2,
+      "whirligig": 0.0
+    },
+    "sovereign_brass": {
+      "artificer_first": 0.983333333333333,
+      "baseline": 0.933333333333333,
+      "boldheart": 0.933333333333333,
+      "chatterbox": 1.0,
+      "cobble_sons": 0.7,
+      "errant": 0.983333333333333,
+      "everykit_standard": 0.966666666666667,
+      "grumble_co": 0.65,
+      "pith_sinew": 1.0,
+      "pocketful": 1.0,
+      "quivergear": 1.0,
+      "silksteel": 1.0,
+      "thicket_fang": 0.6,
+      "tinbox": 1.0,
+      "whirligig": 1.0
+    },
+    "thicket_fang": {
+      "artificer_first": 1.0,
+      "baseline": 0.733333333333333,
+      "boldheart": 0.566666666666667,
+      "chatterbox": 0.933333333333333,
+      "cobble_sons": 0.6,
+      "errant": 0.466666666666667,
+      "everykit_standard": 0.9,
+      "grumble_co": 0.95,
+      "pith_sinew": 1.0,
+      "pocketful": 0.966666666666667,
+      "quivergear": 0.966666666666667,
+      "silksteel": 0.8,
+      "sovereign_brass": 0.366666666666667,
+      "tinbox": 0.966666666666667,
+      "whirligig": 0.6
+    },
+    "tinbox": {
+      "artificer_first": 0.4,
+      "baseline": 0.3,
+      "boldheart": 0.166666666666667,
+      "chatterbox": 0.533333333333333,
+      "cobble_sons": 0.0,
+      "errant": 0.0166666666666667,
+      "everykit_standard": 0.0333333333333333,
+      "grumble_co": 0.616666666666667,
+      "pith_sinew": 0.45,
+      "pocketful": 0.7,
+      "quivergear": 0.433333333333333,
+      "silksteel": 0.8,
+      "sovereign_brass": 0.05,
+      "thicket_fang": 0.0666666666666667,
+      "whirligig": 0.3
+    },
+    "whirligig": {
+      "artificer_first": 0.5,
+      "baseline": 0.0,
+      "boldheart": 0.566666666666667,
+      "chatterbox": 0.166666666666667,
+      "cobble_sons": 0.0,
+      "errant": 0.0,
+      "everykit_standard": 0.333333333333333,
+      "grumble_co": 0.5,
+      "pith_sinew": 0.433333333333333,
+      "pocketful": 0.866666666666667,
+      "quivergear": 1.0,
+      "silksteel": 1.0,
+      "sovereign_brass": 0.0,
+      "thicket_fang": 0.433333333333333,
+      "tinbox": 0.766666666666667
+    }
+  },
+  "meta": {
+    "catalog_bits": 80,
+    "draws": 714,
+    "generated": "2026-07-19T12:19:01",
+    "jitter_rate": 0.35,
+    "losses": 22866,
+    "n_seeds": 30,
+    "notes": "Combat is deterministic; variation comes from seeded per-slot opponent jitter (widely-available commons, CORE never jittered) and role alternation by seed parity. Fights run both-sides-AI with enemy_can_aim_core=true so both sides can close games. Score: WIN=1 for the player side, DEATH and SURVIVABLE_LOSS=1 for the enemy side, turn-cap stall=0.5 each. mean_delta = mean over (template, opponent, seed) of modified-template score minus that template's baseline score at the same seed.",
+    "total_fights": 52200,
+    "turn_cap": 100,
+    "wins": 28620
+  },
+  "pentagon": {
+    "cycles": 0,
+    "cycles_found": [],
+    "families": [
+      "boldheart",
+      "grumble_co",
+      "whirligig",
+      "thicket_fang",
+      "silksteel"
+    ],
+    "pairs": [
+      {
+        "a": "boldheart",
+        "b": "grumble_co",
+        "direction": "boldheart > grumble_co",
+        "dom_a_over_b": 0.883333333333333
+      },
+      {
+        "a": "boldheart",
+        "b": "whirligig",
+        "direction": "whirligig > boldheart",
+        "dom_a_over_b": 0.4
+      },
+      {
+        "a": "boldheart",
+        "b": "thicket_fang",
+        "direction": "thicket_fang > boldheart",
+        "dom_a_over_b": 0.4
+      },
+      {
+        "a": "boldheart",
+        "b": "silksteel",
+        "direction": "boldheart > silksteel",
+        "dom_a_over_b": 0.916666666666667
+      },
+      {
+        "a": "grumble_co",
+        "b": "whirligig",
+        "direction": "even",
+        "dom_a_over_b": 0.5
+      },
+      {
+        "a": "grumble_co",
+        "b": "thicket_fang",
+        "direction": "thicket_fang > grumble_co",
+        "dom_a_over_b": 0.075
+      },
+      {
+        "a": "grumble_co",
+        "b": "silksteel",
+        "direction": "grumble_co > silksteel",
+        "dom_a_over_b": 0.841666666666667
+      },
+      {
+        "a": "whirligig",
+        "b": "thicket_fang",
+        "direction": "thicket_fang > whirligig",
+        "dom_a_over_b": 0.416666666666667
+      },
+      {
+        "a": "whirligig",
+        "b": "silksteel",
+        "direction": "whirligig > silksteel",
+        "dom_a_over_b": 1.0
+      },
+      {
+        "a": "thicket_fang",
+        "b": "silksteel",
+        "direction": "thicket_fang > silksteel",
+        "dom_a_over_b": 0.85
+      }
+    ]
+  },
+  "templates": [
+    {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "grumble_co_girder_fist",
+        "ARM_R": "thicket_fang_arm_gnashmaw",
+        "BACK": "boldheart_back_rocketspine",
+        "CORE": "core_ember",
+        "HEAD": "everykit_standard_cowl",
+        "LEGS": "pocketful_legs_stubby"
+      },
+      "legal": true,
+      "name": "Nuke",
+      "speed": 11,
+      "weight": 100
+    },
+    {
+      "capacity": 106,
+      "ids": {
+        "ARM_L": "errant_arm_warder",
+        "ARM_R": "cobble_sons_arm_ratchet",
+        "BACK": "grumble_co_furnace_pack",
+        "CORE": "core_bulwark",
+        "HEAD": "grumble_co_anvil_cowl",
+        "LEGS": "tinbox_legs_trusty"
+      },
+      "legal": true,
+      "name": "Wall",
+      "speed": 8,
+      "weight": 102
+    },
+    {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "whirligig_back_slipfin",
+        "CORE": "whirligig_core_quickstart",
+        "HEAD": "whirligig_head_windshear",
+        "LEGS": "silksteel_legs_slip"
+      },
+      "legal": true,
+      "name": "Tempo",
+      "speed": 19,
+      "weight": 56
+    },
+    {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "thicket_fang_arm_rendclaw",
+        "ARM_R": "quivergear_salvo_fist",
+        "BACK": "quivergear_volley_pod",
+        "CORE": "core_font",
+        "HEAD": "chatterbox_prattle_dome",
+        "LEGS": "thicket_fang_legs_haunch"
+      },
+      "legal": true,
+      "name": "Swarm",
+      "speed": 13,
+      "weight": 96
+    },
+    {
+      "capacity": 100,
+      "ids": {
+        "ARM_L": "pocketful_arm_weefist",
+        "ARM_R": "silksteel_arm_needle",
+        "BACK": "chatterbox_notion_pack",
+        "CORE": "core_font",
+        "HEAD": "silksteel_head_gauze",
+        "LEGS": "silksteel_legs_slip"
+      },
+      "legal": true,
+      "name": "Sniper",
+      "speed": 15,
+      "weight": 56
+    }
+  ]
+}

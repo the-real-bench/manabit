@@ -1,0 +1,1574 @@
+{
+  "meta": {
+    "generated": "2026-07-19",
+    "script": "tools/sim/economy_sim.py",
+    "master_seed_scheme": "player i seed = 100003 + i * 7919 (smoke_kit_sim pattern)",
+    "players": 500,
+    "days": 30,
+    "catalog_size": {
+      "total": 100,
+      "body": 89,
+      "cores": 11,
+      "body_by_rarity": {
+        "COMMON": 45,
+        "RARE": 30,
+        "EPIC": 14
+      },
+      "note": "13 base fixtures + 67 non-colliding catalog_extra entries; 7 of the 10 cores are unobtainable"
+    }
+  },
+  "constants_extracted": [
+    {
+      "name": "TIN_PRICE",
+      "value": 40,
+      "source": "economy/broker.gd:5"
+    },
+    {
+      "name": "BRASS_PRICE",
+      "value": 100,
+      "source": "economy/broker.gd:6"
+    },
+    {
+      "name": "salvage_scrap EPIC/RARE/COMMON",
+      "value": [
+        45,
+        20,
+        8
+      ],
+      "source": "economy/broker.gd:9-13"
+    },
+    {
+      "name": "distill_glimmer EPIC/RARE/COMMON",
+      "value": [
+        3,
+        1,
+        0
+      ],
+      "source": "economy/broker.gd:16-20"
+    },
+    {
+      "name": "find_price EPIC/RARE/COMMON",
+      "value": [
+        "10 glimmer",
+        "4 glimmer",
+        "25 scrap"
+      ],
+      "source": "economy/broker.gd:23-27"
+    },
+    {
+      "name": "shelf slots / unowned weight",
+      "value": [
+        3,
+        "3:1"
+      ],
+      "source": "economy/broker.gd:44,48"
+    },
+    {
+      "name": "shelf discovered-gated (compendium only)",
+      "value": true,
+      "source": "economy/broker.gd:35-38"
+    },
+    {
+      "name": "BIND_CORE_COST",
+      "value": 60,
+      "source": "meta/player_state.gd:25"
+    },
+    {
+      "name": "BINDABLE_CORES",
+      "value": [
+        "core_ember",
+        "core_bulwark",
+        "core_font"
+      ],
+      "source": "meta/player_state.gd:26"
+    },
+    {
+      "name": "BOUT_STAKE regular/elite/boss (wave 1 CH-08)",
+      "value": [
+        5,
+        10,
+        20
+      ],
+      "source": "meta/player_state.gd:30-32 + ui/combat_screen.gd:137-139"
+    },
+    {
+      "name": "KIT_PURSE skirmish/elite/boss",
+      "value": [
+        10,
+        25,
+        40
+      ],
+      "source": "meta/player_state.gd:46"
+    },
+    {
+      "name": "KIT_PURSE_HALVED",
+      "value": [
+        5,
+        12,
+        20
+      ],
+      "source": "meta/player_state.gd:47"
+    },
+    {
+      "name": "purse halves after 2 counted runs/day",
+      "value": "kit_runs_today < 2",
+      "source": "meta/player_state.gd:206"
+    },
+    {
+      "name": "kit DEATH does not count a run (note_kit_run only on keep)",
+      "value": true,
+      "source": "ui/run_screen.gd:652-658"
+    },
+    {
+      "name": "starter kit scrap/tin/brass",
+      "value": [
+        50,
+        1,
+        2
+      ],
+      "source": "meta/player_state.gd:37-39"
+    },
+    {
+      "name": "starter grant: 3 cores + 1 brass roll (5 bits)",
+      "value": true,
+      "source": "meta/player_state.gd:40-46"
+    },
+    {
+      "name": "PackRoller fixed seed 20260711, pity NOT saved",
+      "value": 20260711,
+      "source": "meta/player_state.gd:35 + meta/save_manager.gd (no roller field)"
+    },
+    {
+      "name": "brass coffer: 5 bits, C/R/E 0.70/0.22/0.08, rare+ guaranteed, epic pity 9",
+      "value": true,
+      "source": "economy/pack_roller.gd:15-16,26,35-36"
+    },
+    {
+      "name": "tin coffer: 3 bits, C/R/E 0.85/0.12/0.03, no guarantee",
+      "value": true,
+      "source": "economy/pack_roller.gd:18-19"
+    },
+    {
+      "name": "doorstep: free tin once per calendar day",
+      "value": true,
+      "source": "meta/player_state.gd:153-161"
+    },
+    {
+      "name": "box grade cuts Dud/Rough/Fair/Keen/Gleaming",
+      "value": [
+        0.12,
+        0.4,
+        0.72,
+        0.92
+      ],
+      "source": "economy/box_roller.gd:17-21"
+    },
+    {
+      "name": "kit loot cap: 1 COMMON, only while satchel bit empty",
+      "value": true,
+      "source": "ui/combat_screen.gd:1372,1377"
+    },
+    {
+      "name": "kit forfeits pay 0 scrap",
+      "value": true,
+      "source": "ui/combat_screen.gd:1148-1153"
+    },
+    {
+      "name": "BOUT forfeit pays 0 scrap (wave 1 CH-09)",
+      "value": true,
+      "source": "ui/combat_screen.gd:1154-1162"
+    },
+    {
+      "name": "own-build VENTURE survivable loss: forfeit broken part pays salvage to PLAYER (unchanged)",
+      "value": true,
+      "source": "ui/combat_screen.gd:1163-1168"
+    },
+    {
+      "name": "non-kit WIN loot: any non-core part of the foe",
+      "value": true,
+      "source": "ui/combat_screen.gd:1359-1371"
+    },
+    {
+      "name": "loot never includes cores",
+      "value": true,
+      "source": "ui/combat_screen.gd:1361"
+    },
+    {
+      "name": "coffers/shelf draw from body_pool only (no cores ever)",
+      "value": true,
+      "source": "economy/pack_roller.gd:22 + economy/broker.gd:35"
+    },
+    {
+      "name": "venture consumes the bench build (clear without return)",
+      "value": true,
+      "source": "ui/root.gd:82-87 + manabits/build_session.gd:48-52"
+    },
+    {
+      "name": "own-build repair: ceil(missing HP / 2) scrap",
+      "value": 1,
+      "source": "meta/run_state.gd:11,168-174"
+    },
+    {
+      "name": "kit rests mend free",
+      "value": true,
+      "source": "ui/run_screen.gd:417-421"
+    },
+    {
+      "name": "run map: node0 skirmish -> rest -> elite junction -> rest -> boss junction",
+      "value": true,
+      "source": "meta/run_state.gd:17-50"
+    },
+    {
+      "name": "compendium total = obtainable-only denominator, 73 (wave 1 CH-10)",
+      "value": 73,
+      "source": "meta/player_state.gd:239-248 + parts/catalog.gd:136-159"
+    }
+  ],
+  "assumptions": [
+    "Fight outcomes are drawn from priors, not re-simulated: own-build node0 0.95 / elite 0.60 / boss 0.50 (lane brief); kit per-grade bands anchored to smoke_kit_sim gates + CLAUDE.md measured numbers (Gleaming elite 0.88 / boss 0.83, node0 >= 0.90 with zero deaths, Dud boss <= 0.15).",
+    "Death-given-loss on core-hunting nodes: kit 0.75, own-build 0.70 (elite/boss aim the core; node0 never kills).",
+    "2-4 sessions/day (uniform). Each session runs one Box of Scrap; an eligible session also mounts an own-build venture with p=0.5.",
+    "Kit stop policy is grade-aware (grade is revealed at crack): Dud banks after node0 (greed 0.15), Rough presses elite at 0.50 / boss 0.20, Fair elite always / boss 0.35, Keen boss 0.80, Gleaming always presses.",
+    "Own-build ventures consume 1 core + up to 5 COMMON body bits (dupes first, then singles; RARE/EPIC never spent on venture chassis). Requires one offensive COMMON body bit.",
+    "Own-build repair costs are abstracted: rest1 uniform 2-6 scrap, rest2 uniform 4-10 scrap (repair = ceil(missing HP/2), run_state.gd:11). Unrepaired fights lose 0.15 win probability.",
+    "After a survivable elite loss the player extracts at the next rest (banks the damaged Manabit). A survivable BOSS loss still banks (run_screen.resolve_fight advances past the last node and _finish(true) banks) - modeled, plus one forfeit salvage payment.",
+    "Dupe policy per task brief: end of day keep 1 of each id, melt COMMON extras, distill RARE/EPIC extras. Binding bought whenever core-locked and scrap >= 60. Brass coffers bought while scrap >= 160 (100 + 60 bind reserve); tin is never bought (melt-back EV 31.65 of 40 makes it strictly a collection item - the daily doorstep tin covers that).",
+    "Shelf model: 3 discovered body ids/day, 3:1 unowned:owned weighting (broker.gd:41-58). Players buy unowned RARE (4 glimmer) / EPIC (10 glimmer) finds to re-acquire consumed dex pieces; COMMON finds only as an emergency weapon when no offensive body bit is owned.",
+    "PackRoller is modeled per-player with the shipped odds tables and a persistent pity counter. The SHIPPED code seeds every PlayerState roller at the fixed 20260711 and never saves pity - every player gets identical starter bits and every app relaunch replays the same coffer stream (flagged, not simulated).",
+    "Bouts (Proving Grounds) are excluded from the base loop and analyzed as an arbitrage flag: they are uncapped, fight a CLONE of the bench build, and pay loot on win / salvage on forfeit.",
+    "Lane modifiers (tailwind/second_wind/rusted/overgrown) are folded into the fight priors, not modeled separately - they mend or wear a few HP and never touch purses (RunMods contract).",
+    "WAVE 3 (venture-depth-wave3.md, PREDICTIVE): the template pick is 50/50 on a separate RNG stream; Template A kit runs tally a shrine visit (money-neutral, push propensity 0.5); Template B kit runs rummage the heap at 8 satchel scrap when pressing on a full-rate day (55/30/15 lend-COMMON/filings+4/lend-RARE, RARE downgrades to filings until a RARE is discovered); lends grant an ASSUMED +2pp (COMMON) / +5pp (RARE) elite+boss win uplift.",
+    "WAVE 3 Gleaner's Due: kit death keeps floor(S * K * (0.5 + 0.5H)) with K boss 0.50 / elite 0.25 and H = ladder-measured death_h_frac_mean (repair-always runs die with near-full body bits); the satchel bit is always lost; a paying death burns a daily full-rate slot. Own-build death credits floor(K * chassis-melt * H), Run-only."
+  ],
+  "results": {
+    "scrap_curve": [
+      {
+        "day": 1,
+        "p25": 76,
+        "p50": 96,
+        "p75": 120
+      },
+      {
+        "day": 2,
+        "p25": 71,
+        "p50": 96,
+        "p75": 122
+      },
+      {
+        "day": 3,
+        "p25": 71,
+        "p50": 92,
+        "p75": 113
+      },
+      {
+        "day": 4,
+        "p25": 70,
+        "p50": 92,
+        "p75": 114
+      },
+      {
+        "day": 5,
+        "p25": 68,
+        "p50": 89,
+        "p75": 114
+      },
+      {
+        "day": 6,
+        "p25": 72,
+        "p50": 91,
+        "p75": 113
+      },
+      {
+        "day": 7,
+        "p25": 68,
+        "p50": 92,
+        "p75": 117
+      },
+      {
+        "day": 8,
+        "p25": 69,
+        "p50": 92,
+        "p75": 113
+      },
+      {
+        "day": 9,
+        "p25": 68,
+        "p50": 91,
+        "p75": 113
+      },
+      {
+        "day": 10,
+        "p25": 69,
+        "p50": 91,
+        "p75": 112
+      },
+      {
+        "day": 11,
+        "p25": 70,
+        "p50": 89,
+        "p75": 111
+      },
+      {
+        "day": 12,
+        "p25": 67,
+        "p50": 87,
+        "p75": 114
+      },
+      {
+        "day": 13,
+        "p25": 69,
+        "p50": 92,
+        "p75": 115
+      },
+      {
+        "day": 14,
+        "p25": 67,
+        "p50": 90,
+        "p75": 115
+      },
+      {
+        "day": 15,
+        "p25": 69,
+        "p50": 92,
+        "p75": 116
+      },
+      {
+        "day": 16,
+        "p25": 69,
+        "p50": 91,
+        "p75": 115
+      },
+      {
+        "day": 17,
+        "p25": 68,
+        "p50": 89,
+        "p75": 116
+      },
+      {
+        "day": 18,
+        "p25": 67,
+        "p50": 91,
+        "p75": 113
+      },
+      {
+        "day": 19,
+        "p25": 67,
+        "p50": 90,
+        "p75": 112
+      },
+      {
+        "day": 20,
+        "p25": 69,
+        "p50": 93,
+        "p75": 114
+      },
+      {
+        "day": 21,
+        "p25": 68,
+        "p50": 91,
+        "p75": 114
+      },
+      {
+        "day": 22,
+        "p25": 71,
+        "p50": 94,
+        "p75": 119
+      },
+      {
+        "day": 23,
+        "p25": 71,
+        "p50": 93,
+        "p75": 117
+      },
+      {
+        "day": 24,
+        "p25": 67,
+        "p50": 90,
+        "p75": 112
+      },
+      {
+        "day": 25,
+        "p25": 67,
+        "p50": 88,
+        "p75": 113
+      },
+      {
+        "day": 26,
+        "p25": 67,
+        "p50": 89,
+        "p75": 115
+      },
+      {
+        "day": 27,
+        "p25": 68,
+        "p50": 93,
+        "p75": 114
+      },
+      {
+        "day": 28,
+        "p25": 69,
+        "p50": 92,
+        "p75": 111
+      },
+      {
+        "day": 29,
+        "p25": 69,
+        "p50": 89,
+        "p75": 114
+      },
+      {
+        "day": 30,
+        "p25": 67,
+        "p50": 91,
+        "p75": 115
+      }
+    ],
+    "glimmer_curve": [
+      {
+        "day": 1,
+        "p25": 0,
+        "p50": 0,
+        "p75": 1
+      },
+      {
+        "day": 2,
+        "p25": 0,
+        "p50": 1,
+        "p75": 3
+      },
+      {
+        "day": 3,
+        "p25": 1,
+        "p50": 3,
+        "p75": 4
+      },
+      {
+        "day": 4,
+        "p25": 2,
+        "p50": 4,
+        "p75": 6
+      },
+      {
+        "day": 5,
+        "p25": 3,
+        "p50": 5,
+        "p75": 9
+      },
+      {
+        "day": 6,
+        "p25": 4,
+        "p50": 7,
+        "p75": 11
+      },
+      {
+        "day": 7,
+        "p25": 5,
+        "p50": 8,
+        "p75": 12
+      },
+      {
+        "day": 8,
+        "p25": 6,
+        "p50": 10,
+        "p75": 14
+      },
+      {
+        "day": 9,
+        "p25": 8,
+        "p50": 12,
+        "p75": 16
+      },
+      {
+        "day": 10,
+        "p25": 9,
+        "p50": 14,
+        "p75": 18
+      },
+      {
+        "day": 11,
+        "p25": 10,
+        "p50": 15,
+        "p75": 20
+      },
+      {
+        "day": 12,
+        "p25": 12,
+        "p50": 17,
+        "p75": 22
+      },
+      {
+        "day": 13,
+        "p25": 13,
+        "p50": 19,
+        "p75": 24
+      },
+      {
+        "day": 14,
+        "p25": 15,
+        "p50": 21,
+        "p75": 27
+      },
+      {
+        "day": 15,
+        "p25": 17,
+        "p50": 23,
+        "p75": 29
+      },
+      {
+        "day": 16,
+        "p25": 19,
+        "p50": 25,
+        "p75": 31
+      },
+      {
+        "day": 17,
+        "p25": 20,
+        "p50": 27,
+        "p75": 33
+      },
+      {
+        "day": 18,
+        "p25": 23,
+        "p50": 29,
+        "p75": 36
+      },
+      {
+        "day": 19,
+        "p25": 25,
+        "p50": 31,
+        "p75": 38
+      },
+      {
+        "day": 20,
+        "p25": 27,
+        "p50": 33,
+        "p75": 41
+      },
+      {
+        "day": 21,
+        "p25": 29,
+        "p50": 36,
+        "p75": 43
+      },
+      {
+        "day": 22,
+        "p25": 31,
+        "p50": 37,
+        "p75": 45
+      },
+      {
+        "day": 23,
+        "p25": 33,
+        "p50": 40,
+        "p75": 47
+      },
+      {
+        "day": 24,
+        "p25": 35,
+        "p50": 42,
+        "p75": 50
+      },
+      {
+        "day": 25,
+        "p25": 37,
+        "p50": 45,
+        "p75": 52
+      },
+      {
+        "day": 26,
+        "p25": 39,
+        "p50": 47,
+        "p75": 54
+      },
+      {
+        "day": 27,
+        "p25": 41,
+        "p50": 49,
+        "p75": 57
+      },
+      {
+        "day": 28,
+        "p25": 43,
+        "p50": 51,
+        "p75": 59
+      },
+      {
+        "day": 29,
+        "p25": 45,
+        "p50": 54,
+        "p75": 62
+      },
+      {
+        "day": 30,
+        "p25": 47,
+        "p50": 56,
+        "p75": 64
+      }
+    ],
+    "days_to_first_epic": {
+      "p25": 0,
+      "p50": 1,
+      "p75": 1,
+      "reached_pct": 100.0,
+      "never_within_window": 0,
+      "day0_note": "day 0 = an EPIC in the starter brass roll"
+    },
+    "days_to_80pct_compendium": {
+      "threshold_bits": 64,
+      "reached_pct": 84.0,
+      "p50": 24,
+      "p25": 21,
+      "p75": 27,
+      "not_reached_in_30d": 80,
+      "dex_at_day30_p25_p50_p75": [
+        65,
+        67,
+        70
+      ],
+      "max_possible": 73
+    },
+    "dead_end_softlock": {
+      "hard_softlock_probability": 0.0,
+      "why_zero": "The Box of Scrap needs no core, no scrap and no bits (root.gd:89-98, box_roller.gd) and kit rests mend free (run_screen.gd:417-421), so scrap income is always reachable and the Binding (60) is always eventually affordable. By construction there is no absorbing dead state.",
+      "core_locked_player_days_pct": 1.08,
+      "core_locked_and_poor_and_cofferless_player_days_pct": 1.08,
+      "players_ever_core_locked_pct": 25.2,
+      "still_core_locked_at_day30": 3,
+      "lock_episode_days_p50": 1,
+      "lock_episode_days_p95": 2
+    },
+    "binding": {
+      "binds_per_player_30d_p25_p50_p75": [
+        25,
+        27,
+        29
+      ],
+      "bind_affordable_pct_by_day": [
+        91.8,
+        88.8,
+        87.8,
+        86.8,
+        83.4,
+        86.4,
+        83.4,
+        85.8,
+        83.0,
+        84.8,
+        85.4,
+        84.4,
+        85.2,
+        84.4,
+        82.8,
+        83.6,
+        86.2,
+        84.0,
+        82.0,
+        83.8,
+        84.6,
+        86.4,
+        85.2,
+        83.8,
+        81.8,
+        84.4,
+        85.6,
+        84.2,
+        85.2,
+        84.6
+      ]
+    },
+    "coffer_cadence": {
+      "brass_bought_per_player_30d_p25_p50_p75": [
+        3,
+        4,
+        6
+      ],
+      "tin_bought": 0,
+      "tin_note": "never rational to buy under the melt policy (EV 31.65 melt-back on 40); doorstep supplies 1 tin/day free"
+    },
+    "menagerie_banked_p25_p50_p75": [
+      13,
+      15,
+      17
+    ],
+    "faucet_sink_daily_mean_per_player": [
+      {
+        "day": 1,
+        "kit_purse": 55.31,
+        "melt": 11.49,
+        "forfeit_salvage": 3.22,
+        "death_keep": 3.93,
+        "venture_wreck": 8.69,
+        "rummage_filings": 0.91,
+        "brass_coffers": 14.2,
+        "binding": 7.68,
+        "repairs": 12.31,
+        "finds_scrap": 0.0,
+        "rummage": 6.18,
+        "distill": 1.01,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 2,
+        "kit_purse": 53.48,
+        "melt": 11.07,
+        "forfeit_salvage": 2.37,
+        "death_keep": 3.84,
+        "venture_wreck": 7.03,
+        "rummage_filings": 0.98,
+        "brass_coffers": 28.4,
+        "binding": 41.52,
+        "repairs": 9.84,
+        "finds_scrap": 0.0,
+        "rummage": 6.43,
+        "distill": 1.03,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 3,
+        "kit_purse": 55.8,
+        "melt": 12.91,
+        "forfeit_salvage": 2.06,
+        "death_keep": 3.44,
+        "venture_wreck": 5.87,
+        "rummage_filings": 0.99,
+        "brass_coffers": 23.0,
+        "binding": 52.2,
+        "repairs": 7.83,
+        "finds_scrap": 0.0,
+        "rummage": 6.38,
+        "distill": 1.02,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 4,
+        "kit_purse": 53.38,
+        "melt": 13.2,
+        "forfeit_salvage": 2.11,
+        "death_keep": 3.22,
+        "venture_wreck": 5.55,
+        "rummage_filings": 0.89,
+        "brass_coffers": 14.2,
+        "binding": 56.88,
+        "repairs": 8.15,
+        "finds_scrap": 0.0,
+        "rummage": 6.21,
+        "distill": 1.29,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 5,
+        "kit_purse": 56.89,
+        "melt": 12.64,
+        "forfeit_salvage": 2.16,
+        "death_keep": 4.01,
+        "venture_wreck": 5.42,
+        "rummage_filings": 1.0,
+        "brass_coffers": 13.6,
+        "binding": 60.0,
+        "repairs": 8.81,
+        "finds_scrap": 0.0,
+        "rummage": 6.61,
+        "distill": 1.62,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 6,
+        "kit_purse": 54.32,
+        "melt": 12.14,
+        "forfeit_salvage": 2.14,
+        "death_keep": 3.61,
+        "venture_wreck": 5.45,
+        "rummage_filings": 0.82,
+        "brass_coffers": 11.2,
+        "binding": 57.48,
+        "repairs": 8.07,
+        "finds_scrap": 0.0,
+        "rummage": 5.92,
+        "distill": 1.43,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 7,
+        "kit_purse": 55.14,
+        "melt": 12.8,
+        "forfeit_salvage": 2.19,
+        "death_keep": 3.36,
+        "venture_wreck": 5.2,
+        "rummage_filings": 0.89,
+        "brass_coffers": 12.0,
+        "binding": 57.96,
+        "repairs": 7.7,
+        "finds_scrap": 0.0,
+        "rummage": 5.81,
+        "distill": 1.55,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 8,
+        "kit_purse": 54.59,
+        "melt": 12.94,
+        "forfeit_salvage": 1.92,
+        "death_keep": 3.36,
+        "venture_wreck": 4.87,
+        "rummage_filings": 1.02,
+        "brass_coffers": 15.4,
+        "binding": 55.2,
+        "repairs": 7.61,
+        "finds_scrap": 0.0,
+        "rummage": 6.26,
+        "distill": 1.59,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 9,
+        "kit_purse": 53.06,
+        "melt": 13.38,
+        "forfeit_salvage": 1.84,
+        "death_keep": 3.78,
+        "venture_wreck": 5.16,
+        "rummage_filings": 0.99,
+        "brass_coffers": 14.6,
+        "binding": 56.28,
+        "repairs": 7.92,
+        "finds_scrap": 0.0,
+        "rummage": 6.58,
+        "distill": 1.75,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 10,
+        "kit_purse": 49.84,
+        "melt": 13.23,
+        "forfeit_salvage": 1.66,
+        "death_keep": 3.72,
+        "venture_wreck": 5.08,
+        "rummage_filings": 0.94,
+        "brass_coffers": 13.2,
+        "binding": 52.8,
+        "repairs": 7.43,
+        "finds_scrap": 0.0,
+        "rummage": 6.59,
+        "distill": 1.7,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 11,
+        "kit_purse": 52.9,
+        "melt": 13.66,
+        "forfeit_salvage": 2.0,
+        "death_keep": 3.26,
+        "venture_wreck": 5.39,
+        "rummage_filings": 0.9,
+        "brass_coffers": 14.2,
+        "binding": 55.68,
+        "repairs": 7.32,
+        "finds_scrap": 0.0,
+        "rummage": 6.26,
+        "distill": 1.62,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 12,
+        "kit_purse": 51.61,
+        "melt": 13.82,
+        "forfeit_salvage": 1.81,
+        "death_keep": 4.3,
+        "venture_wreck": 4.86,
+        "rummage_filings": 0.96,
+        "brass_coffers": 14.4,
+        "binding": 55.08,
+        "repairs": 7.37,
+        "finds_scrap": 0.0,
+        "rummage": 6.18,
+        "distill": 1.83,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 13,
+        "kit_purse": 57.01,
+        "melt": 14.13,
+        "forfeit_salvage": 2.13,
+        "death_keep": 3.39,
+        "venture_wreck": 5.19,
+        "rummage_filings": 0.92,
+        "brass_coffers": 15.4,
+        "binding": 56.76,
+        "repairs": 7.65,
+        "finds_scrap": 0.0,
+        "rummage": 6.19,
+        "distill": 1.86,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 14,
+        "kit_purse": 53.06,
+        "melt": 14.56,
+        "forfeit_salvage": 1.86,
+        "death_keep": 3.82,
+        "venture_wreck": 5.24,
+        "rummage_filings": 1.1,
+        "brass_coffers": 16.2,
+        "binding": 55.8,
+        "repairs": 7.87,
+        "finds_scrap": 0.0,
+        "rummage": 6.38,
+        "distill": 2.12,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 15,
+        "kit_purse": 55.01,
+        "melt": 14.03,
+        "forfeit_salvage": 1.79,
+        "death_keep": 3.48,
+        "venture_wreck": 5.79,
+        "rummage_filings": 0.99,
+        "brass_coffers": 13.6,
+        "binding": 57.24,
+        "repairs": 7.92,
+        "finds_scrap": 0.0,
+        "rummage": 6.02,
+        "distill": 1.93,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 16,
+        "kit_purse": 53.33,
+        "melt": 14.51,
+        "forfeit_salvage": 1.7,
+        "death_keep": 3.58,
+        "venture_wreck": 5.07,
+        "rummage_filings": 1.02,
+        "brass_coffers": 16.2,
+        "binding": 54.96,
+        "repairs": 7.22,
+        "finds_scrap": 0.0,
+        "rummage": 6.34,
+        "distill": 1.89,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 17,
+        "kit_purse": 54.58,
+        "melt": 14.58,
+        "forfeit_salvage": 1.98,
+        "death_keep": 3.55,
+        "venture_wreck": 5.07,
+        "rummage_filings": 0.79,
+        "brass_coffers": 17.2,
+        "binding": 54.96,
+        "repairs": 7.68,
+        "finds_scrap": 0.0,
+        "rummage": 6.18,
+        "distill": 2.03,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 18,
+        "kit_purse": 51.97,
+        "melt": 14.53,
+        "forfeit_salvage": 2.08,
+        "death_keep": 4.91,
+        "venture_wreck": 5.22,
+        "rummage_filings": 1.13,
+        "brass_coffers": 15.2,
+        "binding": 56.4,
+        "repairs": 7.9,
+        "finds_scrap": 0.0,
+        "rummage": 6.53,
+        "distill": 2.06,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 19,
+        "kit_purse": 53.55,
+        "melt": 13.7,
+        "forfeit_salvage": 2.03,
+        "death_keep": 3.7,
+        "venture_wreck": 5.38,
+        "rummage_filings": 0.82,
+        "brass_coffers": 11.6,
+        "binding": 60.0,
+        "repairs": 8.53,
+        "finds_scrap": 0.0,
+        "rummage": 6.32,
+        "distill": 2.33,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 20,
+        "kit_purse": 53.6,
+        "melt": 13.78,
+        "forfeit_salvage": 1.97,
+        "death_keep": 3.65,
+        "venture_wreck": 5.37,
+        "rummage_filings": 0.98,
+        "brass_coffers": 13.4,
+        "binding": 55.2,
+        "repairs": 7.84,
+        "finds_scrap": 0.0,
+        "rummage": 6.27,
+        "distill": 2.16,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 21,
+        "kit_purse": 55.57,
+        "melt": 14.88,
+        "forfeit_salvage": 2.22,
+        "death_keep": 3.13,
+        "venture_wreck": 5.39,
+        "rummage_filings": 0.95,
+        "brass_coffers": 11.2,
+        "binding": 60.48,
+        "repairs": 8.2,
+        "finds_scrap": 0.0,
+        "rummage": 6.3,
+        "distill": 2.2,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 22,
+        "kit_purse": 57.92,
+        "melt": 15.17,
+        "forfeit_salvage": 1.82,
+        "death_keep": 3.51,
+        "venture_wreck": 5.23,
+        "rummage_filings": 1.06,
+        "brass_coffers": 16.0,
+        "binding": 57.96,
+        "repairs": 7.75,
+        "finds_scrap": 0.0,
+        "rummage": 6.19,
+        "distill": 2.08,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 23,
+        "kit_purse": 52.09,
+        "melt": 14.4,
+        "forfeit_salvage": 1.81,
+        "death_keep": 3.99,
+        "venture_wreck": 5.19,
+        "rummage_filings": 0.94,
+        "brass_coffers": 14.6,
+        "binding": 57.12,
+        "repairs": 7.62,
+        "finds_scrap": 0.0,
+        "rummage": 6.34,
+        "distill": 2.16,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 24,
+        "kit_purse": 54.73,
+        "melt": 13.94,
+        "forfeit_salvage": 2.18,
+        "death_keep": 3.2,
+        "venture_wreck": 4.87,
+        "rummage_filings": 0.97,
+        "brass_coffers": 15.0,
+        "binding": 57.36,
+        "repairs": 8.3,
+        "finds_scrap": 0.0,
+        "rummage": 6.61,
+        "distill": 2.3,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 25,
+        "kit_purse": 53.69,
+        "melt": 14.61,
+        "forfeit_salvage": 2.14,
+        "death_keep": 3.71,
+        "venture_wreck": 5.12,
+        "rummage_filings": 0.94,
+        "brass_coffers": 15.6,
+        "binding": 57.84,
+        "repairs": 7.65,
+        "finds_scrap": 0.0,
+        "rummage": 6.11,
+        "distill": 2.24,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 26,
+        "kit_purse": 52.5,
+        "melt": 14.72,
+        "forfeit_salvage": 1.58,
+        "death_keep": 3.64,
+        "venture_wreck": 4.72,
+        "rummage_filings": 0.97,
+        "brass_coffers": 11.8,
+        "binding": 55.92,
+        "repairs": 7.98,
+        "finds_scrap": 0.0,
+        "rummage": 6.59,
+        "distill": 2.32,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 27,
+        "kit_purse": 52.81,
+        "melt": 14.5,
+        "forfeit_salvage": 2.0,
+        "death_keep": 3.72,
+        "venture_wreck": 5.44,
+        "rummage_filings": 1.0,
+        "brass_coffers": 12.4,
+        "binding": 57.96,
+        "repairs": 7.93,
+        "finds_scrap": 0.0,
+        "rummage": 5.74,
+        "distill": 2.14,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 28,
+        "kit_purse": 53.68,
+        "melt": 14.7,
+        "forfeit_salvage": 1.89,
+        "death_keep": 3.85,
+        "venture_wreck": 5.0,
+        "rummage_filings": 0.85,
+        "brass_coffers": 14.8,
+        "binding": 56.28,
+        "repairs": 7.88,
+        "finds_scrap": 0.0,
+        "rummage": 6.59,
+        "distill": 2.31,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 29,
+        "kit_purse": 55.9,
+        "melt": 13.98,
+        "forfeit_salvage": 2.1,
+        "death_keep": 3.95,
+        "venture_wreck": 5.38,
+        "rummage_filings": 0.92,
+        "brass_coffers": 15.0,
+        "binding": 58.68,
+        "repairs": 8.05,
+        "finds_scrap": 0.0,
+        "rummage": 6.53,
+        "distill": 2.24,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 30,
+        "kit_purse": 52.48,
+        "melt": 15.17,
+        "forfeit_salvage": 1.9,
+        "death_keep": 3.78,
+        "venture_wreck": 5.01,
+        "rummage_filings": 0.86,
+        "brass_coffers": 13.8,
+        "binding": 55.8,
+        "repairs": 7.54,
+        "finds_scrap": 0.0,
+        "rummage": 5.95,
+        "distill": 2.16,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      }
+    ],
+    "totals_per_player_30d": {
+      "binding": 1635.5,
+      "brass_coffers": 447.4,
+      "death_keep": 110.4,
+      "distill": 56.0,
+      "doorstep_tins": 30.0,
+      "forfeit_salvage": 60.7,
+      "kit_boss_clears": 14.5,
+      "kit_deaths": 26.5,
+      "kit_loot_bits": 60.1,
+      "kit_purse": 1619.8,
+      "melt": 413.2,
+      "repairs": 241.9,
+      "rummage": 188.6,
+      "rummage_filings": 28.5,
+      "venture_banked": 14.9,
+      "venture_bits_spent": 154.5,
+      "venture_deaths": 14.4,
+      "venture_loot": 54.3,
+      "venture_wreck": 162.2
+    },
+    "scrap_faucet_vs_sink_total_per_player": {
+      "faucets": 2394.8,
+      "sinks": 2513.3,
+      "note": "faucets = kit purses + melts + forfeit salvage + death keeps + own wrecks + rummage filings; sinks = brass coffers + bindings + repairs + scrap finds + rummages"
+    }
+  },
+  "flags": [
+    {
+      "severity": "MEDIUM",
+      "title": "Proving Grounds bout printer THROTTLED by wave 1 CH-08/CH-09; daily cap (D7) still open",
+      "detail": "Bouts now charge a non-refundable tier stake (5/10/20, player_state.gd:30-32, charged in begin_bout) and a survivable-loss forfeit pays ZERO salvage (combat_screen.gd:1154-1162). Brassmore bout EV at the 0.5 prior is now 0.5*45 - 20 = +2.5 scrap (was >= +22.5). Bouts remain uncapped per day and are still fought on a clone; the persisted daily bout-win loot cap (D7) is deferred to save v5. See bout_ev_module for the per-challenger table incl. ladder-measured win rates."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "The Scrap/Glimmer firewall leaks one way: Glimmer -> Scrap at 4.5-5.0 scrap per glimmer",
+      "detail": "EPIC Find costs 10 glimmer (broker.gd:25) and melts for 45 scrap (broker.gd:11) = 4.5 scrap/glimmer; RARE Find 4 -> 20 = 5.0. The reverse channel (brass coffer 100 scrap -> EV 2.30 glimmer via the Still = 43.5 scrap/glimmer) is 8-10x more expensive, so there is NO profitable round trip (100 scrap -> 2.30 glimmer -> ~10.3 scrap), but the 'no conversion' design claim is not literally true."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "PackRoller RNG stream + pity are not persisted and the seed is a constant",
+      "detail": "PlayerState._init always makes PackRoller.new(20260711) (player_state.gd:35) and SaveManager saves no roller state (meta/save_manager.gd). Every app relaunch replays the identical coffer sequence from position 0: the first brass opened after any boot always contains the same 5 bits, all players share one starter roll, and epic pity resets on every boot. Coffer outcomes are relaunch-scummable and feel samey. Persist pity + a per-save roller seed."
+    },
+    {
+      "severity": "LOW",
+      "title": "Kit DEATH does not consume the daily full-purse allotment",
+      "detail": "note_kit_run only fires on keep=true (run_screen.gd:652-658), so a spilled run never increments kit_runs_today. Benign (death already costs the satchel) but it means a player who dies twice still has 2 full-rate purses left - worth confirming as intended."
+    },
+    {
+      "severity": "INFO",
+      "title": "Compendium denominator fixed by wave 1 CH-10: 73 obtainable bits, 100 percent reachable",
+      "detail": "compendium_total now filters out cores that are not in BINDABLE_CORES (meta/player_state.gd:239-248): 70 body bits + 3 bindable cores = 73. Display-only change; every discovery metric in this sim already used the 73-bit discoverable set, so no economy metric moves."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Glimmer has no functioning sink for a keep-1 collector: earned 56.0 per player over 30d, spent 0.0",
+      "detail": "RARE/EPIC Finds are the only glimmer sinks (broker.gd:23-27), but the shelf is discovered-gated (broker.gd:35-38) and RARE/EPIC bits are never consumed by any loop (ventures spend COMMON chassis, melts/distills only touch dupes) - so every RARE/EPIC Find on offer is a dupe of a bit the player already owns, and buying one to re-distill refunds only 25-30 percent. Simulated p50 glimmer wallet hits 56 by day 30 on a straight line (~1.9/day) with zero spent. Glimmer is currently a score counter; it needs a real sink (enchants, dyes, a glimmer coffer, or core rentals)."
+    },
+    {
+      "severity": "INFO",
+      "title": "The Binding is the dominant scrap sink (65% of all scrap sunk), not coffers",
+      "detail": "Per player over 30d: bindings 1635 vs brass coffers 447 vs repairs 242 scrap. Own-build venturing consumes the seated core (root.gd:82-87), so every venture effectively costs 60 scrap in core replacement - the venture appetite, not Fettle's cart, drives the economy. p50 player buys only 4 brass coffers in 30 days. Fine if intended; if coffers are meant to be the aspirational sink, the venture-per-core price is crowding them out."
+    },
+    {
+      "severity": "INFO",
+      "title": "80 percent compendium is out of reach in a month for most players; the tail is pure coffer RNG",
+      "detail": "Only 84.0% of simulated players hit 64/80 discovered within 30 days (p50 dex at day 30 = 67). Finds cannot sell undiscovered bits (broker.gd:35-38), loot only covers the 9 challenger loadouts, so the last-mile dex is a coupon-collector on tin/brass rolls alone. If 80 percent is meant as a month-one goal, either add a discovery faucet (e.g. one undiscovered Find slot) or accept the longer horizon."
+    },
+    {
+      "severity": "INFO",
+      "title": "Anti-arbitrage on coffers holds",
+      "detail": "Tin melt-back EV 31.65 scrap of a 40 price (79%); brass melt-back EV 68.00 of 100 (68%) before the rare+ guarantee bump. Buy-to-melt is strictly negative on both - matches the pack_roller.gd:4 design note."
+    },
+    {
+      "severity": "INFO",
+      "title": "No runaway SCRAP inflation in the modeled loop",
+      "detail": "p50 scrap drifts +3 over days 25-30 and ends near 91 (start 50); 30-day faucets 2395 vs sinks 2513 per player - the wallet is a pass-through, not an accumulator. The satchel halving does its job: kit purse income is flat day over day. (Glimmer is the currency that inflates - see its own flag.)"
+    }
+  ],
+  "bout_ev_module": {
+    "model": "EV = win_rate * best-loot melt - tier stake; survivable loss pays 0 salvage (CH-09); stake charged win or lose (CH-08); measured rates from ladder part C when present",
+    "rows": [
+      {
+        "index": 0,
+        "tier": "regular",
+        "stake": 5,
+        "best_loot": "everykit_standard_cowl",
+        "best_loot_melt": 8,
+        "ev_at_half_prior": -1.0,
+        "name": "Scrap-Pup Rusty",
+        "measured_win_rate": 0.854,
+        "ev_measured": 1.833
+      },
+      {
+        "index": 1,
+        "tier": "regular",
+        "stake": 5,
+        "best_loot": "whirligig_arm_turbine",
+        "best_loot_melt": 20,
+        "ev_at_half_prior": 5.0,
+        "name": "Whirl-Kid Ziptie",
+        "measured_win_rate": 0.715,
+        "ev_measured": 9.306
+      },
+      {
+        "index": 2,
+        "tier": "regular",
+        "stake": 5,
+        "best_loot": "everykit_standard_cowl",
+        "best_loot_melt": 8,
+        "ev_at_half_prior": -1.0,
+        "name": "Sir Vance the Steadfast",
+        "measured_win_rate": 0.521,
+        "ev_measured": -0.833
+      },
+      {
+        "index": 3,
+        "tier": "elite",
+        "stake": 10,
+        "best_loot": "cobble_sons_legs_bedrock",
+        "best_loot_melt": 45,
+        "ev_at_half_prior": 12.5,
+        "name": "Grand Warden Cogsworth",
+        "measured_win_rate": 0.142,
+        "ev_measured": -3.594
+      },
+      {
+        "index": 4,
+        "tier": "boss",
+        "stake": 20,
+        "best_loot": "silksteel_head_oracle",
+        "best_loot_melt": 45,
+        "ev_at_half_prior": 2.5,
+        "name": "Sunking Brassmore, the Undethroned",
+        "measured_win_rate": 0.045,
+        "ev_measured": -17.969
+      },
+      {
+        "index": 5,
+        "tier": "elite",
+        "stake": 10,
+        "best_loot": "pith_sinew_deep_pulse_sac",
+        "best_loot_melt": 45,
+        "ev_at_half_prior": 12.5,
+        "name": "Thornlash Briar",
+        "measured_win_rate": 0.184,
+        "ev_measured": -1.719
+      },
+      {
+        "index": 6,
+        "tier": "elite",
+        "stake": 10,
+        "best_loot": "chatterbox_bigeye_dome",
+        "best_loot_melt": 20,
+        "ev_at_half_prior": 0.0,
+        "name": "Quartermaster Pindrop",
+        "measured_win_rate": 0.288,
+        "ev_measured": -4.236
+      },
+      {
+        "index": 7,
+        "tier": "elite",
+        "stake": 10,
+        "best_loot": "silksteel_head_whisper",
+        "best_loot_melt": 20,
+        "ev_at_half_prior": 0.0,
+        "name": "Seamstress Sable",
+        "measured_win_rate": 0.486,
+        "ev_measured": -0.278
+      },
+      {
+        "index": 8,
+        "tier": "boss",
+        "stake": 20,
+        "best_loot": "sovereign_brass_head_herald",
+        "best_loot_melt": 20,
+        "ev_at_half_prior": -10.0,
+        "name": "Prince Gildfall, the Heir-Apparent",
+        "measured_win_rate": 0.024,
+        "ev_measured": -19.514
+      }
+    ]
+  },
+  "v2_anchored_sensitivity": {
+    "anchor_source": "ladder.json part_b_venture.lane_observational (post-wave-1 run)",
+    "anchored_base": {
+      "elite_win": 0.52,
+      "elite_death": 0.16,
+      "boss_win": 0.128,
+      "boss_death": 0.844
+    },
+    "note": "AI-floor lane rates + human-uplift bands; hold faucet/sink imbalance under 5% on any follow-up tuning",
+    "bands": [
+      {
+        "day30_scrap_p25_p50_p75": [
+          71,
+          95,
+          115
+        ],
+        "faucets_per_player_30d": 2453.7,
+        "sinks_per_player_30d": 2568.3,
+        "faucet_sink_imbalance_pct": 4.46,
+        "uplift_pp": 0,
+        "own_p": {
+          "node0": 0.95,
+          "elite": 0.52,
+          "boss": 0.128
+        },
+        "own_death_given_loss": 0.651
+      },
+      {
+        "day30_scrap_p25_p50_p75": [
+          73,
+          95,
+          116
+        ],
+        "faucets_per_player_30d": 2446.6,
+        "sinks_per_player_30d": 2559.6,
+        "faucet_sink_imbalance_pct": 4.42,
+        "uplift_pp": 10,
+        "own_p": {
+          "node0": 0.95,
+          "elite": 0.62,
+          "boss": 0.228
+        },
+        "own_death_given_loss": 0.651
+      },
+      {
+        "day30_scrap_p25_p50_p75": [
+          70,
+          91,
+          113
+        ],
+        "faucets_per_player_30d": 2415.7,
+        "sinks_per_player_30d": 2531.3,
+        "faucet_sink_imbalance_pct": 4.57,
+        "uplift_pp": 20,
+        "own_p": {
+          "node0": 0.95,
+          "elite": 0.72,
+          "boss": 0.328
+        },
+        "own_death_given_loss": 0.651
+      }
+    ]
+  },
+  "wave3_g0": {
+    "baseline_no_wave3": {
+      "day30_scrap_p50": 92,
+      "faucet_sink_ratio": 1.019,
+      "kit_flush_mean": 27.99
+    },
+    "v2_with_wave3": {
+      "day30_scrap_p50": 91,
+      "faucet_sink_ratio": 0.953,
+      "kit_flush_mean": 25.52,
+      "kit_flush_mean_by_depth": {
+        "node0": 7.03,
+        "elite": 27.32,
+        "boss": 61.32
+      },
+      "kit_runs_started_total": 44982
+    },
+    "per_template": {
+      "runs_T0_event_T1_heap": [
+        22430,
+        22552
+      ],
+      "safe_end_rate_T0_T1": [
+        0.704,
+        0.707
+      ],
+      "clear_rate_T0_T1": [
+        0.159,
+        0.164
+      ],
+      "g1_safe_end_within_5pp": true
+    },
+    "rummage": {
+      "price": 8,
+      "n_rummages": 11786,
+      "outcomes": {
+        "lend_common": 6460,
+        "filings": 3562,
+        "lend_rare": 1764
+      },
+      "spend_per_player_30d": 188.6,
+      "return_per_player_30d": 28.5,
+      "mean_scrap_return_per_kit_run": 0.32,
+      "g6_return_le_2_per_run": true,
+      "note": "net rummage EV is -8 + 0.30*4 = -6.8 satchel scrap plus the lend value - a sink, structurally full-rate-day only"
+    },
+    "gleaners_due": {
+      "death_h_used": 0.994,
+      "paying_deaths": 10884,
+      "total_deaths_recorded": 13245,
+      "death_keep_mean_per_death": 4.17,
+      "death_keep_mean_elite": 1.12,
+      "death_keep_mean_boss": 13.12,
+      "death_keep_per_player_30d": 110.4,
+      "own_wreck_mean_per_death": 11.28,
+      "own_wreck_per_player_30d": 162.2,
+      "g8_boss_death_vs_safe_elite_depth_ratio": 0.48,
+      "g8_elite_death_vs_safe_node0_depth_ratio": 0.159,
+      "g10_max_kept_minus_half_satchel": 0,
+      "g10_deep_death_strictly_dominated": true
+    },
+    "event_tally": {
+      "barrow_wisp": {
+        "seen": 916,
+        "pushed": 461,
+        "push_good_realized": 0.512
+      },
+      "button_merchant": {
+        "seen": 1910,
+        "pushed": 943,
+        "push_good_realized": 0.677
+      },
+      "clockwork_wren": {
+        "seen": 2840,
+        "pushed": 1391,
+        "push_good_realized": 0.668
+      },
+      "gearwrights_ghost_light": {
+        "seen": 955,
+        "pushed": 476,
+        "push_good_realized": 0.502
+      },
+      "kettle_sprite": {
+        "seen": 2835,
+        "pushed": 1429,
+        "push_good_realized": 0.691
+      },
+      "moss_kept_milestone": {
+        "seen": 1870,
+        "pushed": 916,
+        "push_good_realized": 0.645
+      },
+      "rain_soaked_coffer": {
+        "seen": 2814,
+        "pushed": 1410,
+        "push_good_realized": 0.518
+      },
+      "rust_rooks": {
+        "seen": 1806,
+        "pushed": 914,
+        "push_good_realized": 0.642
+      },
+      "sleepy_signpost": {
+        "seen": 2836,
+        "pushed": 1426,
+        "push_good_realized": 0.668
+      },
+      "toll_doll": {
+        "seen": 2820,
+        "pushed": 1408,
+        "push_good_realized": 0.68
+      }
+    },
+    "g14_money_neutrality": {
+      "predicted_delta": 0,
+      "note": "events in this model NEVER touch a wallet - the on/off scrap curve is identical by construction; the real toggle test runs post-implementation"
+    },
+    "gate_bands_checked": {
+      "g6_g8_day30_p50_in_85_95": true,
+      "g8_faucet_sink_ratio_in_0.95_1.10": true,
+      "g6_kit_flush_mean_in_baseline_minus15_to_0": true
+    }
+  }
+}

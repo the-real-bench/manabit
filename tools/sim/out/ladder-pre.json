@@ -1,0 +1,1523 @@
+{
+  "headline": {
+    "best_venture_config": {
+      "boss": "T1 boss Gilded Gate [rusted] (Sunking Brassmore)",
+      "build": "strong",
+      "elite": "T1 elite Silk Stair [rusted] (Seamstress Sable)",
+      "survival_rate": 0.453,
+      "template": "The Quiet Spiral"
+    },
+    "biggest_rung_gap": {
+      "from": "Grand Warden Cogsworth",
+      "to": "Prince Gildfall, the Heir-Apparent",
+      "win_rate_drop": 0.212
+    },
+    "cruelest_rung": {
+      "name": "Sunking Brassmore, the Undethroned",
+      "win_rate": 0.132
+    },
+    "softest_rung": {
+      "name": "Scrap-Pup Rusty",
+      "win_rate": 0.854
+    },
+    "worst_venture_config": {
+      "boss": "T0 boss Gilded Gate [tailwind] (Sunking Brassmore)",
+      "build": "mid",
+      "elite": "T0 elite Wardens Wall [second_wind] (Grand Warden Cogsworth)",
+      "survival_rate": 0.016,
+      "template": "The Old Road"
+    }
+  },
+  "meta": {
+    "ai_note": "both sides use the shipped combat.ai_take_turn (first affordable non-GUARD move in slot order, HEAD first); this understates optimized human play on both sides equally",
+    "aims_core_note": "part A uses entry.elite as aims_core (run-context rule); regulars never aim the core",
+    "combat_note": "combat.gd is fully deterministic; all variance comes from seeded build generation",
+    "generated": "2026-07-19T12:23:31",
+    "policy_note": "venture policy: repair fully at every rest, loot highest-melt bit, forfeit lowest-melt broken bit, never extract (extraction reported as trigger + death-ahead rates)",
+    "purse_note": "own-build ventures pay NO win purse in shipped code (PlayerState.KIT_PURSE is kit-only); net scrap = forfeit salvage - repairs, loot melt value reported separately",
+    "seeds_part_a": 48,
+    "seeds_part_b": 64,
+    "turn_cap_actor_turns": 600
+  },
+  "modifier_experiments": {
+    "overgrown": {
+      "design": "same player build + seed, foe with vs without the modifier, aims_core true",
+      "rows": [
+        {
+          "build_tier": "mid",
+          "death_rate_clean": 0.422,
+          "death_rate_with_mod": 0.219,
+          "lane": "T0 elite Bramble Cut (Thornlash Briar)",
+          "n": 64,
+          "win_rate_clean": 0.578,
+          "win_rate_delta": 0.203,
+          "win_rate_with_mod": 0.781
+        },
+        {
+          "build_tier": "strong",
+          "death_rate_clean": 0.063,
+          "death_rate_with_mod": 0.016,
+          "lane": "T0 elite Bramble Cut (Thornlash Briar)",
+          "n": 64,
+          "win_rate_clean": 0.891,
+          "win_rate_delta": 0.031,
+          "win_rate_with_mod": 0.922
+        }
+      ]
+    },
+    "rusted": {
+      "design": "same player build + seed, foe with vs without the modifier, aims_core true",
+      "rows": [
+        {
+          "build_tier": "mid",
+          "death_rate_clean": 0.922,
+          "death_rate_with_mod": 0.875,
+          "lane": "T0 boss Heralds Walk (Prince Gildfall)",
+          "n": 64,
+          "win_rate_clean": 0.078,
+          "win_rate_delta": 0.047,
+          "win_rate_with_mod": 0.125
+        },
+        {
+          "build_tier": "strong",
+          "death_rate_clean": 0.828,
+          "death_rate_with_mod": 0.672,
+          "lane": "T0 boss Heralds Walk (Prince Gildfall)",
+          "n": 64,
+          "win_rate_clean": 0.078,
+          "win_rate_delta": 0.125,
+          "win_rate_with_mod": 0.203
+        },
+        {
+          "build_tier": "mid",
+          "death_rate_clean": 0.0,
+          "death_rate_with_mod": 0.0,
+          "lane": "T1 elite Silk Stair (Seamstress Sable)",
+          "n": 64,
+          "win_rate_clean": 0.984,
+          "win_rate_delta": 0.0,
+          "win_rate_with_mod": 0.984
+        },
+        {
+          "build_tier": "strong",
+          "death_rate_clean": 0.0,
+          "death_rate_with_mod": 0.0,
+          "lane": "T1 elite Silk Stair (Seamstress Sable)",
+          "n": 64,
+          "win_rate_clean": 0.906,
+          "win_rate_delta": 0.031,
+          "win_rate_with_mod": 0.938
+        },
+        {
+          "build_tier": "mid",
+          "death_rate_clean": 0.984,
+          "death_rate_with_mod": 0.953,
+          "lane": "T1 boss Gilded Gate (Sunking Brassmore)",
+          "n": 64,
+          "win_rate_clean": 0.016,
+          "win_rate_delta": 0.031,
+          "win_rate_with_mod": 0.047
+        },
+        {
+          "build_tier": "strong",
+          "death_rate_clean": 0.797,
+          "death_rate_with_mod": 0.563,
+          "lane": "T1 boss Gilded Gate (Sunking Brassmore)",
+          "n": 64,
+          "win_rate_clean": 0.172,
+          "win_rate_delta": 0.172,
+          "win_rate_with_mod": 0.344
+        }
+      ]
+    },
+    "second_wind": {
+      "design": "win the second_wind elite, shipped post-mend vs none, then the same non-tailwind boss lane unrepaired; for a repairing player the whole value is the repair scrap saved",
+      "rows": [
+        {
+          "boss_win_rate_delta": 0.0,
+          "boss_win_rate_with_mend": 0.095,
+          "boss_win_rate_without": 0.095,
+          "build_tier": "mid",
+          "lane": "T0 elite Wardens Wall (Grand Warden Cogsworth)",
+          "mean_hp_mended": 3.0,
+          "mean_repair_scrap_saved": 1.952,
+          "n_elite_wins": 21
+        },
+        {
+          "boss_win_rate_delta": 0.0,
+          "boss_win_rate_with_mend": 0.52,
+          "boss_win_rate_without": 0.52,
+          "build_tier": "strong",
+          "lane": "T0 elite Wardens Wall (Grand Warden Cogsworth)",
+          "mean_hp_mended": 2.88,
+          "mean_repair_scrap_saved": 1.8,
+          "n_elite_wins": 25
+        },
+        {
+          "boss_win_rate_delta": 0.0,
+          "boss_win_rate_with_mend": 0.0,
+          "boss_win_rate_without": 0.0,
+          "build_tier": "mid",
+          "lane": "T1 elite Powder Row (Quartermaster Pindrop)",
+          "mean_hp_mended": 2.85,
+          "mean_repair_scrap_saved": 1.45,
+          "n_elite_wins": 20
+        },
+        {
+          "boss_win_rate_delta": 0.0,
+          "boss_win_rate_with_mend": 0.575,
+          "boss_win_rate_without": 0.575,
+          "build_tier": "strong",
+          "lane": "T1 elite Powder Row (Quartermaster Pindrop)",
+          "mean_hp_mended": 2.625,
+          "mean_repair_scrap_saved": 1.275,
+          "n_elite_wins": 40
+        }
+      ]
+    },
+    "tailwind": {
+      "design": "enter the boss lane damaged (unrepaired Rusty fight), shipped pre-mend vs none; under the repair-always policy tailwind mends 0 by construction",
+      "rows": [
+        {
+          "build_tier": "mid",
+          "lane": "T0 boss Gilded Gate (Sunking Brassmore)",
+          "mean_hp_mended": 2.224,
+          "mean_hp_missing_at_entry": 4.448,
+          "n_damaged_entrants": 58,
+          "win_rate_delta": 0.0,
+          "win_rate_with_tailwind": 0.0,
+          "win_rate_without": 0.0
+        },
+        {
+          "build_tier": "strong",
+          "lane": "T0 boss Gilded Gate (Sunking Brassmore)",
+          "mean_hp_mended": 2.389,
+          "mean_hp_missing_at_entry": 4.083,
+          "n_damaged_entrants": 36,
+          "win_rate_delta": 0.0,
+          "win_rate_with_tailwind": 0.083,
+          "win_rate_without": 0.083
+        },
+        {
+          "build_tier": "mid",
+          "lane": "T1 boss Heralds Walk (Prince Gildfall)",
+          "mean_hp_mended": 2.224,
+          "mean_hp_missing_at_entry": 4.448,
+          "n_damaged_entrants": 58,
+          "win_rate_delta": 0.0,
+          "win_rate_with_tailwind": 0.086,
+          "win_rate_without": 0.086
+        },
+        {
+          "build_tier": "strong",
+          "lane": "T1 boss Heralds Walk (Prince Gildfall)",
+          "mean_hp_mended": 2.389,
+          "mean_hp_missing_at_entry": 4.083,
+          "n_damaged_entrants": 36,
+          "win_rate_delta": 0.0,
+          "win_rate_with_tailwind": 0.111,
+          "win_rate_without": 0.111
+        }
+      ]
+    }
+  },
+  "part_a_ladder": {
+    "archetypes": [
+      {
+        "desc": "COMMON core + COMMON weapon arm + COMMON legs (cheap 3-slot)",
+        "id": "sprout_3slot"
+      },
+      {
+        "desc": "COMMON core + COMMON head/arms/legs, no back (5-slot)",
+        "id": "common_kit_5slot"
+      },
+      {
+        "desc": "COMMON core, COMMON-or-RARE bits in all 6 sockets (mid tier)",
+        "id": "tuned_mixed_6slot"
+      },
+      {
+        "desc": "RARE core, RARE-first fill in all 6 sockets",
+        "id": "rare_core_6slot"
+      },
+      {
+        "desc": "RARE core + top-power EPIC weapon arm + RARE-first fill (strong)",
+        "id": "rare_epic_weapon"
+      },
+      {
+        "desc": "EPIC Regalia core + EPIC centerpiece + EPIC-first budget fill (ceiling)",
+        "id": "epic_flagship"
+      }
+    ],
+    "challengers": [
+      {
+        "aggregate": {
+          "death_rate": 0.0,
+          "mean_actor_turns": 17.823,
+          "mean_parts_broken": 0.323,
+          "n": 288,
+          "stall_rate": 0.014,
+          "survivable_loss_rate": 0.132,
+          "win_rate": 0.854
+        },
+        "aims_core": false,
+        "index": 0,
+        "name": "Scrap-Pup Rusty",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 13.167,
+            "mean_parts_broken": 0.542,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 1.0
+          },
+          "epic_flagship": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 59.25,
+            "mean_parts_broken": 0.083,
+            "n": 48,
+            "stall_rate": 0.083,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.917
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 8.875,
+            "mean_parts_broken": 0.063,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 1.0
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 9.021,
+            "mean_parts_broken": 0.146,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.021,
+            "win_rate": 0.979
+          },
+          "sprout_3slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 5.5,
+            "mean_parts_broken": 0.771,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.771,
+            "win_rate": 0.229
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 11.125,
+            "mean_parts_broken": 0.333,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 1.0
+          }
+        },
+        "tier": "regular"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.0,
+          "mean_actor_turns": 6.785,
+          "mean_parts_broken": 1.903,
+          "n": 288,
+          "stall_rate": 0.0,
+          "survivable_loss_rate": 0.559,
+          "win_rate": 0.441
+        },
+        "aims_core": false,
+        "index": 1,
+        "name": "Whirl-Kid Ziptie",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 6.333,
+            "mean_parts_broken": 2.729,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.771,
+            "win_rate": 0.229
+          },
+          "epic_flagship": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 9.667,
+            "mean_parts_broken": 1.875,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.375,
+            "win_rate": 0.625
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 7.792,
+            "mean_parts_broken": 1.396,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.271,
+            "win_rate": 0.729
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 6.542,
+            "mean_parts_broken": 2.063,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.542,
+            "win_rate": 0.458
+          },
+          "sprout_3slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 2.458,
+            "mean_parts_broken": 1.375,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 1.0,
+            "win_rate": 0.0
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 7.917,
+            "mean_parts_broken": 1.979,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.396,
+            "win_rate": 0.604
+          }
+        },
+        "tier": "regular"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.0,
+          "mean_actor_turns": 31.01,
+          "mean_parts_broken": 1.177,
+          "n": 288,
+          "stall_rate": 0.017,
+          "survivable_loss_rate": 0.351,
+          "win_rate": 0.632
+        },
+        "aims_core": false,
+        "index": 2,
+        "name": "Sir Vance the Steadfast",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 22.583,
+            "mean_parts_broken": 2.104,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.563,
+            "win_rate": 0.438
+          },
+          "epic_flagship": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 26.542,
+            "mean_parts_broken": 0.708,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.083,
+            "win_rate": 0.917
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 36.104,
+            "mean_parts_broken": 0.667,
+            "n": 48,
+            "stall_rate": 0.021,
+            "survivable_loss_rate": 0.042,
+            "win_rate": 0.938
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 54.125,
+            "mean_parts_broken": 1.0,
+            "n": 48,
+            "stall_rate": 0.063,
+            "survivable_loss_rate": 0.188,
+            "win_rate": 0.75
+          },
+          "sprout_3slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 3.833,
+            "mean_parts_broken": 1.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 1.0,
+            "win_rate": 0.0
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 42.875,
+            "mean_parts_broken": 1.583,
+            "n": 48,
+            "stall_rate": 0.021,
+            "survivable_loss_rate": 0.229,
+            "win_rate": 0.75
+          }
+        },
+        "tier": "regular"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.594,
+          "mean_actor_turns": 65.458,
+          "mean_parts_broken": 0.0,
+          "n": 288,
+          "stall_rate": 0.024,
+          "survivable_loss_rate": 0.0,
+          "win_rate": 0.382
+        },
+        "aims_core": true,
+        "index": 3,
+        "name": "Grand Warden Cogsworth",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.896,
+            "mean_actor_turns": 31.396,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.104
+          },
+          "epic_flagship": {
+            "death_rate": 0.25,
+            "mean_actor_turns": 155.646,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.104,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.646
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.375,
+            "mean_actor_turns": 80.583,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.042,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.583
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.521,
+            "mean_actor_turns": 48.813,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.479
+          },
+          "sprout_3slot": {
+            "death_rate": 0.896,
+            "mean_actor_turns": 24.896,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.104
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.625,
+            "mean_actor_turns": 51.417,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.375
+          }
+        },
+        "tier": "elite"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.847,
+          "mean_actor_turns": 22.556,
+          "mean_parts_broken": 0.0,
+          "n": 288,
+          "stall_rate": 0.021,
+          "survivable_loss_rate": 0.0,
+          "win_rate": 0.132
+        },
+        "aims_core": true,
+        "index": 4,
+        "name": "Sunking Brassmore, the Undethroned",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 1.0,
+            "mean_actor_turns": 5.417,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.0
+          },
+          "epic_flagship": {
+            "death_rate": 0.542,
+            "mean_actor_turns": 84.354,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.104,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.354
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.875,
+            "mean_actor_turns": 9.25,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.125
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.667,
+            "mean_actor_turns": 25.271,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.021,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.313
+          },
+          "sprout_3slot": {
+            "death_rate": 1.0,
+            "mean_actor_turns": 4.958,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.0
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 1.0,
+            "mean_actor_turns": 6.083,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.0
+          }
+        },
+        "tier": "boss"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.382,
+          "mean_actor_turns": 14.667,
+          "mean_parts_broken": 0.0,
+          "n": 288,
+          "stall_rate": 0.003,
+          "survivable_loss_rate": 0.0,
+          "win_rate": 0.615
+        },
+        "aims_core": true,
+        "index": 5,
+        "name": "Thornlash Briar",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.604,
+            "mean_actor_turns": 10.854,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.396
+          },
+          "epic_flagship": {
+            "death_rate": 0.083,
+            "mean_actor_turns": 21.042,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.917
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.063,
+            "mean_actor_turns": 12.604,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.938
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.104,
+            "mean_actor_turns": 23.917,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.021,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.875
+          },
+          "sprout_3slot": {
+            "death_rate": 1.0,
+            "mean_actor_turns": 6.875,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.0
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.438,
+            "mean_actor_turns": 12.708,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.563
+          }
+        },
+        "tier": "elite"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.0,
+          "mean_actor_turns": 14.285,
+          "mean_parts_broken": 1.854,
+          "n": 288,
+          "stall_rate": 0.0,
+          "survivable_loss_rate": 0.563,
+          "win_rate": 0.438
+        },
+        "aims_core": true,
+        "index": 6,
+        "name": "Quartermaster Pindrop",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 12.375,
+            "mean_parts_broken": 2.688,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.875,
+            "win_rate": 0.125
+          },
+          "epic_flagship": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 13.813,
+            "mean_parts_broken": 1.917,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.354,
+            "win_rate": 0.646
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 20.083,
+            "mean_parts_broken": 1.458,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.229,
+            "win_rate": 0.771
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 14.417,
+            "mean_parts_broken": 1.375,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.313,
+            "win_rate": 0.688
+          },
+          "sprout_3slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 3.417,
+            "mean_parts_broken": 1.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 1.0,
+            "win_rate": 0.0
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 21.604,
+            "mean_parts_broken": 2.688,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.604,
+            "win_rate": 0.396
+          }
+        },
+        "tier": "elite"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.038,
+          "mean_actor_turns": 12.906,
+          "mean_parts_broken": 0.667,
+          "n": 288,
+          "stall_rate": 0.003,
+          "survivable_loss_rate": 0.135,
+          "win_rate": 0.823
+        },
+        "aims_core": true,
+        "index": 7,
+        "name": "Seamstress Sable",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 12.958,
+            "mean_parts_broken": 1.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.146,
+            "win_rate": 0.854
+          },
+          "epic_flagship": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 11.938,
+            "mean_parts_broken": 1.021,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 1.0
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 9.958,
+            "mean_parts_broken": 0.229,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.021,
+            "win_rate": 0.979
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 22.667,
+            "mean_parts_broken": 0.563,
+            "n": 48,
+            "stall_rate": 0.021,
+            "survivable_loss_rate": 0.063,
+            "win_rate": 0.917
+          },
+          "sprout_3slot": {
+            "death_rate": 0.229,
+            "mean_actor_turns": 8.75,
+            "mean_parts_broken": 0.521,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.521,
+            "win_rate": 0.25
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.0,
+            "mean_actor_turns": 11.167,
+            "mean_parts_broken": 0.667,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.063,
+            "win_rate": 0.938
+          }
+        },
+        "tier": "elite"
+      },
+      {
+        "aggregate": {
+          "death_rate": 0.788,
+          "mean_actor_turns": 48.913,
+          "mean_parts_broken": 0.0,
+          "n": 288,
+          "stall_rate": 0.042,
+          "survivable_loss_rate": 0.0,
+          "win_rate": 0.17
+        },
+        "aims_core": true,
+        "index": 8,
+        "name": "Prince Gildfall, the Heir-Apparent",
+        "per_archetype": {
+          "common_kit_5slot": {
+            "death_rate": 1.0,
+            "mean_actor_turns": 11.083,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.0
+          },
+          "epic_flagship": {
+            "death_rate": 0.458,
+            "mean_actor_turns": 166.438,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.188,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.354
+          },
+          "rare_core_6slot": {
+            "death_rate": 0.604,
+            "mean_actor_turns": 53.021,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.042,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.354
+          },
+          "rare_epic_weapon": {
+            "death_rate": 0.833,
+            "mean_actor_turns": 21.125,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.167
+          },
+          "sprout_3slot": {
+            "death_rate": 1.0,
+            "mean_actor_turns": 9.625,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.0,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.0
+          },
+          "tuned_mixed_6slot": {
+            "death_rate": 0.833,
+            "mean_actor_turns": 32.188,
+            "mean_parts_broken": 0.0,
+            "n": 48,
+            "stall_rate": 0.021,
+            "survivable_loss_rate": 0.0,
+            "win_rate": 0.146
+          }
+        },
+        "tier": "boss"
+      }
+    ],
+    "ladder_softest_to_cruelest": [
+      {
+        "index": 0,
+        "name": "Scrap-Pup Rusty",
+        "tier": "regular",
+        "win_rate": 0.854
+      },
+      {
+        "index": 7,
+        "name": "Seamstress Sable",
+        "tier": "elite",
+        "win_rate": 0.823
+      },
+      {
+        "index": 2,
+        "name": "Sir Vance the Steadfast",
+        "tier": "regular",
+        "win_rate": 0.632
+      },
+      {
+        "index": 5,
+        "name": "Thornlash Briar",
+        "tier": "elite",
+        "win_rate": 0.615
+      },
+      {
+        "index": 1,
+        "name": "Whirl-Kid Ziptie",
+        "tier": "regular",
+        "win_rate": 0.441
+      },
+      {
+        "index": 6,
+        "name": "Quartermaster Pindrop",
+        "tier": "elite",
+        "win_rate": 0.438
+      },
+      {
+        "index": 3,
+        "name": "Grand Warden Cogsworth",
+        "tier": "elite",
+        "win_rate": 0.382
+      },
+      {
+        "index": 8,
+        "name": "Prince Gildfall, the Heir-Apparent",
+        "tier": "boss",
+        "win_rate": 0.17
+      },
+      {
+        "index": 4,
+        "name": "Sunking Brassmore, the Undethroned",
+        "tier": "boss",
+        "win_rate": 0.132
+      }
+    ],
+    "monotonic_checks": {
+      "elite_to_boss_gap": 0.212,
+      "every_elite_softer_than_every_boss": 1.0,
+      "every_regular_softer_than_every_elite": 0.0,
+      "regular_to_elite_gap": -0.382,
+      "regulars_in_order_0_1_2": 0.0,
+      "rusty_is_softest": 1.0
+    },
+    "rung_gaps": [
+      {
+        "from": "Scrap-Pup Rusty",
+        "to": "Seamstress Sable",
+        "win_rate_drop": 0.031
+      },
+      {
+        "from": "Seamstress Sable",
+        "to": "Sir Vance the Steadfast",
+        "win_rate_drop": 0.191
+      },
+      {
+        "from": "Sir Vance the Steadfast",
+        "to": "Thornlash Briar",
+        "win_rate_drop": 0.017
+      },
+      {
+        "from": "Thornlash Briar",
+        "to": "Whirl-Kid Ziptie",
+        "win_rate_drop": 0.174
+      },
+      {
+        "from": "Whirl-Kid Ziptie",
+        "to": "Quartermaster Pindrop",
+        "win_rate_drop": 0.003
+      },
+      {
+        "from": "Quartermaster Pindrop",
+        "to": "Grand Warden Cogsworth",
+        "win_rate_drop": 0.056
+      },
+      {
+        "from": "Grand Warden Cogsworth",
+        "to": "Prince Gildfall, the Heir-Apparent",
+        "win_rate_drop": 0.212
+      },
+      {
+        "from": "Prince Gildfall, the Heir-Apparent",
+        "to": "Sunking Brassmore, the Undethroned",
+        "win_rate_drop": 0.038
+      }
+    ],
+    "sample_builds_seed0": {
+      "common_kit_5slot": [
+        "HEAD:chatterbox_prattle_dome",
+        "CORE:pith_sinew_heartcore",
+        "ARM_L:thicket_fang_arm_gnashmaw",
+        "ARM_R:silksteel_arm_needle",
+        "LEGS:thicket_fang_legs_haunch"
+      ],
+      "epic_flagship": [
+        "HEAD:silksteel_head_oracle",
+        "CORE:sovereign_brass_core_regalia",
+        "ARM_L:pocketful_arm_grinlet",
+        "ARM_R:boldheart_arm_meteor",
+        "LEGS:chatterbox_skitter_legs_6",
+        "BACK:pocketful_back_pippack"
+      ],
+      "rare_core_6slot": [
+        "HEAD:everykit_standard_cowl_mk2",
+        "CORE:boldheart_core_sunheart",
+        "ARM_L:cobble_sons_arm_mendclaw",
+        "ARM_R:sovereign_brass_arm_pistonfist",
+        "LEGS:errant_legs_rampart"
+      ],
+      "rare_epic_weapon": [
+        "HEAD:head_hornet",
+        "CORE:quivergear_magazine_core",
+        "ARM_L:cobble_sons_arm_mendclaw_no7",
+        "ARM_R:pocketful_arm_grinlet",
+        "LEGS:sovereign_brass_legs_colonnade",
+        "BACK:sovereign_brass_back_mantle"
+      ],
+      "sprout_3slot": [
+        "CORE:errant_core_pledge",
+        "ARM_R:thicket_fang_arm_rendclaw",
+        "LEGS:legs_light"
+      ],
+      "tuned_mixed_6slot": [
+        "HEAD:head_hornet",
+        "CORE:pith_sinew_heartcore",
+        "ARM_L:cobble_sons_arm_mendclaw",
+        "ARM_R:boldheart_arm_sunder",
+        "LEGS:legs_light",
+        "BACK:pocketful_back_pippack"
+      ]
+    }
+  },
+  "part_b_venture": {
+    "by_build_tier": {
+      "mid": {
+        "death_ahead_if_pressing_from_rest1": 0.918,
+        "death_ahead_if_pressing_from_rest2": 0.898,
+        "death_rate_boss": 0.719,
+        "death_rate_elite": 0.199,
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.156,
+        "mean_bits_looted": 1.754,
+        "mean_bits_lost": 5.254,
+        "mean_forfeit_salvage_scrap": 1.094,
+        "mean_loot_melt_value_scrap": 25.764,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -7.551,
+        "mean_repairs_paid_scrap": 8.645,
+        "n": 512,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.801,
+        "stalled_fights": 0,
+        "survival_rate": 0.082
+      },
+      "strong": {
+        "death_ahead_if_pressing_from_rest1": 0.709,
+        "death_ahead_if_pressing_from_rest2": 0.67,
+        "death_rate_boss": 0.592,
+        "death_rate_elite": 0.117,
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.102,
+        "mean_bits_looted": 1.932,
+        "mean_bits_lost": 4.088,
+        "mean_forfeit_salvage_scrap": 2.305,
+        "mean_loot_melt_value_scrap": 32.818,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -5.156,
+        "mean_repairs_paid_scrap": 7.461,
+        "n": 512,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.883,
+        "stalled_fights": 66,
+        "survival_rate": 0.291
+      }
+    },
+    "configs": [
+      {
+        "boss_lane": "T0 boss Gilded Gate [tailwind] (Sunking Brassmore)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.969,
+        "death_ahead_if_pressing_from_rest2": 0.964,
+        "death_rate_boss": 0.828,
+        "death_rate_elite": 0.141,
+        "elite_lane": "T0 elite Bramble Cut [overgrown] (Thornlash Briar)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 1.891,
+        "mean_bits_lost": 5.531,
+        "mean_forfeit_salvage_scrap": 0.0,
+        "mean_loot_melt_value_scrap": 26.594,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -8.859,
+        "mean_repairs_paid_scrap": 8.859,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.859,
+        "stalled_fights": 0,
+        "survival_rate": 0.031,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T0 boss Heralds Walk [rusted] (Prince Gildfall)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.844,
+        "death_ahead_if_pressing_from_rest2": 0.818,
+        "death_rate_boss": 0.703,
+        "death_rate_elite": 0.141,
+        "elite_lane": "T0 elite Bramble Cut [overgrown] (Thornlash Briar)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 2.016,
+        "mean_bits_lost": 4.813,
+        "mean_forfeit_salvage_scrap": 0.0,
+        "mean_loot_melt_value_scrap": 28.313,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -8.859,
+        "mean_repairs_paid_scrap": 8.859,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.859,
+        "stalled_fights": 0,
+        "survival_rate": 0.156,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T0 boss Gilded Gate [tailwind] (Sunking Brassmore)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.984,
+        "death_ahead_if_pressing_from_rest2": 0.955,
+        "death_rate_boss": 0.328,
+        "death_rate_elite": 0.656,
+        "elite_lane": "T0 elite Wardens Wall [second_wind] (Grand Warden Cogsworth)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 1.359,
+        "mean_bits_lost": 5.625,
+        "mean_forfeit_salvage_scrap": 0.0,
+        "mean_loot_melt_value_scrap": 24.172,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -5.047,
+        "mean_repairs_paid_scrap": 5.047,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.344,
+        "stalled_fights": 0,
+        "survival_rate": 0.016,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T0 boss Heralds Walk [rusted] (Prince Gildfall)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.844,
+        "death_ahead_if_pressing_from_rest2": 0.545,
+        "death_rate_boss": 0.188,
+        "death_rate_elite": 0.656,
+        "elite_lane": "T0 elite Wardens Wall [second_wind] (Grand Warden Cogsworth)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 1.5,
+        "mean_bits_lost": 4.813,
+        "mean_forfeit_salvage_scrap": 0.0,
+        "mean_loot_melt_value_scrap": 26.594,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -5.047,
+        "mean_repairs_paid_scrap": 5.047,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.344,
+        "stalled_fights": 0,
+        "survival_rate": 0.156,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T1 boss Gilded Gate [rusted] (Sunking Brassmore)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.922,
+        "death_ahead_if_pressing_from_rest2": 0.922,
+        "death_rate_boss": 0.922,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Powder Row [second_wind] (Quartermaster Pindrop)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.484,
+        "mean_bits_looted": 1.578,
+        "mean_bits_lost": 5.297,
+        "mean_forfeit_salvage_scrap": 4.25,
+        "mean_loot_melt_value_scrap": 21.125,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -6.687,
+        "mean_repairs_paid_scrap": 10.938,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 0,
+        "survival_rate": 0.078,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T1 boss Heralds Walk [tailwind] (Prince Gildfall)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.922,
+        "death_ahead_if_pressing_from_rest2": 0.922,
+        "death_rate_boss": 0.922,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Powder Row [second_wind] (Quartermaster Pindrop)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.484,
+        "mean_bits_looted": 1.578,
+        "mean_bits_lost": 5.313,
+        "mean_forfeit_salvage_scrap": 4.25,
+        "mean_loot_melt_value_scrap": 19.563,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -6.687,
+        "mean_repairs_paid_scrap": 10.938,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 0,
+        "survival_rate": 0.078,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T1 boss Gilded Gate [rusted] (Sunking Brassmore)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.938,
+        "death_ahead_if_pressing_from_rest2": 0.938,
+        "death_rate_boss": 0.938,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Silk Stair [rusted] (Seamstress Sable)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.016,
+        "mean_bits_looted": 2.047,
+        "mean_bits_lost": 5.359,
+        "mean_forfeit_salvage_scrap": 0.125,
+        "mean_loot_melt_value_scrap": 30.5,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -9.609,
+        "mean_repairs_paid_scrap": 9.734,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 0,
+        "survival_rate": 0.063,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T1 boss Heralds Walk [tailwind] (Prince Gildfall)",
+        "build_tier": "mid",
+        "death_ahead_if_pressing_from_rest1": 0.922,
+        "death_ahead_if_pressing_from_rest2": 0.922,
+        "death_rate_boss": 0.922,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Silk Stair [rusted] (Seamstress Sable)",
+        "extract_trigger_rate_rest1": 0.0,
+        "extract_trigger_rate_rest2": 0.016,
+        "mean_bits_looted": 2.063,
+        "mean_bits_lost": 5.281,
+        "mean_forfeit_salvage_scrap": 0.125,
+        "mean_loot_melt_value_scrap": 29.25,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -9.609,
+        "mean_repairs_paid_scrap": 9.734,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 0,
+        "survival_rate": 0.078,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T0 boss Gilded Gate [tailwind] (Sunking Brassmore)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.828,
+        "death_ahead_if_pressing_from_rest2": 0.825,
+        "death_rate_boss": 0.813,
+        "death_rate_elite": 0.016,
+        "elite_lane": "T0 elite Bramble Cut [overgrown] (Thornlash Briar)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 2.047,
+        "mean_bits_lost": 4.766,
+        "mean_forfeit_salvage_scrap": 0.313,
+        "mean_loot_melt_value_scrap": 32.438,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -7.547,
+        "mean_repairs_paid_scrap": 7.859,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.984,
+        "stalled_fights": 6,
+        "survival_rate": 0.172,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T0 boss Heralds Walk [rusted] (Prince Gildfall)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.656,
+        "death_ahead_if_pressing_from_rest2": 0.651,
+        "death_rate_boss": 0.641,
+        "death_rate_elite": 0.016,
+        "elite_lane": "T0 elite Bramble Cut [overgrown] (Thornlash Briar)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 2.172,
+        "mean_bits_lost": 3.75,
+        "mean_forfeit_salvage_scrap": 0.313,
+        "mean_loot_melt_value_scrap": 31.813,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -7.547,
+        "mean_repairs_paid_scrap": 7.859,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.984,
+        "stalled_fights": 9,
+        "survival_rate": 0.344,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T0 boss Gilded Gate [tailwind] (Sunking Brassmore)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.891,
+        "death_ahead_if_pressing_from_rest2": 0.8,
+        "death_rate_boss": 0.438,
+        "death_rate_elite": 0.453,
+        "elite_lane": "T0 elite Wardens Wall [second_wind] (Grand Warden Cogsworth)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 1.563,
+        "mean_bits_lost": 5.078,
+        "mean_forfeit_salvage_scrap": 0.313,
+        "mean_loot_melt_value_scrap": 34.469,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -6.25,
+        "mean_repairs_paid_scrap": 6.563,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.547,
+        "stalled_fights": 5,
+        "survival_rate": 0.109,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T0 boss Heralds Walk [rusted] (Prince Gildfall)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.734,
+        "death_ahead_if_pressing_from_rest2": 0.514,
+        "death_rate_boss": 0.281,
+        "death_rate_elite": 0.453,
+        "elite_lane": "T0 elite Wardens Wall [second_wind] (Grand Warden Cogsworth)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.0,
+        "mean_bits_looted": 1.719,
+        "mean_bits_lost": 4.156,
+        "mean_forfeit_salvage_scrap": 0.313,
+        "mean_loot_melt_value_scrap": 35.25,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -6.25,
+        "mean_repairs_paid_scrap": 6.563,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 0.547,
+        "stalled_fights": 5,
+        "survival_rate": 0.266,
+        "template": 0,
+        "template_name": "The Old Road"
+      },
+      {
+        "boss_lane": "T1 boss Gilded Gate [rusted] (Sunking Brassmore)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.563,
+        "death_ahead_if_pressing_from_rest2": 0.563,
+        "death_rate_boss": 0.563,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Powder Row [second_wind] (Quartermaster Pindrop)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.328,
+        "mean_bits_looted": 1.906,
+        "mean_bits_lost": 3.328,
+        "mean_forfeit_salvage_scrap": 7.266,
+        "mean_loot_melt_value_scrap": 34.313,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -0.687,
+        "mean_repairs_paid_scrap": 7.953,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 11,
+        "survival_rate": 0.438,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T1 boss Heralds Walk [tailwind] (Prince Gildfall)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.719,
+        "death_ahead_if_pressing_from_rest2": 0.719,
+        "death_rate_boss": 0.719,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Powder Row [second_wind] (Quartermaster Pindrop)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.328,
+        "mean_bits_looted": 1.734,
+        "mean_bits_lost": 4.188,
+        "mean_forfeit_salvage_scrap": 7.266,
+        "mean_loot_melt_value_scrap": 23.063,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -0.687,
+        "mean_repairs_paid_scrap": 7.953,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 12,
+        "survival_rate": 0.281,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T1 boss Gilded Gate [rusted] (Sunking Brassmore)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.547,
+        "death_ahead_if_pressing_from_rest2": 0.547,
+        "death_rate_boss": 0.547,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Silk Stair [rusted] (Seamstress Sable)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.031,
+        "mean_bits_looted": 2.234,
+        "mean_bits_lost": 3.234,
+        "mean_forfeit_salvage_scrap": 1.328,
+        "mean_loot_melt_value_scrap": 41.266,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -6.141,
+        "mean_repairs_paid_scrap": 7.469,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 10,
+        "survival_rate": 0.453,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      },
+      {
+        "boss_lane": "T1 boss Heralds Walk [tailwind] (Prince Gildfall)",
+        "build_tier": "strong",
+        "death_ahead_if_pressing_from_rest1": 0.734,
+        "death_ahead_if_pressing_from_rest2": 0.734,
+        "death_rate_boss": 0.734,
+        "death_rate_elite": 0.0,
+        "elite_lane": "T1 elite Silk Stair [rusted] (Seamstress Sable)",
+        "extract_trigger_rate_rest1": 0.016,
+        "extract_trigger_rate_rest2": 0.031,
+        "mean_bits_looted": 2.078,
+        "mean_bits_lost": 4.203,
+        "mean_forfeit_salvage_scrap": 1.328,
+        "mean_loot_melt_value_scrap": 29.938,
+        "mean_net_scrap_purse_plus_salvage_minus_repairs": -6.141,
+        "mean_repairs_paid_scrap": 7.469,
+        "n": 64,
+        "reach_rest1_rate": 1.0,
+        "reach_rest2_rate": 1.0,
+        "stalled_fights": 8,
+        "survival_rate": 0.266,
+        "template": 1,
+        "template_name": "The Quiet Spiral"
+      }
+    ],
+    "lane_observational": {
+      "T0 boss Gilded Gate [tailwind] (Sunking Brassmore)": {
+        "death_rate": 0.88,
+        "n_fought": 175,
+        "survivable_loss_rate": 0.023,
+        "win_rate": 0.097
+      },
+      "T0 boss Heralds Walk [rusted] (Prince Gildfall)": {
+        "death_rate": 0.663,
+        "n_fought": 175,
+        "survivable_loss_rate": 0.04,
+        "win_rate": 0.297
+      },
+      "T0 elite Bramble Cut [overgrown] (Thornlash Briar)": {
+        "death_rate": 0.078,
+        "n_fought": 256,
+        "survivable_loss_rate": 0.016,
+        "win_rate": 0.906
+      },
+      "T0 elite Wardens Wall [second_wind] (Grand Warden Cogsworth)": {
+        "death_rate": 0.555,
+        "n_fought": 256,
+        "survivable_loss_rate": 0.023,
+        "win_rate": 0.422
+      },
+      "T1 boss Gilded Gate [rusted] (Sunking Brassmore)": {
+        "death_rate": 0.742,
+        "n_fought": 256,
+        "survivable_loss_rate": 0.066,
+        "win_rate": 0.191
+      },
+      "T1 boss Heralds Walk [tailwind] (Prince Gildfall)": {
+        "death_rate": 0.824,
+        "n_fought": 256,
+        "survivable_loss_rate": 0.063,
+        "win_rate": 0.113
+      },
+      "T1 elite Powder Row [second_wind] (Quartermaster Pindrop)": {
+        "death_rate": 0.0,
+        "n_fought": 256,
+        "survivable_loss_rate": 0.43,
+        "win_rate": 0.57
+      },
+      "T1 elite Silk Stair [rusted] (Seamstress Sable)": {
+        "death_rate": 0.0,
+        "n_fought": 256,
+        "survivable_loss_rate": 0.039,
+        "win_rate": 0.961
+      }
+    },
+    "policy": "repair-always, press-on, loot best, forfeit cheapest broken"
+  }
+}

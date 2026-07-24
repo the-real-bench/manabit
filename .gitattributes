@@ -1,0 +1,14 @@
+# Normalize text to LF in the repo (this project syncs across two machines).
+* text=auto eol=lf
+
+# Binary assets - never touch line endings or try to diff as text.
+*.wav binary
+*.ogg binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ttf binary
+*.otf binary
+*.glb binary
+*.res binary
+*.pck binary

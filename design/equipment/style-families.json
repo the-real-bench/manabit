@@ -1,0 +1,114 @@
+[
+  {
+    "key": "everykit_standard",
+    "name": "Everykit Standard",
+    "mecha_inspiration": "Sleek 'real robot' military mass-production - RX-78 Gundam, the workhorse GM/mook line, plain Mobile Suit silhouettes",
+    "motif": "Matte primary-red-and-grey ABS with off-white panels; clean boxy humanoid silhouette, obvious snap-seams and hex sockets, no ornament. Glow: a single plain warm-amber pilot light at each socket - the 'stock' glow every other family is a variation on. Etched runes are minimal, catalogue-stamped serial glyphs baked into the low-res texture.",
+    "mechanical_identity": "The balanced generalist / teaching baseline. Bits sit dead-center: a typical COMMON arm is ATK 4 / DEF 1 / wt 24, a head ATK 2 / SPD 2 / en 2 - no stat spikes, always well under the 100 weight budget so it never eats a SPD penalty. Favors HEAD + both ARMs with clean SINGLE abilities (power ~4-5, mana_cost 1, can_target_core false). Ships one core per affinity at flat 30 HP / en 8 (attack/defense/mana all offered) so it's the neutral spine any other family plugs into. Rarity: almost all COMMON, a couple of RARE 'Mk. II' variants that add +1 to two stats for +6 weight. Its job in play: reliable, legible, the reference every exotic family is measured against.",
+    "naming": "[Everykit] + Mark number + plain part noun. e.g. 'Everykit Standard Cowl' (HEAD), 'Everykit Mk. II Fist' (ARM), 'Everykit Strider Legs' (LEGS), 'Everykit Field Core' (CORE). Serial-stamped, utilitarian - no adjectives that promise more than the bit delivers."
+  },
+  {
+    "key": "boldheart",
+    "name": "Boldheart Valorworks",
+    "mecha_inspiration": "Over-the-top super robot - Mazinger Z, Gurren Lagann, Getter: drills, rocket punches, chest-beams and one gigantic finisher",
+    "motif": "Glossy candy-red with chrome-gold trim and oversized fists/drill-bits; heroic V-silhouette, huge shoulders, tiny waist, a big crest brow. Glow: hot orange-gold flare that blooms bright at the drill tip and the chest boss when a big move is charged. Runes are bold heraldic 'courage' glyphs stamped large across the chest plate.",
+    "mechanical_identity": "The heavy-SINGLE burst nuke - unstoppable force. Lives on ARM bits with the highest single-hit ATK in the game: an EPIC drill-fist runs ATK 8 / power 6 / wt 50 / mana_cost 3, a signature 'Meteor Knuckle' finisher power 9, can_target_core TRUE but mana_cost 5 so it fires roughly once a fight. Deliberately fragile everywhere the fist isn't: low DEF, low SPD, heavy weight that usually pushes it a few points over budget (a knowing SPD tax). Attack-affinity cores with above-average HP (32-34) to survive long enough to land the haymaker. No MULTI, no PART_RESTORE - Boldheart never plays defense, it races to detonate one arm before it's outlasted. Skews RARE/EPIC.",
+    "naming": "Grand heroic compound nouns, always a promise of impact. 'Sunder-Drill' / 'Meteor Knuckle' / 'Piston Vanguard' (ARM), 'Thunderbrow Crest' (HEAD), 'Valorheart Core' (CORE), 'Bastion Boots' (LEGS). Exclamatory, toybox-box-art energy."
+  },
+  {
+    "key": "grumble_co",
+    "name": "Grumble & Co. Heavy Plant",
+    "mecha_inspiration": "Hulking industrial slabs - Pacific Rim Jaegers, Ideon-scale monoliths: brute tonnage and durability over finesse",
+    "motif": "Thick matte safety-yellow and gunmetal with rounded slab edges (chunky and toy-safe, no sharp corners); wide low trapezoid silhouette that reads as a walking loading-dock. Glow: deep slow amber pulsing in the deep panel seams, like a banked furnace. Runes are big riveted load-rating glyphs pressed into the plates.",
+    "mechanical_identity": "The immovable wall - pure HP + DEF tank. Highest local durability in the catalog: slab pauldrons and torsos at HP 18-24, DEF 3-5, and the heaviest LEGS (wt 44-52) that gladly sit over budget because the build was never going to be fast anyway. Signature ability is GUARD/DEF_BUFF at high value (guard_amount 5-6, mana_cost 2) to turtle a strained part through a turn. Almost no ATK - Grumble wins by refusing to die while a partner or a slow chip finishes the job. Defense-affinity cores with the biggest HP pools (34+). The counter-pole to Boldheart: it eats the haymaker. Skews COMMON/RARE (cheap, sturdy, unglamorous).",
+    "naming": "Solid, weight-rated, industrial nouns. 'Slab-Pauldron' / 'Girder Fist' (ARM), 'Bollard Legs' (LEGS), 'Anvil Cowl' (HEAD), 'Ballast Core' (CORE). Prefix parts with tonnage flavor ('Grumble No.7 Anvil Foot')."
+  },
+  {
+    "key": "whirligig",
+    "name": "Whirligig Foldforms",
+    "mecha_inspiration": "Transforming vehicles - Transformers, Macross Valkyries: wheels, jets, folding panels, speed and versatility",
+    "motif": "Glossy two-tone teal-and-white with visible hinges, wheel-hubs and fold-lines that hint at a hidden vehicle mode; aerodynamic wedge silhouette, swept panels. Glow: a bright cyan motion-streak that trails from the joints when it acts. Runes are aerodynamic 'swift' glyphs etched along the fairings.",
+    "mechanical_identity": "The speed / mobility racer. Owns the SPD stat: featherweight LEGS and BACK bits (SPD 5-7, wt 10-16, en low) that dominate initiative and never risk the weight penalty. Its arms grant fast MULTI (hit_count 3, power 2, mana_cost 2) - cheap flurries that let it act first and start chipping parts before the slow families move. Low HP, low DEF - it wins the initiative war or it loses. Light attack-leaning cores tuned for SPD (SPD 3, en 8). Distinct from Chatterbox (which buys energy, not raw speed) and Silksteel (which buys precision, not tempo): Whirligig is simply always first. Skews COMMON/RARE.",
+    "naming": "Motion + vehicle words. 'Rollarm' / 'Turbine Fist' (ARM), 'Zephyr Tread' / 'Coilspring Legs' (LEGS), 'Slipstream Fin' (BACK), 'Quickstart Core' (CORE). Fast, breezy, verb-forward."
+  },
+  {
+    "key": "thicket_fang",
+    "name": "Thicket & Fang Menagerie",
+    "mecha_inspiration": "Animal / beast mecha - Zoids, Beast Wars: claws, fangs, haunches, organic predator shapes",
+    "motif": "Textured 'flocked' rubbery mossy-green shells with bone-cream fangs and claws; crouched four-limb-ready animal silhouette, hunched shoulders, a biting head. Glow: soft leaf-green at the eye-slits and the joint 'muscles'. Runes are wild interlace/knotwork glyphs, like carved totems, baked into the pelt texture.",
+    "mechanical_identity": "The aggressive beast - MULTI attacker built to shred multiple parts. Its whole hook is claw/bite ARM bits that grant MULTI at high hit-count (hit_count 4, power 3, wt 30, mana_cost 3): because MULTI auto-targets the enemy's lowest-HP part each hit, a Thicket build races enemies to the SURVIVABLE_LOSS state (all weapon parts broken) faster than anyone. Biting HEAD bits also carry a MULTI move (rare among heads). High ATK, moderate SPD, thin DEF and HP - a predator, not a bruiser. Attack-affinity cores. Ships complementary ARM pairs (a rending 'Claw' + a gripping 'Maw'-arm). Contrast Boldheart's one big hit: Thicket is death by a hundred bites. Skews RARE/EPIC.",
+    "naming": "Anatomical predator parts. 'Rend-Claw' / 'Gnash Maw' (ARM), 'Fang Crown' (HEAD), 'Haunch Legs' (LEGS), 'Wildheart Core' (CORE), 'Bristle Mane' (BACK). Feral, single-syllable-heavy."
+  },
+  {
+    "key": "silksteel",
+    "name": "Silksteel Atelier",
+    "mecha_inspiration": "Sleek powered armor / hardsuits - Bubblegum Crisis, Appleseed Landmates, Ghost in the Shell hardsuits: form-fitting, fast, precise",
+    "motif": "Pearlescent glossy lavender-and-silver, form-fitting smooth panels with no bulk; slim streamlined humanoid silhouette, elegant and minimal. Glow: thin magenta rune-lines that trace the seams like filigree and flare only at the strike. Runes are delicate, jeweller-fine 'precision' glyphs etched hairline into the gloss.",
+    "mechanical_identity": "The precision glass-cannon assassin - the core sniper. Low weight, very high SPD, dangerously low HP. Signature ARM/HEAD bits grant SINGLE with can_target_core TRUE (power 5-6, mana_cost 2-3): it skips breaking limbs and aims straight for the enemy mana core, the fastest legitimate route to a WIN that Boldheart's slow finisher and Thicket's grind can't match. But it can be one-shot itself. Attack-affinity cores tuned for SPD over HP (HP 26, SPD 3). The scalpel to Boldheart's hammer: it also kills the core, but early and precisely instead of late and huge. Skews EPIC - the premium precision shelf. Note vs the AI core-gate (§13.3): a player Silksteel is far deadlier than an AI one, which is the intended thrill.",
+    "naming": "Sleek, precise, delicate nouns. 'Needle-Arm' / 'Sliver Edge' (ARM), 'Whisper Visor' (HEAD), 'Slip Greaves' (LEGS), 'Filigree Core' (CORE), 'Gossamer Vane' (BACK). Refined, quiet, expensive."
+  },
+  {
+    "key": "pith_sinew",
+    "name": "Pith & Sinew Livingworks",
+    "mecha_inspiration": "Biomech / organic - Evangelion, Guyver: living tissue over a frame, self-repair, an unsettling heartbeat rendered here as cozy-organic",
+    "motif": "Translucent gummy amber-and-rose 'resin' plastic you can see an inner glow through, ribbed and soft-edged like a gummy toy; rounded organic silhouette that swells and settles. Glow: a warm rosy pulse THROBBING from deep inside the translucent shell (the only family that glows from within, not at sockets). Runes are vein-like flowing glyphs suspended inside the resin.",
+    "mechanical_identity": "The mana-engine self-sustain family - the regenerator. Owns ENERGY: BACK and CORE bits push the mana pool high (en 10-14) so it can afford to spend every turn. Its GUARD ability is PART_RESTORE (guard_amount 4-5, mana_cost 2), the catalog's rare self-heal - it keeps a strained part alive turn after turn (never revives a broken one, per §13.2). Mana-affinity cores with the deepest energy (en 12-14) and solid HP. High endurance, low burst: it out-lasts, never out-hits. Distinct from Grumble (which turtles with DEF) - Pith survives by healing and out-manaing. Skews RARE/EPIC. Watch that it doesn't become an un-killable stall - a real balance-pass flag.",
+    "naming": "Soft biological nouns. 'Sinew Coil-Arm' / 'Tendon Grip' (ARM), 'Caul Hood' (HEAD), 'Marrow Legs' (LEGS), 'Pith Heart-Core' (CORE), 'Pulse Sac' (BACK). Warm, living, never gory."
+  },
+  {
+    "key": "quivergear",
+    "name": "Quivergear Ordnance",
+    "mecha_inspiration": "Modular hardpoint / arsenal - Armored Core, Heavy Gear, Full Metal Panic: back-mounted missile racks, boosters, swappable weapon pods",
+    "motif": "Matte olive with safety-orange tips and a bristle of back-mounted racks, pods and launch-tubes; back-heavy hunched silhouette that leans forward under its ordnance. Glow: rows of little amber pilot-lights, one per pod, that flare in sequence as a volley fires. Runes are stenciled ordnance/hazard glyphs on every tube.",
+    "mechanical_identity": "The ranged artillery family - the only one built around the BACK slot. Its signature bits are BACK-mounted MULTI launchers (hit_count 3-4, power 3, mana_cost 3, and uniquely can_target_core TRUE on an EPIC 'Sky-Rack') that rain hits auto-spread onto the enemy's weakest parts from range. High energy demand (needs a Pith or mana core to fund it), heavy back weight, thin melee. Mana-affinity cores. Plays as a stand-off bombardment build: it wants a Grumble/Errant front and a loaded BACK. Distinct from Thicket (melee MULTI) - Quivergear does its MULTI from the back slot and can reach the core. Skews RARE/EPIC.",
+    "naming": "Ordnance nouns, rack-and-pod flavor. 'Sky-Rack' / 'Volley Pod' (BACK), 'Salvo Fist' (ARM), 'Spotter Dome' (HEAD), 'Recoil Legs' (LEGS), 'Magazine Core' (CORE). Stenciled, military-surplus toy-line feel."
+  },
+  {
+    "key": "errant",
+    "name": "Errant Oathforge",
+    "mecha_inspiration": "Fantasy knight mecha - Escaflowne, Knightmare Frames (Code Geass), The Vision of Escaflowne: sword-and-shield duelists with capes and crests",
+    "motif": "Enamel-painted heraldic look - deep royal blue with polished-brass trim, a tall head-crest and a little cloth pennant; upright chivalric silhouette, sword arm and shield arm. Glow: a clean gold rune running the length of the blade and rimming the shield boss. Runes are formal heraldic 'oath' sigils, crisp and gilded.",
+    "mechanical_identity": "The sword-and-shield duelist - an ATK/DEF hybrid that ships complementary ARM pairs. The 'Oathblade' arm grants a solid SINGLE (power 5, mana_cost 2); the 'Warder' shield arm grants GUARD/DEF_BUFF (guard_amount 4, mana_cost 2). A full Errant build fields both, alternating strike and brace - the honorable tempo duelist that neither over-commits (Boldheart) nor turtles forever (Grumble). Balanced HP/DEF, moderate weight, defense-leaning cores with respectable HP (32) and modest energy. The 'principled midrange' family: good at everything, best at trading blows one part at a time. Skews COMMON/RARE with EPIC 'named-blade' arms.",
+    "naming": "Chivalric, oath-and-heraldry nouns, arms sold as complementary pairs. 'Oathblade' / 'Warder' (ARM), 'Sigil Crest' (HEAD), 'Vigil Greaves' (LEGS), 'Pledge Core' (CORE), 'Pennant Mantle' (BACK). Formal, honorable, a touch archaic."
+  },
+  {
+    "key": "cobble_sons",
+    "name": "Cobble & Sons Workaday",
+    "mecha_inspiration": "Utility / labor mecha - Patlabor, the civilian construction and rescue frames: clamps, cranes, honest tools, non-combat DNA repurposed",
+    "motif": "Well-loved matte orange and grey with clamp-hands, a tool-belt and a few honest painted scuffs (the cozy 'this one's been used and loved' shelf-worn look); stocky, dependable utility silhouette. Glow: a friendly steady green tool-light at the clamp and chest. Runes are practical measure/mend glyphs stamped like tool markings.",
+    "mechanical_identity": "The repair/support workhorse - durable and cheap, built around GUARD/PART_RESTORE. Its clamp arms grant the best-value PART_RESTORE in the game (guard_amount 5, mana_cost 1 - cheaper than Pith's, but on a lower energy budget), letting a budget build nurse a key part through a whole fight. High HP, moderate DEF, low ATK and SPD, generous weight-efficiency. Defense-affinity cores that are all HP and thrift (HP 34, en 6). The accessible support: where Pith is the premium mana-regen engine, Cobble is the cheap dependable mender the early game can actually afford. Skews COMMON - the value shelf.",
+    "naming": "Honest workaday tool nouns, plain and warm. 'Mendclaw' / 'Ratchet Grip' (ARM), 'Hardhat Cowl' (HEAD), 'Trundle Legs' (LEGS), 'Dependable Core' (CORE), 'Toolrack Pack' (BACK). Often 'Cobble & Sons No.4 Mendclaw' - family-firm cataloguing."
+  },
+  {
+    "key": "chatterbox",
+    "name": "Chatterbox Bright-Minds",
+    "mecha_inspiration": "Spider-tank / friendly AI - Tachikoma (Ghost in the Shell), Scopedog pods, Bonaparte: chatty little-brain scouts on many nimble legs",
+    "motif": "Glossy rounded pastel sky-blue-and-white pod body with one big friendly eye-dome and a cluster of little skittering legs; round pod-on-legs silhouette, adorable and inquisitive. Glow: a soft-blue blinking eye plus a gentle belly underlight that brightens when it 'thinks' (spends mana). Runes are cheerful dotted 'chatter' glyphs like little speech-marks.",
+    "mechanical_identity": "The agile AI support / battery - a mana-and-tempo enabler, not a heavy hitter. Multi-legged LEGS bits give an unusual SPD+DEF blend (SPD 4, DEF 2, wt 20 - stable AND quick). Its big-eye HEAD and pods pump ENERGY (en 6-8 each) and grant a cheap MULTI 'chip-and-mark' (hit_count 3, power 2, mana_cost 1) plus a light GUARD/DEF_BUFF (guard_amount 2, mana_cost 1). Mana-affinity cores, mid HP. It funds and screens a heavy partner: the friendly brain that keeps the pool full and pokes while the bruiser winds up. Distinct from Whirligig (raw speed, no energy) and Pith (endurance, no tempo): Chatterbox trades in cheap actions and mana. Skews COMMON/RARE.",
+    "naming": "Cute-AI, chatty diminutives. 'Skitter-Legs' (LEGS), 'Prattle Dome' (HEAD), 'Ping Arm' (ARM), 'Bright Core' (CORE), 'Notion Pack' (BACK). Numbered like friendly units ('Chatterbox Unit-3 Skitter-Legs')."
+  },
+  {
+    "key": "sovereign_brass",
+    "name": "Sovereign Brass",
+    "mecha_inspiration": "Retro art-deco dieselpunk - Big O, Iron Giant, Sky Captain robots: stately brass, rivets, sunbursts and one thunderous piston blow",
+    "motif": "Polished brass and cream art-deco enamel with fluted columns, sunburst motifs and rivet rows, rigorously symmetrical; a broad-shouldered stately obelisk silhouette that stands like a monument. Glow: warm gold uplight glowing up out of the fluting and behind the sunburst crest, grand and slow. Runes are ornate deco filigree glyphs, gilt-etched.",
+    "mechanical_identity": "The premium counter-bruiser - the expensive best-of-both, and the game's high-end shelf. Uniquely strong in TWO axes at once: high DEF (like Grumble) AND a heavy piston SINGLE (near Boldheart, power 7, mana_cost 3). It pays for that with the steepest costs - high weight (usually over budget for a real SPD tax) and high mana_cost, so it acts slow and deliberate: brace with a GUARD/DEF_BUFF, then land a megaton. Defense-or-attack cores, both premium (HP 32, en 10). The stately answer to 'what if a tank could also punch' - deliberately gated behind RARE/EPIC rarity and weight so it's an aspirational build, not a default. Skews EPIC.",
+    "naming": "Stately art-deco grandeur nouns. 'Pistonfist' / 'Sudden Impact Arm' (ARM), 'Sunburst Crown' (HEAD), 'Cornice Legs' (LEGS), 'Grand Core' (CORE), 'Mantle of State' (BACK). Capitalized, monumental, a touch pompous - on purpose."
+  },
+  {
+    "key": "tinbox",
+    "name": "Tinbox Chums",
+    "mecha_inspiration": "Toy-medal / boxset lineage - Medabots, chibi Mobile Suit starter kits, tin wind-up robots: the friendly first-robot everyone starts with",
+    "motif": "Cheerful stamped-tin look in bright primaries with rounded rivets and a big friendly two-eye face; a warm rounded retro-robot silhouette, huggable and simple. Glow: one simple warm dot at the chest, nothing fancy - the training-wheels glow. Runes are big, few, storybook-simple glyphs printed (not deeply etched) on the tin.",
+    "mechanical_identity": "The onboarding starter boxset - the family the first hour is built from. Deliberately gentle and complete: it ships at least one COMMON bit of EVERY slot and one of every ability archetype (a SINGLE 'Buddy-Fist', a MULTI 'Pal-Rattle', a GUARD/DEF_BUFF 'Chum-Shield'), all cheap, low-weight, forgiving stat lines (nothing over ATK 4 or wt 24, HP a friendly 10-12). One accessible core of each affinity at flat 30 HP so a new Artificer can taste attack/defense/mana without commitment. Overlaps nobody's ceiling - it's the safe sandbox you graduate out of, and the sentimental keep-forever line. All COMMON.",
+    "naming": "Friendly, buddy-warm diminutives. 'Buddy-Head' / 'Pal Mitt' (ARM/HEAD), 'Trusty Legs' (LEGS), 'Firstheart Core' (CORE), 'Chum Pack' (BACK). 'Tinbox Chum #1 Buddy-Head' - collectible-numbered like a first sticker album."
+  },
+  {
+    "key": "pocketful",
+    "name": "Pocketful Capsule Critters",
+    "mecha_inspiration": "Super-deformed capsule toys - SD Gundam, Choro-Q, gashapon chibi mecha: big-head, tiny-body pocket collectibles",
+    "motif": "Super-deformed chibi in glossy candy colors with an oversized head and stubby limbs; unmistakable big-head/tiny-body silhouette, palm-sized and grin-y. Glow: a single tiny sparkle-glint, blink-and-miss-it, at the eye or fist. Runes are one lone oversized 'cute' glyph on the belly, cartoon-thick.",
+    "mechanical_identity": "The featherweight enabler - the weight-budget tetris piece, a genuinely distinct build lane. Its whole gimmick: near-zero WEIGHT (bits at wt 2-6) with correspondingly small stats (ATK 1-2, HP 6-8) and low mana_cost abilities. It exists so you can equip a monstrous over-budget Boldheart drill or a Sovereign piston and claw back UNDER the 100 budget by filling the other slots with Pocketful bits - trading raw power for keeping your SPD penalty at zero. Chibi cores are tiny (HP 24, wt 6, en 6) across all three affinities. Also the pure-collectible chase line (a mascot per capsule series). Rarity spread COMMON→EPIC, but even the EPICs stay tiny - you buy them for the weight slot, not the numbers.",
+    "naming": "Diminutive, capsule-cute nouns. 'Wee Fist' / 'Chibi Mitt' (ARM), 'Big-Bonce Head' (HEAD), 'Stubby Legs' (LEGS), 'Mote Core' (CORE), 'Pip Pack' (BACK). Series-numbered like gashapon runs ('Pocketful Series 2 · Wee Fist')."
+  }
+]

@@ -1,0 +1,996 @@
+MANABIT - SESSION TRANSCRIPTS (playtest play-by-play)
+Generated 2026-07-21T16:13:37   |   324 sessions total, 6 transcribed below
+Each line: actor, move, target, damage; core HP shown as You/Foe after the blow.
+==============================================================================
+SESSION #15  [novice ladder - the early wall]
+journey=ladder  tier=novice  seed=2070944
+OPENING BUILD  (ATK 10 / DEF 8 / SPD 9 / mana 9, weight 102/106, core core_bulwark hp34 COMMON):
+    HEAD   head_optic                     COMMON hp8
+    CORE   core_bulwark                   COMMON hp34
+    ARM_L  quivergear_salvo_fist          COMMON hp9
+    ARM_R  grumble_co_girder_fist         COMMON hp12
+    LEGS   errant_legs_vigil              COMMON hp16
+------------------------------------------------------------
+>> RUNG 1: Scrap-Pup Rusty  (regular)
+     You strikes Foe's HEAD for 9
+       ↳ Foe's HEAD breaks!
+     Foe strikes You's HEAD for 2
+     You strikes Foe's ARM_R for 9
+     Foe strikes You's HEAD for 2
+     You strikes Foe's ARM_R for 9
+       ↳ Foe's ARM_R breaks!
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 10
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 10
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 12
+     Foe has no move it can afford
+     You strikes Foe's CORE for 12
+     Foe has no move it can afford
+     You strikes Foe's CORE for 12
+     result: WIN  [clean_win]  turns 15  (you ended 100%, foe 0%)
+>> RUNG 2: Whirl-Kid Ziptie  (regular)
+     Foe strikes You's HEAD for 1
+     You strikes Foe's HEAD for 11
+       ↳ Foe's HEAD breaks!
+     Foe strikes You's HEAD for 1
+     Foe strikes You's HEAD for 1
+     Foe strikes You's HEAD for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 11
+       ↳ Foe's BACK breaks!
+     Foe strikes You's HEAD for 1
+     Foe strikes You's HEAD for 1
+     Foe strikes You's HEAD for 1
+       ↳ You's HEAD breaks!
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's ARM_R for 9
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's LEGS for 9
+     You strikes Foe's LEGS for 9
+       ↳ Foe's LEGS breaks!
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     Foe has no move it can afford
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 10
+     You strikes Foe's CORE for 10
+     result: WIN  [clean_win]  turns 9  (you ended 100%, foe 0%)
+>> RUNG 3: Sir Vance the Steadfast  (regular)
+     Foe strikes You's HEAD for 2
+     You strikes Foe's HEAD for 4
+     Foe strikes You's HEAD for 2
+     You strikes Foe's HEAD for 4
+       ↳ Foe's HEAD breaks!
+     Foe strikes You's HEAD for 2
+     You strikes Foe's BACK for 4
+     Foe strikes You's HEAD for 2
+       ↳ You's HEAD breaks!
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+       ↳ Foe's BACK breaks!
+     You strikes Foe's ARM_R for 1
+     Foe strikes You's ARM_L for 3
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe strikes You's ARM_L for 3
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe strikes You's ARM_L for 3
+       ↳ You's ARM_L breaks!
+     You strikes Foe's ARM_R for 1
+     Foe strikes You's ARM_R for 3
+     You strikes Foe's ARM_R for 1
+     Foe strikes You's ARM_R for 3
+     You strikes Foe's ARM_R for 1
+       ↳ Foe's ARM_R breaks!
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     Foe guards (+4 DEF this turn)
+     You strikes Foe's ARM_L for 1
+       ↳ Foe's ARM_L breaks!
+     You strikes Foe's LEGS for 1
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     Foe has no move it can afford
+     You strikes Foe's CORE for 5
+     result: WIN  [clean_win]  turns 67  (you ended 100%, foe 0%)
+>> RUNG 4: Grand Warden Cogsworth  (elite)
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's HEAD for 1
+     You strikes Foe's BACK for 1
+       ↳ Foe's BACK breaks!
+     Foe strikes You's HEAD for 1
+       ↳ You's HEAD breaks!
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe strikes You's ARM_L for 2
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe strikes You's ARM_L for 2
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe strikes You's ARM_L for 2
+     You strikes Foe's HEAD for 1
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_L for 2
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_L for 2
+       ↳ You's ARM_L breaks!
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_R for 2
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_R for 2
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_R for 2
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_R for 2
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_R for 2
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_R for 2
+       ↳ You's ARM_R breaks!
+     result: SURVIVABLE_LOSS  [survivable_loss]  turns 38  (you ended 100%, foe 100%)
+CLIMB: cleared 3/9 rungs; wall = Grand Warden Cogsworth (elite)
+ECONOMY: stake paid 25 scrap, loot melt 36, parts lost 1, net EV +11
+
+==============================================================================
+SESSION #77  [expert ladder - a deep climb]
+journey=ladder  tier=expert  seed=1039492
+OPENING BUILD  (ATK 11 / DEF 10 / SPD 11 / mana 12, weight 112/112, core steadfast_gallant_core_gallant hp40 EPIC):
+    HEAD   steadfast_gallant_head_beacon  EPIC   hp16
+    CORE   steadfast_gallant_core_gallant EPIC   hp40
+    ARM_L  whirligig_arm_overdrive        EPIC   hp8
+    ARM_R  pocketful_arm_grinlet          EPIC   hp12
+    LEGS   cobble_sons_legs_bedrock       EPIC   hp26
+------------------------------------------------------------
+>> RUNG 1: Scrap-Pup Rusty  (regular)
+     You strikes Foe's HEAD for 9
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_R for 9
+     You strikes Foe's ARM_R for 9
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's LEGS for 10
+     You strikes Foe's LEGS for 10
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 12
+     You strikes Foe's CORE for 12
+     You strikes Foe's CORE for 12
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     result: WIN  [clean_win]  turns 3  (you ended 100%, foe 0%)
+>> RUNG 2: Whirl-Kid Ziptie  (regular)
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's HEAD for 11
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's BACK for 11
+       ↳ Foe's BACK breaks!
+     You strikes Foe's ARM_R for 12
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's LEGS for 12
+     You strikes Foe's LEGS for 12
+       ↳ Foe's LEGS breaks!
+     You strikes Foe's CORE for 12
+     You strikes Foe's CORE for 12
+     You strikes Foe's CORE for 12
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     result: WIN  [blowout]  turns 3  (you ended 100%, foe 0%)
+>> RUNG 3: Sir Vance the Steadfast  (regular)
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's HEAD for 4
+     You strikes Foe's HEAD for 4
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's BACK for 4
+     You strikes Foe's BACK for 4
+       ↳ Foe's BACK breaks!
+     You strikes Foe's ARM_R for 4
+     You strikes Foe's ARM_R for 4
+     You strikes Foe's ARM_R for 4
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's ARM_L for 4
+     You strikes Foe's ARM_L for 4
+     You strikes Foe's ARM_L for 4
+       ↳ Foe's ARM_L breaks!
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 7
+     You strikes Foe's LEGS for 7
+     You strikes Foe's LEGS for 7
+       ↳ Foe's LEGS breaks!
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     Foe has no move it can afford
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     result: WIN  [clean_win]  turns 7  (you ended 100%, foe 0%)
+>> RUNG 4: Grand Warden Cogsworth  (elite)
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+       ↳ Foe's BACK breaks!
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe strikes You's ARM_L for 1
+     Foe strikes You's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+       ↳ Foe's ARM_L breaks!
+     Foe guards (+5 DEF this turn)
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+       ↳ Foe's ARM_R breaks!
+     Foe has no move it can afford
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+     Foe has no move it can afford
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+     You strikes Foe's LEGS for 3
+       ↳ Foe's LEGS breaks!
+     You strikes Foe's CORE for 9
+     Foe has no move it can afford
+     Foe has no move it can afford
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 9
+     You strikes Foe's CORE for 13
+     result: WIN  [clean_win]  turns 41  (you ended 100%, foe 0%)
+>> RUNG 5: Sunking Brassmore, the Undethroned  (boss)
+     You strikes Foe's CORE for 6
+     Foe strikes You's ARM_L for 8
+       ↳ You's ARM_L breaks!
+     You strikes Foe's HEAD for 2
+     Foe strikes You's ARM_R for 8
+     You strikes Foe's HEAD for 2
+     Foe strikes You's ARM_R for 8
+       ↳ You's ARM_R breaks!
+     result: SURVIVABLE_LOSS  [survivable_loss]  turns 6  (you ended 100%, foe 84%)
+CLIMB: cleared 4/9 rungs; wall = Sunking Brassmore, the Undethroned (boss)
+ECONOMY: stake paid 45 scrap, loot melt 81, parts lost 1, net EV +36
+
+==============================================================================
+SESSION #180  [expert own-build venture - a core-hunt DEATH]
+journey=venture  tier=expert  seed=615849
+OPENING BUILD  (ATK 12 / DEF 8 / SPD 15 / mana 20, weight 112/112, core steadfast_gallant_core_gallant hp40 EPIC):
+    HEAD   silksteel_head_oracle          EPIC   hp6
+    CORE   steadfast_gallant_core_gallant EPIC   hp40
+    ARM_L  pocketful_arm_grinlet          EPIC   hp12
+    ARM_R  carillon_cadets_arm_grandpeal  EPIC   hp10
+    LEGS   cobble_sons_legs_bedrock       EPIC   hp26
+    BACK   pocketful_back_pippack         RARE   hp8
+------------------------------------------------------------
+>> FIGHT pos0: Scrap-Pup Rusty  (skirmish)
+     You strikes Foe's CORE for 17
+     Foe strikes You's HEAD for 3
+     You strikes Foe's CORE for 17
+     result: WIN  [blowout]  turns 3  (you ended 100%, foe 0%)
+[ REST pos1: Wayside Shrine (event)  repair -2 scrap ]
+[ JUNCTION pos2 elite: chose 'Wardens Wall' [second_wind], spurned 'Bramble Cut' ]
+>> FIGHT pos2: Grand Warden Cogsworth  (elite  mod=second_wind)
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You strikes Foe's CORE for 2
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     You braces a part (+4 HP)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 1
+     result: STALL  [stall]  turns 120  (you ended 98%, foe 55%)
+[ REST pos3: The Last Lantern (camp)  repair -1 scrap ]
+[ JUNCTION pos4 boss: chose 'Gilded Gate' [tailwind], spurned 'Heralds Walk' ]
+>> FIGHT pos4: Sunking Brassmore  (boss  mod=tailwind)
+     You strikes Foe's CORE for 8
+     Foe lunges for your core!
+     Foe strikes You's CORE for 10
+     You strikes Foe's CORE for 8
+     Foe lunges for your core!
+     Foe strikes You's CORE for 10
+     You strikes Foe's CORE for 8
+     Foe lunges for your core!
+     Foe strikes You's CORE for 10
+     You strikes Foe's CORE for 8
+     Foe lunges for your core!
+     Foe strikes You's CORE for 10
+     result: DEATH  [heartbreak]  turns 8  (you ended 0%, foe 14%)
+OUTCOME: DEATH at pos4 (boss, Sunking Brassmore). Killing blow: foe SINGLE from HEAD for 10; foe core left 14%. Your body was at 100% HP.
+ECONOMY: net +47 scrap (repairs -3, loot melt 8, forfeit +0, satchel 0, gleaners +0, wreck +50)
+
+==============================================================================
+SESSION #176  [average own-build venture - a road cleared]
+journey=venture  tier=average  seed=3959258
+OPENING BUILD  (ATK 12 / DEF 5 / SPD 13 / mana 12, weight 104/104, core boldheart_core_sunheart hp37 RARE):
+    HEAD   everykit_standard_cowl_mk2     RARE   hp8
+    CORE   boldheart_core_sunheart        RARE   hp37
+    ARM_L  whirligig_arm_turbine          RARE   hp9
+    ARM_R  sovereign_brass_arm_pistonfist RARE   hp14
+    LEGS   larkabout_skyworks_legs_rocketboot RARE   hp16
+------------------------------------------------------------
+>> FIGHT pos0: Scrap-Pup Rusty  (skirmish)
+     You strikes Foe's HEAD for 10
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_R for 10
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's LEGS for 11
+     You strikes Foe's LEGS for 11
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 14
+     result: WIN  [clean_win]  turns 3  (you ended 100%, foe 0%)
+[ REST pos1: Wayside Shrine (event)  (free mend) ]
+[ JUNCTION pos2 elite: chose 'Wardens Wall' [second_wind], spurned 'Bramble Cut' ]
+>> FIGHT pos2: Grand Warden Cogsworth  (elite  mod=second_wind)
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+     You strikes Foe's BACK for 1
+       ↳ Foe's BACK breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's HEAD for 1
+     You strikes Foe's HEAD for 1
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 4
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+       ↳ Foe's ARM_L breaks!
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     Foe guards (+5 DEF this turn)
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+     You strikes Foe's ARM_R for 1
+       ↳ Foe's ARM_R breaks!
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 6
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 4
+     You strikes Foe's LEGS for 4
+     You strikes Foe's LEGS for 4
+     You strikes Foe's LEGS for 4
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 6
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 10
+     You strikes Foe's CORE for 10
+     You strikes Foe's CORE for 10
+     You strikes Foe's CORE for 10
+     result: WIN  [comeback]  turns 35  (you ended 24%, foe 0%)
+[ REST pos3: The Last Lantern (camp)  repair -14 scrap ]
+[ JUNCTION pos4 boss: chose 'Gilded Gate' [tailwind], spurned 'Heralds Walk' ]
+>> FIGHT pos4: Sunking Brassmore  (boss  mod=tailwind)
+     You strikes Foe's HEAD for 6
+       ↳ Foe's HEAD breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 15
+     You strikes Foe's BACK for 6
+       ↳ Foe's BACK breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 15
+     You strikes Foe's ARM_R for 3
+     You strikes Foe's ARM_R for 3
+     You strikes Foe's ARM_R for 3
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's ARM_L for 3
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+       ↳ Foe's ARM_L breaks!
+     You strikes Foe's LEGS for 1
+     You strikes Foe's LEGS for 1
+     You strikes Foe's LEGS for 1
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 7
+     You strikes Foe's LEGS for 7
+     You strikes Foe's LEGS for 7
+     You strikes Foe's LEGS for 7
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 15
+     Foe has no move it can afford
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 14
+     You strikes Foe's CORE for 14
+     result: WIN  [comeback]  turns 23  (you ended 27%, foe 0%)
+OUTCOME: SURVIVED the road.
+ECONOMY: net -14 scrap (repairs -14, loot melt 98, forfeit +0, satchel 0, gleaners +0, wreck +0)
+
+==============================================================================
+SESSION #220  [Gleaming box - the near-guarantee]
+journey=kit  tier=novice  seed=107922  grade=Gleaming
+OPENING BUILD  (ATK 13 / DEF 6 / SPD 19 / mana 37, weight 101/115, core core_heirloom hp80 EPIC):
+    HEAD   chatterbox_bigeye_dome         RARE   hp8
+    CORE   core_heirloom                  EPIC   hp80
+    ARM_L  arm_seer                       EPIC   hp9
+    ARM_R  carillon_cadets_arm_grandpeal  EPIC   hp10
+    LEGS   whirligig_legs_zephyr          RARE   hp16
+    BACK   larkabout_skyworks_back_updraft RARE   hp9
+------------------------------------------------------------
+>> FIGHT pos0: Scrap-Pup Rusty  (skirmish)
+     You strikes Foe's HEAD for 11
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_R for 11
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's LEGS for 12
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 12
+       ↳ Foe's LEGS breaks!
+     You strikes Foe's CORE for 14
+     You strikes Foe's CORE for 14
+     Foe has no move it can afford
+     You strikes Foe's CORE for 14
+     You strikes Foe's CORE for 15
+     You strikes Foe's CORE for 15
+     result: WIN  [clean_win]  turns 5  (you ended 100%, foe 0%)
+[ REST pos1: Wayside Shrine (event)  (free mend) ]
+[ JUNCTION pos2 elite: chose 'Bramble Cut' [overgrown], spurned 'Wardens Wall' ]
+>> FIGHT pos2: Thornlash Briar  (elite  mod=overgrown)
+     You strikes Foe's BACK for 9
+       ↳ Foe's BACK breaks!
+     You strikes Foe's HEAD for 11
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_L for 11
+       ↳ Foe's ARM_L breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 10
+     You strikes Foe's ARM_R for 11
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's LEGS for 11
+     You strikes Foe's LEGS for 11
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     You strikes Foe's CORE for 13
+     result: WIN  [clean_win]  turns 5  (you ended 88%, foe 0%)
+[ REST pos3: The Last Lantern (camp)  (free mend) ]
+[ JUNCTION pos4 boss: chose 'Gilded Gate' [tailwind], spurned 'Heralds Walk' ]
+>> FIGHT pos4: Sunking Brassmore  (boss  mod=tailwind)
+     You strikes Foe's HEAD for 2
+     You strikes Foe's HEAD for 2
+     You strikes Foe's HEAD for 2
+       ↳ Foe's HEAD breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 14
+     You strikes Foe's BACK for 2
+     You strikes Foe's BACK for 2
+     You strikes Foe's BACK for 2
+       ↳ Foe's BACK breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 14
+     You strikes Foe's ARM_R for 4
+     You strikes Foe's ARM_R for 4
+       ↳ Foe's ARM_R breaks!
+     You strikes Foe's ARM_L for 4
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+     Foe guards (+6 DEF this turn)
+     You strikes Foe's ARM_L for 1
+     You strikes Foe's ARM_L for 1
+       ↳ Foe's ARM_L breaks!
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 8
+     You strikes Foe's LEGS for 8
+     You strikes Foe's LEGS for 8
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 14
+     You strikes Foe's CORE for 14
+     You strikes Foe's CORE for 14
+     result: WIN  [clean_win]  turns 23  (you ended 65%, foe 0%)
+OUTCOME: SURVIVED the road.
+ECONOMY: net +75 scrap (repairs -0, loot melt 98, forfeit +0, satchel 75, gleaners +0, wreck +0)
+
+==============================================================================
+SESSION #231  [Dud box - a weak box gets got]
+journey=kit  tier=novice  seed=210869  grade=Dud
+OPENING BUILD  (ATK 6 / DEF 7 / SPD 8 / mana 9, weight 40/106, core core_bulwark hp34 COMMON):
+    HEAD   grumble_co_anvil_cowl          COMMON hp10
+    CORE   core_bulwark                   COMMON hp34
+    ARM_L  pocketful_arm_weefist          COMMON hp8
+    ARM_R  pocketful_arm_weefist          COMMON hp8
+    LEGS   pocketful_legs_stubby          COMMON hp12
+------------------------------------------------------------
+>> FIGHT pos0: Scrap-Pup Rusty  (skirmish)
+     Foe strikes You's ARM_L for 4
+     You strikes Foe's HEAD for 5
+     Foe strikes You's ARM_L for 4
+       ↳ You's ARM_L breaks!
+     You strikes Foe's HEAD for 3
+       ↳ Foe's HEAD breaks!
+     You strikes Foe's ARM_R for 3
+     Foe strikes You's ARM_R for 3
+     You strikes Foe's ARM_R for 3
+     Foe strikes You's ARM_R for 3
+     You strikes Foe's ARM_R for 3
+     Foe strikes You's ARM_R for 3
+       ↳ You's ARM_R breaks!
+     You strikes Foe's ARM_R for 1
+       ↳ Foe's ARM_R breaks!
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 2
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     Foe has no move it can afford
+     You strikes Foe's CORE for 4
+     result: WIN  [clean_win]  turns 41  (you ended 100%, foe 0%)
+[ REST pos1: Magpie's Heap (scrapyard)  (free mend) ]
+[ JUNCTION pos2 elite: chose 'Silk Stair' [rusted], spurned 'Powder Row' ]
+>> FIGHT pos2: Seamstress Sable  (elite  mod=rusted)
+     Foe lunges for your core!
+     Foe strikes You's CORE for 11
+     You strikes Foe's HEAD for 7
+       ↳ Foe's HEAD breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 12
+     You strikes Foe's ARM_R for 7
+       ↳ Foe's ARM_R breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 8
+     You strikes Foe's BACK for 7
+       ↳ Foe's BACK breaks!
+     You strikes Foe's ARM_L for 8
+       ↳ Foe's ARM_L breaks!
+     Foe has no move it can afford
+     You strikes Foe's LEGS for 8
+       ↳ Foe's LEGS breaks!
+     Foe has no move it can afford
+     You strikes Foe's CORE for 8
+     Foe has no move it can afford
+     You strikes Foe's CORE for 8
+     Foe has no move it can afford
+     You strikes Foe's CORE for 8
+     Foe has no move it can afford
+     You strikes Foe's CORE for 8
+     result: WIN  [comeback]  turns 17  (you ended 9%, foe 0%)
+[ REST pos3: The Last Lantern (camp)  (free mend) ]
+[ JUNCTION pos4 boss: chose 'Gilded Gate' [rusted], spurned 'Heralds Walk' ]
+>> FIGHT pos4: Sunking Brassmore  (boss  mod=rusted)
+     You strikes Foe's HEAD for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 11
+     You strikes Foe's HEAD for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 11
+     You strikes Foe's HEAD for 1
+     Foe lunges for your core!
+     Foe strikes You's CORE for 11
+     You strikes Foe's HEAD for 1
+       ↳ Foe's HEAD breaks!
+     Foe lunges for your core!
+     Foe strikes You's CORE for 13
+     result: DEATH  [outclassed]  turns 8  (you ended 0%, foe 95%)
+OUTCOME: DEATH at pos4 (boss, Sunking Brassmore). Killing blow: foe SINGLE from ARM_R for 13; foe core left 95%. Your body was at 100% HP.
+ECONOMY: net +17 scrap (repairs -0, loot melt 28, forfeit +0, satchel 35, gleaners +17, wreck +0)
+
+==============================================================================

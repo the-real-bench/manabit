@@ -1,0 +1,1144 @@
+{
+  "meta": {
+    "generated": "2026-07-19",
+    "script": "tools/sim/economy_sim.py",
+    "master_seed_scheme": "player i seed = 100003 + i * 7919 (smoke_kit_sim pattern)",
+    "players": 500,
+    "days": 30,
+    "catalog_size": {
+      "total": 80,
+      "body": 70,
+      "cores": 10,
+      "body_by_rarity": {
+        "COMMON": 38,
+        "RARE": 21,
+        "EPIC": 11
+      },
+      "note": "13 base fixtures + 67 non-colliding catalog_extra entries; 7 of the 10 cores are unobtainable"
+    }
+  },
+  "constants_extracted": [
+    {
+      "name": "TIN_PRICE",
+      "value": 40,
+      "source": "economy/broker.gd:5"
+    },
+    {
+      "name": "BRASS_PRICE",
+      "value": 100,
+      "source": "economy/broker.gd:6"
+    },
+    {
+      "name": "salvage_scrap EPIC/RARE/COMMON",
+      "value": [
+        45,
+        20,
+        8
+      ],
+      "source": "economy/broker.gd:9-13"
+    },
+    {
+      "name": "distill_glimmer EPIC/RARE/COMMON",
+      "value": [
+        3,
+        1,
+        0
+      ],
+      "source": "economy/broker.gd:16-20"
+    },
+    {
+      "name": "find_price EPIC/RARE/COMMON",
+      "value": [
+        "10 glimmer",
+        "4 glimmer",
+        "25 scrap"
+      ],
+      "source": "economy/broker.gd:23-27"
+    },
+    {
+      "name": "shelf slots / unowned weight",
+      "value": [
+        3,
+        "3:1"
+      ],
+      "source": "economy/broker.gd:44,48"
+    },
+    {
+      "name": "shelf discovered-gated (compendium only)",
+      "value": true,
+      "source": "economy/broker.gd:35-38"
+    },
+    {
+      "name": "BIND_CORE_COST",
+      "value": 60,
+      "source": "meta/player_state.gd:25"
+    },
+    {
+      "name": "BINDABLE_CORES",
+      "value": [
+        "core_ember",
+        "core_bulwark",
+        "core_font"
+      ],
+      "source": "meta/player_state.gd:26"
+    },
+    {
+      "name": "KIT_PURSE skirmish/elite/boss",
+      "value": [
+        10,
+        25,
+        40
+      ],
+      "source": "meta/player_state.gd:31"
+    },
+    {
+      "name": "KIT_PURSE_HALVED",
+      "value": [
+        5,
+        12,
+        20
+      ],
+      "source": "meta/player_state.gd:32"
+    },
+    {
+      "name": "purse halves after 2 counted runs/day",
+      "value": "kit_runs_today < 2",
+      "source": "meta/player_state.gd:191"
+    },
+    {
+      "name": "kit DEATH does not count a run (note_kit_run only on keep)",
+      "value": true,
+      "source": "ui/run_screen.gd:652-658"
+    },
+    {
+      "name": "starter kit scrap/tin/brass",
+      "value": [
+        50,
+        1,
+        2
+      ],
+      "source": "meta/player_state.gd:37-39"
+    },
+    {
+      "name": "starter grant: 3 cores + 1 brass roll (5 bits)",
+      "value": true,
+      "source": "meta/player_state.gd:40-46"
+    },
+    {
+      "name": "PackRoller fixed seed 20260711, pity NOT saved",
+      "value": 20260711,
+      "source": "meta/player_state.gd:35 + meta/save_manager.gd (no roller field)"
+    },
+    {
+      "name": "brass coffer: 5 bits, C/R/E 0.70/0.22/0.08, rare+ guaranteed, epic pity 9",
+      "value": true,
+      "source": "economy/pack_roller.gd:15-16,26,35-36"
+    },
+    {
+      "name": "tin coffer: 3 bits, C/R/E 0.85/0.12/0.03, no guarantee",
+      "value": true,
+      "source": "economy/pack_roller.gd:18-19"
+    },
+    {
+      "name": "doorstep: free tin once per calendar day",
+      "value": true,
+      "source": "meta/player_state.gd:153-161"
+    },
+    {
+      "name": "box grade cuts Dud/Rough/Fair/Keen/Gleaming",
+      "value": [
+        0.12,
+        0.4,
+        0.72,
+        0.92
+      ],
+      "source": "economy/box_roller.gd:17-21"
+    },
+    {
+      "name": "kit loot cap: 1 COMMON, only while satchel bit empty",
+      "value": true,
+      "source": "ui/combat_screen.gd:1358,1363"
+    },
+    {
+      "name": "kit forfeits pay 0 scrap",
+      "value": true,
+      "source": "ui/combat_screen.gd:1144-1147"
+    },
+    {
+      "name": "non-kit survivable loss: forfeit broken part pays salvage to PLAYER",
+      "value": true,
+      "source": "ui/combat_screen.gd:1149-1153"
+    },
+    {
+      "name": "non-kit WIN loot: any non-core part of the foe",
+      "value": true,
+      "source": "ui/combat_screen.gd:1359-1371"
+    },
+    {
+      "name": "loot never includes cores",
+      "value": true,
+      "source": "ui/combat_screen.gd:1361"
+    },
+    {
+      "name": "coffers/shelf draw from body_pool only (no cores ever)",
+      "value": true,
+      "source": "economy/pack_roller.gd:22 + economy/broker.gd:35"
+    },
+    {
+      "name": "venture consumes the bench build (clear without return)",
+      "value": true,
+      "source": "ui/root.gd:82-87 + manabits/build_session.gd:48-52"
+    },
+    {
+      "name": "own-build repair: ceil(missing HP / 2) scrap",
+      "value": 1,
+      "source": "meta/run_state.gd:11,168-174"
+    },
+    {
+      "name": "kit rests mend free",
+      "value": true,
+      "source": "ui/run_screen.gd:417-421"
+    },
+    {
+      "name": "run map: node0 skirmish -> rest -> elite junction -> rest -> boss junction",
+      "value": true,
+      "source": "meta/run_state.gd:17-50"
+    },
+    {
+      "name": "compendium total = full catalog incl. 7 never-obtainable cores",
+      "value": 80,
+      "source": "meta/player_state.gd:224-225 + parts/catalog.gd:136-159"
+    }
+  ],
+  "assumptions": [
+    "Fight outcomes are drawn from priors, not re-simulated: own-build node0 0.95 / elite 0.60 / boss 0.50 (lane brief); kit per-grade bands anchored to smoke_kit_sim gates + CLAUDE.md measured numbers (Gleaming elite 0.88 / boss 0.83, node0 >= 0.90 with zero deaths, Dud boss <= 0.15).",
+    "Death-given-loss on core-hunting nodes: kit 0.75, own-build 0.70 (elite/boss aim the core; node0 never kills).",
+    "2-4 sessions/day (uniform). Each session runs one Box of Scrap; an eligible session also mounts an own-build venture with p=0.5.",
+    "Kit stop policy is grade-aware (grade is revealed at crack): Dud banks after node0 (greed 0.15), Rough presses elite at 0.50 / boss 0.20, Fair elite always / boss 0.35, Keen boss 0.80, Gleaming always presses.",
+    "Own-build ventures consume 1 core + up to 5 COMMON body bits (dupes first, then singles; RARE/EPIC never spent on venture chassis). Requires one offensive COMMON body bit.",
+    "Own-build repair costs are abstracted: rest1 uniform 2-6 scrap, rest2 uniform 4-10 scrap (repair = ceil(missing HP/2), run_state.gd:11). Unrepaired fights lose 0.15 win probability.",
+    "After a survivable elite loss the player extracts at the next rest (banks the damaged Manabit). A survivable BOSS loss still banks (run_screen.resolve_fight advances past the last node and _finish(true) banks) - modeled, plus one forfeit salvage payment.",
+    "Dupe policy per task brief: end of day keep 1 of each id, melt COMMON extras, distill RARE/EPIC extras. Binding bought whenever core-locked and scrap >= 60. Brass coffers bought while scrap >= 160 (100 + 60 bind reserve); tin is never bought (melt-back EV 31.65 of 40 makes it strictly a collection item - the daily doorstep tin covers that).",
+    "Shelf model: 3 discovered body ids/day, 3:1 unowned:owned weighting (broker.gd:41-58). Players buy unowned RARE (4 glimmer) / EPIC (10 glimmer) finds to re-acquire consumed dex pieces; COMMON finds only as an emergency weapon when no offensive body bit is owned.",
+    "PackRoller is modeled per-player with the shipped odds tables and a persistent pity counter. The SHIPPED code seeds every PlayerState roller at the fixed 20260711 and never saves pity - every player gets identical starter bits and every app relaunch replays the same coffer stream (flagged, not simulated).",
+    "Bouts (Proving Grounds) are excluded from the base loop and analyzed as an arbitrage flag: they are uncapped, fight a CLONE of the bench build, and pay loot on win / salvage on forfeit.",
+    "Lane modifiers (tailwind/second_wind/rusted/overgrown) are folded into the fight priors, not modeled separately - they mend or wear a few HP and never touch purses (RunMods contract)."
+  ],
+  "results": {
+    "scrap_curve": [
+      {
+        "day": 1,
+        "p25": 71,
+        "p50": 91,
+        "p75": 118
+      },
+      {
+        "day": 2,
+        "p25": 70,
+        "p50": 95,
+        "p75": 118
+      },
+      {
+        "day": 3,
+        "p25": 67,
+        "p50": 93,
+        "p75": 116
+      },
+      {
+        "day": 4,
+        "p25": 66,
+        "p50": 88,
+        "p75": 110
+      },
+      {
+        "day": 5,
+        "p25": 60,
+        "p50": 86,
+        "p75": 109
+      },
+      {
+        "day": 6,
+        "p25": 67,
+        "p50": 85,
+        "p75": 114
+      },
+      {
+        "day": 7,
+        "p25": 65,
+        "p50": 88,
+        "p75": 113
+      },
+      {
+        "day": 8,
+        "p25": 63,
+        "p50": 91,
+        "p75": 116
+      },
+      {
+        "day": 9,
+        "p25": 66,
+        "p50": 88,
+        "p75": 112
+      },
+      {
+        "day": 10,
+        "p25": 65,
+        "p50": 87,
+        "p75": 108
+      },
+      {
+        "day": 11,
+        "p25": 65,
+        "p50": 86,
+        "p75": 112
+      },
+      {
+        "day": 12,
+        "p25": 65,
+        "p50": 87,
+        "p75": 110
+      },
+      {
+        "day": 13,
+        "p25": 62,
+        "p50": 86,
+        "p75": 114
+      },
+      {
+        "day": 14,
+        "p25": 66,
+        "p50": 86,
+        "p75": 109
+      },
+      {
+        "day": 15,
+        "p25": 67,
+        "p50": 90,
+        "p75": 114
+      },
+      {
+        "day": 16,
+        "p25": 69,
+        "p50": 92,
+        "p75": 116
+      },
+      {
+        "day": 17,
+        "p25": 67,
+        "p50": 89,
+        "p75": 111
+      },
+      {
+        "day": 18,
+        "p25": 66,
+        "p50": 90,
+        "p75": 112
+      },
+      {
+        "day": 19,
+        "p25": 66,
+        "p50": 88,
+        "p75": 112
+      },
+      {
+        "day": 20,
+        "p25": 63,
+        "p50": 89,
+        "p75": 113
+      },
+      {
+        "day": 21,
+        "p25": 66,
+        "p50": 89,
+        "p75": 115
+      },
+      {
+        "day": 22,
+        "p25": 69,
+        "p50": 91,
+        "p75": 116
+      },
+      {
+        "day": 23,
+        "p25": 64,
+        "p50": 89,
+        "p75": 111
+      },
+      {
+        "day": 24,
+        "p25": 63,
+        "p50": 88,
+        "p75": 113
+      },
+      {
+        "day": 25,
+        "p25": 66,
+        "p50": 84,
+        "p75": 109
+      },
+      {
+        "day": 26,
+        "p25": 64,
+        "p50": 87,
+        "p75": 112
+      },
+      {
+        "day": 27,
+        "p25": 61,
+        "p50": 85,
+        "p75": 110
+      },
+      {
+        "day": 28,
+        "p25": 65,
+        "p50": 89,
+        "p75": 111
+      },
+      {
+        "day": 29,
+        "p25": 65,
+        "p50": 88,
+        "p75": 114
+      },
+      {
+        "day": 30,
+        "p25": 66,
+        "p50": 90,
+        "p75": 115
+      }
+    ],
+    "glimmer_curve": [
+      {
+        "day": 1,
+        "p25": 0,
+        "p50": 1,
+        "p75": 2
+      },
+      {
+        "day": 2,
+        "p25": 0,
+        "p50": 2,
+        "p75": 4
+      },
+      {
+        "day": 3,
+        "p25": 1,
+        "p50": 3,
+        "p75": 5
+      },
+      {
+        "day": 4,
+        "p25": 2,
+        "p50": 4,
+        "p75": 7
+      },
+      {
+        "day": 5,
+        "p25": 3,
+        "p50": 6,
+        "p75": 9
+      },
+      {
+        "day": 6,
+        "p25": 4,
+        "p50": 7,
+        "p75": 11
+      },
+      {
+        "day": 7,
+        "p25": 5,
+        "p50": 9,
+        "p75": 12
+      },
+      {
+        "day": 8,
+        "p25": 7,
+        "p50": 10,
+        "p75": 14
+      },
+      {
+        "day": 9,
+        "p25": 8,
+        "p50": 12,
+        "p75": 16
+      },
+      {
+        "day": 10,
+        "p25": 10,
+        "p50": 14,
+        "p75": 19
+      },
+      {
+        "day": 11,
+        "p25": 11,
+        "p50": 16,
+        "p75": 21
+      },
+      {
+        "day": 12,
+        "p25": 13,
+        "p50": 18,
+        "p75": 23
+      },
+      {
+        "day": 13,
+        "p25": 15,
+        "p50": 20,
+        "p75": 25
+      },
+      {
+        "day": 14,
+        "p25": 16,
+        "p50": 22,
+        "p75": 27
+      },
+      {
+        "day": 15,
+        "p25": 18,
+        "p50": 23,
+        "p75": 29
+      },
+      {
+        "day": 16,
+        "p25": 19,
+        "p50": 25,
+        "p75": 32
+      },
+      {
+        "day": 17,
+        "p25": 22,
+        "p50": 27,
+        "p75": 34
+      },
+      {
+        "day": 18,
+        "p25": 23,
+        "p50": 30,
+        "p75": 36
+      },
+      {
+        "day": 19,
+        "p25": 25,
+        "p50": 32,
+        "p75": 39
+      },
+      {
+        "day": 20,
+        "p25": 28,
+        "p50": 34,
+        "p75": 41
+      },
+      {
+        "day": 21,
+        "p25": 30,
+        "p50": 36,
+        "p75": 43
+      },
+      {
+        "day": 22,
+        "p25": 32,
+        "p50": 38,
+        "p75": 46
+      },
+      {
+        "day": 23,
+        "p25": 34,
+        "p50": 40,
+        "p75": 49
+      },
+      {
+        "day": 24,
+        "p25": 36,
+        "p50": 43,
+        "p75": 51
+      },
+      {
+        "day": 25,
+        "p25": 38,
+        "p50": 45,
+        "p75": 53
+      },
+      {
+        "day": 26,
+        "p25": 41,
+        "p50": 47,
+        "p75": 56
+      },
+      {
+        "day": 27,
+        "p25": 42,
+        "p50": 49,
+        "p75": 58
+      },
+      {
+        "day": 28,
+        "p25": 45,
+        "p50": 52,
+        "p75": 61
+      },
+      {
+        "day": 29,
+        "p25": 47,
+        "p50": 54,
+        "p75": 63
+      },
+      {
+        "day": 30,
+        "p25": 49,
+        "p50": 56,
+        "p75": 66
+      }
+    ],
+    "days_to_first_epic": {
+      "p25": 0,
+      "p50": 1,
+      "p75": 1,
+      "reached_pct": 100.0,
+      "never_within_window": 0,
+      "day0_note": "day 0 = an EPIC in the starter brass roll"
+    },
+    "days_to_80pct_compendium": {
+      "threshold_bits": 64,
+      "reached_pct": 12.6,
+      "p50": 28,
+      "p25": 27,
+      "p75": 29,
+      "not_reached_in_30d": 437,
+      "dex_at_day30_p25_p50_p75": [
+        57,
+        60,
+        62
+      ],
+      "max_possible": 73
+    },
+    "dead_end_softlock": {
+      "hard_softlock_probability": 0.0,
+      "why_zero": "The Box of Scrap needs no core, no scrap and no bits (root.gd:89-98, box_roller.gd) and kit rests mend free (run_screen.gd:417-421), so scrap income is always reachable and the Binding (60) is always eventually affordable. By construction there is no absorbing dead state.",
+      "core_locked_player_days_pct": 1.77,
+      "core_locked_and_poor_and_cofferless_player_days_pct": 1.767,
+      "players_ever_core_locked_pct": 37.6,
+      "still_core_locked_at_day30": 7,
+      "lock_episode_days_p50": 1,
+      "lock_episode_days_p95": 2
+    },
+    "binding": {
+      "binds_per_player_30d_p25_p50_p75": [
+        24,
+        26,
+        28
+      ],
+      "bind_affordable_pct_by_day": [
+        88.6,
+        87.0,
+        83.6,
+        82.4,
+        75.6,
+        82.2,
+        81.6,
+        79.6,
+        84.2,
+        80.4,
+        80.6,
+        79.8,
+        77.4,
+        79.6,
+        82.6,
+        83.4,
+        81.2,
+        82.4,
+        81.4,
+        77.8,
+        82.4,
+        83.2,
+        80.8,
+        77.4,
+        81.8,
+        80.8,
+        77.2,
+        81.0,
+        81.0,
+        83.2
+      ]
+    },
+    "coffer_cadence": {
+      "brass_bought_per_player_30d_p25_p50_p75": [
+        3,
+        4,
+        6
+      ],
+      "tin_bought": 0,
+      "tin_note": "never rational to buy under the melt policy (EV 31.65 melt-back on 40); doorstep supplies 1 tin/day free"
+    },
+    "menagerie_banked_p25_p50_p75": [
+      12,
+      14,
+      16
+    ],
+    "faucet_sink_daily_mean_per_player": [
+      {
+        "day": 1,
+        "kit_purse": 59.41,
+        "melt": 13.34,
+        "forfeit_salvage": 3.17,
+        "brass_coffers": 14.2,
+        "binding": 6.6,
+        "repairs": 11.39,
+        "finds_scrap": 0.0,
+        "distill": 1.31,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 2,
+        "kit_purse": 61.85,
+        "melt": 10.94,
+        "forfeit_salvage": 2.53,
+        "brass_coffers": 26.0,
+        "binding": 38.16,
+        "repairs": 10.09,
+        "finds_scrap": 0.0,
+        "distill": 1.09,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 3,
+        "kit_purse": 60.9,
+        "melt": 13.98,
+        "forfeit_salvage": 2.19,
+        "brass_coffers": 22.4,
+        "binding": 50.16,
+        "repairs": 7.67,
+        "finds_scrap": 0.0,
+        "distill": 1.12,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 4,
+        "kit_purse": 62.36,
+        "melt": 13.46,
+        "forfeit_salvage": 2.14,
+        "brass_coffers": 17.8,
+        "binding": 56.28,
+        "repairs": 7.78,
+        "finds_scrap": 0.0,
+        "distill": 1.43,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 5,
+        "kit_purse": 59.4,
+        "melt": 12.74,
+        "forfeit_salvage": 2.13,
+        "brass_coffers": 11.4,
+        "binding": 57.96,
+        "repairs": 7.76,
+        "finds_scrap": 0.0,
+        "distill": 1.42,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 6,
+        "kit_purse": 62.62,
+        "melt": 13.73,
+        "forfeit_salvage": 1.92,
+        "brass_coffers": 13.8,
+        "binding": 54.0,
+        "repairs": 7.34,
+        "finds_scrap": 0.0,
+        "distill": 1.44,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 7,
+        "kit_purse": 60.13,
+        "melt": 14.18,
+        "forfeit_salvage": 1.92,
+        "brass_coffers": 14.8,
+        "binding": 53.4,
+        "repairs": 7.49,
+        "finds_scrap": 0.0,
+        "distill": 1.54,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 8,
+        "kit_purse": 59.55,
+        "melt": 14.38,
+        "forfeit_salvage": 1.86,
+        "brass_coffers": 16.4,
+        "binding": 51.24,
+        "repairs": 6.83,
+        "finds_scrap": 0.0,
+        "distill": 1.48,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 9,
+        "kit_purse": 61.47,
+        "melt": 14.54,
+        "forfeit_salvage": 2.08,
+        "brass_coffers": 16.2,
+        "binding": 54.72,
+        "repairs": 7.55,
+        "finds_scrap": 0.0,
+        "distill": 1.79,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 10,
+        "kit_purse": 59.87,
+        "melt": 14.48,
+        "forfeit_salvage": 2.1,
+        "brass_coffers": 13.6,
+        "binding": 57.24,
+        "repairs": 7.87,
+        "finds_scrap": 0.0,
+        "distill": 1.98,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 11,
+        "kit_purse": 60.23,
+        "melt": 14.9,
+        "forfeit_salvage": 1.63,
+        "brass_coffers": 16.0,
+        "binding": 52.8,
+        "repairs": 7.29,
+        "finds_scrap": 0.0,
+        "distill": 1.91,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 12,
+        "kit_purse": 58.52,
+        "melt": 14.75,
+        "forfeit_salvage": 1.79,
+        "brass_coffers": 13.0,
+        "binding": 54.84,
+        "repairs": 7.79,
+        "finds_scrap": 0.0,
+        "distill": 1.9,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 13,
+        "kit_purse": 57.86,
+        "melt": 14.22,
+        "forfeit_salvage": 1.97,
+        "brass_coffers": 11.0,
+        "binding": 56.16,
+        "repairs": 7.53,
+        "finds_scrap": 0.0,
+        "distill": 1.95,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 14,
+        "kit_purse": 57.62,
+        "melt": 14.62,
+        "forfeit_salvage": 1.97,
+        "brass_coffers": 15.0,
+        "binding": 52.08,
+        "repairs": 6.75,
+        "finds_scrap": 0.0,
+        "distill": 1.86,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 15,
+        "kit_purse": 59.37,
+        "melt": 15.54,
+        "forfeit_salvage": 2.0,
+        "brass_coffers": 13.2,
+        "binding": 52.2,
+        "repairs": 7.05,
+        "finds_scrap": 0.0,
+        "distill": 1.79,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 16,
+        "kit_purse": 60.89,
+        "melt": 14.94,
+        "forfeit_salvage": 1.81,
+        "brass_coffers": 16.2,
+        "binding": 53.52,
+        "repairs": 7.47,
+        "finds_scrap": 0.0,
+        "distill": 2.19,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 17,
+        "kit_purse": 59.38,
+        "melt": 14.88,
+        "forfeit_salvage": 2.14,
+        "brass_coffers": 16.0,
+        "binding": 56.4,
+        "repairs": 7.62,
+        "finds_scrap": 0.0,
+        "distill": 2.14,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 18,
+        "kit_purse": 61.31,
+        "melt": 15.63,
+        "forfeit_salvage": 2.13,
+        "brass_coffers": 17.8,
+        "binding": 53.52,
+        "repairs": 6.92,
+        "finds_scrap": 0.0,
+        "distill": 1.96,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 19,
+        "kit_purse": 61.51,
+        "melt": 14.86,
+        "forfeit_salvage": 2.05,
+        "brass_coffers": 15.0,
+        "binding": 56.64,
+        "repairs": 7.41,
+        "finds_scrap": 0.0,
+        "distill": 2.19,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 20,
+        "kit_purse": 60.75,
+        "melt": 14.74,
+        "forfeit_salvage": 1.7,
+        "brass_coffers": 15.4,
+        "binding": 54.96,
+        "repairs": 7.28,
+        "finds_scrap": 0.0,
+        "distill": 2.1,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 21,
+        "kit_purse": 60.93,
+        "melt": 15.38,
+        "forfeit_salvage": 1.68,
+        "brass_coffers": 17.4,
+        "binding": 51.48,
+        "repairs": 6.85,
+        "finds_scrap": 0.0,
+        "distill": 2.18,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 22,
+        "kit_purse": 58.15,
+        "melt": 15.62,
+        "forfeit_salvage": 2.35,
+        "brass_coffers": 14.4,
+        "binding": 52.8,
+        "repairs": 7.58,
+        "finds_scrap": 0.0,
+        "distill": 2.26,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 23,
+        "kit_purse": 60.21,
+        "melt": 15.23,
+        "forfeit_salvage": 1.86,
+        "brass_coffers": 15.2,
+        "binding": 57.36,
+        "repairs": 7.8,
+        "finds_scrap": 0.0,
+        "distill": 2.32,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 24,
+        "kit_purse": 57.77,
+        "melt": 16.3,
+        "forfeit_salvage": 1.7,
+        "brass_coffers": 16.4,
+        "binding": 52.68,
+        "repairs": 7.37,
+        "finds_scrap": 0.0,
+        "distill": 2.27,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 25,
+        "kit_purse": 58.09,
+        "melt": 15.47,
+        "forfeit_salvage": 1.71,
+        "brass_coffers": 16.0,
+        "binding": 53.76,
+        "repairs": 7.17,
+        "finds_scrap": 0.0,
+        "distill": 2.15,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 26,
+        "kit_purse": 60.86,
+        "melt": 15.74,
+        "forfeit_salvage": 2.08,
+        "brass_coffers": 13.8,
+        "binding": 56.28,
+        "repairs": 7.68,
+        "finds_scrap": 0.0,
+        "distill": 2.33,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 27,
+        "kit_purse": 58.95,
+        "melt": 15.34,
+        "forfeit_salvage": 1.66,
+        "brass_coffers": 14.0,
+        "binding": 57.0,
+        "repairs": 7.42,
+        "finds_scrap": 0.0,
+        "distill": 2.33,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 28,
+        "kit_purse": 61.29,
+        "melt": 15.95,
+        "forfeit_salvage": 1.92,
+        "brass_coffers": 14.8,
+        "binding": 52.8,
+        "repairs": 7.66,
+        "finds_scrap": 0.0,
+        "distill": 2.45,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 29,
+        "kit_purse": 58.78,
+        "melt": 15.55,
+        "forfeit_salvage": 1.84,
+        "brass_coffers": 14.4,
+        "binding": 54.48,
+        "repairs": 7.05,
+        "finds_scrap": 0.0,
+        "distill": 2.12,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      },
+      {
+        "day": 30,
+        "kit_purse": 57.79,
+        "melt": 15.84,
+        "forfeit_salvage": 1.74,
+        "brass_coffers": 13.2,
+        "binding": 53.52,
+        "repairs": 7.1,
+        "finds_scrap": 0.0,
+        "distill": 2.24,
+        "finds_glimmer": 0.0,
+        "dominant_scrap_faucet": "kit_purse"
+      }
+    ],
+    "totals_per_player_30d": {
+      "binding": 1565.0,
+      "brass_coffers": 464.8,
+      "distill": 57.2,
+      "doorstep_tins": 30.0,
+      "forfeit_salvage": 59.8,
+      "kit_boss_clears": 14.2,
+      "kit_deaths": 26.7,
+      "kit_loot_bits": 60.0,
+      "kit_purse": 1797.8,
+      "melt": 441.3,
+      "repairs": 228.6,
+      "venture_banked": 14.3,
+      "venture_bits_spent": 150.2,
+      "venture_deaths": 13.8,
+      "venture_loot": 51.6
+    },
+    "scrap_faucet_vs_sink_total_per_player": {
+      "faucets": 2298.9,
+      "sinks": 2258.4,
+      "note": "faucets = kit purses + melts + forfeit salvage; sinks = brass coffers + bindings + repairs + scrap finds"
+    }
+  },
+  "flags": [
+    {
+      "severity": "HIGH",
+      "title": "Proving Grounds bouts are an uncapped scrap/loot faucet (not in the daily loop, but live in the build)",
+      "detail": "begin_bout fights a CLONE (combat_screen.gd:126-135) so a bout risks at most one broken bench bit, pays loot on WIN (any non-core foe part) and pays YOU salvage on a survivable-loss forfeit (combat_screen.gd:1149-1153). At the lane's boss prior 0.5, a Brassmore bout EV is >= 0.5*45 = 22.5 scrap (EPIC loot melted) per bout with zero entry cost and no daily cap - it dominates the kit purse cap (max 10+25+40=75/run, halving to 37 after 2 runs). Recommend a bout stake (entry fee) or a daily bout purse cap before launch."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "The Scrap/Glimmer firewall leaks one way: Glimmer -> Scrap at 4.5-5.0 scrap per glimmer",
+      "detail": "EPIC Find costs 10 glimmer (broker.gd:25) and melts for 45 scrap (broker.gd:11) = 4.5 scrap/glimmer; RARE Find 4 -> 20 = 5.0. The reverse channel (brass coffer 100 scrap -> EV 2.30 glimmer via the Still = 43.5 scrap/glimmer) is 8-10x more expensive, so there is NO profitable round trip (100 scrap -> 2.30 glimmer -> ~10.3 scrap), but the 'no conversion' design claim is not literally true."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "PackRoller RNG stream + pity are not persisted and the seed is a constant",
+      "detail": "PlayerState._init always makes PackRoller.new(20260711) (player_state.gd:35) and SaveManager saves no roller state (meta/save_manager.gd). Every app relaunch replays the identical coffer sequence from position 0: the first brass opened after any boot always contains the same 5 bits, all players share one starter roll, and epic pity resets on every boot. Coffer outcomes are relaunch-scummable and feel samey. Persist pity + a per-save roller seed."
+    },
+    {
+      "severity": "LOW",
+      "title": "Kit DEATH does not consume the daily full-purse allotment",
+      "detail": "note_kit_run only fires on keep=true (run_screen.gd:652-658), so a spilled run never increments kit_runs_today. Benign (death already costs the satchel) but it means a player who dies twice still has 2 full-rate purses left - worth confirming as intended."
+    },
+    {
+      "severity": "LOW",
+      "title": "Compendium can never reach 100 percent: 7 of 10 cores are unobtainable",
+      "detail": "compendium_total = Catalog.all().size() = 80 incl. 10 cores, but coffers/shelf draw body_pool only (pack_roller.gd:22, broker.gd:35), loot skips cores (combat_screen.gd:1361) and only 3 cores are bindable (player_state.gd:26). Max dex = 73/80 = 91.25 percent. The 80 percent bar (64) is reachable; a 100 percent completionist goal is not."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Glimmer has no functioning sink for a keep-1 collector: earned 57.2 per player over 30d, spent 0.0",
+      "detail": "RARE/EPIC Finds are the only glimmer sinks (broker.gd:23-27), but the shelf is discovered-gated (broker.gd:35-38) and RARE/EPIC bits are never consumed by any loop (ventures spend COMMON chassis, melts/distills only touch dupes) - so every RARE/EPIC Find on offer is a dupe of a bit the player already owns, and buying one to re-distill refunds only 25-30 percent. Simulated p50 glimmer wallet hits 56 by day 30 on a straight line (~1.9/day) with zero spent. Glimmer is currently a score counter; it needs a real sink (enchants, dyes, a glimmer coffer, or core rentals)."
+    },
+    {
+      "severity": "INFO",
+      "title": "The Binding is the dominant scrap sink (69% of all scrap sunk), not coffers",
+      "detail": "Per player over 30d: bindings 1565 vs brass coffers 465 vs repairs 229 scrap. Own-build venturing consumes the seated core (root.gd:82-87), so every venture effectively costs 60 scrap in core replacement - the venture appetite, not Fettle's cart, drives the economy. p50 player buys only 4 brass coffers in 30 days. Fine if intended; if coffers are meant to be the aspirational sink, the venture-per-core price is crowding them out."
+    },
+    {
+      "severity": "INFO",
+      "title": "80 percent compendium is out of reach in a month for most players; the tail is pure coffer RNG",
+      "detail": "Only 12.6% of simulated players hit 64/80 discovered within 30 days (p50 dex at day 30 = 60). Finds cannot sell undiscovered bits (broker.gd:35-38), loot only covers the 9 challenger loadouts, so the last-mile dex is a coupon-collector on tin/brass rolls alone. If 80 percent is meant as a month-one goal, either add a discovery faucet (e.g. one undiscovered Find slot) or accept the longer horizon."
+    },
+    {
+      "severity": "INFO",
+      "title": "Anti-arbitrage on coffers holds",
+      "detail": "Tin melt-back EV 31.65 scrap of a 40 price (79%); brass melt-back EV 68.00 of 100 (68%) before the rare+ guarantee bump. Buy-to-melt is strictly negative on both - matches the pack_roller.gd:4 design note."
+    },
+    {
+      "severity": "INFO",
+      "title": "No runaway SCRAP inflation in the modeled loop",
+      "detail": "p50 scrap drifts +6 over days 25-30 and ends near 90 (start 50); 30-day faucets 2299 vs sinks 2258 per player - the wallet is a pass-through, not an accumulator. The satchel halving does its job: kit purse income is flat day over day. (Glimmer is the currency that inflates - see its own flag.)"
+    }
+  ]
+}
