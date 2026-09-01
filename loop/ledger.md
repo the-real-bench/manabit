@@ -8,6 +8,34 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 2 - 2026-09-01 - L-17, make an empty run loud
+
+**Picked:** L-17 (priority 9.0). It outranks L-16 (6.0), which the Routine prompt
+listed first - that prompt was written before L-17 existed, and priority decides, not
+the prompt. Lens: none, this is the loop's own accountability. It is the direct guard
+against Incident 1.
+
+**RECONCILE:** baseline 14/14 fast gates green, tree clean, head 6974b95. L-17 was
+filed one commit ago from a failure observed this session, so its evidence cannot be
+stale.
+
+**CRITERION (stated before writing any code):**
+1. A check exists that compares the branch head across an iteration and **exits
+   non-zero with a loud message** when the iteration ends with no new commit and no
+   BLOCKED report. **Proven by running it on a deliberately empty iteration** - an
+   assertion never seen red is not evidence, which is the lesson iteration 1 learned
+   the hard way.
+2. It exits 0 when a commit was made (proven on this iteration's own commit).
+3. It exits 0 when a BLOCKED report was written (proven by writing one).
+4. All 16 gates green.
+
+**Revert trigger:** the check cannot be made to fail on a deliberately empty run, or
+it reports success in any case where nothing was delivered.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Incident 1 - 2026-09-01 - The loop's first two unattended runs delivered nothing
 
 **Not an iteration. A failure of the delivery mechanism, recorded because a ledger
