@@ -27,7 +27,9 @@ Seeded 2026-09-01 from: `design/playtest/ai-playtest-2026-07-21.md` (D1-D11),
 6. **No new markdown docs** except a change order for a shipped balance/design wave.
 7. **gate-green != correct.** UI items are proven with `tests/shoot.gd` screenshots, audio with a
    windowed playing-player probe. Headless alone is inert (the wave-4b silent-loop lesson).
-8. **ONE PC AT A TIME.** This tree lives in the `my-game-dotclaude` Syncthing folder and is shared
+8. **RUNNER = THE SECOND PC (ZJEO242) ONLY.** Owner call 2026-09-01: this loop does NOT run on
+   GamingComputer. A session on GamingComputer may read this ledger and edit docs, but must not
+   execute queue items. ONE PC AT A TIME regardless: this tree lives in the `my-game-dotclaude` Syncthing folder and is shared
    with the second PC, `.git` included. Never run the loop on both machines at once - concurrent
    commits into a file-synced `.git` corrupt it. Before starting, confirm the other machine is idle;
    each DONE LOG line names the machine it ran on.
