@@ -27,6 +27,10 @@ Seeded 2026-09-01 from: `design/playtest/ai-playtest-2026-07-21.md` (D1-D11),
 6. **No new markdown docs** except a change order for a shipped balance/design wave.
 7. **gate-green != correct.** UI items are proven with `tests/shoot.gd` screenshots, audio with a
    windowed playing-player probe. Headless alone is inert (the wave-4b silent-loop lesson).
+8. **ONE PC AT A TIME.** This tree lives in the `my-game-dotclaude` Syncthing folder and is shared
+   with the second PC, `.git` included. Never run the loop on both machines at once - concurrent
+   commits into a file-synced `.git` corrupt it. Before starting, confirm the other machine is idle;
+   each DONE LOG line names the machine it ran on.
 
 ---
 
@@ -35,9 +39,11 @@ Seeded 2026-09-01 from: `design/playtest/ai-playtest-2026-07-21.md` (D1-D11),
 ```
 cd "G:\ClaudeAgents\my-game\.claude\manabit"; powershell -ExecutionPolicy Bypass -File run/gates.ps1
 ```
-16 gates, exit 0 = green. Godot on this PC is 4.6.1 (`C:\Users\Stream Boi\Downloads\Godot_v4.6.1-stable_win64.exe\`);
-the project targets 4.7 - the version warning and the `SpatialMaterial specular` warnings are harmless noise.
-Override with `$env:GODOT`.
+16 gates, exit 0 = green. The runner DISCOVERS Godot (`$env:GODOT`, then PATH, then
+`~\Downloads` / `G:\Godot` / `Program Files`) because this tree is Syncthing-synced across two PCs
+with different usernames and different Godot installs. If it prints `GODOT NOT FOUND`, set
+`$env:GODOT` and re-run. GamingComputer has only 4.6.1 against a 4.7 project - the version warning
+and the `SpatialMaterial specular` warnings are harmless noise, all 16 gates pass.
 
 ---
 
@@ -93,6 +99,6 @@ then stop. It may not implement.
 
 ## DONE LOG
 
-Newest first. One line each: ID, date, what shipped, the number that proves it.
+Newest first. One line each: ID, date, MACHINE, what shipped, the number that proves it.
 
-- (seed) 2026-09-01 - ledger created; `run/gates.ps1` added and verified ALL 16 GATES GREEN.
+- (seed) 2026-09-01 - GamingComputer - ledger created; `run/gates.ps1` added (Godot auto-discovery, portable across both PCs) and verified ALL 16 GATES GREEN.
