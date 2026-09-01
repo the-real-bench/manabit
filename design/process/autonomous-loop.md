@@ -41,13 +41,35 @@ Establish a **green baseline before touching anything**. If the baseline is red,
 the only permitted work this iteration is making it green. No feature work rides
 on an unknown starting state.
 
+**Then RECONCILE, before picking anything.** Scan for work that has already landed:
+
+```bash
+ls design/balance/*change-order*.md design/*/*.md   # what the studio already answered
+git log --oneline -30
+```
+
+A backlog item records a defect that was true when it was written. **Evidence
+expires.** Re-verify in code that the defect is still live before picking it, and
+close it against the change that fixed it if it is not.
+
+> **This rule is written against this backlog's own first draft.** It scored six
+> items as live work, and every one of them had already been fixed and measured by
+> `design/balance/playtest-fixes-change-order.md` weeks earlier. The miss was
+> narrow and specific: the session read the *problem* statement (the playtest
+> panel) and never read the *response* to it. Two full iterations would have
+> re-implemented shipped work and reported progress for it. Reading the defect list
+> is not reconciliation; reading what was done about it is.
+
 ### Phase 1 - PICK
 Take the highest-`priority` item from `loop/backlog.json` whose `gate` is `loop`.
 **Exactly one headline item per iteration.** The scoring is
 `lift * evidence / (cost * risk)`; the definitions live in the file's `_scoring`
 block.
 
-Two laws govern picking:
+Three laws govern picking:
+
+- **The staleness law.** No item is picked until its defect is re-verified as still
+  live in code. Not in a doc - in code.
 - **The evidence law.** An item with `evidence < 2` may not be built, only
   *measured*. Build the instrument, rescore, then build the change. This is the
   rule that would have stopped wave 1 shipping two changes that moved the wrong way.

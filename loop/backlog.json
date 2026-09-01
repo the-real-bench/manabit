@@ -1,117 +1,229 @@
 {
-  "_doc": "MANABIT autonomous loop backlog. Protocol: design/process/autonomous-loop.md. The loop PICKS the highest `priority` item whose `gate` is `loop`. Items gated `owner` are never picked - they are mirrored into loop/owner-queue.md and wait. Rescore after every iteration.",
-  "_scoring": {
-    "priority": "lift * evidence / (cost * risk)",
-    "lift": "1-5, expected enjoyment gain. 5 = moves 3+ personas or repairs a headline promise.",
-    "evidence": "0-3. 3 = a number from a committed artifact (tools/sim/out/*, a seeded probe). 2 = observed directly (rendered frame, live probe) but not root-caused. 1 = reasoned from the design. 0 = taste alone.",
-    "cost": "1-5 sessions of work.",
-    "risk": "1-5 blast radius. 5 = frozen section 13 contract, save schema, or a final taste call -> AUTO-ESCALATE, never picked.",
-    "law": "An item with evidence < 2 may not be built. It may only be MEASURED - build the instrument first, then rescore. This is the rule that stopped wave 1 shipping two wrong-way changes on vibes."
+ "_doc": "MANABIT autonomous loop backlog. Protocol: design/process/autonomous-loop.md. The loop PICKS the highest `priority` item whose `gate` is `loop`. Items gated `owner` are never picked - they are mirrored into loop/owner-queue.md and wait. Rescore after every iteration. Items with gate `closed` are kept as a record of a reconciliation miss, not as available work - see `_reconciliation`.",
+ "_scoring": {
+  "priority": "lift * evidence / (cost * risk)",
+  "lift": "1-5, expected enjoyment gain. 5 = moves 3+ personas or repairs a headline promise.",
+  "evidence": "0-3. 3 = a number from a committed artifact (tools/sim/out/*, a seeded probe). 2 = observed directly (rendered frame, live probe) but not root-caused. 1 = reasoned from the design. 0 = taste alone.",
+  "cost": "1-5 sessions of work.",
+  "risk": "1-5 blast radius. 5 = frozen section 13 contract, save schema, or a final taste call -> AUTO-ESCALATE, never picked.",
+  "law": "An item with evidence < 2 may not be built. It may only be MEASURED - build the instrument first, then rescore. This is the rule that stopped wave 1 shipping two wrong-way changes on vibes."
+ },
+ "items": [
+  {
+   "id": "L-01",
+   "gate": "closed",
+   "lift": 4,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 1,
+   "priority": 0.0,
+   "title": "New-player legibility: fragility + overweight nudge, and an honest 'defanged' loss reason",
+   "why": "R3 / D3. outcome() returns SURVIVABLE_LOSS the moment has_offensive_move() is false (combat.gd:172), but is_deployable() needs only ONE offensive bit. A deploy-legal core+1-arm build passes the Workshop gate then loses on turn 1 before the player acts. Novice own-build ventures lose 58.3% of the pos0 Rusty skirmish. The loss screen says nothing about why.",
+   "persona": "Newcomer (6/10 - 'teaching by punishment')",
+   "criterion": "PRE-STATE before building: a one-offensive-bit build shows a build-time fragility warning in the BalanceMeter, and the defang loss path prints a distinct reason string. Verified in a rendered frame (L3) plus a smoke_layout/smoke_builder assertion. No change to combat.gd resolution.",
+   "touches": "ui/workshop.gd, ui/combat_screen.gd copy, BalanceMeter. Frozen surfaces: none.",
+   "closed_by": "CH-P7 + CH-P8",
+   "closed_evidence": "ui/workshop.gd:917,921 fragility copy; ui/combat_screen.gd:1042 defanged line",
+   "closed_note": "Already shipped by design/balance/playtest-fixes-change-order.md (COUNCIL-RATIFIED 2026-07-21, section A) before this backlog was written. Re-verified in code on 2026-09-01. Kept as a record of the miss, not as work."
   },
-  "items": [
-    {
-      "id": "L-01", "gate": "loop", "lift": 4, "evidence": 3, "cost": 2, "risk": 1, "priority": 6.0,
-      "title": "New-player legibility: fragility + overweight nudge, and an honest 'defanged' loss reason",
-      "why": "R3 / D3. outcome() returns SURVIVABLE_LOSS the moment has_offensive_move() is false (combat.gd:172), but is_deployable() needs only ONE offensive bit. A deploy-legal core+1-arm build passes the Workshop gate then loses on turn 1 before the player acts. Novice own-build ventures lose 58.3% of the pos0 Rusty skirmish. The loss screen says nothing about why.",
-      "persona": "Newcomer (6/10 - 'teaching by punishment')",
-      "criterion": "PRE-STATE before building: a one-offensive-bit build shows a build-time fragility warning in the BalanceMeter, and the defang loss path prints a distinct reason string. Verified in a rendered frame (L3) plus a smoke_layout/smoke_builder assertion. No change to combat.gd resolution.",
-      "touches": "ui/workshop.gd, ui/combat_screen.gd copy, BalanceMeter. Frozen surfaces: none."
-    },
-    {
-      "id": "L-02", "gate": "loop", "lift": 3, "evidence": 3, "cost": 1, "risk": 1, "priority": 9.0,
-      "title": "Junction lane labels tell the truth about risk",
-      "why": "R7 / D8. Measured per-mod outcomes: overgrown ('the foe fields heavier bits') is the SAFEST lane at DEATH 0.00, tailwind ('mended 4 HP', sounds like a gift) is the DEADLIEST at DEATH 0.59. The menace label is the safe pick. This directly violates the project's own standing law that card text IS the rule and the FTL lying-label anti-pattern is banned.",
-      "persona": "QA Hunter + Optimizer (decision depth: a choice you cannot read is not a choice)",
-      "criterion": "PRE-STATE: per-lane DEATH rate ordering matches the ordering a player would infer from the printed card text, measured on the existing sessions aggregate. Elite fork only - the BOSS fork rusted lane is already correctly the harder pick and must stay.",
-      "touches": "meta/run_mods.gd card text, ui route cards. Frozen surfaces: none - modifier RULES unchanged, only the copy."
-    },
-    {
-      "id": "L-03", "gate": "loop", "lift": 5, "evidence": 3, "cost": 2, "risk": 2, "priority": 3.75,
-      "title": "Restore elite core-hunt stakes (Pindrop structural, Sable undertuned)",
-      "why": "R1 / D1. Two of six 'core-hunting' elites have a 0% DEATH rate. Pindrop is STRUCTURAL: its loadout is HEAD MULTI / ARM_L GUARD / ARM_R MULTI / BACK MULTI, zero SINGLE moves, and the core-hunt branch (combat.gd:146-152) only fires for archetype==SINGLE, so it can never land a killing blow (0/60). Sable has 2 SINGLE moves but is too weak (0/60). Cogsworth 30/60, Brassmore 49/60 confirm the probe is sound. The panel calls this the single highest-leverage change.",
-      "persona": "QA Hunter + Cozy Collector + the difficulty curve (3 lenses at once)",
-      "criterion": "PRE-STATE: Pindrop and Sable each reach a DEATH rate inside the elite band set by Cogsworth (30/60) and Thornlash (24/60) - NOT above Brassmore. Re-measure with tools/sim/qa_verify.gd. CH-05/CH-06 were reverted once on wrong-way criteria; re-apply only with the band stated first and revert again if it moves wrong.",
-      "touches": "Challenger loadouts and move powers only. Frozen surfaces: combat.gd resolution and base fixtures are OFF LIMITS."
-    },
-    {
-      "id": "L-04", "gate": "loop", "lift": 4, "evidence": 3, "cost": 2, "risk": 2, "priority": 3.0,
-      "title": "The modal first Box of Scrap should not be a guaranteed death",
-      "why": "R3 / D2. Kit survival by grade is a step function: Dud/Rough/Fair all ~0.00 at every skill tier, Keen 0.86-1.00, Gleaming 1.00. Fair is the 32% modal roll, so P(survive first box) ~= 0.25 and the median FIRST free kit dies 100% at the boss regardless of play. Real stakes are intended; a guaranteed-loss modal first experience is a new-player cliff.",
-      "persona": "Newcomer + Cozy Collector",
-      "criterion": "PRE-STATE: P(survive) for a player's first N boxes rises above a stated floor without flattening the Gleaming payoff. Options: a first-boxes pity floor, or a clearer grade-power read at crack time so a Fair box reads as a short outing rather than a run. Re-measure on smoke_kit_sim per-lane bands.",
-      "touches": "economy/box_roller.gd odds or ui reveal copy. Frozen surfaces: none, but smoke_kit_sim is the tripwire."
-    },
-    {
-      "id": "L-05", "gate": "loop", "lift": 3, "evidence": 3, "cost": 2, "risk": 2, "priority": 2.25,
-      "title": "Boss difficulty should rise, not fall (Gildfall folds, Brassmore is the wall)",
-      "why": "R4 / D4. Under optimal aggression the ch8 FINALE Prince Gildfall is WIN 1.000 / DEATH 0.000 while the EARLIER ch4 Sunking Brassmore is WIN 0.305 / DEATH 0.695. The finale folds to the exact tech a player has already found by the earlier boss. The identical ~0.12 ladder win rates are a greedy-AI artifact hiding this.",
-      "persona": "Optimizer",
-      "criterion": "PRE-STATE: measured WIN under the RACE policy is monotonically non-increasing across ch4 -> ch8. Fix by giving Gildfall real core defense (guard/mend when threatened) or by swapping boss order.",
-      "touches": "Challenger loadouts / AI behaviour. Frozen surfaces: combat.gd resolution OFF LIMITS."
-    },
-    {
-      "id": "L-06", "gate": "loop", "lift": 2, "evidence": 3, "cost": 1, "risk": 2, "priority": 3.0,
-      "title": "Rarity should not be an inverted value signal",
-      "why": "R6 / D10. Mean win-rate deltas: EPIC arm_seer -0.0058 and EPIC pocketful_arm_grinlet -0.1225 are NEGATIVE, while COMMON grumble_co_girder_fist +0.191 and COMMON errant_core_pledge +0.165 are among the strongest. Grinlet at -0.1225 is a genuine dead bit. Players see rarity and raw stats and no counter-data. Rarity is not uniformly wrong (EPIC bedrock legs +0.34) - it is unreliable, which is worse than a known-flat signal.",
-      "persona": "Optimizer + Cozy Collector (a chase item that makes you weaker poisons collection)",
-      "criterion": "PRE-STATE: both negative EPICs land above a stated delta floor after repricing, measured on the roster sim, without pushing any bit past the existing band ceiling.",
-      "touches": "parts/catalog_extra.json stats. Frozen surfaces: the 13 base fixtures are hardcoded and OFF LIMITS."
-    },
-    {
-      "id": "L-07", "gate": "loop", "lift": 2, "evidence": 2, "cost": 1, "risk": 1, "priority": 4.0,
-      "title": "Coffer odds string reads as a typo: 'C70 R22 E8 %'",
-      "why": "Observed in a rendered frame (loop/out/shots/shot_coffer_nook.png, shot_barrow.png). The trailing bare '%' after the last number reads like a stray glyph rather than a unit applying to all three. Odds legibility is the honest-information promise of the Coffer Nook and it is the first number a new player is asked to trust.",
-      "persona": "Newcomer + Cozy Collector",
-      "criterion": "PRE-STATE: the odds line reads unambiguously as three percentages in a rendered frame, at the same or smaller width (the 720px layout budget has zero slack - smoke_layout must stay green).",
-      "touches": "ui coffer/broker copy. Frozen surfaces: none."
-    },
-    {
-      "id": "L-08", "gate": "loop", "lift": 1, "evidence": 2, "cost": 1, "risk": 1, "priority": 2.0,
-      "title": "Audit the saturated cyan panel on the Brass Coffer lid against the warm palette",
-      "why": "Observed in shot_coffer_nook.png: a bright saturated cyan rectangle sits on the coffer lid inside an otherwise warm brass/wood frame. It may be the intended Glimmer/mana tell, but at that saturation it reads as an untextured placeholder rather than etched-rune plastic with a soft mana glow. Needs a root-cause read against the art bible before it is called a defect.",
-      "persona": "Cozy Collector (cozy-craft tone, NOT cyber-circuitry)",
-      "criterion": "MEASURE FIRST: identify the source material/token, compare against the DESIGN.md palette tokens, and either confirm it as intended (close the item) or reprice the colour. Do not repaint on taste alone.",
-      "touches": "coffer face render / Tokens. Frozen surfaces: none."
-    },
-    {
-      "id": "L-09", "gate": "loop", "lift": 2, "evidence": 2, "cost": 1, "risk": 1, "priority": 4.0,
-      "title": "Proving Grounds spoils lines name bits but never their value",
-      "why": "R7 tail, corroborated in shot_proving.png: every challenger row lists 'Spoils: <bit names>' with no worth attached, while the wager loop asks the player to weigh a scrap stake against those spoils. The panel separately measured the loot gradient INVERTED (stake-10 Cogsworth loots a melt-45 EPIC; stake-20 Gildfall loots melt-20), so the reward does not track the difficulty and the screen gives the player nothing to notice that with.",
-      "persona": "Optimizer + Newcomer (an informed wager needs both numbers)",
-      "criterion": "PRE-STATE: a rendered frame shows spoils value alongside the stake on every challenger row, within the row height budget, smoke_layout green. Whether to also FIX the inverted gradient is a separate balance item.",
-      "touches": "ui/proving copy. Frozen surfaces: none."
-    },
-    {
-      "id": "L-10", "gate": "measure", "lift": 3, "evidence": 1, "cost": 2, "risk": 1, "priority": 1.5,
-      "title": "INSTRUMENT: a decision-density probe for the build screen",
-      "why": "The Optimizer scores 5/10 because 'the legal build collapses to one greedy answer identical across every core' and 'the soul pick is nearly cosmetic'. That is currently a reasoned claim, not a measured one - there is no instrument that counts how many distinct builds are within X% of optimal under the weight cap. Every other headline claim in the loop is numbers-grounded; this one is not, so under the evidence law it cannot be built against yet.",
-      "persona": "Optimizer",
-      "criterion": "Build the probe FIRST: report the count of distinct near-optimal builds per core and the overlap between them. Then rescore L-10 into a real balance item with evidence 3.",
-      "touches": "tools/sim/ only. Frozen surfaces: none."
-    },
-    {
-      "id": "L-11", "gate": "owner", "lift": 5, "evidence": 3, "cost": 3, "risk": 5, "priority": 0.0,
-      "title": "Turn cap / wall-fight pacing (D13 ADR)",
-      "why": "R2 / D7. combat.gd outcome() has no turn counter. 27.2% of damaging hits land for exactly 1 (the DEF floor at combat.gd:107). Cogsworth-mirror resolves at turn 167; GUARD-vs-Brassmore at 221. The ladder top is uncappable (reached_top 0.00 at every tier). Fights provably terminate, so this is a grind not a lock - but it is a 5-10 minute slog and it caps the ladder.",
-      "blocked_by": "The resolver is section 13 frozen. A turn cap needs a tiebreak rule (core-HP %) and that is an owner ADR, not a loop edit."
-    },
-    {
-      "id": "L-12", "gate": "owner", "lift": 4, "evidence": 3, "cost": 3, "risk": 5, "priority": 0.0,
-      "title": "Cozy endgame bundle: coffer RNG persistence, a Glimmer sink, a discovery faucet",
-      "why": "R5 / D5+D6+D9. PlayerState._init always runs PackRoller.new(20260711) and SaveManager persists no roller or pity field, so every fresh boot replays a byte-identical brass stream and every new player cracks the identical 'surprises' - coffers are relaunch-scummable. Glimmer: 57.2 earned per player over 30 days, 0.0 spent on all 30. Compendium: only 12.6% reach 80% in a month. The panel estimates this moves the Cozy Collector from 6 to ~8.",
-      "blocked_by": "Needs save schema v5. The workbench already lists D7/D9 as owner-gated save-v5 items."
-    },
-    {
-      "id": "L-13", "gate": "owner", "lift": 3, "evidence": 3, "cost": 3, "risk": 5, "priority": 0.0,
-      "title": "Speed axis payoff (D11 ADR)",
-      "why": "Measured dead: speed buys initiative and nothing else, the sniper attack rates sit at 0.00/0.00/0.03/0.00, and the whole silksteel core-sniper family beats nobody in the pentagon. An entire advertised build direction is inert.",
-      "blocked_by": "Any real payoff changes resolution order or adds a resolver hook - section 13 territory. Already queued as an owner ADR in the workbench."
-    },
-    {
-      "id": "L-14", "gate": "owner", "lift": 2, "evidence": 3, "cost": 2, "risk": 5, "priority": 0.0,
-      "title": "Wave 2 bit meshes (20 bits on procedural placeholders)",
-      "why": "design/art/wave2-mesh-work-order.md is written and waiting. The catalog is 100 bits; 20 of them ship on procedural placeholders.",
-      "blocked_by": "Needs the owner's Blender rig on the second PC. No amount of loop autonomy produces a hand-rigged mesh."
-    }
-  ]
+  {
+   "id": "L-02",
+   "gate": "closed",
+   "lift": 3,
+   "evidence": 3,
+   "cost": 1,
+   "risk": 1,
+   "priority": 0.0,
+   "title": "Junction lane labels tell the truth about risk",
+   "why": "R7 / D8. Measured per-mod outcomes: overgrown ('the foe fields heavier bits') is the SAFEST lane at DEATH 0.00, tailwind ('mended 4 HP', sounds like a gift) is the DEADLIEST at DEATH 0.59. The menace label is the safe pick. This directly violates the project's own standing law that card text IS the rule and the FTL lying-label anti-pattern is banned.",
+   "persona": "QA Hunter + Optimizer (decision depth: a choice you cannot read is not a choice)",
+   "criterion": "PRE-STATE: per-lane DEATH rate ordering matches the ordering a player would infer from the printed card text, measured on the existing sessions aggregate. Elite fork only - the BOSS fork rusted lane is already correctly the harder pick and must stay.",
+   "touches": "meta/run_mods.gd card text, ui route cards. Frozen surfaces: none - modifier RULES unchanged, only the copy.",
+   "closed_by": "CH-P4",
+   "closed_evidence": "combat/challengers.gd:44 overgrown swaps in boldheart_arm_sunder, a SINGLE; measured overgrown DEATH 0.30 > base 0.22",
+   "closed_note": "Already shipped by design/balance/playtest-fixes-change-order.md (COUNCIL-RATIFIED 2026-07-21, section A) before this backlog was written. Re-verified in code on 2026-09-01. Kept as a record of the miss, not as work."
+  },
+  {
+   "id": "L-03",
+   "gate": "closed",
+   "lift": 5,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 2,
+   "priority": 0.0,
+   "title": "Restore elite core-hunt stakes (Pindrop structural, Sable undertuned)",
+   "why": "R1 / D1. Two of six 'core-hunting' elites have a 0% DEATH rate. Pindrop is STRUCTURAL: its loadout is HEAD MULTI / ARM_L GUARD / ARM_R MULTI / BACK MULTI, zero SINGLE moves, and the core-hunt branch (combat.gd:146-152) only fires for archetype==SINGLE, so it can never land a killing blow (0/60). Sable has 2 SINGLE moves but is too weak (0/60). Cogsworth 30/60, Brassmore 49/60 confirm the probe is sound. The panel calls this the single highest-leverage change.",
+   "persona": "QA Hunter + Cozy Collector + the difficulty curve (3 lenses at once)",
+   "criterion": "PRE-STATE: Pindrop and Sable each reach a DEATH rate inside the elite band set by Cogsworth (30/60) and Thornlash (24/60) - NOT above Brassmore. Re-measure with tools/sim/qa_verify.gd. CH-05/CH-06 were reverted once on wrong-way criteria; re-apply only with the band stated first and revert again if it moves wrong.",
+   "touches": "Challenger loadouts and move powers only. Frozen surfaces: combat.gd resolution and base fixtures are OFF LIMITS.",
+   "closed_by": "CH-P1 + CH-P2",
+   "closed_evidence": "combat/challengers.gd:50 Pindrop ARM_L is boldheart_arm_sunder; measured Pindrop 0.23, Sable 0.22, both > 0",
+   "closed_note": "Already shipped by design/balance/playtest-fixes-change-order.md (COUNCIL-RATIFIED 2026-07-21, section A) before this backlog was written. Re-verified in code on 2026-09-01. Kept as a record of the miss, not as work."
+  },
+  {
+   "id": "L-04",
+   "gate": "closed",
+   "lift": 4,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 2,
+   "priority": 0.0,
+   "title": "The modal first Box of Scrap should not be a guaranteed death",
+   "why": "R3 / D2. Kit survival by grade is a step function: Dud/Rough/Fair all ~0.00 at every skill tier, Keen 0.86-1.00, Gleaming 1.00. Fair is the 32% modal roll, so P(survive first box) ~= 0.25 and the median FIRST free kit dies 100% at the boss regardless of play. Real stakes are intended; a guaranteed-loss modal first experience is a new-player cliff.",
+   "persona": "Newcomer + Cozy Collector",
+   "criterion": "PRE-STATE: P(survive) for a player's first N boxes rises above a stated floor without flattening the Gleaming payoff. Options: a first-boxes pity floor, or a clearer grade-power read at crack time so a Fair box reads as a short outing rather than a run. Re-measure on smoke_kit_sim per-lane bands.",
+   "touches": "economy/box_roller.gd odds or ui reveal copy. Frozen surfaces: none, but smoke_kit_sim is the tripwire.",
+   "closed_by": "CH-P5 + CH-P6",
+   "closed_evidence": "economy/box_roller.gd Fair gains a RARE centerpiece + the Bastion lent core; Fair boss survival 0.01 -> 0.35",
+   "closed_note": "Already shipped by design/balance/playtest-fixes-change-order.md (COUNCIL-RATIFIED 2026-07-21, section A) before this backlog was written. Re-verified in code on 2026-09-01. Kept as a record of the miss, not as work."
+  },
+  {
+   "id": "L-05",
+   "gate": "closed",
+   "lift": 3,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 2,
+   "priority": 0.0,
+   "title": "Boss difficulty should rise, not fall (Gildfall folds, Brassmore is the wall)",
+   "why": "R4 / D4. Under optimal aggression the ch8 FINALE Prince Gildfall is WIN 1.000 / DEATH 0.000 while the EARLIER ch4 Sunking Brassmore is WIN 0.305 / DEATH 0.695. The finale folds to the exact tech a player has already found by the earlier boss. The identical ~0.12 ladder win rates are a greedy-AI artifact hiding this.",
+   "persona": "Optimizer",
+   "criterion": "PRE-STATE: measured WIN under the RACE policy is monotonically non-increasing across ch4 -> ch8. Fix by giving Gildfall real core defense (guard/mend when threatened) or by swapping boss order.",
+   "touches": "Challenger loadouts / AI behaviour. Frozen surfaces: combat.gd resolution OFF LIMITS.",
+   "closed_by": "CH-P3",
+   "closed_evidence": "Gildfall given grandpeal; RACE WIN 1.000 -> 0.305, GUARD DEATH 0.775 vs Brassmore 0.550; Brassmore unmoved",
+   "closed_note": "Already shipped by design/balance/playtest-fixes-change-order.md (COUNCIL-RATIFIED 2026-07-21, section A) before this backlog was written. Re-verified in code on 2026-09-01. Kept as a record of the miss, not as work."
+  },
+  {
+   "id": "L-06",
+   "gate": "closed",
+   "lift": 2,
+   "evidence": 3,
+   "cost": 1,
+   "risk": 2,
+   "priority": 0.0,
+   "title": "Rarity should not be an inverted value signal",
+   "why": "R6 / D10. Mean win-rate deltas: EPIC arm_seer -0.0058 and EPIC pocketful_arm_grinlet -0.1225 are NEGATIVE, while COMMON grumble_co_girder_fist +0.191 and COMMON errant_core_pledge +0.165 are among the strongest. Grinlet at -0.1225 is a genuine dead bit. Players see rarity and raw stats and no counter-data. Rarity is not uniformly wrong (EPIC bedrock legs +0.34) - it is unreliable, which is worse than a known-flat signal.",
+   "persona": "Optimizer + Cozy Collector (a chase item that makes you weaker poisons collection)",
+   "criterion": "PRE-STATE: both negative EPICs land above a stated delta floor after repricing, measured on the roster sim, without pushing any bit past the existing band ceiling.",
+   "touches": "parts/catalog_extra.json stats. Frozen surfaces: the 13 base fixtures are hardcoded and OFF LIMITS.",
+   "closed_by": "CH-P9 (+ a producer ruling on seer)",
+   "closed_evidence": "pocketful_arm_grinlet now SINGLE power 8, mean_delta -0.1225 -> +0.1242. arm_seer is a BASE FIXTURE and frozen; ruled statistically neutral, no-change",
+   "closed_note": "Already shipped by design/balance/playtest-fixes-change-order.md (COUNCIL-RATIFIED 2026-07-21, section A) before this backlog was written. Re-verified in code on 2026-09-01. Kept as a record of the miss, not as work."
+  },
+  {
+   "id": "L-07",
+   "gate": "loop",
+   "lift": 2,
+   "evidence": 2,
+   "cost": 1,
+   "risk": 1,
+   "priority": 4.0,
+   "title": "Coffer odds string reads as a typo: 'C70 R22 E8 %'",
+   "why": "Observed in a rendered frame (loop/out/shots/shot_coffer_nook.png, shot_barrow.png). The trailing bare '%' after the last number reads like a stray glyph rather than a unit applying to all three. Odds legibility is the honest-information promise of the Coffer Nook and it is the first number a new player is asked to trust.",
+   "persona": "Newcomer + Cozy Collector",
+   "criterion": "PRE-STATE: the odds line reads unambiguously as three percentages in a rendered frame, at the same or smaller width (the 720px layout budget has zero slack - smoke_layout must stay green).",
+   "touches": "ui coffer/broker copy. Frozen surfaces: none."
+  },
+  {
+   "id": "L-08",
+   "gate": "loop",
+   "lift": 1,
+   "evidence": 2,
+   "cost": 1,
+   "risk": 1,
+   "priority": 2.0,
+   "title": "Audit the saturated cyan panel on the Brass Coffer lid against the warm palette",
+   "why": "Observed in shot_coffer_nook.png: a bright saturated cyan rectangle sits on the coffer lid inside an otherwise warm brass/wood frame. It may be the intended Glimmer/mana tell, but at that saturation it reads as an untextured placeholder rather than etched-rune plastic with a soft mana glow. Needs a root-cause read against the art bible before it is called a defect.",
+   "persona": "Cozy Collector (cozy-craft tone, NOT cyber-circuitry)",
+   "criterion": "MEASURE FIRST: identify the source material/token, compare against the DESIGN.md palette tokens, and either confirm it as intended (close the item) or reprice the colour. Do not repaint on taste alone.",
+   "touches": "coffer face render / Tokens. Frozen surfaces: none."
+  },
+  {
+   "id": "L-09",
+   "gate": "loop",
+   "lift": 2,
+   "evidence": 2,
+   "cost": 1,
+   "risk": 1,
+   "priority": 4.0,
+   "title": "Proving Grounds spoils lines name bits but never their value",
+   "why": "R7 tail, corroborated in shot_proving.png: every challenger row lists 'Spoils: <bit names>' with no worth attached, while the wager loop asks the player to weigh a scrap stake against those spoils. The panel separately measured the loot gradient INVERTED (stake-10 Cogsworth loots a melt-45 EPIC; stake-20 Gildfall loots melt-20), so the reward does not track the difficulty and the screen gives the player nothing to notice that with.",
+   "persona": "Optimizer + Newcomer (an informed wager needs both numbers)",
+   "criterion": "PRE-STATE: a rendered frame shows spoils value alongside the stake on every challenger row, within the row height budget, smoke_layout green. Whether to also FIX the inverted gradient is a separate balance item.",
+   "touches": "ui/proving copy. Frozen surfaces: none."
+  },
+  {
+   "id": "L-10",
+   "gate": "measure",
+   "lift": 3,
+   "evidence": 1,
+   "cost": 2,
+   "risk": 1,
+   "priority": 1.5,
+   "title": "INSTRUMENT: a decision-density probe for the build screen",
+   "why": "The Optimizer scores 5/10 because 'the legal build collapses to one greedy answer identical across every core' and 'the soul pick is nearly cosmetic'. That is currently a reasoned claim, not a measured one - there is no instrument that counts how many distinct builds are within X% of optimal under the weight cap. Every other headline claim in the loop is numbers-grounded; this one is not, so under the evidence law it cannot be built against yet.",
+   "persona": "Optimizer",
+   "criterion": "Build the probe FIRST: report the count of distinct near-optimal builds per core and the overlap between them. Then rescore L-10 into a real balance item with evidence 3.",
+   "touches": "tools/sim/ only. Frozen surfaces: none."
+  },
+  {
+   "id": "L-11",
+   "gate": "owner",
+   "lift": 5,
+   "evidence": 3,
+   "cost": 3,
+   "risk": 5,
+   "priority": 0.0,
+   "title": "Turn cap / wall-fight pacing (D13 ADR)",
+   "why": "R2 / D7. combat.gd outcome() has no turn counter. 27.2% of damaging hits land for exactly 1 (the DEF floor at combat.gd:107). Cogsworth-mirror resolves at turn 167; GUARD-vs-Brassmore at 221. The ladder top is uncappable (reached_top 0.00 at every tier). Fights provably terminate, so this is a grind not a lock - but it is a 5-10 minute slog and it caps the ladder.",
+   "blocked_by": "The resolver is section 13 frozen. A turn cap needs a tiebreak rule (core-HP %) and that is an owner ADR, not a loop edit.",
+   "corroborated": "Change order section C: D7 deferred, needs the section-13 turn-cap ADR (D13)."
+  },
+  {
+   "id": "L-12",
+   "gate": "owner",
+   "lift": 4,
+   "evidence": 3,
+   "cost": 3,
+   "risk": 5,
+   "priority": 0.0,
+   "title": "Cozy endgame bundle: coffer RNG persistence, a Glimmer sink, a discovery faucet",
+   "why": "R5 / D5+D6+D9. PlayerState._init always runs PackRoller.new(20260711) and SaveManager persists no roller or pity field, so every fresh boot replays a byte-identical brass stream and every new player cracks the identical 'surprises' - coffers are relaunch-scummable. Glimmer: 57.2 earned per player over 30 days, 0.0 spent on all 30. Compendium: only 12.6% reach 80% in a month. The panel estimates this moves the Cozy Collector from 6 to ~8.",
+   "blocked_by": "Needs save schema v5. The workbench already lists D7/D9 as owner-gated save-v5 items.",
+   "corroborated": "Change order section C: D5 needs save v5 (schema FROZEN); D6 a new shop feature, out of bounded scope; D9 an economy/discovery-faucet pass."
+  },
+  {
+   "id": "L-13",
+   "gate": "owner",
+   "lift": 3,
+   "evidence": 3,
+   "cost": 3,
+   "risk": 5,
+   "priority": 0.0,
+   "title": "Speed axis payoff (D11 ADR)",
+   "why": "Measured dead: speed buys initiative and nothing else, the sniper attack rates sit at 0.00/0.00/0.03/0.00, and the whole silksteel core-sniper family beats nobody in the pentagon. An entire advertised build direction is inert.",
+   "blocked_by": "Any real payoff changes resolution order or adds a resolver hook - section 13 territory. Already queued as an owner ADR in the workbench.",
+   "corroborated": "Change order section C: D11 resolver weight-check is FROZEN. The speed-axis ADR remains separately queued in workbench.md."
+  },
+  {
+   "id": "L-14",
+   "gate": "owner",
+   "lift": 2,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 5,
+   "priority": 0.0,
+   "title": "Wave 2 bit meshes (20 bits on procedural placeholders)",
+   "why": "design/art/wave2-mesh-work-order.md is written and waiting. The catalog is 100 bits; 20 of them ship on procedural placeholders.",
+   "blocked_by": "Needs the owner's Blender rig on the second PC. No amount of loop autonomy produces a hand-rigged mesh."
+  }
+ ],
+ "_reconciliation": {
+  "date": "2026-09-01",
+  "what": "The first version of this backlog scored L-01 through L-06 as live work. All seven underlying defects had already been fixed and measured by design/balance/playtest-fixes-change-order.md (ratified 2026-07-21), which this session read the PROBLEM statement for (the playtest panel) without reading the RESPONSE to it.",
+  "how_found": "Flagged by a peer session, then verified in code here (challengers.gd:44,50; workshop.gd:917,921; combat_screen.gd:1042; catalog_extra.json grinlet) rather than taken on the doc's or the peer's word.",
+  "cost_if_unfixed": "The first two unattended iterations would have re-implemented shipped work, and the loop would have reported progress for it.",
+  "protocol_fix": "Phase 0 of design/process/autonomous-loop.md now requires RECONCILE: no item is picked until its defect is re-verified as still live in code. Evidence expires."
+ }
 }

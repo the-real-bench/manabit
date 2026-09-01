@@ -8,6 +8,51 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 0b - 2026-09-01 - CORRECTION: the backlog was stale on arrival
+
+**What happened:** a peer session flagged that backlog items L-01 and L-02 were
+already shipped. Verified here in code rather than on the peer's word or the
+document's own say-so. The claim was true, and broader than reported.
+
+**Six of ten loop-pickable items were already done**, by
+`design/balance/playtest-fixes-change-order.md` (COUNCIL-RATIFIED 2026-07-21,
+section A, nine shipped changes) - including both of the items iteration 0 named as
+the next two picks:
+
+| Item | Shipped as | Verified in code |
+|---|---|---|
+| L-01 fragility + defanged reason | CH-P7, CH-P8 | `workshop.gd:917,921`, `combat_screen.gd:1042` |
+| L-02 junction lane labels | CH-P4 | `challengers.gd:44` swaps in a SINGLE; DEATH 0.30 > base 0.22 |
+| L-03 elite core-hunt stakes | CH-P1, CH-P2 | `challengers.gd:50`; Pindrop 0.23, Sable 0.22 |
+| L-04 modal Fair box | CH-P5, CH-P6 | Fair boss survival 0.01 -> 0.35 |
+| L-05 boss re-tier | CH-P3 | Gildfall RACE WIN 1.000 -> 0.305 |
+| L-06 inverted rarity | CH-P9 | grinlet -0.1225 -> +0.1242; seer frozen and ruled neutral |
+
+**Root cause, stated narrowly:** iteration 0 read the *problem* statement
+(`design/playtest/ai-playtest-2026-07-21.md`) and never read the *response* to it,
+though the change order sat in a directory it had already listed. Reading a defect
+list is not reconciliation. Reading what was done about it is.
+
+**Cost had it not been caught:** the first two unattended iterations would have
+re-implemented shipped work and reported progress for it. Worse than wasted time -
+the ledger would have contained two false successes, which is the failure mode this
+whole apparatus exists to prevent.
+
+**Protocol fixed, not just the data.** Phase 0 gains a RECONCILE step and picking
+gains a third law: **evidence expires; no item is picked until its defect is
+re-verified as still live in code.** Backlog items L-01..L-06 are marked `closed`
+with their CH mapping and kept as a record of the miss.
+
+**The signal worth keeping:** after reconciliation the only live items are L-07,
+L-08, L-09 and L-10 - and three of those four came from the rendered-frame review,
+the capability that did not exist before this session. The measured-defect backlog
+was exhausted; the visual one was untouched. That is an argument for the sight
+capability being the real unlock, not the gate runner.
+
+**Next iteration picks:** L-07 or L-09 (both 4.0, both copy-only, both from frames).
+
+---
+
 ## Iteration 0 - 2026-09-01 - Build the loop, and prove it can test itself
 
 **Picked:** the process itself. No gameplay change.

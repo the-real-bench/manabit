@@ -20,8 +20,10 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 - **The silence rule is now protocol, not lore.** Wave 4b's eight audio loops passed every existence check while loading null. Anything that can be silent gets a live probe; gate-green is neither audible nor visible.
 - **Honest limits recorded rather than papered over:** no audio device (audio stays structurally verified, never heard), no human feel (persona scores are a labelled proxy), and Blender/taste/section 13 remain owner work.
 
+**Correction, same session (backlog was stale on arrival):** a peer session flagged L-01/L-02 as already shipped; verified in code, and it was broader - SIX of ten loop-pickable items were already delivered by design/balance/playtest-fixes-change-order.md (ratified 2026-07-21, 9 shipped changes): L-01=CH-P7/P8, L-02=CH-P4, L-03=CH-P1/P2, L-04=CH-P5/P6, L-05=CH-P3, L-06=CH-P9. Root cause is narrow: this session read the playtest PROBLEM statement and never the RESPONSE to it, though the change order sat in a directory it had already listed. Protocol fixed rather than just the data - Phase 0 gains RECONCILE and picking gains a third law (evidence expires; re-verify the defect is still live IN CODE before picking). Closed items kept with their CH mapping as a record of the miss. The signal worth keeping: after reconciliation the only live items are L-07/L-08/L-09/L-10, and three of the four came from the rendered-frame review - the measured-defect backlog was exhausted, the visual one untouched, which argues that SIGHT is the real unlock here, not the gate runner.
+
 **Outstanding / next session:**
-- **Run the first unattended iteration:** L-02 (junction labels, priority 9.0, copy-only) then L-01 (new-player legibility, 6.0).
+- **Run the first unattended iteration:** L-07 or L-09 (both 4.0, copy-only, both found by looking at frames).
 - **Owner queue needs six answers** (none blocking): Q1 turn-cap ADR, Q2 permission for an additive save v5, Q3 speed-axis ADR (recommend deciding after Q1), Q4 the Blender mesh batch, Q5 taste sign-off posture, Q6 cadence and per-pass authorisation.
 - Everything from the 2026-07-19 entries still stands.
 

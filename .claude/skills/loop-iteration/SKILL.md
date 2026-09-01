@@ -23,9 +23,16 @@ bash tools/loop/gates.sh
 Green baseline first. **If red, fixing it is the whole iteration.** Never start
 feature work from an unknown state.
 
+Then **RECONCILE**: read `design/balance/*change-order*.md` and recent `git log`
+before trusting the backlog. Evidence expires - an item records a defect that was
+true when written. The first draft of this backlog scored six items that had all
+already shipped, because the session read the playtest's problem list and never the
+response to it. Re-verify each candidate defect **in code**, and close what is done.
+
 ## Phase 1 - PICK
 Read `loop/backlog.json`. Take the highest `priority` with `gate: "loop"` (or the id
 in the argument). **One headline item.**
+- **Not still live in code -> close it, do not build it.**
 - `evidence < 2` -> you may only MEASURE it, not build against it. Build the
   instrument, rescore, stop.
 - `risk: 5` -> never pick. Mirror to `loop/owner-queue.md` and take the next item.
