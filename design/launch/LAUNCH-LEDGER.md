@@ -36,6 +36,24 @@ Seeded 2026-09-01 from: `design/playtest/ai-playtest-2026-07-21.md` (D1-D11),
 
 ---
 
+## LOOP PROCEDURE
+
+The whole loop prompt is: **"Run the next item in design/launch/LAUNCH-LEDGER.md per its LAWS."**
+Everything it needs is here. Each iteration:
+
+1. Confirm LAW 8 holds - you are on the second PC (ZJEO242), and the other machine is idle.
+2. Run the GATE below. Red gates outrank every queued item: fixing them IS this iteration.
+3. Take the top `TODO` in the highest non-empty priority band. Set it `WIP`.
+4. Do it, inside its declared Scope column. If the real fix exceeds that scope, stop and re-queue it
+   as smaller items rather than widening (LAW 5).
+5. If it needs a frozen surface (LAW 2), move the row to OWNER-BLOCKED with a drafted ADR and take
+   the next item instead. Never implement it.
+6. Prove it: GATE exit 0, plus the item's own proof (LAW 7 - screenshots for UI, an audible probe
+   for audio, a committed measurement for balance).
+7. Set the row `DONE`, add a DONE LOG line (ID, date, machine, what shipped, the proving number),
+   and commit `[ledger] <ID> - <what>` (LAW 4).
+8. Stop the loop when P0 and P1 hold no `TODO` rows.
+
 ## GATE
 
 ```
