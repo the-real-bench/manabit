@@ -11,12 +11,28 @@ class_name PackRoller extends RefCounted
 const BRASS_COUNT := 5
 const BRASS_RARE := 0.70    # below this = COMMON
 const BRASS_EPIC := 0.92    # at or above this = EPIC
+const BRASS_PITY := 9       # brass only: after this many non-EPIC BITS, the next is forced EPIC
 const TIN_COUNT := 3
 const TIN_RARE := 0.85
 const TIN_EPIC := 0.97
 
 var _rng := RandomNumberGenerator.new()
 var pity: int = 0   # opens since last EPIC
+
+# The pity promise, in words, derived from BRASS_PITY so it cannot drift from the
+# rule. Brass counts BITS since its last EPIC and forces one at BRASS_PITY, so the
+# next bit after that many misses is always an Epic. Tin has no guarantee and no
+# pity - it returns "" rather than a claim it does not keep, which is why tin's
+# printed odds match its rolls to a tenth of a point and brass's do not.
+#
+# This discloses the MECHANISM behind the gap (printed E8%, realized ~14.8% over
+# 40,000 coffers). It does not close it numerically: the pity counter is not
+# persisted, so the realized rate depends on session length and no single printed
+# number is true for every player. That fix needs save v5 and is owner-gated.
+static func pity_line(kind: String) -> String:
+    if kind != "brass":
+        return ""
+    return "never more than %d bits without an Epic" % BRASS_PITY
 
 # The printed odds for a coffer kind, built from the thresholds above.
 # Each figure carries its own unit so the line reads as three percentages
@@ -51,7 +67,7 @@ func _roll(count: int, guarantee_rare: bool, rare_thresh: float, epic_thresh: fl
     var out: Array[PartInstance] = []
     var got_rare := false
     for i in range(count):
-        var force_epic := guarantee_rare and pity >= 9
+        var force_epic := guarantee_rare and pity >= BRASS_PITY
         var pd := _pick(pool, force_epic, rare_thresh, epic_thresh)
         if pd.rarity != "COMMON":
             got_rare = true

@@ -74,6 +74,23 @@ the working branch, always behind a PR, never merged without you.**
 
 ---
 
+## Q2b. The brass coffer's odds cannot be made numerically honest without Q2
+**Raised by iteration 4.** Brass prints EPIC 8%% and rolls **14.8%%** measured over
+40,000 coffers (`tools/sim/odds_probe.gd`). The cause is pity-at-9, which is real and
+generous. The loop shipped what it could without you: the rule is now disclosed in
+words on both screens, derived from the constant and gated.
+
+What it could NOT ship: one honest printed number. Pity is not persisted (`grep pity
+meta/save_manager.gd` returns nothing), so it resets every launch - 14.8%% is a
+marathon-session ceiling and a relaunch-often player sees nearer 8%%. Any single
+number would be wrong for one of them.
+
+**This is the same unlock as Q2.** Approving additive save v5 fixes the coffer odds,
+the scummable stream (D5), the Glimmer sink (D6) and the discovery faucet (D9) - four
+measured holes on one decision.
+
+---
+
 ## Answered
 
 *(nothing yet - this file starts with the first autonomous pass)*

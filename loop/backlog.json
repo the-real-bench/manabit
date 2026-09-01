@@ -222,18 +222,20 @@
   },
   {
    "id": "L-15",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 3,
    "evidence": 3,
    "cost": 1,
    "risk": 2,
-   "priority": 4.5,
+   "priority": 0.0,
    "title": "Brass coffer prints EPIC 8% but actually rolls 14.8%",
    "why": "Measured this iteration with tools/sim/odds_probe.gd over 40,000 brass coffers (200,000 bits): realized C 63.3% / R 21.9% / E 14.8% against a printed C70 / R22 / E8. The epic-pity at 9 nearly DOUBLES the real EPIC rate. Tin is honest (85.1/11.9/3.0 vs printed 85/12/3) because it has no guarantee and no pity. The error is generous to the player, so it is not predatory - but it is still a label that does not match the roll, and the project's own law is that printed odds match the threshold verbatim (smoke_run.gd:174). It also means the pity, a real kindness, is completely invisible.",
    "persona": "Cozy Collector (surprise you cannot see the shape of) + QA Hunter (P3, labels never lie)",
    "criterion": "PRE-STATE: the printed brass line and the realized 40k-coffer distribution agree within the same +/-2pp band the tin assertion already uses, OR the line discloses the pity rule in words so the gap is explained rather than hidden. Then extend the smoke_broker empirical assertion to cover brass (it is deliberately excluded today).",
    "entangled_with": "D5 / L-12. The pity counter is NOT persisted (PlayerState._init always re-seeds, SaveManager stores no pity field), so realized EPIC depends on session length: 14.8% is a marathon-session upper bound and a relaunch-often player sees closer to the printed 8%. Printing a single honest number may not be possible until pity persists, which is owner-gated. Disclosing the rule in words is available now and needs no schema change.",
-   "touches": "economy/pack_roller.gd odds_line copy, tests/smoke_broker.gd. Frozen surfaces: none."
+   "touches": "economy/pack_roller.gd odds_line copy, tests/smoke_broker.gd. Frozen surfaces: none.",
+   "closed_by": "Iteration 4 (2026-09-01) - DISCLOSED, not numerically resolved",
+   "closed_evidence": "PackRoller.BRASS_PITY named, _roll uses it, pity_line() derives the copy. Coffer Nook and Barrow both print \"never more than 9 bits without an Epic\"; tin prints nothing. smoke_broker asserts the words track the constant, proven red by tampering. The 8%% vs 14.8%% gap is NOT closed - that needs one honest number, which needs persisted pity, which needs save v5 (owner Q2)."
   },
   {
    "id": "L-16",

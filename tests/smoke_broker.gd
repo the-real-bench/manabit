@@ -128,6 +128,16 @@ func _initialize() -> void:
     ok = _c("brass prints its rare+ guarantee", PackRoller.odds_line("brass").contains("rare+ guaranteed")) and ok
     ok = _c("tin claims no guarantee it does not keep", not PackRoller.odds_line("tin").contains("guaranteed")) and ok
 
+    # --- the pity promise is DERIVED from the rule, and tin makes no claim ---
+    # Brass realized EPIC runs ~14.8%% against a printed 8%% because of pity-at-9
+    # (measured, tools/sim/odds_probe.gd). The gap is owner-gated on save v5 (D5,
+    # pity is not persisted), so what ships now is disclosure of the mechanism.
+    # This asserts the WORDS track the CONSTANT: change BRASS_PITY without the copy
+    # following and this goes red.
+    ok = _c("brass discloses its pity at the real threshold",
+            PackRoller.pity_line("brass").contains("%d bits" % PackRoller.BRASS_PITY)) and ok
+    ok = _c("tin promises no pity it does not have", PackRoller.pity_line("tin") == "") and ok
+
     print("SMOKE PASS" if ok else "SMOKE FAIL")
     quit(0 if ok else 1)
 

@@ -218,6 +218,13 @@ func _coffer_ware(kind: String, name: String, odds: String, price: int) -> Contr
     od.add_theme_font_size_override("font_size", 11)
     od.add_theme_color_override("font_color", Color(Tokens.PARCHMENT, 0.6))
     v.add_child(od)
+    var pity := PackRoller.pity_line(kind)
+    if pity != "":
+        var pl := Label.new()
+        pl.text = pity
+        pl.add_theme_font_size_override("font_size", 10)
+        pl.add_theme_color_override("font_color", Color(Tokens.PARCHMENT, 0.5))
+        v.add_child(pl)
     var row := HBoxContainer.new()
     v.add_child(row)
     var afford := player.scrap >= price

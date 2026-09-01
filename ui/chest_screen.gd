@@ -22,6 +22,7 @@ var _status: Label
 var _skip_btn: Button
 var _face: TextureRect          # drop-in coffer art (res://art/props/coffer_face_<kind>.png)
 var _odds: Label                # odds printed on the coffer face (DESIGN.md PackOpen spec)
+var _pity: Label                # the brass pity promise, under the odds (never on the same line)
 
 var _kind: String = "brass"
 var _state: String = "idle"        # idle | charging | revealing
@@ -172,6 +173,24 @@ func _build_layout() -> void:
     _odds.mouse_filter = Control.MOUSE_FILTER_IGNORE
     _coffer_btn.add_child(_odds)
 
+    # The pity promise sits UNDER the odds, never on the same line: the odds line
+    # already runs the width of the coffer card, and crowding it was the defect
+    # iteration 1 fixed. Dimmer and a size down, so it reads as a footnote to the
+    # numbers rather than competing with them.
+    _pity = Label.new()
+    _pity.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    _pity.add_theme_font_size_override("font_size", 9)
+    _pity.add_theme_color_override("font_color", Color(Tokens.PARCHMENT, 0.60))
+    _pity.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+    # BELOW the card, not on it. At -34 it landed across the chest lid and the wax
+    # strap - legible, but text over illustration is not the cozy-craft register.
+    # The clear band between the card and the seal instruction is where a footnote
+    # belongs.
+    _pity.offset_top = 3
+    _pity.offset_bottom = 16
+    _pity.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _coffer_btn.add_child(_pity)
+
     _ring = ChargeRing.new()
     _ring.set_anchors_preset(Control.PRESET_FULL_RECT)
     _ring.visible = false          # the charge ring only appears while the seal is being HELD
@@ -305,6 +324,9 @@ func refresh_from_player() -> void:
     var face_path := "res://art/props/coffer_face_%s.png" % _kind
     _face.texture = load(face_path) if ResourceLoader.exists(face_path) else null
     _odds.text = PackRoller.odds_line(_kind)
+    if _pity != null:
+        _pity.text = PackRoller.pity_line(_kind)
+        _pity.visible = _pity.text != ""   # tin claims nothing, because tin has nothing
     if _state == "idle":
         if none:
             _status.text = ""   # the empty state above carries the message

@@ -46,7 +46,35 @@ new assertion cannot be made to fail on purpose.
 It discloses the mechanism that causes it. The numeric fix stays owner-gated on Q2,
 and the ledger will say so rather than implying the gap is resolved.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All four criteria met.**
+
+1. **Disclosed on both screens, verified in frames.** Coffer Nook and Barrow
+   cartboard both read `never more than 9 bits without an Epic` under the odds.
+2. **Tin claims nothing**, because tin has no pity and no guarantee. `pity_line`
+   returns "" for it, and a gate asserts that rather than trusting it.
+3. **Derived, and the gate was seen red.** `BRASS_PITY` is now a named constant,
+   `_roll` uses it, and `pity_line` formats it. Negative control: change the constant
+   to 12 and hand-type "9" in the copy -> `[FAIL] brass discloses its pity at the
+   real threshold`, `SMOKE FAIL`. Restored -> PASS.
+4. **16/16 gates green**, `smoke_layout` included.
+
+**One placement correction inside Phase 4.** The first render put the footnote at
+offset -34, which landed it across the chest lid and the wax strap - legible, and
+wrong for the register. Text over illustration is not cozy-craft. Moved to the clear
+band below the card, above the seal instruction, and re-rendered to confirm. The
+literal revert trigger ("overflows its card") had not fired; I moved it because the
+frame looked bad, which is the entire reason the loop renders frames at all.
+
+**What this does NOT do, restated so the ledger cannot be misread later:** the
+printed 8% still does not equal the realized ~14.8%. This discloses the mechanism
+that causes the gap; it does not close it. Closing it needs one honest number, which
+needs the pity counter to survive a relaunch, which needs save v5 - **owner Q2**.
+Until then a player can at least see that a pity rule exists and what it promises.
+
+**L-15 closed as DISCLOSED, not as resolved.** The numeric half is re-filed under
+the owner queue rather than left implied.
+
+**Next iteration picks:** L-09 (4.0, Proving spoils show no value), then L-16 (3.0).
 
 ---
 
