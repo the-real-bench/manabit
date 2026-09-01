@@ -35,6 +35,7 @@ regressions.
 ### Phase 0 - SYNC
 ```bash
 bash tools/loop/bootstrap.sh     # engine, cached
+bash tools/loop/verdict.sh start # record the head, so a no-op cannot hide
 bash tools/loop/gates.sh         # 16/16, ~65s
 ```
 Establish a **green baseline before touching anything**. If the baseline is red,
@@ -117,6 +118,9 @@ iteration. Never lower a criterion after seeing the result.
   only prepend).
 
 ### Phase 7 - PUSH
+```bash
+bash tools/loop/verdict.sh check   # refuses an iteration that delivered nothing
+```
 Commit with the item id in the subject, push to the working branch, keep the PR
 updated. CI re-runs the same `gates.sh` on GitHub so no claim of green depends on
 the session that made it.
@@ -141,7 +145,9 @@ Two rules follow:
    backlog.** A run that cannot push should discover that in seconds and say so, not
    after twenty minutes of work it is about to throw away.
 2. **Every run ends in one of exactly two states, and says which:** a pushed SHA, or
-   a BLOCKED report naming the exact command and its exact error. "Everything was
+   a BLOCKED report naming the exact command and its exact error. This is enforced,
+   not merely asked for: `tools/loop/verdict.sh` records the head at Phase 0 and
+   refuses the run at Phase 7 if neither a commit nor a `blocked` report exists. "Everything was
    already green" is not an outcome. If the backlog is empty, build the next
    instrument and push that.
 

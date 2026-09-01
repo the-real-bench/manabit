@@ -4,6 +4,22 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 
 ---
 
+## 2026-09-01 (incident 1 + loop iteration 2: the loop learns to notice its own silence)
+
+**What happened:**
+- **INCIDENT 1 - the first two unattended runs delivered nothing.** Scheduled 08:17: 19 min, $2.61, pushed nothing. Diagnostic re-fire 08:44: 73 sec, $0.45, pushed nothing. Both exited SUCCEEDED - which only means the session did not crash. Caught only because a session happened to fetch the branch. Root cause of the first is mine: the trigger prompt described the seven phases but never demanded an OUTCOME, so a run could analyse, decide things looked fine, and exit clean. The 73-second second run is the evidence for the structural half: after the prompt was hardened to check the push path first, duration collapsed from 19 minutes, meaning it found it could not deliver and stopped.
+- **Fix:** fresh-session Routine deleted; the loop now fires INTO the session that can deliver (trig_01Vk2VwDhqM78UoKBokyGagH, self-bound, every 4 hours). Protocol gained section 2b: verify the loop can DELIVER before trusting it to run.
+- **Iteration 2 shipped L-17** (priority 9.0, which outranked the L-16 the Routine prompt named - priority decides, not the prompt): `tools/loop/verdict.sh`. `start` records the head at Phase 0; `check` at Phase 7 refuses any iteration that produced neither a commit nor a `blocked` report naming the exact command and its exact error. Four negative controls run and SEEN TO FAIL, including a malformed blocker (exit 2) - so "BLOCKED" cannot become the new way of delivering nothing. Wired into the protocol and the skill so it is enforced, not remembered.
+
+**Decisions (with reasoning):**
+- **A ledger that only holds successes is worthless**, so Incident 1 is recorded in full including its $3.06 cost. The whole apparatus exists to catch false confidence; hiding its own first failure would be the same sin.
+- **The delivery path is tested before the engine, the gates, or the backlog.** A run that cannot push should find out in seconds, not after twenty minutes of work it is about to throw away.
+- **verdict.sh proves delivery, never worth.** It closes exactly one hole - silence. Judgment stays with the pre-stated criterion, the fun rubric and the revert rule.
+
+**Outstanding / next session:**
+- L-16 (hermetic shots, 6.0), then L-15 (brass odds honesty, 4.5, needs the D5 read).
+- Owner queue Q1-Q5 unanswered. Two new owner questions: scheduled runs default to Sonnet 5 (the Routine stores no model), and cadence is 6/day against a 5-item backlog while the owner hit a usage limit.
+
 ## 2026-09-01 (loop iteration 1: the coffer odds line, and what the negative control found)
 
 **What happened:**

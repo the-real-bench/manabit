@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# MANABIT autonomous loop - the delivery check.
+#
+#   tools/loop/verdict.sh start    # at Phase 0, records the branch head
+#   tools/loop/verdict.sh check    # at Phase 7, proves the run delivered something
+#   tools/loop/verdict.sh blocked "cmd" "error text"   # record a real blocker
+#
+# WHY THIS EXISTS (Incident 1, 2026-09-01): two unattended runs exited
+# ROUTINE_RUN_STATUS_SUCCEEDED having pushed nothing - 19 minutes and $2.61, then
+# 73 seconds and $0.45. A scheduler's status field cannot tell "did the work" from
+# "exited cleanly", so nothing noticed. It was caught only because a human-driven
+# session happened to fetch the branch.
+#
+# An iteration has exactly two honest endings: a new commit, or a BLOCKED report
+# naming the exact command and its exact error. This script refuses the third one.
+set -uo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT"
+mkdir -p loop/out
+STATE="loop/out/iteration_start"
+BLOCKED="loop/out/BLOCKED"
+
+case "${1:-check}" in
+
+  start)
+    git rev-parse HEAD > "$STATE"
+    rm -f "$BLOCKED"
+    echo "verdict: iteration starts at $(cat "$STATE")"
+    ;;
+
+  blocked)
+    # A blocker is only a real outcome if it names what was tried and what happened.
+    cmd="${2:-}"; err="${3:-}"
+    if [ -z "$cmd" ] || [ -z "$err" ]; then
+      echo "verdict: a BLOCKED report needs both the command and its error." >&2
+      echo "  usage: tools/loop/verdict.sh blocked '<command>' '<exact error>'" >&2
+      exit 2
+    fi
+    { echo "BLOCKED at $(date -u +%FT%TZ)"; echo "command: $cmd"; echo "error: $err"; } > "$BLOCKED"
+    echo "verdict: blocker recorded -> $BLOCKED"
+    ;;
+
+  check)
+    if [ ! -f "$STATE" ]; then
+      echo "VERDICT: FAIL - no iteration start recorded." >&2
+      echo "  Run 'tools/loop/verdict.sh start' at Phase 0. Without a baseline this" >&2
+      echo "  check cannot tell delivery from a no-op, which is the whole point." >&2
+      exit 1
+    fi
+    start="$(cat "$STATE")"
+    head="$(git rev-parse HEAD)"
+    n=$(git rev-list --count "$start..$head" 2>/dev/null || echo 0)
+
+    if [ "$n" -gt 0 ]; then
+      echo "VERDICT: DELIVERED - $n new commit(s) since $start"
+      git --no-pager log --oneline "$start..$head"
+      exit 0
+    fi
+
+    if [ -s "$BLOCKED" ]; then
+      echo "VERDICT: BLOCKED - no commit, but the blocker is reported:"
+      sed 's/^/  /' "$BLOCKED"
+      exit 0
+    fi
+
+    # The third ending, refused.
+    echo "VERDICT: FAIL - this iteration delivered NOTHING." >&2
+    echo "  head is still $start: no commit was made, and no BLOCKED report was" >&2
+    echo "  written. 'I looked at it and things seemed fine' is not an outcome." >&2
+    echo "  Either commit the work, or run:" >&2
+    echo "    tools/loop/verdict.sh blocked '<command>' '<exact error>'" >&2
+    exit 1
+    ;;
+
+  *)
+    echo "usage: verdict.sh {start|check|blocked <cmd> <error>}" >&2; exit 2 ;;
+esac

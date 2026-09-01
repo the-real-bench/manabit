@@ -251,17 +251,19 @@
   },
   {
    "id": "L-17",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 3,
    "evidence": 3,
    "cost": 1,
    "risk": 1,
-   "priority": 9.0,
+   "priority": 0.0,
    "title": "A loop run that pushes nothing must be loud, not 'succeeded'",
    "why": "Incident 1: two unattended runs exited SUCCEEDED having pushed nothing ($3.06, 19 min and 73 sec). The scheduler's own status field cannot distinguish 'did the work' from 'exited cleanly', so nothing in the system noticed. The only reason it was caught is that a human-driven session happened to fetch the branch.",
    "persona": "n/a - the loop's own accountability",
    "criterion": "PRE-STATE: a script or gate that compares the branch head before and after an iteration and fails loudly when an iteration ends with no new commit and no BLOCKED entry in loop/ledger.md. The check must be shown to fire on a deliberately empty run.",
-   "touches": "tools/loop/. Frozen surfaces: none."
+   "touches": "tools/loop/. Frozen surfaces: none.",
+   "closed_by": "Iteration 2 (2026-09-01)",
+   "closed_evidence": "tools/loop/verdict.sh - start records the head, check refuses an iteration with neither a commit nor a blocked report. Four negative controls run and seen to fail. Wired into Phase 0 and Phase 7 of the protocol and the skill."
   }
  ],
  "_reconciliation": {

@@ -32,7 +32,31 @@ stale.
 **Revert trigger:** the check cannot be made to fail on a deliberately empty run, or
 it reports success in any case where nothing was delivered.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All four criteria met, each proven by a control that was seen to fail.**
+
+`tools/loop/verdict.sh` records the head at Phase 0 and refuses the run at Phase 7
+unless it delivered. Four controls, all run:
+
+| Control | Expected | Actual |
+|---|---|---|
+| Empty run, no commit, no blocker | loud FAIL | `VERDICT: FAIL - this iteration delivered NOTHING`, exit 1 |
+| BLOCKED report written | PASS, echoes it | exit 0, prints the command and error |
+| Blocker missing its error text | refused | exit 2, "needs both the command and its error" |
+| No Phase-0 baseline recorded | FAIL | exit 1, "no iteration start recorded" |
+| A commit was made | PASS | exit 0 (this iteration's own commit, below) |
+
+The third control matters more than it looks: a blocker that does not name the exact
+command and the exact error is not a report, it is a shrug. The script refuses to
+accept one, so "BLOCKED" cannot become the new way of delivering nothing.
+
+Wired into Phase 0 and Phase 7 of the protocol and the skill, so it is enforced
+rather than remembered. 16/16 gates green.
+
+**Not a substitute for judgment.** This proves an iteration produced a commit; it
+cannot prove the commit was worth making. That is what the criterion, the fun rubric
+and the revert rule are for. It closes exactly one hole: silence.
+
+**Next iteration picks:** L-16 (hermetic shots, 6.0), then L-15 (4.5).
 
 ---
 
