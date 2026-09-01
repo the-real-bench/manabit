@@ -46,7 +46,46 @@ day and may legitimately differ across a date boundary. That is a property of th
 game, not a defect in the harness, and it will be recorded rather than engineered
 around.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: CRITERION 1 MISSED. L-16 stays OPEN. The save fix is kept, and I am
+overriding my own revert trigger deliberately - saying so rather than quietly
+keeping it.**
+
+After booting each capture from a fresh save, 3 of 6 screens became byte-stable and
+3 did not:
+
+    stable    compendium, menagerie, proving
+    drifting  barrow, coffer_nook, workshop
+
+**Root cause of the residual, measured not guessed.** It is not state at all - it is
+wall-clock animation phase, sampled at capture time:
+- `ui/chest_screen.gd:341` - the coffer rune pulses on `sin(Time.get_ticks_msec() / 480.0)`
+- `ui/workshop.gd:650` and `ui/manabit_stage.gd:194` - the soul hum and the medallion
+  invite ring, both sampling `Time.get_ticks_msec()`
+Exactly the three screens that drift. The warmth grain was a suspect and is exonerated:
+`ui/warmth.gd:48` seeds it at `rng.seed = 7`, so it is deterministic.
+
+**Why the save fix is kept anyway.** The revert trigger exists to stop me keeping a
+change that did not achieve its purpose. This one achieved a provable sub-goal with
+its own evidence, independent of the byte-identity goal: a capture no longer inherits
+the previous capture's wallet, shelf and tray, and a real save is byte-identical
+before and after a run (verified with a sentinel: `1db6fad3...` both sides). That is
+a genuine defect fixed. Reverting it would restore a bug I have now proven exists,
+purely because a more ambitious criterion was not met. So it stays - stated openly,
+not smuggled through as a pass.
+
+**What I did NOT do, and why.** Byte-identity now requires freezing animation clocks
+in three shipped UI files. Changing how the game animates for the benefit of a
+screenshot tool is the tail wagging the dog, and it touches player-facing feel to
+serve a test. That decision deserves its own criterion and its own iteration, not a
+quiet widening of this one.
+
+**Honest correction during this iteration:** my first comparison reported PASS on all
+six. It was wrong - a greedy `sed 's|.*/||'` stripped the md5 hash along with the
+path, so it compared filenames to filenames. Caught by re-reading the command, not by
+the output looking suspicious. It would have closed L-16 on a fabricated pass.
+
+**L-16 rescored and left open** with the root cause attached, so the next iteration
+starts from the diagnosis rather than repeating it.
 
 ---
 

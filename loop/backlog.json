@@ -240,13 +240,13 @@
    "gate": "loop",
    "lift": 2,
    "evidence": 3,
-   "cost": 1,
+   "cost": 2,
    "risk": 1,
-   "priority": 6.0,
-   "title": "INSTRUMENT: shots.sh is not hermetic, so frames are not comparable run to run",
-   "why": "Observed directly this iteration: the Barrow frame captured before the change showed scrap 50 and three Today's Finds; the frame after showed scrap 12 and one Find. Nothing in the diff touched the economy. shots.sh backs up and restores the save around a run, but the save PERSISTS BETWEEN runs, so each capture starts from whatever the last one left behind. Visual review is now a primary verification layer (L3), and a layer whose baseline drifts on its own produces false diffs and hides real ones.",
+   "priority": 3.0,
+   "title": "INSTRUMENT: frames drift because animation samples the wall clock",
+   "why": "Partially fixed in iteration 3: shots.sh now boots each capture from a fresh save, which stopped one run inheriting the previous run's wallet/shelf/tray and made 3 of 6 screens byte-stable (compendium, menagerie, proving). The remaining 3 (barrow, coffer_nook, workshop) drift from WALL-CLOCK ANIMATION PHASE sampled at capture time: ui/chest_screen.gd:341 sin(Time.get_ticks_msec()/480.0), ui/workshop.gd:650 and ui/manabit_stage.gd:194. The warmth grain is exonerated - ui/warmth.gd:48 seeds it at 7.",
    "persona": "n/a - this is the loop's own instrument, and it is load-bearing",
-   "criterion": "PRE-STATE: two consecutive shots.sh runs with no code change between them produce byte-identical PNGs for all six screens. Fix by seeding a fixed, disposable save before the harness boots rather than inheriting user:// state.",
+   "criterion": "PRE-STATE next time: all six screens byte-identical across two consecutive runs. This needs the capture to sample a FROZEN clock rather than the wall clock. Prefer a harness-side freeze (a fixed fake time source the harness installs) over editing shipped animation - changing how the game feels to serve a screenshot tool is the wrong trade. If no harness-side freeze is possible, the honest alternative is to change the criterion to a perceptual threshold and say so explicitly, rather than editing three UI files.",
    "touches": "tools/loop/shots.sh. Frozen surfaces: none."
   },
   {

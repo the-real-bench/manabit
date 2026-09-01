@@ -25,8 +25,21 @@ SAVE="$USERDIR/manabit_save.json"
 OUT="$ROOT/loop/out/shots"
 mkdir -p "$OUT" "$USERDIR"
 
+# HERMETIC (L-16). The save is backed up, then REMOVED, so every capture boots from
+# the same fresh state instead of inheriting whatever the last run left behind.
+# Without this, run N+1 renders a different wallet, a different shelf and a different
+# tray than run N with no code change between them - measured at d8a6b41 vs 028a158 -
+# which makes frame-to-frame comparison meaningless. Visual review is a primary
+# verification layer; a baseline that drifts on its own hides real regressions and
+# invents fake ones.
+#
+# A save present before the run is restored byte-identical afterwards, including when
+# the run dies partway: the trap fires on EXIT.
 [ -f "$SAVE" ] && cp "$SAVE" "$SAVE.loopbak"
-restore() { [ -f "$SAVE.loopbak" ] && mv -f "$SAVE.loopbak" "$SAVE"; }
+rm -f "$SAVE"
+restore() {
+  if [ -f "$SAVE.loopbak" ]; then mv -f "$SAVE.loopbak" "$SAVE"; else rm -f "$SAVE"; fi
+}
 trap restore EXIT
 
 DISP=":$(( (RANDOM % 400) + 99 ))"
