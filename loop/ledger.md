@@ -8,6 +8,48 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 4 - 2026-09-01 - L-15, the brass coffer tells you about its pity
+
+**Picked:** L-15 (priority 4.5), top live item. Lens: Cozy Collector (surprise you
+cannot see the shape of) and QA Hunter (P3, labels never lie).
+
+**RECONCILE - defect re-measured this iteration, not carried over.** 40,000 brass
+coffers: printed C70 / R22 / E8, realized **C 63.3 / R 21.9 / E 14.8**. Tin printed
+C85 / R12 / E3, realized 85.1 / 11.9 / 3.0 - honest to a tenth of a point.
+
+**The D5 dependency is real and was checked, not assumed:** `grep pity
+meta/save_manager.gd meta/player_state.gd` returns NOTHING. The pity counter is not
+persisted, so it resets every launch. That means **14.8% is a marathon-session upper
+bound**, and a relaunch-often player sees something closer to the printed 8%.
+Printing a single number would be true for neither player. Owner Q2 (additive save
+v5) gates the version of this fix that makes one number honest.
+
+**The exact rule, read from `_roll` rather than from the header comment:** pity
+counts BITS since the last EPIC, brass only (`guarantee_rare`), incremented on each
+non-EPIC bit, and forces an EPIC at `pity >= 9`. So the tenth consecutive non-EPIC
+bit is always an Epic. Tin never touches this path, which is precisely why tin
+measures honest.
+
+**CRITERION (stated before writing any code):**
+1. The brass coffer discloses its pity rule in words, verbatim-true to the code, on
+   BOTH the Coffer Nook and the Barrow cartboard. Verified in a rendered frame.
+2. Tin makes no pity claim, because tin genuinely has none.
+3. The disclosure is DERIVED from a named constant, not hand-typed, and a gate
+   assertion proves it - **shown red when the constant and the text disagree**.
+4. `smoke_layout` green and all 16 gates green. The Nook odds line already sits at
+   the edge of its card, so the disclosure must not ride on that line.
+
+**Revert trigger:** the disclosure overflows its card in a rendered frame, or the
+new assertion cannot be made to fail on purpose.
+
+**Explicitly NOT claimed:** this does not close the 8-versus-14.8 gap numerically.
+It discloses the mechanism that causes it. The numeric fix stays owner-gated on Q2,
+and the ledger will say so rather than implying the gap is resolved.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 3 - 2026-09-01 - L-16, make the visual baseline hermetic
 
 **Picked:** L-16 (priority 6.0), the top live item now that L-17 is closed. Lens:
