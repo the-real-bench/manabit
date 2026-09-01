@@ -4,6 +4,27 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 
 ---
 
+## 2026-09-01 (process: the autonomous loop is built, and it can test itself)
+
+**What happened:**
+- Owner asked how to refine the process into a loop that builds MANABIT incrementally without their input. Answered by building the machine, not by writing a plan.
+- **The blocking constraint turned out to be false.** Verification did not actually need the owner's PC. A cloud Linux session fetched Godot 4.7 stable, imported the project, and ran **all 16 gates green in 65 seconds** (14 fast + smoke_kit_sim + smoke_stalemate; slowest is smoke_stage at 44.9s, everything else under 8s). This is the first time the suite has been run by the same session that reports it.
+- **The loop can SEE.** Headless Godot draws nothing, so every visual judgment used to be owner-only. `tools/loop/shots.sh` renders windowed under Xvfb with software GL: all 6 screens captured and reviewed this session. The review produced 3 backlog items no gate could have found (odds string legibility, a saturated cyan panel on the coffer lid to audit against the warm palette, spoils lines that name bits but never their value).
+- **Shipped:** `tools/loop/bootstrap.sh` (engine acquisition, cached, idempotent, honours $GODOT so the Windows checkout reuses it) - `tools/loop/gates.sh` (16 gates, JSON report at loop/out/gates.json, a gate with no printed verdict counts as FAIL) - `tools/loop/shots.sh` (Xvfb capture, auto save backup/restore, flags suspiciously small captures) - `loop/backlog.json` (14 scored items) - `loop/ledger.md` - `loop/owner-queue.md` - `design/process/autonomous-loop.md` - `design/process/fun-rubric.md` - `.claude/skills/loop-iteration/` - `.github/workflows/gates.yml` (first CI this project has had).
+- **Backlog seeded from evidence already in the repo.** The 2026-07-21 AI playtest panel produced D1-D11 and R1-R7 in markdown that no process consumed; those measurements are now scored and pickable. Top loop-pickable item is L-02 (junction lane labels lie about risk: the menace-flavoured lane measures DEATH 0.00, the gift-flavoured lane DEATH 0.59) at priority 9.0.
+
+**Decisions (with reasoning):**
+- **Two laws govern picking, both written against this project's own scars.** The evidence law (`evidence < 2` may only be MEASURED, never built against) exists because wave 1 shipped two changes that moved the wrong way and had to be reverted. The risk law (`risk: 5` is never picked) keeps section 13, the save schema, and the base fixtures owner-gated by construction rather than by memory.
+- **Escalation is a write, never a wait.** One frozen-contract question used to stall the queue behind it. The owner queue holds the case already built (measurement, options, recommendation) and the loop takes the next item.
+- **Fun got a red light.** Sixteen gates prove the game works and none of them prove it is worth playing; a loop that optimises only what it can assert holds correctness flat while enjoyment drifts. The rubric is built from this build's own measured failures (toothless elites, lying lane labels, the guaranteed-death modal box, inverted rarity, the byte-identical coffer stream) rather than from generic design advice, so each principle carries local proof.
+- **The silence rule is now protocol, not lore.** Wave 4b's eight audio loops passed every existence check while loading null. Anything that can be silent gets a live probe; gate-green is neither audible nor visible.
+- **Honest limits recorded rather than papered over:** no audio device (audio stays structurally verified, never heard), no human feel (persona scores are a labelled proxy), and Blender/taste/section 13 remain owner work.
+
+**Outstanding / next session:**
+- **Run the first unattended iteration:** L-02 (junction labels, priority 9.0, copy-only) then L-01 (new-player legibility, 6.0).
+- **Owner queue needs six answers** (none blocking): Q1 turn-cap ADR, Q2 permission for an additive save v5, Q3 speed-axis ADR (recommend deciding after Q1), Q4 the Blender mesh batch, Q5 taste sign-off posture, Q6 cadence and per-pass authorisation.
+- Everything from the 2026-07-19 entries still stands.
+
 ## 2026-07-19 (loop closeout addendum: wave 4b audio structure on Opus + the silent-loop fix)
 
 **What happened:**
