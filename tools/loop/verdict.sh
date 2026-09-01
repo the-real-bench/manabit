@@ -42,13 +42,23 @@ case "${1:-check}" in
     ;;
 
   check)
-    if [ ! -f "$STATE" ]; then
-      echo "VERDICT: FAIL - no iteration start recorded." >&2
-      echo "  Run 'tools/loop/verdict.sh start' at Phase 0. Without a baseline this" >&2
-      echo "  check cannot tell delivery from a no-op, which is the whole point." >&2
-      exit 1
+    if [ -f "$STATE" ]; then
+      start="$(cat "$STATE")"
+    else
+      # No Phase-0 baseline: fall back to the remote-tracking ref. check runs BEFORE
+      # push, so commits ahead of origin are exactly this run's delivery. This keeps a
+      # session that forgot `start` - or a fresh container with no loop/out/ - from
+      # being told it delivered nothing when it plainly did. Found the honest way:
+      # this check failed at the real Phase 7 of the iteration that built it.
+      br="$(git rev-parse --abbrev-ref HEAD)"
+      if start="$(git rev-parse --verify -q "origin/$br")"; then
+        echo "verdict: no Phase-0 baseline, comparing against origin/$br" >&2
+      else
+        echo "VERDICT: FAIL - no iteration start recorded and no origin/$br to fall back to." >&2
+        echo "  Run 'tools/loop/verdict.sh start' at Phase 0." >&2
+        exit 1
+      fi
     fi
-    start="$(cat "$STATE")"
     head="$(git rev-parse HEAD)"
     n=$(git rev-list --count "$start..$head" 2>/dev/null || echo 0)
 

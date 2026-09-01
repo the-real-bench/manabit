@@ -56,6 +56,20 @@ rather than remembered. 16/16 gates green.
 cannot prove the commit was worth making. That is what the criterion, the fun rubric
 and the revert rule are for. It closes exactly one hole: silence.
 
+**Addendum, found by using it.** At this iteration's own Phase 7 the check reported
+FAIL on a run that had plainly delivered - negative control 4 had deleted the
+baseline and it was never re-recorded. A false negative: a fresh container has no
+`loop/out/` at all, so an unattended run could be told it delivered nothing right
+after committing. Fixed by falling back to `origin/<branch>` when no baseline exists
+- `check` runs before push, so commits ahead of origin are exactly this run's
+delivery. Re-proven both ways: FAIL when HEAD equals origin and nothing was written,
+DELIVERED via the fallback and via an explicit baseline.
+
+That is the second time this session that a control caught a defect in the thing
+built to catch defects. Worth stating plainly: the instruments are not above the
+protocol they enforce, and the only reason both were caught is that the criterion
+demanded the check be seen to fail rather than assumed to work.
+
 **Next iteration picks:** L-16 (hermetic shots, 6.0), then L-15 (4.5).
 
 ---
