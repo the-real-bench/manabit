@@ -8,6 +8,89 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 1 - 2026-09-01 - L-07, the coffer odds line
+
+**Picked:** L-07 (priority 4.0), tied with L-09; broke the tie toward the cheaper,
+fully self-contained one. Lens: Newcomer + Cozy Collector. Principle: P3 (labels
+never lie), applied preventively, plus plain legibility.
+
+**RECONCILE result:** defect confirmed STILL LIVE. The odds line is a hardcoded
+string literal duplicated in two places, `ui/broker_screen.gd:203` and
+`ui/chest_screen.gd:307`. No change order touched it; `git log` shows the files
+untouched since the initial commit.
+
+**What the reconcile also established (and it changes the fix):** the printed
+numbers are currently TRUE. `PackRoller.roll_brass` is `_roll(5, true, 0.70, 0.92)`
+= C70 / R22 / E8, and `roll_tin` is `_roll(3, false, 0.85, 0.97)` = C85 / R12 / E3.
+So this is not a lie today. It is two hand-copied literals sitting next to four
+magic numbers in another file, with nothing holding them together - a lie waiting
+to happen the first time anyone tunes the roller. The project already has a law for
+exactly this shape: `smoke_run.gd:174` asserts that printed event odds match the
+threshold verbatim. Coffers have no such assertion.
+
+**CRITERION (stated before writing any code):**
+1. In rendered frames of the Coffer Nook and the Barrow, each odds figure carries
+   its own percent sign - no trailing bare `%` governing three numbers at a
+   distance - at a line width no greater than today's. Instrument:
+   `tools/loop/shots.sh`, read the frames.
+2. The printed figures are DERIVED from `PackRoller`'s thresholds rather than
+   hand-copied, so the label cannot drift from the roll.
+3. A new gate assertion proves the printed line matches the thresholds verbatim,
+   mirroring `smoke_run.gd:174`. It must be shown to FAIL when the threshold and
+   the label disagree - an assertion never seen red is not evidence.
+4. All 16 gates green, `smoke_layout` included (the 720px budget has zero slack).
+
+**Revert trigger:** the derived line renders wider than the current one, or
+`smoke_layout` goes red, or the new assertion cannot be made to fail on purpose.
+
+**Result: KEPT. Three criteria met, one missed by one character - stated plainly
+rather than rounded up.**
+
+- **(1) Legibility - MET. Width - MISSED by 1 character.** The line reads
+  `5 bits · C70% R22% E8% · rare+ guaranteed`; every figure carries its own unit and
+  the stray trailing `%` is gone. It renders inside the coffer card on both the Nook
+  and the Barrow, and `smoke_layout` (the actual fit gate) is green. But it is 41
+  characters against the old 40, so the criterion as I wrote it - "no greater than
+  today's" - is not literally satisfied. It is also unsatisfiable as written: fixing
+  the defect costs two characters for the two added units and refunds one for the
+  dropped bare `%`, so +1 is the provable floor. A first draft used
+  `C 70% · R 22% · E 8%`, which rendered visibly wider than the card and tripped the
+  revert trigger; that was tightened rather than excused, and re-rendered to confirm.
+- **(2) Derived, not hand-copied - MET.** `PackRoller` now names its thresholds
+  (`BRASS_RARE` etc.) and `odds_line()` formats them. Both call sites ask the roller.
+  Two duplicated literals became zero.
+- **(3) An assertion that can go red - MET, but only after the first attempt failed
+  this test.** The structural assertions I wrote first were tautological: label and
+  threshold derive from the same constant, so tampering the constant moved both and
+  the gate stayed green. Chasing that added an *empirical* assertion - roll 4,000 tin
+  coffers and compare the realized mix to the printed line within 2pp. Negative
+  control: tampering only the label's math while leaving the roll alone gives
+  `SMOKE FAIL`; restored, green.
+- **(4) All 16 gates green - MET.**
+
+**What the negative control turned up, which is worth more than the fix:** chasing a
+gate that could actually fail meant measuring what the coffers really roll.
+`tools/sim/odds_probe.gd` (committed - it earned its place) over 40,000 brass coffers:
+**realized C 63.3% / R 21.9% / E 14.8% against a printed C70 / R22 / E8.** The
+epic-pity at 9 nearly doubles the real EPIC rate. Tin is honest to a tenth of a point.
+The error is generous, so it is not predatory, but the label still does not match the
+roll and the pity - a real kindness - is invisible. Filed as **L-15** with the
+measurement, and it is entangled with D5: pity is not persisted, so 14.8% is a
+marathon-session upper bound. Brass is deliberately excluded from the empirical
+assertion with that reason written at the assertion.
+
+**Also filed: L-16.** The Barrow frame before the change showed 50 scrap and three
+Finds; after, 12 scrap and one Find, with nothing in the diff touching the economy.
+`shots.sh` restores the save around a run but state persists between runs, so the
+visual baseline drifts on its own. Visual review is now a primary verification layer,
+and a drifting baseline produces false diffs and hides real ones. That makes L-16
+(priority 6.0) the top pick, ahead of any content work - the loop should fix its own
+instrument before trusting another frame.
+
+**Next iteration picks:** L-16, then L-15.
+
+---
+
 ## Iteration 0b - 2026-09-01 - CORRECTION: the backlog was stale on arrival
 
 **What happened:** a peer session flagged that backlog items L-01 and L-02 were

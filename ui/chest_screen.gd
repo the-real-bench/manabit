@@ -304,7 +304,7 @@ func refresh_from_player() -> void:
     # drop-in coffer face + odds printed on it (PackOpen spec)
     var face_path := "res://art/props/coffer_face_%s.png" % _kind
     _face.texture = load(face_path) if ResourceLoader.exists(face_path) else null
-    _odds.text = "5 bits · C70 R22 E8 % · rare+ guaranteed" if _kind == "brass" else "3 bits · C85 R12 E3 %"
+    _odds.text = PackRoller.odds_line(_kind)
     if _state == "idle":
         if none:
             _status.text = ""   # the empty state above carries the message

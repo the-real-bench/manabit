@@ -4,6 +4,25 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 
 ---
 
+## 2026-09-01 (loop iteration 1: the coffer odds line, and what the negative control found)
+
+**What happened:**
+- Owner authorized the loop to run here: schedule every 4 hours (fresh session per fire), push to the working branch ONLY, no PRs, no merges. Routine `trig_012ncu72zSqNfCbyW4ZpqdfD` created; fired sessions carry no MCP connectors (plain git only), which suits a branch-only loop.
+- **Iteration 1 ran the full seven phases on L-07 (the coffer odds line).** RECONCILE confirmed the defect live: the odds were a hardcoded literal duplicated at `ui/broker_screen.gd:203` and `ui/chest_screen.gd:307`, untouched since the initial commit, sitting next to four magic numbers in `pack_roller.gd` with nothing holding them together.
+- **Shipped:** `PackRoller` names its thresholds and derives the printed line via `odds_line()`; both UI sites ask the roller; the line now reads `5 bits · C70% R22% E8% · rare+ guaranteed` with every figure carrying its own unit. New `smoke_broker` assertions, including an EMPIRICAL one (4,000 tin coffers, realized mix vs printed, 2pp band).
+- **The negative control earned the iteration.** The first assertions I wrote were tautological - label and threshold derive from the same constant, so tampering the constant moved both and the gate stayed green. Fixing that meant measuring what the coffers actually roll, and that found a real defect: **brass prints EPIC 8% and rolls 14.8%** (40,000 coffers, `tools/sim/odds_probe.gd`, now committed). Epic-pity at 9 nearly doubles it. Tin is honest to a tenth of a point. Filed as L-15, entangled with D5 (pity is not persisted, so 14.8% is a marathon-session upper bound).
+- **The loop caught its own instrument breaking.** Barrow frames before and after showed different scrap and Finds with nothing economy-related in the diff: `shots.sh` restores the save around a run but state persists BETWEEN runs, so the visual baseline drifts. Filed as L-16 at priority 6.0 - now the top pick, ahead of any content work.
+
+**Decisions (with reasoning):**
+- **The revert trigger fired once and was honored.** A first format (`C 70% · R 22% · E 8%`) rendered wider than the coffer card. Tightened and re-rendered rather than excused.
+- **Criterion 1 is recorded as MISSED by one character, not rounded up.** The line is 41 chars against 40. Fixing the defect costs +2 units and refunds the bare `%`, so +1 is the provable floor and the criterion was unsatisfiable as written. Recording the miss keeps the ledger worth reading.
+- **Brass is deliberately excluded from the empirical assertion**, with the reason written at the assertion rather than left as a silent gap.
+- **The loop fixes its own instrument first.** L-16 outranks content work because visual review is now a primary verification layer and a drifting baseline hides real regressions.
+
+**Outstanding / next session:**
+- L-16 (hermetic shots), then L-15 (brass odds honesty, needs the D5 read).
+- Owner queue unchanged and unanswered: Q1 turn-cap ADR, Q2 additive save v5, Q3 speed axis, Q4 Blender, Q5 taste posture. Q6 (cadence) is now answered.
+
 ## 2026-09-01 (process: the autonomous loop is built, and it can test itself)
 
 **What happened:**

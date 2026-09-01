@@ -3,8 +3,36 @@ class_name PackRoller extends RefCounted
 #   Brass: 5 bits, ~70/22/8 common/rare/epic, GUARANTEED >=1 RARE+, epic-pity at 9.
 #   Tin:   3 bits, own common-heavy ~85/12/3 table (keeps buy-Tin->Melt net-NEGATIVE; anti-arbitrage).
 
+# The roll thresholds, named once. The printed odds on the coffer face and on
+# Fettle's cartboard are DERIVED from these by odds_line() - never hand-copied -
+# so a tuning pass cannot leave the label telling a lie the roll does not keep.
+# Same law the run events already hold to (tests/smoke_run.gd:174, "printed odds
+# match the threshold, verbatim").
+const BRASS_COUNT := 5
+const BRASS_RARE := 0.70    # below this = COMMON
+const BRASS_EPIC := 0.92    # at or above this = EPIC
+const TIN_COUNT := 3
+const TIN_RARE := 0.85
+const TIN_EPIC := 0.97
+
 var _rng := RandomNumberGenerator.new()
 var pity: int = 0   # opens since last EPIC
+
+# The printed odds for a coffer kind, built from the thresholds above.
+# Each figure carries its own unit so the line reads as three percentages
+# rather than three bare numbers trailed by a stray glyph.
+static func odds_line(kind: String) -> String:
+    var brass := kind == "brass"
+    var count := BRASS_COUNT if brass else TIN_COUNT
+    var rare_t := BRASS_RARE if brass else TIN_RARE
+    var epic_t := BRASS_EPIC if brass else TIN_EPIC
+    var c := int(round(rare_t * 100.0))
+    var e := int(round((1.0 - epic_t) * 100.0))
+    var r := 100 - c - e
+    var line := "%d bits · C%d%% R%d%% E%d%%" % [count, c, r, e]
+    if brass:
+        line += " · rare+ guaranteed"
+    return line
 
 func _init(seed_val: int = 0) -> void:
     if seed_val != 0:
@@ -13,10 +41,10 @@ func _init(seed_val: int = 0) -> void:
         _rng.randomize()
 
 func roll_brass() -> Array[PartInstance]:
-    return _roll(5, true, 0.70, 0.92)
+    return _roll(BRASS_COUNT, true, BRASS_RARE, BRASS_EPIC)
 
 func roll_tin() -> Array[PartInstance]:
-    return _roll(3, false, 0.85, 0.97)
+    return _roll(TIN_COUNT, false, TIN_RARE, TIN_EPIC)
 
 func _roll(count: int, guarantee_rare: bool, rare_thresh: float, epic_thresh: float) -> Array[PartInstance]:
     var pool := Catalog.body_pool()

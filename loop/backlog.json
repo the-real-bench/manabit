@@ -113,17 +113,19 @@
   },
   {
    "id": "L-07",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 2,
    "evidence": 2,
    "cost": 1,
    "risk": 1,
-   "priority": 4.0,
+   "priority": 0.0,
    "title": "Coffer odds string reads as a typo: 'C70 R22 E8 %'",
    "why": "Observed in a rendered frame (loop/out/shots/shot_coffer_nook.png, shot_barrow.png). The trailing bare '%' after the last number reads like a stray glyph rather than a unit applying to all three. Odds legibility is the honest-information promise of the Coffer Nook and it is the first number a new player is asked to trust.",
    "persona": "Newcomer + Cozy Collector",
    "criterion": "PRE-STATE: the odds line reads unambiguously as three percentages in a rendered frame, at the same or smaller width (the 720px layout budget has zero slack - smoke_layout must stay green).",
-   "touches": "ui coffer/broker copy. Frozen surfaces: none."
+   "touches": "ui coffer/broker copy. Frozen surfaces: none.",
+   "closed_by": "Iteration 1 (2026-09-01)",
+   "closed_evidence": "Odds now derived from PackRoller thresholds via odds_line(); both call sites (broker_screen.gd:202-203, chest_screen.gd:307) ask the roller. Reads \"5 bits - C70% R22% E8% - rare+ guaranteed\". New smoke_broker assertions, proven red on label-math drift."
   },
   {
    "id": "L-08",
@@ -217,6 +219,35 @@
    "title": "Wave 2 bit meshes (20 bits on procedural placeholders)",
    "why": "design/art/wave2-mesh-work-order.md is written and waiting. The catalog is 100 bits; 20 of them ship on procedural placeholders.",
    "blocked_by": "Needs the owner's Blender rig on the second PC. No amount of loop autonomy produces a hand-rigged mesh."
+  },
+  {
+   "id": "L-15",
+   "gate": "loop",
+   "lift": 3,
+   "evidence": 3,
+   "cost": 1,
+   "risk": 2,
+   "priority": 4.5,
+   "title": "Brass coffer prints EPIC 8% but actually rolls 14.8%",
+   "why": "Measured this iteration with tools/sim/odds_probe.gd over 40,000 brass coffers (200,000 bits): realized C 63.3% / R 21.9% / E 14.8% against a printed C70 / R22 / E8. The epic-pity at 9 nearly DOUBLES the real EPIC rate. Tin is honest (85.1/11.9/3.0 vs printed 85/12/3) because it has no guarantee and no pity. The error is generous to the player, so it is not predatory - but it is still a label that does not match the roll, and the project's own law is that printed odds match the threshold verbatim (smoke_run.gd:174). It also means the pity, a real kindness, is completely invisible.",
+   "persona": "Cozy Collector (surprise you cannot see the shape of) + QA Hunter (P3, labels never lie)",
+   "criterion": "PRE-STATE: the printed brass line and the realized 40k-coffer distribution agree within the same +/-2pp band the tin assertion already uses, OR the line discloses the pity rule in words so the gap is explained rather than hidden. Then extend the smoke_broker empirical assertion to cover brass (it is deliberately excluded today).",
+   "entangled_with": "D5 / L-12. The pity counter is NOT persisted (PlayerState._init always re-seeds, SaveManager stores no pity field), so realized EPIC depends on session length: 14.8% is a marathon-session upper bound and a relaunch-often player sees closer to the printed 8%. Printing a single honest number may not be possible until pity persists, which is owner-gated. Disclosing the rule in words is available now and needs no schema change.",
+   "touches": "economy/pack_roller.gd odds_line copy, tests/smoke_broker.gd. Frozen surfaces: none."
+  },
+  {
+   "id": "L-16",
+   "gate": "loop",
+   "lift": 2,
+   "evidence": 3,
+   "cost": 1,
+   "risk": 1,
+   "priority": 6.0,
+   "title": "INSTRUMENT: shots.sh is not hermetic, so frames are not comparable run to run",
+   "why": "Observed directly this iteration: the Barrow frame captured before the change showed scrap 50 and three Today's Finds; the frame after showed scrap 12 and one Find. Nothing in the diff touched the economy. shots.sh backs up and restores the save around a run, but the save PERSISTS BETWEEN runs, so each capture starts from whatever the last one left behind. Visual review is now a primary verification layer (L3), and a layer whose baseline drifts on its own produces false diffs and hides real ones.",
+   "persona": "n/a - this is the loop's own instrument, and it is load-bearing",
+   "criterion": "PRE-STATE: two consecutive shots.sh runs with no code change between them produce byte-identical PNGs for all six screens. Fix by seeding a fixed, disposable save before the harness boots rather than inheriting user:// state.",
+   "touches": "tools/loop/shots.sh. Frozen surfaces: none."
   }
  ],
  "_reconciliation": {
