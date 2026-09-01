@@ -123,6 +123,34 @@ the session that made it.
 
 ---
 
+## 2b. Verify the loop can DELIVER before trusting it to run
+
+Before scheduling anything, prove the runner can push. Not that it can think, or run
+gates, or render frames - that it can land a commit on the branch.
+
+> **Written against Incident 1.** The first two unattended runs exited
+> `SUCCEEDED` having pushed nothing: 19 minutes and $2.61, then 73 seconds and $0.45.
+> "Succeeded" meant the session exited without crashing. Nothing in the system
+> noticed, because a scheduler's status field cannot tell "did the work" from "exited
+> cleanly". It was caught only because a human-driven session happened to fetch the
+> branch.
+
+Two rules follow:
+
+1. **The delivery path is tested first, before the engine, the gates, or the
+   backlog.** A run that cannot push should discover that in seconds and say so, not
+   after twenty minutes of work it is about to throw away.
+2. **Every run ends in one of exactly two states, and says which:** a pushed SHA, or
+   a BLOCKED report naming the exact command and its exact error. "Everything was
+   already green" is not an outcome. If the backlog is empty, build the next
+   instrument and push that.
+
+A scheduler that reports success while producing nothing is strictly worse than no
+scheduler: it manufactures false confidence. That is the wave-4b audio bug one layer
+up - a green light with nothing behind it.
+
+---
+
 ## 3. Standing rules
 
 1. **Never trust a lane's green.** The coordinating session re-runs the gates itself.

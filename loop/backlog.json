@@ -248,6 +248,20 @@
    "persona": "n/a - this is the loop's own instrument, and it is load-bearing",
    "criterion": "PRE-STATE: two consecutive shots.sh runs with no code change between them produce byte-identical PNGs for all six screens. Fix by seeding a fixed, disposable save before the harness boots rather than inheriting user:// state.",
    "touches": "tools/loop/shots.sh. Frozen surfaces: none."
+  },
+  {
+   "id": "L-17",
+   "gate": "loop",
+   "lift": 3,
+   "evidence": 3,
+   "cost": 1,
+   "risk": 1,
+   "priority": 9.0,
+   "title": "A loop run that pushes nothing must be loud, not 'succeeded'",
+   "why": "Incident 1: two unattended runs exited SUCCEEDED having pushed nothing ($3.06, 19 min and 73 sec). The scheduler's own status field cannot distinguish 'did the work' from 'exited cleanly', so nothing in the system noticed. The only reason it was caught is that a human-driven session happened to fetch the branch.",
+   "persona": "n/a - the loop's own accountability",
+   "criterion": "PRE-STATE: a script or gate that compares the branch head before and after an iteration and fails loudly when an iteration ends with no new commit and no BLOCKED entry in loop/ledger.md. The check must be shown to fire on a deliberately empty run.",
+   "touches": "tools/loop/. Frozen surfaces: none."
   }
  ],
  "_reconciliation": {

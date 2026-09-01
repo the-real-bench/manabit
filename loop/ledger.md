@@ -8,6 +8,51 @@ Never rewrite an entry.
 
 ---
 
+## Incident 1 - 2026-09-01 - The loop's first two unattended runs delivered nothing
+
+**Not an iteration. A failure of the delivery mechanism, recorded because a ledger
+that only holds successes is worthless.**
+
+| Run | Fired | Duration | Cost | Model | Pushed |
+|---|---|---|---|---|---|
+| Scheduled | 08:17:40 | 19 min | $2.61 | Sonnet 5 | nothing |
+| Diagnostic re-fire | 08:44:46 | **73 sec** | $0.45 | Sonnet 5 | nothing |
+
+Both exited `ROUTINE_RUN_STATUS_SUCCEEDED`. **"Succeeded" means the session exited
+without crashing. It says nothing about whether work landed.** The remote head sat
+at 537cd42 through both, exactly where the human-driven session left it.
+
+**What the second run proved.** After the first no-op I hardened the Routine prompt
+to demand one of two explicit outcomes - a pushed SHA, or a BLOCKED report with the
+exact command and error - and to verify the push path FIRST, before spending twenty
+minutes on Godot and gates. The re-fire then finished in **73 seconds** instead of
+19 minutes. That collapse in duration is the evidence: it checked whether it could
+deliver, found it could not, and stopped as instructed. The failure is structural to
+fresh fired sessions in this environment, not a one-off.
+
+**Root cause of the FIRST run, stated separately because it is my error:** the
+original Routine prompt described the seven phases but never demanded an outcome. A
+run could analyse, conclude things looked fine, and exit clean. I wrote a protocol
+whose entire thesis is that gate-green is not delivery, and then wrote a trigger
+prompt that accepted "I looked at it" as done.
+
+**Fix applied:** the fresh-session Routine is deleted. The loop now fires INTO THE
+SESSION THAT CAN DELIVER (`trig_01Vk2VwDhqM78UoKBokyGagH`, self-bound, every 4
+hours). That session has the engine cached, the repo checked out, and a proven push
+path - four commits landed with CI green. The outcome rule is carried into the new
+prompt.
+
+**Cost of the lesson:** $3.06 and two empty runs. Cheap for discovering that the
+delivery path was never verified before the loop was declared running. It should
+have been the first thing tested, not the third.
+
+**New standing rule, added to the protocol:** verify the loop can DELIVER before
+trusting it to run. A scheduler that reports success while producing no commits is
+strictly worse than no scheduler, because it manufactures false confidence - the
+same failure shape as the wave-4b audio bug, one layer up.
+
+---
+
 ## Iteration 1 - 2026-09-01 - L-07, the coffer odds line
 
 **Picked:** L-07 (priority 4.0), tied with L-09; broke the tie toward the cheaper,
