@@ -8,6 +8,48 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 3 - 2026-09-01 - L-16, make the visual baseline hermetic
+
+**Picked:** L-16 (priority 6.0), the top live item now that L-17 is closed. Lens:
+none directly - this is the loop's own instrument, and it is load-bearing, because
+rendered frames are a primary verification layer (L3) and a baseline that drifts on
+its own produces false diffs and hides real ones.
+
+**RECONCILE - defect reproduced, not assumed.** Two consecutive `shots.sh` runs with
+no code change between them:
+
+    run 1  d8a6b41b45eb08ee372cd41c51681a04
+    run 2  028a158b5f9e175fdedde20f37e31c7b
+
+Different. Cause confirmed by reading the path rather than guessing: `demo_varied()`
+(ui/workshop.gd:2204) is fully deterministic - six fixed family picks, and `grep`
+finds no `randi`/`randf`/`randomize`/`RandomNumberGenerator` anywhere in
+workshop.gd. So the variance is not in the render, it is the persisted save.
+`shots.sh` backs up and restores `user://manabit_save.json` around a run, but the
+save PERSISTS BETWEEN runs, so each capture boots from whatever the last one left
+behind.
+
+**CRITERION (stated before writing any code):**
+1. Two consecutive `shots.sh` runs with no code change produce **byte-identical
+   PNGs for all six screens** (per-file md5 equal, not just the aggregate).
+   Instrument: `md5sum loop/out/shots/*.png` across two runs.
+2. The player's real save is still protected: a save present before the run is
+   byte-identical after it.
+3. All 16 gates green.
+
+**Revert trigger:** frames still differ after the fix, or the real save is altered
+by a capture run.
+
+**Known limit to state up front, not to discover later:** the Barrow shelf and the
+Doorstep gift are keyed to the calendar day, so frames are reproducible *within* a
+day and may legitimately differ across a date boundary. That is a property of the
+game, not a defect in the harness, and it will be recorded rather than engineered
+around.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 2 - 2026-09-01 - L-17, make an empty run loud
 
 **Picked:** L-17 (priority 9.0). It outranks L-16 (6.0), which the Routine prompt
