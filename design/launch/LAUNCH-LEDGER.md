@@ -8,6 +8,17 @@ Seeded 2026-09-01 from: `design/playtest/ai-playtest-2026-07-21.md` (D1-D11),
 `design/balance/playtest-fixes-change-order.md` (CH-P1..P9 shipped, section C deferred),
 `CLAUDE.md` Status, and a verified `run/gates.ps1` sweep (16/16 green at seed time).
 
+L15-L18 were harvested 2026-09-01 from the cloud session's branch `claude/autonomous-game-loop-olt7gr`
+before that loop was retired; L15/L16/L17 came from ITS rendered-frame review, which is why no gate
+found them. Its loop doctrine is kept at `design/process/autonomous-loop.md` +
+`design/process/fun-rubric.md` - read the fun-rubric before any item that claims to make the game
+better rather than more correct. Its bash tooling (`tools/loop/*.sh`, Xvfb/Linux) was NOT taken:
+this loop runs on Windows via `run/gates.ps1`.
+
+**Do NOT re-do these from that branch's backlog** - its scoring never reconciled against
+`design/balance/playtest-fixes-change-order.md`, so its L-01 (fragility cue + defanged loss reason)
+and L-02 (junction lane labels) are already SHIPPED on main as CH-P7, CH-P8 and CH-P4.
+
 ---
 
 ## LAWS (never violated by the loop)
@@ -91,6 +102,9 @@ Status: `TODO` / `WIP` / `DONE` / `BLOCKED`. Work top-down within a priority ban
 | L9 | **Deferred UI backlog:** hex-shaped slot plates, rarity rim + HP pips on plates, coffer glb in a SubViewport (props already exist at `art/props/`). All DESIGN.md-token-grounded. | `ui/socket_rig.gd`, `ui/chest_screen.gd` | TODO |
 | L10 | **Challenger loadouts should adopt the sovereign bits.** Brassmore fields mixed EPICs, not his own house set. Balance-measured, not vibes. | `combat/challengers.gd` | TODO |
 | L11 | **Onboarding.** No tutorial or first-run guidance exists; D3's fragility cue is a warning, not teaching. Decide the minimum viable first-run path. | `ui/workshop.gd`, `ui/root.gd` | TODO |
+| L15 | **Coffer odds string reads as a typo: `C70 R22 E8 %`.** Found by the cloud loop in a rendered frame. The trailing bare `%` reads as a stray glyph, not a unit on all three. This is the first number a new player is asked to trust. Same-or-smaller width - `smoke_layout` has zero slack. | coffer/broker copy | TODO |
+| L16 | **Proving Grounds spoils name bits but never their value.** Every challenger row prints `Spoils: <bit names>` with no worth, while the wager asks you to weigh a scrap stake against them. Show value alongside stake, inside the row-height budget. (Whether to also fix the measured INVERTED loot gradient is a separate balance item.) | `ui/proving_screen.gd` | TODO |
+| L18 | **INSTRUMENT: decision-density probe for the build screen.** The Optimizer's 5/10 rests on "the legal build collapses to one greedy answer" - a reasoned claim, not a measured one. Build the probe FIRST (count distinct near-optimal builds per core + their overlap), then rescore the depth work with real evidence. | `tools/sim/` only | TODO |
 
 ### P2 - polish, only after P0+P1 clear
 
@@ -99,6 +113,7 @@ Status: `TODO` / `WIP` / `DONE` / `BLOCKED`. Work top-down within a priority ban
 | L12 | PS1 render stack (vertex-jitter + affine-mapping shaders) - deferred since M0. The art direction names it; verify whether it still earns its place before building. | `ui/manabit_stage.gd`, new shaders | TODO |
 | L13 | Accessibility options pass (photosensitivity caps exist in the beat planner; needs a user-facing toggle + text scale). | `ui/options.gd` | TODO |
 | L14 | Store-page surface: capsule art, screenshots, trailer capture, description copy. | `production/` | TODO |
+| L17 | Audit the saturated cyan panel on the Brass Coffer lid against the warm palette. Found in a rendered frame; at that saturation it reads as an untextured placeholder, not etched-rune plastic with a soft mana glow. MEASURE FIRST - find the source token, compare to DESIGN.md, then confirm-or-reprice. Never repaint on taste alone. | coffer face render, `Tokens` | TODO |
 
 ---
 
