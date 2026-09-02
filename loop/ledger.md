@@ -8,6 +8,51 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 5 - 2026-09-02 - L-09, an informed wager needs both numbers
+
+**Picked:** L-09 (priority 4.0), top live item. Lens: Optimizer + Newcomer.
+Principle: P1 (a choice needs a legible difference) and P5 (reward must track
+difficulty).
+
+**A note on the scoring critique.** I told the owner this loop has been grinding
+polish rather than the gameplay loop, proposed reweighting the scoring, and asked
+for their word. **They have not answered, so this iteration runs under the existing
+rules.** Acting on my own un-approved proposal would be exactly the quiet widening
+the protocol forbids. On re-reading, L-09 is also less peripheral than I implied:
+"wager" is one of the four core verbs, and the player currently cannot see what they
+are wagering FOR.
+
+**RECONCILE - defect confirmed live.** `ui/proving_screen.gd:163` builds
+`"Spoils: " + " - ".join(loot)` from display names only. No value anywhere on the
+row. The stake IS shown (`Stake: scrap N to enter`), so the player is asked to weigh
+a number against a list of nouns. Not touched by CH-P1..P9 - a grep of the change
+order for loot/spoil/stake finds nothing, consistent with the panel filing it under
+R7, outside that pass's bounded scope.
+
+**CRITERION (stated before writing any code):**
+1. Every challenger row shows what the spoils are WORTH in scrap, alongside the
+   stake, verified in a rendered frame.
+2. The worth is DERIVED from `Broker.salvage_scrap`, never hand-typed, so it cannot
+   drift from what the bit actually melts for.
+3. A gate assertion proves the derivation, **shown red when worth and rule disagree**.
+4. `smoke_layout` green and 16/16 gates. The Proving rows are already dense, so the
+   worth must not push a row out of its budget.
+
+**Revert trigger:** a row clips or overflows in a rendered frame, or the assertion
+cannot be made to fail.
+
+**Expected side effect, stated up front:** the panel measured the loot gradient
+INVERTED (stake-10 Cogsworth loots a melt-45 EPIC; stake-20 Gildfall loots melt-20).
+Surfacing worth will make that inversion VISIBLE rather than fix it. That is the
+honest order of operations - you cannot balance a gradient the player cannot see -
+but it means this iteration may make the game look worse before it is better. The
+measured gradient will be filed as its own balance item rather than quietly patched
+inside a UI change.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 4 - 2026-09-01 - L-15, the brass coffer tells you about its pity
 
 **Picked:** L-15 (priority 4.5), top live item. Lens: Cozy Collector (surprise you
