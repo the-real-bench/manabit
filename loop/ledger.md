@@ -54,7 +54,36 @@ the gem and brings it to a token.
 **Revert trigger:** the recoloured gem stops reading as a gem in the frame, or the
 new gate cannot be made to fail.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All four criteria met.**
+
+1. **On-palette.** All 779 cool pixels remapped onto `--affinity-mana #3FA890`, the
+   mana-core glow tint, which is the thematic match for a seal you channel mana into.
+   Internal shading preserved by scaling value proportionally rather than flattening,
+   so it stays a faceted gem instead of becoming a sticker. Peak value 1.00 -> 0.66.
+2. **Still a gem in the frame.** Rendered and reviewed: it now reads as a teal mana
+   seal against brass, visible by HUE contrast rather than by out-shouting everything
+   else on the screen.
+3. **Gate proven both ways.** `smoke_art` gained a coffer-face palette check.
+   Against the fixed asset: `[PASS] 0 off-palette cool pixels`. Against the original,
+   restored on purpose: `[FAIL] coffer face brass: 779 off-palette cool pixels,
+   first #91c9ff h209 v1.00 at 72,49`, `ART AUDIT FAIL`.
+4. **16/16 gates green.**
+
+**Two mistakes I made inside this iteration, both caught before they shipped:**
+- My first colour sample read every third pixel and reported only the top eight
+  colours, all warm. I nearly closed L-08 as "not a defect" on that. A 34x28 region
+  in a 224x168 image cannot reach a top-eight list. A full scan found it.
+- My first gate insertion used spaces in a tab-indented file and referenced `ok` when
+  this test's accumulator is `proven`. It failed to parse, and the run printed
+  nothing at all - which is exactly the silent-success shape this loop keeps having
+  to catch. It was caught because the expected assertion lines were absent from the
+  output, not because anything went red.
+
+**Out of scope, noted not fixed:** the gem is still a hard-edged rectangle. That is a
+SHAPE problem and it predates this change; the criterion was palette compliance.
+Filed as L-19 at low priority rather than widened into here.
+
+**Next iteration picks:** L-16 (2.0) or L-10 (1.5).
 
 ---
 

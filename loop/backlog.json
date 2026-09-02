@@ -129,17 +129,19 @@
   },
   {
    "id": "L-08",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 1,
    "evidence": 2,
    "cost": 1,
    "risk": 1,
-   "priority": 2.0,
+   "priority": 0.0,
    "title": "Audit the saturated cyan panel on the Brass Coffer lid against the warm palette",
    "why": "Observed in shot_coffer_nook.png: a bright saturated cyan rectangle sits on the coffer lid inside an otherwise warm brass/wood frame. It may be the intended Glimmer/mana tell, but at that saturation it reads as an untextured placeholder rather than etched-rune plastic with a soft mana glow. Needs a root-cause read against the art bible before it is called a defect.",
    "persona": "Cozy Collector (cozy-craft tone, NOT cyber-circuitry)",
    "criterion": "MEASURE FIRST: identify the source material/token, compare against the DESIGN.md palette tokens, and either confirm it as intended (close the item) or reprice the colour. Do not repaint on taste alone.",
-   "touches": "coffer face render / Tokens. Frozen surfaces: none."
+   "touches": "coffer face render / Tokens. Frozen surfaces: none.",
+   "closed_by": "Iteration 8 (2026-09-02)",
+   "closed_evidence": "Measured #7be1ff h194 v1.00 against DESIGN.md: matched no token and exceeded every token value. Remapped 779 pixels onto --affinity-mana #3FA890 with shading preserved. smoke_art gained a coffer-face palette check, proven red on the original asset."
   },
   {
    "id": "L-09",
@@ -284,6 +286,20 @@
    "touches": "Challenger loadouts. Frozen surfaces: none.",
    "closed_by": "Iteration 7 (2026-09-02) - REFUTED at reconcile",
    "closed_evidence": "The player CHOOSES the looted bit - ui/combat_screen.gd:1626-1638 builds one button per non-core bit under \"Loot a part:\". The 8-45 range is a menu, not a draw, so it is not a lottery. By what is actually taken: stake 5 -> 8/20/8, stake 10 -> 45/45/20/20, stake 20 -> 45/45. Monotonic. The real finding (flat reward ceiling from stake 10 to 20) is escalated as Q7."
+  },
+  {
+   "id": "L-19",
+   "gate": "loop",
+   "lift": 1,
+   "evidence": 2,
+   "cost": 1,
+   "risk": 1,
+   "priority": 2.0,
+   "title": "The coffer lid gem is a hard-edged rectangle",
+   "why": "Noticed while fixing L-08's colour, and deliberately not widened into that change. The seal on the brass coffer lid is a flat 34x28 rectangle with hard edges. The palette is now correct but the SHAPE still reads as a pasted-on sticker rather than an inset, faceted seal. Cozy-craft is etched-rune plastic; a rectangle with no bevel or inset shadow is neither etched nor faceted.",
+   "persona": "Cozy Collector",
+   "criterion": "PRE-STATE: the seal reads as inset or faceted in a rendered frame - a bevel, an inset shadow, or a non-rectangular silhouette. Judge it in the frame, not in the file. If the honest answer is that it needs real art rather than a procedural tweak, say so and escalate instead of approximating.",
+   "touches": "art/props/coffer_face_brass.png. Frozen surfaces: none."
   }
  ],
  "_reconciliation": {
