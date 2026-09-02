@@ -8,6 +8,45 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 10 - 2026-09-02 - L-20, the guard that would have caught last iteration
+
+**Picked:** L-20 (9.0), by a clear margin. This is the hole iteration 9 opened.
+
+**RECONCILE:** `grep -n "ledger\|pending" tools/loop/verdict.sh` returns nothing.
+The delivery guard has never looked at the bookkeeping at all. Defect live.
+
+**A DELIBERATE CRITERION REFINEMENT, stated rather than slipped in.** The backlog
+criterion I wrote in iteration 9 said: *"a record step that fails must stop the
+iteration before the commit. Prove it by deliberately breaking the record step and
+showing no commit is created."* I am changing where the check sits, and here is why.
+
+Preventing the COMMIT means wrapping every record step in every future iteration in
+strict error handling - a discipline that has to be remembered every time, which is
+exactly the class of thing that failed last iteration. Checking at Phase 7 is ONE
+place that cannot be forgotten, and it is the place that matters: a local commit is
+cheap and amendable, while **the push is the harm**. 81f33c0 was not damaging because
+it existed; it was damaging because it reached the remote and CI blessed it.
+
+So the guard moves into `verdict.sh check`, which already runs at Phase 7 before
+every push.
+
+**CRITERION (stated before writing any code):**
+1. `verdict.sh check` FAILS when the ledger's newest entry still contains a
+   `(pending` placeholder.
+2. `verdict.sh check` FAILS when an iteration delivered commits but none of them
+   touched `loop/ledger.md` - code shipped with no record is the exact 81f33c0 shape.
+3. Both are proven RED by deliberately reproducing each failure.
+4. A BLOCKED report is still a valid outcome and must NOT be caught by either rule -
+   a blocked run legitimately has no ledger entry.
+5. 16/16 gates green.
+
+**Revert trigger:** either new assertion cannot be made to fail, or rule 2 fires on a
+legitimate BLOCKED run.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 9 - 2026-09-02 - L-16, a tool that admits what it cannot see
 
 **Picked:** L-16 (2.0), tied with L-19 (2.0). Broke the tie on LIFT (2 vs 1) rather
