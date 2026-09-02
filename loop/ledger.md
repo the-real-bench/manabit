@@ -49,7 +49,47 @@ but it means this iteration may make the game look worse before it is better. Th
 measured gradient will be filed as its own balance item rather than quietly patched
 inside a UI change.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All four criteria met - and the expected side effect did not happen,
+because the claim behind it was wrong.**
+
+1. **Worth on every row, verified in frame.** Each Spoils line now ends
+   `(melts for scrap N)` or `(melts for scrap N-M)`. The range, not a total: you loot
+   exactly ONE bit on a win, so a sum would advertise money the player never receives.
+2. **Derived** from `Broker.salvage_scrap`, the same rule the Melt pays out.
+3. **The gate is genuinely independent, and was seen red.** It does not restate the
+   display call - it melts a real `PartInstance` through `PlayerState.melt_bit` and
+   compares the scrap actually received. Negative control: make the payout pay 3 less
+   than advertised -> `[FAIL] spoils worth is honest: everykit_standard_cowl
+   advertises 8, melts for 5`, `SMOKE FAIL`. Restored -> PASS. This is the first
+   assertion this loop has written that compares two INDEPENDENT paths rather than a
+   value against its own source.
+4. **16/16 green**, `smoke_layout` included, no row clipped.
+
+**THE INVERTED GRADIENT IS REFUTED AS STATED.** I pre-stated that surfacing worth
+would make a measured inversion visible. Then I measured it
+(`tools/sim/wager_probe.gd`, committed):
+
+    stake  5   8-8    8-20   8-8
+    stake 10   8-45   8-45   8-20   8-20
+    stake 20   45-45  20-45
+
+Both ends rise with the stake: the floor goes 8 -> 8 -> 20/45, the ceiling goes
+20 -> 45 -> 45. That is monotonic non-decreasing, not inverted. The panel's line -
+"stake-10 Cogsworth loots a melt-45 EPIC while stake-20 Gildfall loots melt-20" - is
+true only as a cherry-pick of Cogsworth's BEST case against Gildfall's WORST. It is
+not a gradient inversion.
+
+I was one step from filing "fix the inverted loot gradient" as a balance item on a
+relayed claim. The measurement stopped it. That is the evidence law doing exactly its
+job, and it is worth noting that the bad claim came from the project's own respected
+playtest document, not from a careless source.
+
+**The real finding, which is different:** the stake-10 tier has enormous variance
+(8-45). A Cogsworth win is a lottery between a common and an EPIC while the stake is
+fixed. Whether that is a defect or intended texture is a design call, not a bug -
+filed as L-18 at low priority with the measurement attached, not smuggled in here.
+
+**Next iteration picks:** L-16 (3.0), then L-08 (2.0), L-10 (1.5).
 
 ---
 

@@ -143,17 +143,19 @@
   },
   {
    "id": "L-09",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 2,
    "evidence": 2,
    "cost": 1,
    "risk": 1,
-   "priority": 4.0,
+   "priority": 0.0,
    "title": "Proving Grounds spoils lines name bits but never their value",
    "why": "R7 tail, corroborated in shot_proving.png: every challenger row lists 'Spoils: <bit names>' with no worth attached, while the wager loop asks the player to weigh a scrap stake against those spoils. The panel separately measured the loot gradient INVERTED (stake-10 Cogsworth loots a melt-45 EPIC; stake-20 Gildfall loots melt-20), so the reward does not track the difficulty and the screen gives the player nothing to notice that with.",
    "persona": "Optimizer + Newcomer (an informed wager needs both numbers)",
    "criterion": "PRE-STATE: a rendered frame shows spoils value alongside the stake on every challenger row, within the row height budget, smoke_layout green. Whether to also FIX the inverted gradient is a separate balance item.",
-   "touches": "ui/proving copy. Frozen surfaces: none."
+   "touches": "ui/proving copy. Frozen surfaces: none.",
+   "closed_by": "Iteration 5 (2026-09-02)",
+   "closed_evidence": "ui/proving_screen.gd appends \"(melts for scrap N-M)\" derived from Broker.salvage_scrap. smoke_bout asserts the advertised worth equals what PlayerState.melt_bit actually pays - two independent paths - proven red by making the payout drift. The \"inverted loot gradient\" half was REFUTED by measurement (tools/sim/wager_probe.gd): floor and ceiling both rise with stake."
   },
   {
    "id": "L-10",
@@ -266,6 +268,20 @@
    "touches": "tools/loop/. Frozen surfaces: none.",
    "closed_by": "Iteration 2 (2026-09-01)",
    "closed_evidence": "tools/loop/verdict.sh - start records the head, check refuses an iteration with neither a commit nor a blocked report. Four negative controls run and seen to fail. Wired into Phase 0 and Phase 7 of the protocol and the skill."
+  },
+  {
+   "id": "L-18",
+   "gate": "loop",
+   "lift": 2,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 2,
+   "priority": 3.0,
+   "title": "The stake-10 tier is a lottery: spoils range 8-45 for a fixed price",
+   "why": "Measured this iteration with tools/sim/wager_probe.gd. Stake 5 pays 8-8, 8-20, 8-8. Stake 10 pays 8-45, 8-45, 8-20, 8-20. Stake 20 pays 45-45 and 20-45. The gradient is monotonic (so the panel's 'inverted' claim is refuted), but at stake 10 the same price buys anything from a common to an EPIC. Two of the four stake-10 elites cap at 20 while the other two reach 45.",
+   "persona": "Optimizer (P5 - reward tracking difficulty is about variance as well as mean)",
+   "criterion": "MEASURE-THEN-DECIDE. This may be intended texture rather than a defect, so do NOT tune it on instinct. First state what the wager is supposed to feel like at each tier, then decide whether 8-45 at a fixed stake serves that. If it does, close this as intended and say so.",
+   "touches": "Challenger loadouts. Frozen surfaces: none."
   }
  ],
  "_reconciliation": {
