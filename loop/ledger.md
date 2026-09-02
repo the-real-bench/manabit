@@ -8,6 +8,56 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 8 - 2026-09-02 - L-08, the brightest thing on a warm screen
+
+**Picked:** L-08 (2.0), tied with L-16 (2.0); took the cheaper (cost 1). Lens: Cozy
+Collector. This was filed from a rendered frame in iteration 0 as a suspicion, with
+its criterion set to MEASURE FIRST and not repaint on taste. This is that measurement.
+
+**RECONCILE, including a correction I made mid-measurement.** My first pass sampled
+every third pixel and reported the top eight colours: all warm, hues 33-39, no cool
+anywhere. I nearly closed the item as "not a defect" on that. It was wrong - a small
+region cannot reach a top-eight list. A full scan finds **779 cool pixels of 21,012
+(3.7%)**, and the region is real:
+
+    bbox x 70-103, y 49-76  (a 34x28 rectangle on the lid, image 224x168)
+    dominant #7be1ff   hue 194   saturation 0.52   value 1.00
+
+**Measured against DESIGN.md, which is the spec:**
+
+    --affinity-mana      #3FA890   h 168   s 0.62   v 0.66
+    Glimmer/stat-energy  #3FD0C0   h 172   s 0.70   v 0.82
+    --affinity-def-text  #8FB4D9   h 210   s 0.34   v 0.85
+    the coffer gem       #7be1ff   h 194   s 0.52   v 1.00   <- matches nothing
+
+It is not a palette colour. Its hue falls between the teals and the def-blue,
+matching neither, and its value is 1.00 - **brighter than every token in the
+palette**, on a screen whose entire register is warm brass and wood. The project's
+identity line is explicit: "etched-rune plastic, soft mana-glow - NOT
+cyber-circuitry." A hard-edged, maximum-value sky-cyan rectangle is the opposite of
+soft. `tools/art/` has no coffer recipe at all, so there is no documented intent to
+weigh this against.
+
+**The verdict is that this is a defect, not a preference** - it is off-spec against
+the project's own written palette, not merely to my taste. A gem on the lid is
+thematically right; its brightness and hue are what is wrong. So the fix preserves
+the gem and brings it to a token.
+
+**CRITERION (stated before touching a pixel):**
+1. Every cool pixel in `coffer_face_brass.png` lands on a DESIGN.md palette token,
+   with value no greater than the token's.
+2. The gem is still visibly a gem in a rendered frame - recoloured, not deleted.
+3. A gate asserts no coffer face contains an off-palette max-value cool pixel,
+   **shown red against the current asset before the fix**.
+4. 16/16 gates, `smoke_art` included.
+
+**Revert trigger:** the recoloured gem stops reading as a gem in the frame, or the
+new gate cannot be made to fail.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 7 - 2026-09-02 - L-18 refuted at RECONCILE, and a sharper finding underneath
 
 **Picked:** L-18 (3.0). **Closed as REFUTED before any code was written**, by the
