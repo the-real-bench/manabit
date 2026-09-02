@@ -119,8 +119,18 @@ iteration. Never lower a criterion after seeing the result.
 
 ### Phase 7 - PUSH
 ```bash
-bash tools/loop/verdict.sh check   # refuses an iteration that delivered nothing
+bash tools/loop/verdict.sh check   # refuses an iteration that delivered nothing,
+                                   # OR delivered code with no record
 ```
+It enforces three things, not one: a commit exists (or a BLOCKED report does), the
+ledger carries no unfilled Result placeholder, and at least one delivered commit
+touched `loop/ledger.md`.
+
+> **Why the second and third exist.** Iteration 9 pushed a tool whose ledger entry
+> never got written - the block that writes it died, and the surrounding shell had no
+> `set -e`, so the commit and push ran anyway. The guard passed it, correctly: a
+> commit existed. Delivery is necessary, not sufficient. Code that ships with no
+> record is unreviewable later and is how the record silently drifts from the code.
 Commit with the item id in the subject, push to the working branch, keep the PR
 updated. CI re-runs the same `gates.sh` on GitHub so no claim of green depends on
 the session that made it.

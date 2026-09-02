@@ -63,6 +63,38 @@ case "${1:-check}" in
     n=$(git rev-list --count "$start..$head" 2>/dev/null || echo 0)
 
     if [ "$n" -gt 0 ]; then
+      # Delivery is necessary, not sufficient. Iteration 9 pushed 81f33c0 carrying a
+      # tool whose ledger entry never got written: the Python block that writes it
+      # died and the shell had no `set -e`, so the commit and push ran anyway. This
+      # guard passed it, correctly - a commit existed. So the guard now also checks
+      # that the bookkeeping actually happened.
+      local_fail=0
+
+      # (1) No placeholder left behind. Match the LITERAL placeholder line, not any
+      #     mention of the word - the first version matched this file's own prose
+      #     describing the rule, so every future entry that explained it would have
+      #     failed the gate. An assertion that fires on its own documentation is
+      #     worse than none.
+      if grep -qF "*(pending - filled in at Phase 5)*" loop/ledger.md 2>/dev/null; then
+        echo "VERDICT: FAIL - loop/ledger.md still has an unfilled Result placeholder." >&2
+        grep -nF "*(pending - filled in at Phase 5)*" loop/ledger.md | head -3 >&2
+        echo "  The iteration produced commits but its Result was never filled in." >&2
+        local_fail=1
+      fi
+
+      # (2) Code without a record is the 81f33c0 shape exactly.
+      if ! git diff --name-only "$start..$head" | grep -q "^loop/ledger.md$"; then
+        echo "VERDICT: FAIL - $n commit(s) delivered but none touched loop/ledger.md." >&2
+        echo "  Every iteration records what it did and why. A change with no entry is" >&2
+        echo "  unreviewable later, and it is how the record silently drifts from the code." >&2
+        local_fail=1
+      fi
+
+      if [ "$local_fail" -ne 0 ]; then
+        echo "  Fix the record, amend or add a commit, then re-run this check." >&2
+        exit 1
+      fi
+
       echo "VERDICT: DELIVERED - $n new commit(s) since $start"
       git --no-pager log --oneline "$start..$head"
       exit 0

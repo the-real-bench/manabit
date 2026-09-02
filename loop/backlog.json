@@ -305,17 +305,19 @@
   },
   {
    "id": "L-20",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 3,
    "evidence": 3,
    "cost": 1,
    "risk": 1,
-   "priority": 9.0,
+   "priority": 0.0,
    "title": "The loop's own scripts continue past a failed step",
    "why": "Iteration 9 shipped commit 81f33c0 with the tool but WITHOUT its ledger entry or backlog closure. The Python block that writes them died on a SyntaxError; the surrounding shell had no `set -e`, so the commit and push ran anyway. Code and record went out of sync, were pushed, and CI passed. verdict.sh passed it correctly - it proves a commit exists, never that the bookkeeping is right. Fourth silent-failure shape this session and the first to reach the remote.",
    "persona": "n/a - the loop's own integrity",
    "criterion": "PRE-STATE: a record step that fails must stop the iteration before the commit. Prove it by deliberately breaking the record step and showing no commit is created. Consider whether verdict.sh should also assert the ledger's newest entry has no 'pending' placeholder left in it.",
-   "touches": "tools/loop/. Frozen surfaces: none."
+   "touches": "tools/loop/. Frozen surfaces: none.",
+   "closed_by": "Iteration 10 (2026-09-02)",
+   "closed_evidence": "verdict.sh check now also fails on an unfilled Result placeholder and on delivered commits that never touched loop/ledger.md; BLOCKED runs stay exempt. Four controls run, including one proving no false positive from prose that merely mentions the placeholder."
   }
  ],
  "_reconciliation": {

@@ -69,8 +69,10 @@ criterion after seeing the result. A revert with a real measurement is a success
 prepend to `workbench.md`.
 
 ## Phase 7 - PUSH
-Run `bash tools/loop/verdict.sh check` first - it refuses an iteration that
-delivered neither a commit nor a `verdict.sh blocked` report. Then commit with the
+Run `bash tools/loop/verdict.sh check` first. It refuses an iteration that delivered
+neither a commit nor a `verdict.sh blocked` report, AND one that delivered code
+without a record: an unfilled Result placeholder in the ledger, or commits that never
+touched `loop/ledger.md`. Delivery is necessary, not sufficient. Then commit with the
 item id in the subject. Push to the working branch. Keep the PR
 updated. CI re-runs the same gates so no green depends on this session.
 

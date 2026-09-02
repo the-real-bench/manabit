@@ -43,7 +43,41 @@ every push.
 **Revert trigger:** either new assertion cannot be made to fail, or rule 2 fires on a
 legitimate BLOCKED run.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All five criteria met, after the first version tripped on its own
+documentation.**
+
+`verdict.sh check` now enforces three things instead of one: a commit exists (or a
+BLOCKED report does), the ledger carries no unfilled Result placeholder, and at least
+one delivered commit touched `loop/ledger.md`.
+
+**Four controls, all run:**
+
+| Control | Expected | Actual |
+|---|---|---|
+| Real `(pending` placeholder in the ledger | FAIL | exit 1, names line 46 |
+| Placeholder filled, prose about it still present | PASS | exit 0, no false positive |
+| Commit delivered, ledger untouched | FAIL | exit 1, "1 commit(s) delivered but none touched loop/ledger.md" |
+| BLOCKED run with no ledger entry | PASS | exit 0, blocker echoed |
+
+**The first version was over-broad and I caught it in the control output.** It
+grepped for the bare word `(pending`, which matched this ledger's own prose
+describing the rule - line 35, not the real placeholder on line 46. Every future
+entry that explained the rule would have failed the gate. **An assertion that fires
+on its own documentation is worse than no assertion**, because it teaches people to
+ignore it. Tightened to the literal placeholder string and re-proven both ways.
+
+**The criterion was refined openly, not silently.** The backlog said "stop the
+iteration before the commit". I moved the guard to Phase 7 instead, because
+preventing the commit means remembering strict error handling in every future record
+step - the exact discipline that failed in iteration 9 - whereas Phase 7 is one place
+that cannot be forgotten. And the local commit was never the harm: 81f33c0 hurt
+because it reached the remote and CI blessed it.
+
+**What this closes.** Iteration 9's failure is now impossible to repeat silently: the
+same shell sequence would abort at `verdict.sh check` before the push, with the
+reason printed.
+
+**Next iteration picks:** L-19 (2.0), then L-10 (1.5).
 
 ---
 
