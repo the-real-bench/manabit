@@ -8,6 +8,50 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 6 - 2026-09-02 - L-16, the right criterion instead of the ambitious one
+
+**Picked:** L-16 (3.0), tied with L-18 (3.0); broke the tie toward the instrument,
+because L-18's own criterion says to state design intent before tuning and that is
+owner territory, while this one is the loop's own tooling and fully in scope.
+
+**Why this is a criterion change, not a retry.** Iteration 3 demanded byte-identical
+frames and missed. The measured cause was wall-clock animation phase
+(`chest_screen.gd:341`, `workshop.gd:650`, `manabit_stage.gd:194`, all sampling
+`Time.get_ticks_msec()`). `Time.get_ticks_msec()` is engine-provided real elapsed
+time - it cannot be frozen from a harness, and it does not follow frame count, so no
+amount of fixed-timestep capture makes it repeat. The only way to byte-freeze it is
+to put a test-only branch inside three shipped UI files, which is the tail wagging
+the dog: changing how the game animates so a screenshot tool can diff cleanly.
+
+The backlog entry written in iteration 3 anticipated exactly this and sanctioned the
+fallback in advance: *"If no harness-side freeze is possible, the honest alternative
+is to change the criterion to a perceptual threshold and say so explicitly."* This is
+that, said explicitly. **Byte-identity is abandoned as the goal.** The PURPOSE was
+never byte equality - it was trustworthy visual diffs. A comparator with a threshold
+serves the purpose; byte-identity was an over-strict proxy for it.
+
+**CRITERION (stated before writing any code):**
+1. A frame comparator exists that reports SAME or DIFFERENT for two shot sets.
+2. **Two consecutive unchanged runs compare SAME.**
+3. **A real visual change is detected as DIFFERENT** - proven by making one on
+   purpose, not asserted.
+4. The threshold is DERIVED from the measured animation-only drift between two
+   unchanged runs, with headroom stated as a number. It is not to be picked to make
+   the test pass, and the measured drift goes in this ledger either way.
+5. 16/16 gates green.
+
+**Revert trigger:** the comparator cannot distinguish animation drift from a real
+change - that is, the measured drift and a genuine edit overlap - in which case the
+threshold approach is refuted and this gets reverted rather than tuned into
+looking successful.
+
+No PIL and no numpy in this container, so the comparator is written in GDScript and
+run through the engine that is already a dependency, rather than adding one.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 5 - 2026-09-02 - L-09, an informed wager needs both numbers
 
 **Picked:** L-09 (priority 4.0), top live item. Lens: Optimizer + Newcomer.
