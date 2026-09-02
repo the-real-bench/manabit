@@ -271,17 +271,19 @@
   },
   {
    "id": "L-18",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 2,
    "evidence": 3,
    "cost": 2,
    "risk": 2,
-   "priority": 3.0,
+   "priority": 0.0,
    "title": "The stake-10 tier is a lottery: spoils range 8-45 for a fixed price",
    "why": "Measured this iteration with tools/sim/wager_probe.gd. Stake 5 pays 8-8, 8-20, 8-8. Stake 10 pays 8-45, 8-45, 8-20, 8-20. Stake 20 pays 45-45 and 20-45. The gradient is monotonic (so the panel's 'inverted' claim is refuted), but at stake 10 the same price buys anything from a common to an EPIC. Two of the four stake-10 elites cap at 20 while the other two reach 45.",
    "persona": "Optimizer (P5 - reward tracking difficulty is about variance as well as mean)",
    "criterion": "MEASURE-THEN-DECIDE. This may be intended texture rather than a defect, so do NOT tune it on instinct. First state what the wager is supposed to feel like at each tier, then decide whether 8-45 at a fixed stake serves that. If it does, close this as intended and say so.",
-   "touches": "Challenger loadouts. Frozen surfaces: none."
+   "touches": "Challenger loadouts. Frozen surfaces: none.",
+   "closed_by": "Iteration 7 (2026-09-02) - REFUTED at reconcile",
+   "closed_evidence": "The player CHOOSES the looted bit - ui/combat_screen.gd:1626-1638 builds one button per non-core bit under \"Loot a part:\". The 8-45 range is a menu, not a draw, so it is not a lottery. By what is actually taken: stake 5 -> 8/20/8, stake 10 -> 45/45/20/20, stake 20 -> 45/45. Monotonic. The real finding (flat reward ceiling from stake 10 to 20) is escalated as Q7."
   }
  ],
  "_reconciliation": {

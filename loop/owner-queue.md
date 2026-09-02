@@ -91,6 +91,32 @@ measured holes on one decision.
 
 ---
 
+## Q7. The reward ceiling is flat across the last stake step
+**Raised by iteration 7, measured (`tools/sim/wager_probe.gd`).** Melt value is a
+rarity proxy (EPIC 45 / RARE 20 / COMMON 8, `economy/broker.gd:9-13`). By what a
+player actually loots - and they DO choose, one button per bit:
+
+    stake  5    COMMON or RARE
+    stake 10    RARE or EPIC       Cogsworth and Thornlash already yield an EPIC
+    stake 20    EPIC or EPIC       Brassmore, Gildfall
+
+Grand Warden Cogsworth costs 10 scrap. Sunking Brassmore costs 20, is the hardest
+fight in the game by measurement (WIN 0.305 under optimal aggression), and pays the
+same reward TIER. The last step of the ladder doubles the price and the difficulty
+for no increase in what you can win.
+
+**Why the loop stopped rather than tuning it.** EPIC is the top rarity; there is
+nothing above it to drop. Fixing this needs a new reward AXIS, not a number:
+a larger purse at boss tier, a choice of two bits instead of one, a unique
+boss-only bit, or something non-material. That is a decision about what the top of
+the ladder is FOR, and it is yours.
+
+**Recommendation:** the cheapest honest option is a boss-tier purse bump, since the
+satchel already exists and it needs no new content. A unique boss-only bit is the
+better long-term answer and the more expensive one.
+
+---
+
 ## Answered
 
 *(nothing yet - this file starts with the first autonomous pass)*

@@ -8,6 +8,58 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 7 - 2026-09-02 - L-18 refuted at RECONCILE, and a sharper finding underneath
+
+**Picked:** L-18 (3.0). **Closed as REFUTED before any code was written**, by the
+Phase 0 reconcile step doing its job.
+
+**What the reconcile found.** L-18 said the stake-10 tier is "a lottery: spoils range
+8-45 for a fixed price". Before treating that as live I checked how the looted bit is
+actually chosen. `ui/combat_screen.gd:1626-1638` builds **one button per non-core
+bit** under the label `"Loot a part:"`. **The player chooses.** The range is a MENU,
+not a draw. A rational player always takes the top, so the minimum is a number nobody
+ever receives.
+
+**This also corrects iteration 5's own framing, which I got wrong.** I reported the
+gradient as ranges (8-8, 8-45, 45-45) and reasoned about floors and ceilings. Half of
+that was noise: the floor is never taken. Recomputed by what a player actually
+receives:
+
+    stake  5   ->   8, 20, 8          COMMON / RARE
+    stake 10   ->  45, 45, 20, 20     RARE / EPIC
+    stake 20   ->  45, 45             EPIC / EPIC
+
+Still monotonic non-decreasing, so the panel's "inverted gradient" stays refuted -
+more cleanly than before, on the numbers that matter.
+
+**THE REAL FINDING, which is sharper than the item it replaces.** Melt value is a
+rarity proxy: 45 = EPIC, 20 = RARE, 8 = COMMON (`economy/broker.gd:9-13`). So the
+reward TIER is:
+
+    stake  5   COMMON or RARE
+    stake 10   RARE or EPIC     <- already reaches the top rarity
+    stake 20   EPIC or EPIC
+
+**The reward ceiling is flat across the last stake step.** Cogsworth costs 10 and
+yields an EPIC. Brassmore costs 20, is the measured wall (WIN 0.305 under optimal
+play), and yields... an EPIC. Double the price and a far harder fight for the same
+reward tier.
+
+**Why this is not a tuning fix.** EPIC is the top rarity - there is nothing above it
+to drop. Raising the boss ceiling needs a different reward AXIS (a larger purse, a
+choice of two bits, a unique drop, a cosmetic), which is a design decision about what
+the top of the ladder is FOR. That is not a number I get to pick. Escalated to the
+owner queue as Q7 with the measurement attached.
+
+**No code changed. That is the correct outcome here** - the defect was not real, and
+the protocol's answer to "not still live" is to close it, not to build something
+anyway to have shipped a diff. The instrument was corrected to print what is actually
+taken, so the next reader is not misled the way I was.
+
+**Next iteration picks:** L-08 (2.0) or L-16 (2.0).
+
+---
+
 ## Iteration 6 - 2026-09-02 - L-16, the right criterion instead of the ambitious one
 
 **Picked:** L-16 (3.0), tied with L-18 (3.0); broke the tie toward the instrument,
