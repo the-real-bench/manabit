@@ -243,17 +243,19 @@
   },
   {
    "id": "L-16",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 2,
    "evidence": 3,
    "cost": 3,
    "risk": 1,
-   "priority": 2.0,
+   "priority": 0.0,
    "title": "INSTRUMENT: per-screen frame verdicts, with animated screens marked UNVERIFIABLE",
    "why": "Iteration 6 REFUTED the cheap version by measurement. Whole-frame difference cannot separate animation phase from a real edit: animation-only drift on the Workshop is 0.291%% and a ONE-CHARACTER label change is 0.376%%, and raising the amplitude cutoff keeps the ratio flat at ~1.3x (12/40/80/120 all measured). Any threshold that ignores the breathing bob also ignores a changed label. The good news: compendium, menagerie and proving measure 0.000%% between runs, so comparison is exact on every screen WITHOUT wall-clock animation.",
    "persona": "n/a - this is the loop's own instrument, and it is load-bearing",
    "criterion": "PRE-STATE next time: the comparator returns a PER-SCREEN verdict - SAME, DIFFERENT, or UNVERIFIABLE - and reports the three animated screens (chest_screen.gd:341, workshop.gd:650, manabit_stage.gd:194) as UNVERIFIABLE rather than guessing. Prove it flags a one-character change as DIFFERENT on a static screen, and never reports SAME for an animated one. A tool that admits what it cannot see beats one that guesses.",
-   "touches": "tools/loop/shots.sh. Frozen surfaces: none."
+   "touches": "tools/loop/shots.sh. Frozen surfaces: none.",
+   "closed_by": "Iteration 9 (2026-09-02)",
+   "closed_evidence": "tools/loop/framecheck.sh returns per-screen SAME / DIFFERENT / UNVERIFIABLE. The unstable set is derived by rendering three times and taking the worst pairing as the noise floor - the Barrow drifts intermittently and is not one of the known wall-clock seams. A screen with non-zero noise is never reported SAME. Three controls run: no-change gives zero DIFFERENT; one char on zero-noise Proving gives DIFFERENT at 2.023%; the same on the noisy Workshop gives UNVERIFIABLE."
   },
   {
    "id": "L-17",
@@ -300,6 +302,20 @@
    "persona": "Cozy Collector",
    "criterion": "PRE-STATE: the seal reads as inset or faceted in a rendered frame - a bevel, an inset shadow, or a non-rectangular silhouette. Judge it in the frame, not in the file. If the honest answer is that it needs real art rather than a procedural tweak, say so and escalate instead of approximating.",
    "touches": "art/props/coffer_face_brass.png. Frozen surfaces: none."
+  },
+  {
+   "id": "L-20",
+   "gate": "loop",
+   "lift": 3,
+   "evidence": 3,
+   "cost": 1,
+   "risk": 1,
+   "priority": 9.0,
+   "title": "The loop's own scripts continue past a failed step",
+   "why": "Iteration 9 shipped commit 81f33c0 with the tool but WITHOUT its ledger entry or backlog closure. The Python block that writes them died on a SyntaxError; the surrounding shell had no `set -e`, so the commit and push ran anyway. Code and record went out of sync, were pushed, and CI passed. verdict.sh passed it correctly - it proves a commit exists, never that the bookkeeping is right. Fourth silent-failure shape this session and the first to reach the remote.",
+   "persona": "n/a - the loop's own integrity",
+   "criterion": "PRE-STATE: a record step that fails must stop the iteration before the commit. Prove it by deliberately breaking the record step and showing no commit is created. Consider whether verdict.sh should also assert the ledger's newest entry has no 'pending' placeholder left in it.",
+   "touches": "tools/loop/. Frozen surfaces: none."
   }
  ],
  "_reconciliation": {

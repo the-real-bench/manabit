@@ -36,7 +36,56 @@ been wrong the day it was written and would rot silently afterwards.
 **Revert trigger:** the checker reports SAME for any screen with non-zero measured
 noise, or cannot detect a one-character change on a zero-noise screen.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All five criteria met, after one real defect found by the controls.**
+
+`tools/loop/framecheck.sh <baseline_dir>`:
+
+    SCREEN                      noise    delta   VERDICT
+    shot_barrow.png            0.063%   0.083%   UNVERIFIABLE
+    shot_coffer_nook.png       0.066%   0.071%   UNVERIFIABLE
+    shot_compendium.png        0.000%   0.000%   SAME
+    shot_menagerie.png         0.000%   0.000%   SAME
+    shot_proving.png           0.000%   0.000%   SAME
+    shot_workshop.png          0.391%   0.778%   UNVERIFIABLE
+
+**The defect the controls caught.** The first version measured each screen's noise
+from ONE pair of renders. The Barrow's drift is INTERMITTENT: that pair read 0.000%,
+so a 0.070% delta was reported DIFFERENT when nothing had changed - a false positive
+on the very first control. One sample is not a floor. Fixed by rendering three times
+and taking the worst of the three pairings.
+
+**Three controls, all run:**
+1. No change at all -> zero DIFFERENT. Three deterministic screens SAME, three noisy
+   screens UNVERIFIABLE.
+2. One-character change on Proving (zero noise) -> DIFFERENT at 2.023% against a
+   0.000% floor.
+3. One-character change on the Workshop (noisy) -> UNVERIFIABLE, never SAME. That is
+   the honest answer: iteration 6 proved that edit is indistinguishable from the
+   breathing bob.
+
+**The unstable set is derived, not hardcoded** - necessary, since the Barrow drifts
+and is not one of the three known `Time.get_ticks_msec()` seams.
+
+**What this buys.** Half the screens get exact automated regression detection; the
+other half are explicitly flagged for human eyes instead of silently passed. Strictly
+better than byte-identity (iteration 3), which would fail closed on everything, and
+than the threshold (iteration 6), which would fail OPEN on everything.
+
+**A PROCESS FAILURE IN THIS ITERATION, recorded because it nearly corrupted the
+record.** The Python block that was supposed to write this Result and close L-16 died
+on a SyntaxError (an escaped quote inside a single-quoted string). The shell had no
+`set -e`, so `git add -A && git commit && push` ran anyway. Commit 81f33c0 therefore
+shipped the TOOL with the ledger still saying "pending" and L-16 still open - the
+code and its record out of sync, pushed and CI-green.
+
+`verdict.sh` passed it, correctly: a commit existed. The delivery guard proves
+something was delivered, never that the bookkeeping was right. This is the fourth
+silent-failure shape this session - after the tautological gate, the false-negative
+verdict check, and the parse error that printed nothing in iteration 8 - and the
+first one to reach the remote. Filed as L-20: the loop's own scripts should not
+continue past a failed step.
+
+**Next iteration picks:** L-20 (the process hole this just opened), then L-19, L-10.
 
 ---
 

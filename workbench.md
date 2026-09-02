@@ -4,6 +4,22 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 
 ---
 
+## 2026-09-02 (loop iterations 7-9: two refutations, the first art fix, and a record that nearly went out of sync)
+
+**What happened:**
+- **Iteration 7 (L-18 REFUTED, eb215e0):** the "stake-10 lottery" is not a lottery - the player CHOOSES the looted bit (ui/combat_screen.gd:1626-1638, one button per bit). Recomputed by what is actually taken: stake 5 -> COMMON/RARE, stake 10 -> RARE/EPIC, stake 20 -> EPIC/EPIC. This also corrected my own iteration-5 framing, which reasoned about floors nobody ever takes. Real finding escalated as Q7: the reward CEILING is flat across the last stake step - Cogsworth costs 10 and pays an EPIC; Brassmore costs 20, is the hardest fight measured (WIN 0.305), and pays an EPIC. Not tunable, since EPIC is the top rarity; it needs a new reward axis, which is an owner call.
+- **Iteration 8 (L-08, cd8d730):** the coffer lid gem measured #7be1ff (h194 v1.00) - matching no DESIGN.md token and brighter than every one of them, on an entirely warm screen. Remapped 779 pixels onto --affinity-mana #3FA890 with shading preserved. smoke_art now enforces the palette on coffer faces, proven red on the original. First fix the loop found purely by LOOKING - it came from a rendered frame in iteration 0 and no gate could have caught it.
+- **Iteration 9 (L-16, 81f33c0):** tools/loop/framecheck.sh gives per-screen SAME / DIFFERENT / UNVERIFIABLE. A screen with a non-zero noise floor is never reported SAME. The unstable set is derived every run, not hardcoded - the Barrow drifts and is not one of the three known wall-clock seams. Controls: no-change gives zero DIFFERENT; one char on zero-noise Proving gives DIFFERENT; one char on the noisy Workshop gives UNVERIFIABLE.
+
+**Decisions (with reasoning):**
+- **Refutation is a first-class outcome.** Two backlog items died to measurement in three iterations, one of them sourced from the project's own playtest document. Disproving a bad item is cheaper than shipping against it.
+- **A tool that admits what it cannot see beats one that guesses.** Byte-identity (iteration 3) would fail closed on every screen; the threshold (iteration 6) would fail OPEN, reporting SAME for changes it could not detect. UNVERIFIABLE is the honest third answer.
+- **The record must not be able to drift from the code.** Iteration 9's commit shipped the tool with its ledger entry still saying "pending", because a Python block died and the shell had no `set -e` so the commit ran anyway. Repaired in a follow-up and filed as L-20 at priority 9.0.
+
+**Outstanding / next session:**
+- L-20 (9.0, the loop's scripts continue past a failed step - the process hole iteration 9 opened), then L-19 (2.0, the gem is still a hard-edged rectangle), L-10 (1.5).
+- Owner, unchanged and unanswered: **Q2** (additive save v5 - unblocks the coffer odds gap, the scummable stream, the dead Glimmer, the discovery faucet), **Q7** (what the top of the ladder is FOR), the scoring reweight, the Routine model default, and cadence.
+
 ## 2026-09-02 (loop iterations 3-6: two shipped, one partial, one refuted by its own measurement)
 
 **What happened:**
