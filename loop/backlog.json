@@ -244,13 +244,13 @@
    "gate": "loop",
    "lift": 2,
    "evidence": 3,
-   "cost": 2,
+   "cost": 3,
    "risk": 1,
-   "priority": 3.0,
-   "title": "INSTRUMENT: frames drift because animation samples the wall clock",
-   "why": "Partially fixed in iteration 3: shots.sh now boots each capture from a fresh save, which stopped one run inheriting the previous run's wallet/shelf/tray and made 3 of 6 screens byte-stable (compendium, menagerie, proving). The remaining 3 (barrow, coffer_nook, workshop) drift from WALL-CLOCK ANIMATION PHASE sampled at capture time: ui/chest_screen.gd:341 sin(Time.get_ticks_msec()/480.0), ui/workshop.gd:650 and ui/manabit_stage.gd:194. The warmth grain is exonerated - ui/warmth.gd:48 seeds it at 7.",
+   "priority": 2.0,
+   "title": "INSTRUMENT: per-screen frame verdicts, with animated screens marked UNVERIFIABLE",
+   "why": "Iteration 6 REFUTED the cheap version by measurement. Whole-frame difference cannot separate animation phase from a real edit: animation-only drift on the Workshop is 0.291%% and a ONE-CHARACTER label change is 0.376%%, and raising the amplitude cutoff keeps the ratio flat at ~1.3x (12/40/80/120 all measured). Any threshold that ignores the breathing bob also ignores a changed label. The good news: compendium, menagerie and proving measure 0.000%% between runs, so comparison is exact on every screen WITHOUT wall-clock animation.",
    "persona": "n/a - this is the loop's own instrument, and it is load-bearing",
-   "criterion": "PRE-STATE next time: all six screens byte-identical across two consecutive runs. This needs the capture to sample a FROZEN clock rather than the wall clock. Prefer a harness-side freeze (a fixed fake time source the harness installs) over editing shipped animation - changing how the game feels to serve a screenshot tool is the wrong trade. If no harness-side freeze is possible, the honest alternative is to change the criterion to a perceptual threshold and say so explicitly, rather than editing three UI files.",
+   "criterion": "PRE-STATE next time: the comparator returns a PER-SCREEN verdict - SAME, DIFFERENT, or UNVERIFIABLE - and reports the three animated screens (chest_screen.gd:341, workshop.gd:650, manabit_stage.gd:194) as UNVERIFIABLE rather than guessing. Prove it flags a one-character change as DIFFERENT on a static screen, and never reports SAME for an animated one. A tool that admits what it cannot see beats one that guesses.",
    "touches": "tools/loop/shots.sh. Frozen surfaces: none."
   },
   {

@@ -48,7 +48,58 @@ looking successful.
 No PIL and no numpy in this container, so the comparator is written in GDScript and
 run through the engine that is already a dependency, rather than adding one.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: CRITERION 3 MISSED. The threshold approach is REFUTED by measurement. The
+gate is reverted; only the instrument is kept.**
+
+Measured animation-only drift between two unchanged runs:
+
+    barrow 0.084%   coffer_nook 0.069%   workshop 0.291%
+    compendium 0.000%   menagerie 0.000%   proving 0.000%
+
+Then a deliberately small real change - `"THE LEDGER"` to `"THE LEDGERS"`, one
+character - on the noisiest screen:
+
+    workshop  0.376%   against 0.291% of animation noise
+
+**They overlap.** A 1.0% threshold with sensible headroom would have called that
+change SAME. My revert trigger named this exact outcome in advance.
+
+**The rescue attempt also failed, and was measured rather than assumed.** The
+hypothesis was that animation is low-amplitude and text is high-amplitude, so raising
+the per-pixel cutoff would separate them:
+
+    NOISE   animation-only   one-character change   ratio
+       12       0.291%            0.376%            1.29x
+       40       0.144%            0.195%            1.35x
+       80       0.104%            0.137%            1.32x
+      120       0.081%            0.109%            1.35x
+
+Flat at ~1.3x. The hypothesis is wrong: the Workshop's breathing bob moves a 3D
+model, so its drift is high-amplitude AND spread over a large area. A one-word label
+is genuinely the same order of magnitude as the toy breathing.
+
+**What was reverted:** the SAME/DIFFERENT verdict and the threshold. Shipping a gate
+that silently cannot see a changed label on half the screens would be a
+false-confidence machine - precisely the failure this apparatus exists to catch, and
+the third time this session that shape has come up.
+
+**What was kept, and why it is not the same thing smuggled through:**
+`tools/loop/framediff.gd` stays as a MEASUREMENT instrument with the verdict removed
+and the refutation table written into its header. It is what produced the numbers
+above; instruments that disprove a plan have earned their place. It cannot be
+mistaken for a gate because it no longer returns one.
+
+**A real finding worth keeping:** the three static screens measure **0.000%** between
+runs. Frame comparison is exact there. The problem is entirely confined to the three
+screens with wall-clock animation.
+
+**L-16 is not closed and its shape has changed.** Re-filed with the constraint proven
+rather than suspected, and with the honest design the next attempt should take:
+per-screen verdicts, where animated screens are reported UNVERIFIABLE rather than
+SAME. A tool that admits what it cannot see is worth more than one that guesses.
+
+**Next iteration picks:** L-18 (3.0) or L-08 (2.0). L-16 stays open at reduced
+priority - the cheap version is refuted and the honest version costs more.
 
 ---
 

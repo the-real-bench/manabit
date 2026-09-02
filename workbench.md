@@ -4,6 +4,23 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 
 ---
 
+## 2026-09-02 (loop iterations 3-6: two shipped, one partial, one refuted by its own measurement)
+
+**What happened:**
+- **Iteration 3 (L-16 partial, 4e2cde8):** shots.sh now boots each capture from a fresh save, so a run no longer inherits the previous run's wallet, shelf and tray. 3 of 6 screens became byte-stable. Criterion (all six) MISSED; kept anyway with the override stated openly, because the save-inheritance bug is independently proven fixed.
+- **Iteration 4 (L-15, 25f3c40):** the brass coffer prints EPIC 8% and rolls 14.8% (40,000 coffers). Cause is pity-at-9 counting BITS since the last EPIC. BRASS_PITY is now a named constant and the wording derives from it, so both the Nook and the Barrow print "never more than 9 bits without an Epic"; tin prints nothing because tin has no pity. Closed as DISCLOSED, not resolved - one honest number needs persisted pity, which is save v5, owner Q2.
+- **Iteration 5 (L-09, d10b367):** Proving rows now show "(melts for scrap N-M)" derived from Broker.salvage_scrap. The gate is the first INDEPENDENT one this loop has written: it melts a real PartInstance through PlayerState.melt_bit and compares what is actually paid, proven red by making the payout drift. **It also refuted the panel's "inverted loot gradient":** measured stake 5 -> 8-8/8-20/8-8, stake 10 -> 8-45/8-45/8-20/8-20, stake 20 -> 45-45/20-45. Floor and ceiling both rise. The claim held only as Cogsworth's best case against Gildfall's worst. A balance item was one step from being filed on it.
+- **Iteration 6 (L-16 REFUTED, this entry):** tried to replace byte-identity with a perceptual threshold. Measured animation-only drift 0.291% on the Workshop against 0.376% for a ONE-CHARACTER label change - overlapping. Raising the amplitude cutoff kept the ratio flat at ~1.3x across 12/40/80/120. The Workshop's breathing bob moves a 3D model, so its drift is high-amplitude too. The SAME/DIFFERENT verdict is reverted; framediff.gd stays as a measurement instrument with the refutation table in its header and no verdict at all.
+
+**Decisions (with reasoning):**
+- **A gate that cannot see a changed label on half the screens is worse than no gate.** It manufactures the false confidence this project keeps digging out - the third instance of that shape this session, after the tautological odds assertion and the false-negative verdict check.
+- **Refutations are kept, not buried.** Two claims died to measurement this week: the inverted loot gradient (from the project's own respected playtest doc) and the perceptual-threshold plan (mine). Both are written into the ledger with their numbers.
+- **The scoring critique was raised with the owner and NOT acted on.** I told them this loop grinds polish rather than the gameplay loop, proposed reweighting so lift beats cheap-and-safe, and asked for their word. No answer, so iterations 5 and 6 ran under the existing rules. Acting on my own proposal would be the quiet widening the protocol forbids.
+
+**Outstanding / next session:**
+- L-18 (3.0, stake-10 spoils span 8-45 for a fixed price - MEASURE-THEN-DECIDE, may be intended texture), L-16 (2.0, reshaped: per-screen verdicts with animated screens marked UNVERIFIABLE), L-08 (2.0), L-10 (1.5).
+- Owner: the scoring reweight, the Routine model default (scheduled runs take Sonnet 5), cadence against a usage limit, and **Q2 - additive save v5, which alone unblocks the coffer odds gap, the scummable stream, the dead Glimmer and the discovery faucet.**
+
 ## 2026-09-01 (incident 1 + loop iteration 2: the loop learns to notice its own silence)
 
 **What happened:**
