@@ -8,6 +8,38 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 9 - 2026-09-02 - L-16, a tool that admits what it cannot see
+
+**Picked:** L-16 (2.0), tied with L-19 (2.0). Broke the tie on LIFT (2 vs 1) rather
+than cost, because this improves every future visual review while L-19 improves one
+asset. Both stay inside the existing scoring - no override.
+
+**RECONCILE.** The three wall-clock seams are still exactly where iteration 6 found
+them (`chest_screen.gd:363`, `workshop.gd:650`, `manabit_stage.gd:194`). But the
+Barrow also drifted at 0.084% and it is NOT in that list - its source was never
+identified. That settles a design question: **the unstable set must be DERIVED by
+measurement, not hardcoded.** A hand-maintained list of "animated screens" would have
+been wrong the day it was written and would rot silently afterwards.
+
+**CRITERION (stated before writing any code):**
+1. The checker returns a PER-SCREEN verdict: SAME, DIFFERENT, or UNVERIFIABLE.
+2. The unstable set is measured every run (render twice, no change between), never
+   hardcoded.
+3. A screen with a non-zero noise floor is NEVER reported SAME. That is the whole
+   point: iteration 6 proved a threshold cannot tell a one-character edit from a
+   breathing bob, so the honest answer there is "I cannot tell", not a guess.
+4. Proven by controls: a one-character change on a ZERO-noise screen reports
+   DIFFERENT; the same class of change on a noisy screen reports UNVERIFIABLE and
+   never SAME.
+5. 16/16 gates green.
+
+**Revert trigger:** the checker reports SAME for any screen with non-zero measured
+noise, or cannot detect a one-character change on a zero-noise screen.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 8 - 2026-09-02 - L-08, the brightest thing on a warm screen
 
 **Picked:** L-08 (2.0), tied with L-16 (2.0); took the cheaper (cost 1). Lens: Cozy
