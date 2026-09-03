@@ -47,6 +47,26 @@ func _initialize() -> void:
     var total_bits := 0
     for pd in Catalog.all():
         if not pd.is_core: total_bits += 1
+    # Per-slot leader adjacency, computed WITHOUT any capacity constraint. At high
+    # capacity the knapsack degenerates to per-slot argmax, so the constrained counts
+    # below converge on these. Printing both makes that degeneracy visible instead of
+    # letting a reader mistake it for capacity harming build diversity - which is the
+    # error L-22 was filed on. The mid-capacity counts are the ones to distrust: a
+    # binding weight budget creates many equal-TOTAL ties, which is more ways to be
+    # equally compromised, not more good choices.
+    print("SLOT LEADER ADJACENCY (no capacity constraint - how many bits are genuinely")
+    print("competitive in their own slot; the honest ceiling on real choice per slot)")
+    for s_name in SLOTS:
+        var best_v := -1.0e9
+        for pd in (by_slot.get(s_name, []) as Array):
+            var bid2 := String(pd.id)
+            if deltas.has(bid2): best_v = maxf(best_v, float(deltas[bid2]))
+        var near := 0
+        for pd in (by_slot.get(s_name, []) as Array):
+            var bid3 := String(pd.id)
+            if deltas.has(bid3) and float(deltas[bid3]) >= best_v - 0.045: near += 1
+        print("  %-6s leader %+.4f   competitive bits: %d" % [s_name, best_v, near])
+    print("")
     print("DECISION DENSITY  (additive model over measured mean_delta - see header)")
     print("%-26s %4s %8s   %s" % ["CORE", "CAP", "BEST", "distinct bits per slot within 5%"])
     var collapsed := 0

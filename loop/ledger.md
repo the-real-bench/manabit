@@ -8,6 +8,91 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 15 - 2026-09-03 - L-22 is an artifact, and its meaning was backwards
+
+**Picked:** L-22 (3.0), the only loop-pickable item. Its own criterion said MEASURE
+FIRST, because the collapse might be an additive-model artifact rather than the game.
+**It is an artifact**, and testing it inverted what the number means.
+
+**The hypothesis.** At high capacity the weight constraint stops binding, so the
+knapsack degenerates to "take the highest-delta bit in every slot" - a single sharp
+peak. If so, the near-optimal count at high capacity is not measuring build diversity
+at all; it is measuring how many bits sit near the top of their OWN slot.
+
+**The test.** Count bits within the same band of their slot leader, ignoring capacity
+entirely:
+
+    BACK  2 bits within 0.045 of its leader   (+0.1146 furnace_pack, +0.1042 payload_rack)
+    HEAD  3                                   (+0.1492, +0.1258, +0.1108)
+    LEGS  1                                   (+0.3400 bedrock, next +0.1800)
+
+Compare against the capacity-constrained counts on the two highest-capacity cores
+(Keystone 110, Gallant 112): **BACK 2, HEAD 3-4, LEGS 1.** They match. The degeneracy
+is real and the numbers are the same numbers.
+
+**So the finding was backwards.** L-22 said "more carrying capacity means FEWER real
+choices" and treated the 2 as the anomaly. It is the other way round: at high
+capacity the metric gives the CLEAN answer - how many bits are genuinely competitive
+in that slot. The 10-11 counts on mid-capacity cores are the artifact. They arise
+because weight-trading creates many combinations with equal TOTAL value, which is
+**more ways to be equally compromised, not more good choices.** A player at capacity
+104 is not spoiled for choice; they are picking among ties forced by a binding budget.
+
+**This strengthens the LEGS finding rather than weakening it.** LEGS has exactly one
+bit within band of its own slot leader, and that is a pure slot-level dominance fact,
+independent of capacity and independent of the knapsack. Q8 stands on firmer ground
+than when it was filed.
+
+**CRITERION (stated before the change):**
+1. The probe reports per-slot leader-adjacency ALONGSIDE the capacity-constrained
+   count, so the degeneracy is visible in the output instead of misleading a reader.
+2. At the highest-capacity cores the two numbers agree - that agreement IS the
+   degeneracy, and seeing it printed is the point.
+3. L-22 is resolved as artifact or real, stated plainly either way.
+4. 16/16 gates green.
+
+**Result: KEPT. L-22 closed as an ARTIFACT with its meaning inverted, and the probe
+now prints the degeneracy instead of hiding it.**
+
+    SLOT LEADER ADJACENCY (no capacity constraint)
+      HEAD   leader +0.1492   competitive bits: 4
+      ARM_L  leader +0.1906   competitive bits: 5
+      ARM_R  leader +0.1906   competitive bits: 5
+      LEGS   leader +0.3400   competitive bits: 1
+      BACK   leader +0.1146   competitive bits: 2
+
+    Highest-capacity cores (Keystone 110, Gallant 112)
+      HEAD 3-4   ARMS 4   LEGS 1   BACK 2
+
+They agree. That agreement IS the degeneracy: once the weight budget stops binding,
+the capacity-constrained count converges on plain slot-leader adjacency.
+
+**What this means for the real question.** The honest ceiling on choice per slot is
+the leader-adjacency row: **HEAD 4, ARMS 5, LEGS 1, BACK 2.** That is the number a
+designer should care about. The mid-capacity counts of 10-11 were never good news -
+they are ties manufactured by a binding budget, more ways to be equally compromised.
+
+**Two prior conclusions get sharper:**
+- **LEGS 1 is confirmed a third time, and now capacity-independent.** It is a pure
+  slot-level dominance fact, nothing to do with the knapsack. Q8 stands on firmer
+  ground than when it was filed.
+- **BACK is the second-thinnest slot in the game at 2**, which no previous run said
+  plainly - iteration 12 reported BACK 5-8 and iteration 13 reported 2-11, and both
+  were reading budget ties rather than competitiveness.
+
+**The pattern, now at five.** L-22 is the fifth item whose framing did not survive
+measurement. What distinguishes this one: the number was not wrong, the
+INTERPRETATION was inverted. "More capacity means fewer choices" and "at high
+capacity the metric finally tells the truth" produce identical data and opposite
+conclusions. A measurement is not self-interpreting, and I filed the wrong reading
+of my own output.
+
+**Next iteration:** the loop-pickable backlog is now EMPTY. Everything remaining is
+owner-gated: Q2 (save v5), Q7 (top of the ladder), Q8 (what Bedrock is for), plus the
+scoring reweight, the Routine model default, and cadence.
+
+---
+
 ## Iteration 14 - 2026-09-03 - L-21 is unsatisfiable as written, and the reason is bigger
 
 **Picked:** L-21 (3.0), confirmed on full coverage last iteration. **Not built.

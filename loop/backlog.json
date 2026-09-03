@@ -340,17 +340,19 @@
   },
   {
    "id": "L-22",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 3,
    "evidence": 3,
    "cost": 2,
    "risk": 2,
-   "priority": 3.0,
+   "priority": 0.0,
    "title": "More carrying capacity means FEWER choices: BACK collapses to 2 on the biggest cores",
    "why": "Surfaced by the full-coverage decision-density run. BACK offers 10-11 near-optimal bits on mid-capacity cores (Pledge 104, Sunheart 104, Magazine 104, Bulwark 106, Regalia 106) but exactly 2 on the two highest-capacity cores (Keystone 110, Gallant 112). Once the weight budget stops binding, the optimum sharpens and the slot solves itself. A player who chases a bigger core is rewarded with a narrower build, which is the opposite of what more capacity should feel like.",
    "persona": "Optimizer + Cozy Collector (a chase item that shrinks your options is a poor chase)",
    "criterion": "MEASURE FIRST, then decide. This may be an artifact of the additive model rather than the game - check whether the collapse holds when the top BACK bits are compared under real fights rather than summed deltas. If it is real, state what a high-capacity core is supposed to buy before changing any number.",
-   "touches": "parts/catalog_extra.json back stats, or the carry values. Frozen surfaces: base fixtures OFF LIMITS."
+   "touches": "parts/catalog_extra.json back stats, or the carry values. Frozen surfaces: base fixtures OFF LIMITS.",
+   "closed_by": "Iteration 15 (2026-09-03) - ARTIFACT, interpretation inverted",
+   "closed_evidence": "Counting bits within band of their own SLOT LEADER, ignoring capacity: BACK 2, HEAD 4, ARMS 5, LEGS 1. These match the high-capacity constrained counts, so at high capacity the knapsack degenerates to per-slot argmax. The 2 is the honest number; the mid-capacity 10-11 are ties forced by a binding budget - more ways to be equally compromised, not more good choices. 'More capacity means fewer choices' is backwards."
   }
  ],
  "_reconciliation": {
