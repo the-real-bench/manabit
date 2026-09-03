@@ -50,7 +50,55 @@ supported. If it does not collapse, the claim is weakened and needs the real thi
 and would have to approximate them - in which case it measures a fiction and should
 not ship.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. Probe shipped, and it splits the Optimizer's claim in two.**
+
+    CORE                    CAP    BEST   distinct near-optimal bits per slot
+    Ember Core              100   0.731   HEAD:3 ARM:8 ARM:8 LEGS:1 BACK:7
+    Bulwark Core            106   0.766   HEAD:3 ARM:8 ARM:8 LEGS:1 BACK:8
+    Keystone Core           110   0.791   HEAD:2 ARM:8 ARM:8 LEGS:1 BACK:7
+    Steadfast No.7 Gallant  112   0.794   HEAD:3 ARM:10 ARM:10 LEGS:1 BACK:8
+    ... (11 cores, all measured)
+
+    slots offering NO choice at 5% tolerance: 11 of 55 - and all 11 are LEGS
+
+**"The legal build collapses to one greedy answer" is REFUTED for four slots of five.**
+Arms carry 7 to 10 viable bits each, Back 5 to 8, Head 2 to 3. That is a real
+decision space, not a formality. The Optimizer's headline claim, taken literally,
+does not survive measurement.
+
+**It is CONFIRMED, completely, for LEGS.** One answer, on every core, without
+exception. This corroborates the playtest's separate observation that Bedrock Legs
+measures +0.34, "3 to 5x every other legs bit". The general claim was wrong; the
+specific slot it was probably built from is exactly right.
+
+**"Identical across every core" is weakened.** The near-optimal sets do shift with the
+core - Head 2 vs 3, Arms 7 to 10, Back 5 to 8 - though modestly.
+
+**"The soul pick is nearly cosmetic" is quantified, not settled.** Achievable optimum
+ranges 0.731 (Ember, Font, Quickstart) to 0.794 (Gallant), an 8.6% spread. Cores are
+not cosmetic, but the ceiling they buy differs by under 9%.
+
+**A bug the output caught, worth naming.** The first run printed 0 near-optimal bits
+in every slot - impossible, since the optimal build must count itself. My backward DP
+is indexed by REMAINING budget and the forward sweep passed CUMULATIVE weight. The
+zeros made it obvious; a subtler indexing error would have printed plausible numbers
+and been believed. I added a `push_error` for the empty case so a future silent zero
+announces itself rather than reading as "the game has no choices".
+
+**The limitation, restated because it bounds every number above.** Value is the
+measured per-bit `mean_delta` from 480-600 real fights, but each bit was measured IN
+ISOLATION, so summing six is an ADDITIVE APPROXIMATION with no interaction terms.
+This is diversity under an additive model. It is decisive where it collapses - LEGS at
+1 cannot be an artifact of ignoring synergies, since no synergy can make a
+strictly-dominated bit competitive on its own axis - and only suggestive where it does
+not.
+
+**What this hands the owner.** A concrete, measured, un-blocked target: **LEGS is a
+solved slot on every core.** Fixing it is loadout-level work inside
+`parts/catalog_extra.json`, not section 13, and it is the one place where "more
+decisions" has an unambiguous meaning. Filed as L-21.
+
+**The backlog is now empty of loop-pickable items.**
 
 ---
 

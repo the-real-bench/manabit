@@ -161,17 +161,19 @@
   },
   {
    "id": "L-10",
-   "gate": "measure",
+   "gate": "closed",
    "lift": 3,
    "evidence": 1,
    "cost": 2,
    "risk": 1,
-   "priority": 1.5,
+   "priority": 0.0,
    "title": "INSTRUMENT: a decision-density probe for the build screen",
    "why": "The Optimizer scores 5/10 because 'the legal build collapses to one greedy answer identical across every core' and 'the soul pick is nearly cosmetic'. That is currently a reasoned claim, not a measured one - there is no instrument that counts how many distinct builds are within X% of optimal under the weight cap. Every other headline claim in the loop is numbers-grounded; this one is not, so under the evidence law it cannot be built against yet.",
    "persona": "Optimizer",
    "criterion": "Build the probe FIRST: report the count of distinct near-optimal builds per core and the overlap between them. Then rescore L-10 into a real balance item with evidence 3.",
-   "touches": "tools/sim/ only. Frozen surfaces: none."
+   "touches": "tools/sim/ only. Frozen surfaces: none.",
+   "closed_by": "Iteration 12 (2026-09-03)",
+   "closed_evidence": "tools/sim/decision_density.gd. Measured: HEAD 2-3, ARMS 7-10, BACK 5-8 near-optimal bits per slot; LEGS exactly 1 on all 11 cores. 11 of 55 slots offer no choice and all 11 are LEGS. Refutes 'collapses to one greedy answer' for 4 of 5 slots; confirms it for LEGS."
   },
   {
    "id": "L-11",
@@ -320,6 +322,20 @@
    "touches": "tools/loop/. Frozen surfaces: none.",
    "closed_by": "Iteration 10 (2026-09-02)",
    "closed_evidence": "verdict.sh check now also fails on an unfilled Result placeholder and on delivered commits that never touched loop/ledger.md; BLOCKED runs stay exempt. Four controls run, including one proving no false positive from prose that merely mentions the placeholder."
+  },
+  {
+   "id": "L-21",
+   "gate": "loop",
+   "lift": 4,
+   "evidence": 3,
+   "cost": 2,
+   "risk": 2,
+   "priority": 3.0,
+   "title": "LEGS is a solved slot: one near-optimal answer on every core",
+   "why": "Measured by tools/sim/decision_density.gd across all 11 cores: HEAD offers 2-3 near-optimal bits, ARMS 7-10 each, BACK 5-8 - and LEGS offers exactly 1, every time. 11 of 55 slots offer no choice at 5% tolerance and all 11 are the same slot. Corroborates the playtest's Bedrock Legs +0.34, '3 to 5x every other legs bit'. One of six sockets is a formality on every build the player will ever make.",
+   "persona": "Optimizer (P1 - a choice needs more than one live option)",
+   "criterion": "PRE-STATE: re-run decision_density.gd and show LEGS offering at least 3 near-optimal bits on a majority of cores, WITHOUT pushing any bit past the existing roster band ceiling. Prefer raising the alternatives over nerfing Bedrock - the playtest calls Bedrock a clean best-in-slot chase target, and removing a satisfying chase to fix a diversity number would trade one enjoyment axis for another. Re-run the roster sim as the tripwire.",
+   "touches": "parts/catalog_extra.json legs stats. Frozen surfaces: the 13 base fixtures are OFF LIMITS."
   }
  ],
  "_reconciliation": {
