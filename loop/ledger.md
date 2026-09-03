@@ -8,6 +8,52 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 12 - 2026-09-03 - L-10, the last thing the loop can reach alone
+
+**Picked:** L-10 (1.5), the only live item left. Gate `measure`, evidence 1 - so under
+the evidence law it may only be MEASURED, and building the instrument IS the
+sanctioned action.
+
+**What it is for.** The Optimizer scores 5/10 because "the legal build collapses to
+one greedy answer identical across every core" and "the soul pick is nearly
+cosmetic". Those are the loudest enjoyment claims in the playtest and the only
+headline ones that are still *reasoned* rather than measured. Every other claim in
+this loop's history that was reasoned rather than measured has been wrong at least in
+part - three of them mine. This item exists so that one is not built against on faith
+either way.
+
+**The value signal, and its honest limit.** `tools/sim/out/roster-post.json` carries a
+measured `mean_delta` per bit - each bit's contribution to win rate over 480-600
+fights. That is real data, not an invented heuristic. **But it was measured in
+ISOLATION**, one bit swapped into a baseline at a time, so summing six of them is an
+ADDITIVE APPROXIMATION that ignores every interaction between parts. The probe
+therefore measures build diversity *under an additive model*, not under true play.
+That limitation goes in the output itself, not just this ledger, so no future reader
+mistakes the number for a play-tested one.
+
+It is still decisive in one direction: if even an additive model over 100 bits and
+five free slots collapses to a handful of near-optimal builds, the claim is
+supported. If it does not collapse, the claim is weakened and needs the real thing.
+
+**CRITERION (stated before writing any code):**
+1. A committed probe reports, per core: the optimal additive build under that core's
+   weight capacity, and **how many distinct bits appear in ANY build within 5% of
+   optimal, per slot**. A slot whose count is 1 is a formality, not a decision.
+2. It states its own additive limitation in its printed output.
+3. It runs over the real catalog through `Catalog.all()` and the real capacity rule
+   (100 + seated core carry), not a reimplementation of either.
+4. The finding is recorded whichever way it falls - a refutation of the Optimizer's
+   claim is as publishable as a confirmation.
+5. 16/16 gates green.
+
+**Revert trigger:** the probe cannot reach the real catalog or the real capacity rule
+and would have to approximate them - in which case it measures a fiction and should
+not ship.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 11 - 2026-09-03 - L-19, and my own filed claim was wrong
 
 **Picked:** L-19 (2.0), top live item.
