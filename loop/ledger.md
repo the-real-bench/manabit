@@ -59,7 +59,50 @@ to run on stale data except that nothing checked.
 **Revert trigger:** the fresh data cannot be produced or the probe cannot distinguish
 "unmeasured" from "measured at zero".
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. The probe no longer lies, the data is complete, and iteration 12's
+numbers are CORRECTED - two conclusions survive, one was overstated.**
+
+Coverage is now **89 of 89 non-core bits (100%)**, from a fresh `sim_roster.gd` run:
+67,410 fights, 112 seconds, ROSTER SIM PASS.
+
+    slot    iteration 12 (79% coverage)   iteration 13 (100%)
+    HEAD          2-3                          3-4
+    ARMS          7-10                         4-5      <- OVERSTATED roughly 2x
+    LEGS          1                            1        <- SURVIVES
+    BACK          5-8                          2-11     <- far more core-dependent
+
+**What I got wrong yesterday.** Arm diversity was overstated by about a factor of two.
+The 19 zero-scored bits were not spread evenly: excluding them made the achievable
+optimum look lower (0.731 vs the true 0.852), which widened the 5% band and let more
+arm bits fall inside it. A silent default did not just add noise, it biased the
+answer in a specific direction.
+
+**What survives, on complete data.** LEGS is 1 on all eleven cores. The claim
+"collapses to one greedy answer" is still refuted for four slots of five and still
+confirmed for LEGS - but the refutation is narrower than I reported.
+
+**The key unknown resolved against the item.** `steadfast_gallant_legs_gantry` was the
+plausible Bedrock rival - RARE, hp 22, def 4, weight 30 against Bedrock's 40. Measured:
+**+0.18 against Bedrock's +0.34.** The best alternative in the slot is barely half the
+leader. **L-21 is confirmed on good evidence.**
+
+**A new finding the fresh data surfaced.** BACK collapses to 2 near-optimal bits on
+exactly the two highest-capacity cores (Keystone 110, Gallant 112) while offering 10
+or 11 on mid-capacity ones. More carrying capacity means FEWER real choices, because
+the optimum sharpens once the weight budget stops binding. That is the opposite of
+what a bigger budget is supposed to feel like. Filed as L-22.
+
+**No leg stat was touched**, exactly as pre-stated. The item that justified touching
+them was in doubt at the start of this iteration; it is now established, so the next
+iteration can act on evidence instead of on yesterday's number.
+
+**The lesson, and it is the fifth of its kind.** `deltas.get(id, 0.0)` turns "never
+measured" into "worth nothing" and reads exactly like a real result. Every previous
+silent failure this session was caught by a gate going red or an output being
+obviously impossible. This one produced plausible numbers and I published them. The
+probe now excludes unmeasured bits, prints its coverage, and names what it dropped.
+
+**Next iteration picks:** L-21 (3.0) - now on solid evidence - then L-22.
 
 ---
 

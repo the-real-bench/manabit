@@ -19,6 +19,7 @@ extends SceneTree
 # decisive if the space collapses; if it does not, the question needs real fights.
 const TOL := 0.05          # "near-optimal" = within 5% of the best achievable value
 const SLOTS := ["HEAD", "ARM_L", "ARM_R", "LEGS", "BACK"]
+var _unmeasured := {}
 
 func _initialize() -> void:
     var deltas := _load_deltas()
@@ -43,6 +44,9 @@ func _initialize() -> void:
     by_slot["ARM_L"] = arms
     by_slot["ARM_R"] = arms
 
+    var total_bits := 0
+    for pd in Catalog.all():
+        if not pd.is_core: total_bits += 1
     print("DECISION DENSITY  (additive model over measured mean_delta - see header)")
     print("%-26s %4s %8s   %s" % ["CORE", "CAP", "BEST", "distinct bits per slot within 5%"])
     var collapsed := 0
@@ -59,14 +63,28 @@ func _initialize() -> void:
         print("%-26s %4d %8.3f   %s" % [String(core.display_name).substr(0, 26), cap, float(res["best"]), line])
     print("")
     print("slots that offer NO choice at 5%% tolerance: %d of %d" % [collapsed, total_slots])
+    var cov := 100.0 * float(total_bits - _unmeasured.size()) / float(maxi(total_bits, 1))
+    print("coverage: %d of %d non-core bits carry a measured delta (%.0f%%)" % [total_bits - _unmeasured.size(), total_bits, cov])
+    if not _unmeasured.is_empty():
+        print("EXCLUDED as unmeasured (NOT scored as zero): %s" % [_unmeasured.keys()])
+        print("Run tools/sim/sim_roster.gd (112s) to close the gap before trusting these counts.")
     print("NOTE: additive approximation. Interactions between parts are NOT modelled.")
     quit(0)
 
+# Prefer the freshest roster output. roster.json is what sim_roster.gd writes on its
+# most recent run; roster-post.json is a historical snapshot that PREDATES the wave-2
+# Hero Shelf bits. Iteration 12 read the snapshot and silently scored 19 of 89
+# non-core bits - 21% of the roster - as 0.0, because `get(id, 0.0)` turns "never
+# measured" into "worth nothing" without saying so. Re-measuring costs 112 seconds.
 func _load_deltas() -> Dictionary:
-    var f := FileAccess.open("res://tools/sim/out/roster-post.json", FileAccess.READ)
+    var path := "res://tools/sim/out/roster.json"
+    if not FileAccess.file_exists(path):
+        path = "res://tools/sim/out/roster-post.json"
+    var f := FileAccess.open(path, FileAccess.READ)
     if f == null: return {}
     var data = JSON.parse_string(f.get_as_text())
     f.close()
+    print("value source: %s" % path)
     if typeof(data) != TYPE_DICTIONARY or not data.has("bits"): return {}
     var out := {}
     for b in data["bits"]:
@@ -82,7 +100,13 @@ func _solve(by_slot: Dictionary, deltas: Dictionary, cap: int) -> Dictionary:
     for s in SLOTS:
         var opts := []
         for pd in (by_slot.get(s, []) as Array):
-            opts.append({"id": String(pd.id), "w": int(pd.weight), "v": float(deltas.get(String(pd.id), 0.0))})
+            var bid := String(pd.id)
+            if not deltas.has(bid):
+                # Never silently score an unmeasured bit. Excluding it is honest;
+                # calling it zero is a lie that reads exactly like a real result.
+                _unmeasured[bid] = true
+                continue
+            opts.append({"id": bid, "w": int(pd.weight), "v": float(deltas[bid])})
         layers.append(opts)
 
     var NEG := -1.0e9
