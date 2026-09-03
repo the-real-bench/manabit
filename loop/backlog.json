@@ -291,17 +291,19 @@
   },
   {
    "id": "L-19",
-   "gate": "loop",
+   "gate": "closed",
    "lift": 1,
    "evidence": 2,
    "cost": 1,
    "risk": 1,
-   "priority": 2.0,
+   "priority": 0.0,
    "title": "The coffer lid gem is a hard-edged rectangle",
    "why": "Noticed while fixing L-08's colour, and deliberately not widened into that change. The seal on the brass coffer lid is a flat 34x28 rectangle with hard edges. The palette is now correct but the SHAPE still reads as a pasted-on sticker rather than an inset, faceted seal. Cozy-craft is etched-rune plastic; a rectangle with no bevel or inset shadow is neither etched nor faceted.",
    "persona": "Cozy Collector",
    "criterion": "PRE-STATE: the seal reads as inset or faceted in a rendered frame - a bevel, an inset shadow, or a non-rectangular silhouette. Judge it in the frame, not in the file. If the honest answer is that it needs real art rather than a procedural tweak, say so and escalate instead of approximating.",
-   "touches": "art/props/coffer_face_brass.png. Frozen surfaces: none."
+   "touches": "art/props/coffer_face_brass.png. Frozen surfaces: none.",
+   "closed_by": "Iteration 11 (2026-09-03)",
+   "closed_evidence": "Filed claim REFUTED - the silhouette was already tapered (28 rows, 13 distinct widths). The real defect was measured: gem median 0.659 equalled both its own max and the brass median 0.655, so it was flat AND had no luminance separation. Regraded to median 0.502 against brass 0.655, hue held at 168 degrees, facet detail preserved as modulation. Reads as recessed in the frame; smoke_art palette gate green."
   },
   {
    "id": "L-20",

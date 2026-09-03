@@ -46,7 +46,39 @@ surrounding brass. Fixing one axis without checking the neighbouring one.
 as a seal. Per the item's own criterion: if the honest answer is that this needs real
 art rather than a procedural tweak, say so and escalate rather than approximate.
 
-**Result:** *(pending - filled in at Phase 5)*
+**Result: KEPT. All four criteria met.**
+
+    before   gem 0.451 .. 0.659   median 0.659  (= its own max, = brass 0.655)
+    after    gem 0.282 .. 0.655   median 0.502  (brass median 0.655)
+
+1. **Recessed.** Median 0.502 against brass 0.655 - a clear luminance step down, so
+   the seal now sits in shadow instead of floating at exactly the brightness of the
+   metal around it.
+2. **Graded, not flat.** Median 0.502 is well below its own max 0.655, where before
+   the two were identical.
+3. **Still a seal in the frame.** Reviewed: dark under the upper lip, catching light
+   on the lower one. Recessed, not a hole - the bottom edge is plainly teal.
+4. **16/16 gates**, including the `smoke_art` palette check: hue held at exactly
+   168 degrees and peak value 0.655, both inside the band iteration 8 established.
+
+**The original facet detail was preserved, not discarded.** The old shading was
+normalised to 0..1 and re-applied as a small modulation on top of the new gradient,
+so the surface keeps its texture instead of becoming a clean ramp.
+
+**What this iteration is really about.** L-19 was filed on an impression - "hard-edged
+rectangle" - and the measurement refuted it: 28 rows, 13 distinct widths, already
+tapered. The actual defect was invisible to the eye that filed the item and obvious in
+two numbers: the gem's median equalled both its own max and the brass median. **And it
+was my own doing** - iteration 8 capped the gem at the mana token's 0.66 to stop it
+out-shouting the screen, which happens to be exactly the brightness of the brass.
+Fixing brightness without checking the neighbouring axis.
+
+Third item in this loop's history refuted by measuring rather than trusting the
+impression that filed it. The pattern is consistent enough now to be a rule rather
+than a coincidence: **an item filed from a look must be measured before it is built
+against.**
+
+**Next iteration picks:** L-10 (1.5) - the only live item left.
 
 ---
 
