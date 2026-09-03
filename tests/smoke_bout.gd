@@ -55,6 +55,26 @@ func _initialize() -> void:
             lootable += 1
     ok = _c("foe carries lootable parts", lootable >= 1) and ok
 
+    # --- the advertised spoils worth is what the bit ACTUALLY melts for ---
+    # The Proving row prints "(melts for scrap N)" derived from Broker.salvage_scrap.
+    # This is NOT a restatement of that call: it melts a real instance through
+    # PlayerState.melt_bit and compares the scrap actually received. If the display
+    # rule and the payout rule ever diverge, the row becomes a lie and this goes red.
+    var wcat := Catalog.by_id()
+    for wentry in Challengers.list():
+        for wspec in wentry["loadout"]:
+            var wpd: PartData = wcat.get(wspec[1])
+            if wpd == null or wpd.is_core:
+                continue
+            var advertised := Broker.salvage_scrap(wpd)
+            var wp := PlayerState.new()
+            var inst := PartInstance.new(wpd)
+            wp.bits.append(inst)
+            var before := wp.scrap
+            var paid := wp.melt_bit(inst)
+            ok = _c("spoils worth is honest: %s advertises %d, melts for %d" % [wpd.id, advertised, paid],
+                    paid == advertised and wp.scrap == before + advertised) and ok
+
     print("SMOKE PASS" if ok else "SMOKE FAIL")
     quit(0 if ok else 1)
 

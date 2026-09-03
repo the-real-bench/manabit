@@ -4,6 +4,97 @@ Session log - newest at top. Each entry captures what actually happened, decisio
 
 ---
 
+## 2026-09-02 (loop iterations 7-9: two refutations, the first art fix, and a record that nearly went out of sync)
+
+**What happened:**
+- **Iteration 7 (L-18 REFUTED, eb215e0):** the "stake-10 lottery" is not a lottery - the player CHOOSES the looted bit (ui/combat_screen.gd:1626-1638, one button per bit). Recomputed by what is actually taken: stake 5 -> COMMON/RARE, stake 10 -> RARE/EPIC, stake 20 -> EPIC/EPIC. This also corrected my own iteration-5 framing, which reasoned about floors nobody ever takes. Real finding escalated as Q7: the reward CEILING is flat across the last stake step - Cogsworth costs 10 and pays an EPIC; Brassmore costs 20, is the hardest fight measured (WIN 0.305), and pays an EPIC. Not tunable, since EPIC is the top rarity; it needs a new reward axis, which is an owner call.
+- **Iteration 8 (L-08, cd8d730):** the coffer lid gem measured #7be1ff (h194 v1.00) - matching no DESIGN.md token and brighter than every one of them, on an entirely warm screen. Remapped 779 pixels onto --affinity-mana #3FA890 with shading preserved. smoke_art now enforces the palette on coffer faces, proven red on the original. First fix the loop found purely by LOOKING - it came from a rendered frame in iteration 0 and no gate could have caught it.
+- **Iteration 9 (L-16, 81f33c0):** tools/loop/framecheck.sh gives per-screen SAME / DIFFERENT / UNVERIFIABLE. A screen with a non-zero noise floor is never reported SAME. The unstable set is derived every run, not hardcoded - the Barrow drifts and is not one of the three known wall-clock seams. Controls: no-change gives zero DIFFERENT; one char on zero-noise Proving gives DIFFERENT; one char on the noisy Workshop gives UNVERIFIABLE.
+
+**Decisions (with reasoning):**
+- **Refutation is a first-class outcome.** Two backlog items died to measurement in three iterations, one of them sourced from the project's own playtest document. Disproving a bad item is cheaper than shipping against it.
+- **A tool that admits what it cannot see beats one that guesses.** Byte-identity (iteration 3) would fail closed on every screen; the threshold (iteration 6) would fail OPEN, reporting SAME for changes it could not detect. UNVERIFIABLE is the honest third answer.
+- **The record must not be able to drift from the code.** Iteration 9's commit shipped the tool with its ledger entry still saying "pending", because a Python block died and the shell had no `set -e` so the commit ran anyway. Repaired in a follow-up and filed as L-20 at priority 9.0.
+
+**Outstanding / next session:**
+- L-20 (9.0, the loop's scripts continue past a failed step - the process hole iteration 9 opened), then L-19 (2.0, the gem is still a hard-edged rectangle), L-10 (1.5).
+- Owner, unchanged and unanswered: **Q2** (additive save v5 - unblocks the coffer odds gap, the scummable stream, the dead Glimmer, the discovery faucet), **Q7** (what the top of the ladder is FOR), the scoring reweight, the Routine model default, and cadence.
+
+## 2026-09-02 (loop iterations 3-6: two shipped, one partial, one refuted by its own measurement)
+
+**What happened:**
+- **Iteration 3 (L-16 partial, 4e2cde8):** shots.sh now boots each capture from a fresh save, so a run no longer inherits the previous run's wallet, shelf and tray. 3 of 6 screens became byte-stable. Criterion (all six) MISSED; kept anyway with the override stated openly, because the save-inheritance bug is independently proven fixed.
+- **Iteration 4 (L-15, 25f3c40):** the brass coffer prints EPIC 8% and rolls 14.8% (40,000 coffers). Cause is pity-at-9 counting BITS since the last EPIC. BRASS_PITY is now a named constant and the wording derives from it, so both the Nook and the Barrow print "never more than 9 bits without an Epic"; tin prints nothing because tin has no pity. Closed as DISCLOSED, not resolved - one honest number needs persisted pity, which is save v5, owner Q2.
+- **Iteration 5 (L-09, d10b367):** Proving rows now show "(melts for scrap N-M)" derived from Broker.salvage_scrap. The gate is the first INDEPENDENT one this loop has written: it melts a real PartInstance through PlayerState.melt_bit and compares what is actually paid, proven red by making the payout drift. **It also refuted the panel's "inverted loot gradient":** measured stake 5 -> 8-8/8-20/8-8, stake 10 -> 8-45/8-45/8-20/8-20, stake 20 -> 45-45/20-45. Floor and ceiling both rise. The claim held only as Cogsworth's best case against Gildfall's worst. A balance item was one step from being filed on it.
+- **Iteration 6 (L-16 REFUTED, this entry):** tried to replace byte-identity with a perceptual threshold. Measured animation-only drift 0.291% on the Workshop against 0.376% for a ONE-CHARACTER label change - overlapping. Raising the amplitude cutoff kept the ratio flat at ~1.3x across 12/40/80/120. The Workshop's breathing bob moves a 3D model, so its drift is high-amplitude too. The SAME/DIFFERENT verdict is reverted; framediff.gd stays as a measurement instrument with the refutation table in its header and no verdict at all.
+
+**Decisions (with reasoning):**
+- **A gate that cannot see a changed label on half the screens is worse than no gate.** It manufactures the false confidence this project keeps digging out - the third instance of that shape this session, after the tautological odds assertion and the false-negative verdict check.
+- **Refutations are kept, not buried.** Two claims died to measurement this week: the inverted loot gradient (from the project's own respected playtest doc) and the perceptual-threshold plan (mine). Both are written into the ledger with their numbers.
+- **The scoring critique was raised with the owner and NOT acted on.** I told them this loop grinds polish rather than the gameplay loop, proposed reweighting so lift beats cheap-and-safe, and asked for their word. No answer, so iterations 5 and 6 ran under the existing rules. Acting on my own proposal would be the quiet widening the protocol forbids.
+
+**Outstanding / next session:**
+- L-18 (3.0, stake-10 spoils span 8-45 for a fixed price - MEASURE-THEN-DECIDE, may be intended texture), L-16 (2.0, reshaped: per-screen verdicts with animated screens marked UNVERIFIABLE), L-08 (2.0), L-10 (1.5).
+- Owner: the scoring reweight, the Routine model default (scheduled runs take Sonnet 5), cadence against a usage limit, and **Q2 - additive save v5, which alone unblocks the coffer odds gap, the scummable stream, the dead Glimmer and the discovery faucet.**
+
+## 2026-09-01 (incident 1 + loop iteration 2: the loop learns to notice its own silence)
+
+**What happened:**
+- **INCIDENT 1 - the first two unattended runs delivered nothing.** Scheduled 08:17: 19 min, $2.61, pushed nothing. Diagnostic re-fire 08:44: 73 sec, $0.45, pushed nothing. Both exited SUCCEEDED - which only means the session did not crash. Caught only because a session happened to fetch the branch. Root cause of the first is mine: the trigger prompt described the seven phases but never demanded an OUTCOME, so a run could analyse, decide things looked fine, and exit clean. The 73-second second run is the evidence for the structural half: after the prompt was hardened to check the push path first, duration collapsed from 19 minutes, meaning it found it could not deliver and stopped.
+- **Fix:** fresh-session Routine deleted; the loop now fires INTO the session that can deliver (trig_01Vk2VwDhqM78UoKBokyGagH, self-bound, every 4 hours). Protocol gained section 2b: verify the loop can DELIVER before trusting it to run.
+- **Iteration 2 shipped L-17** (priority 9.0, which outranked the L-16 the Routine prompt named - priority decides, not the prompt): `tools/loop/verdict.sh`. `start` records the head at Phase 0; `check` at Phase 7 refuses any iteration that produced neither a commit nor a `blocked` report naming the exact command and its exact error. Four negative controls run and SEEN TO FAIL, including a malformed blocker (exit 2) - so "BLOCKED" cannot become the new way of delivering nothing. Wired into the protocol and the skill so it is enforced, not remembered.
+
+**Decisions (with reasoning):**
+- **A ledger that only holds successes is worthless**, so Incident 1 is recorded in full including its $3.06 cost. The whole apparatus exists to catch false confidence; hiding its own first failure would be the same sin.
+- **The delivery path is tested before the engine, the gates, or the backlog.** A run that cannot push should find out in seconds, not after twenty minutes of work it is about to throw away.
+- **verdict.sh proves delivery, never worth.** It closes exactly one hole - silence. Judgment stays with the pre-stated criterion, the fun rubric and the revert rule.
+
+**Outstanding / next session:**
+- L-16 (hermetic shots, 6.0), then L-15 (brass odds honesty, 4.5, needs the D5 read).
+- Owner queue Q1-Q5 unanswered. Two new owner questions: scheduled runs default to Sonnet 5 (the Routine stores no model), and cadence is 6/day against a 5-item backlog while the owner hit a usage limit.
+
+## 2026-09-01 (loop iteration 1: the coffer odds line, and what the negative control found)
+
+**What happened:**
+- Owner authorized the loop to run here: schedule every 4 hours (fresh session per fire), push to the working branch ONLY, no PRs, no merges. Routine `trig_012ncu72zSqNfCbyW4ZpqdfD` created; fired sessions carry no MCP connectors (plain git only), which suits a branch-only loop.
+- **Iteration 1 ran the full seven phases on L-07 (the coffer odds line).** RECONCILE confirmed the defect live: the odds were a hardcoded literal duplicated at `ui/broker_screen.gd:203` and `ui/chest_screen.gd:307`, untouched since the initial commit, sitting next to four magic numbers in `pack_roller.gd` with nothing holding them together.
+- **Shipped:** `PackRoller` names its thresholds and derives the printed line via `odds_line()`; both UI sites ask the roller; the line now reads `5 bits · C70% R22% E8% · rare+ guaranteed` with every figure carrying its own unit. New `smoke_broker` assertions, including an EMPIRICAL one (4,000 tin coffers, realized mix vs printed, 2pp band).
+- **The negative control earned the iteration.** The first assertions I wrote were tautological - label and threshold derive from the same constant, so tampering the constant moved both and the gate stayed green. Fixing that meant measuring what the coffers actually roll, and that found a real defect: **brass prints EPIC 8% and rolls 14.8%** (40,000 coffers, `tools/sim/odds_probe.gd`, now committed). Epic-pity at 9 nearly doubles it. Tin is honest to a tenth of a point. Filed as L-15, entangled with D5 (pity is not persisted, so 14.8% is a marathon-session upper bound).
+- **The loop caught its own instrument breaking.** Barrow frames before and after showed different scrap and Finds with nothing economy-related in the diff: `shots.sh` restores the save around a run but state persists BETWEEN runs, so the visual baseline drifts. Filed as L-16 at priority 6.0 - now the top pick, ahead of any content work.
+
+**Decisions (with reasoning):**
+- **The revert trigger fired once and was honored.** A first format (`C 70% · R 22% · E 8%`) rendered wider than the coffer card. Tightened and re-rendered rather than excused.
+- **Criterion 1 is recorded as MISSED by one character, not rounded up.** The line is 41 chars against 40. Fixing the defect costs +2 units and refunds the bare `%`, so +1 is the provable floor and the criterion was unsatisfiable as written. Recording the miss keeps the ledger worth reading.
+- **Brass is deliberately excluded from the empirical assertion**, with the reason written at the assertion rather than left as a silent gap.
+- **The loop fixes its own instrument first.** L-16 outranks content work because visual review is now a primary verification layer and a drifting baseline hides real regressions.
+
+**Outstanding / next session:**
+- L-16 (hermetic shots), then L-15 (brass odds honesty, needs the D5 read).
+- Owner queue unchanged and unanswered: Q1 turn-cap ADR, Q2 additive save v5, Q3 speed axis, Q4 Blender, Q5 taste posture. Q6 (cadence) is now answered.
+
+## 2026-09-01 (process: the autonomous loop is built, and it can test itself)
+
+**What happened:**
+- Owner asked how to refine the process into a loop that builds MANABIT incrementally without their input. Answered by building the machine, not by writing a plan.
+- **The blocking constraint turned out to be false.** Verification did not actually need the owner's PC. A cloud Linux session fetched Godot 4.7 stable, imported the project, and ran **all 16 gates green in 65 seconds** (14 fast + smoke_kit_sim + smoke_stalemate; slowest is smoke_stage at 44.9s, everything else under 8s). This is the first time the suite has been run by the same session that reports it.
+- **The loop can SEE.** Headless Godot draws nothing, so every visual judgment used to be owner-only. `tools/loop/shots.sh` renders windowed under Xvfb with software GL: all 6 screens captured and reviewed this session. The review produced 3 backlog items no gate could have found (odds string legibility, a saturated cyan panel on the coffer lid to audit against the warm palette, spoils lines that name bits but never their value).
+- **Shipped:** `tools/loop/bootstrap.sh` (engine acquisition, cached, idempotent, honours $GODOT so the Windows checkout reuses it) - `tools/loop/gates.sh` (16 gates, JSON report at loop/out/gates.json, a gate with no printed verdict counts as FAIL) - `tools/loop/shots.sh` (Xvfb capture, auto save backup/restore, flags suspiciously small captures) - `loop/backlog.json` (14 scored items) - `loop/ledger.md` - `loop/owner-queue.md` - `design/process/autonomous-loop.md` - `design/process/fun-rubric.md` - `.claude/skills/loop-iteration/` - `.github/workflows/gates.yml` (first CI this project has had).
+- **Backlog seeded from evidence already in the repo.** The 2026-07-21 AI playtest panel produced D1-D11 and R1-R7 in markdown that no process consumed; those measurements are now scored and pickable. Top loop-pickable item is L-02 (junction lane labels lie about risk: the menace-flavoured lane measures DEATH 0.00, the gift-flavoured lane DEATH 0.59) at priority 9.0.
+
+**Decisions (with reasoning):**
+- **Two laws govern picking, both written against this project's own scars.** The evidence law (`evidence < 2` may only be MEASURED, never built against) exists because wave 1 shipped two changes that moved the wrong way and had to be reverted. The risk law (`risk: 5` is never picked) keeps section 13, the save schema, and the base fixtures owner-gated by construction rather than by memory.
+- **Escalation is a write, never a wait.** One frozen-contract question used to stall the queue behind it. The owner queue holds the case already built (measurement, options, recommendation) and the loop takes the next item.
+- **Fun got a red light.** Sixteen gates prove the game works and none of them prove it is worth playing; a loop that optimises only what it can assert holds correctness flat while enjoyment drifts. The rubric is built from this build's own measured failures (toothless elites, lying lane labels, the guaranteed-death modal box, inverted rarity, the byte-identical coffer stream) rather than from generic design advice, so each principle carries local proof.
+- **The silence rule is now protocol, not lore.** Wave 4b's eight audio loops passed every existence check while loading null. Anything that can be silent gets a live probe; gate-green is neither audible nor visible.
+- **Honest limits recorded rather than papered over:** no audio device (audio stays structurally verified, never heard), no human feel (persona scores are a labelled proxy), and Blender/taste/section 13 remain owner work.
+
+**Correction, same session (backlog was stale on arrival):** a peer session flagged L-01/L-02 as already shipped; verified in code, and it was broader - SIX of ten loop-pickable items were already delivered by design/balance/playtest-fixes-change-order.md (ratified 2026-07-21, 9 shipped changes): L-01=CH-P7/P8, L-02=CH-P4, L-03=CH-P1/P2, L-04=CH-P5/P6, L-05=CH-P3, L-06=CH-P9. Root cause is narrow: this session read the playtest PROBLEM statement and never the RESPONSE to it, though the change order sat in a directory it had already listed. Protocol fixed rather than just the data - Phase 0 gains RECONCILE and picking gains a third law (evidence expires; re-verify the defect is still live IN CODE before picking). Closed items kept with their CH mapping as a record of the miss. The signal worth keeping: after reconciliation the only live items are L-07/L-08/L-09/L-10, and three of the four came from the rendered-frame review - the measured-defect backlog was exhausted, the visual one untouched, which argues that SIGHT is the real unlock here, not the gate runner.
+
+**Outstanding / next session:**
+- **Run the first unattended iteration:** L-07 or L-09 (both 4.0, copy-only, both found by looking at frames).
+- **Owner queue needs six answers** (none blocking): Q1 turn-cap ADR, Q2 permission for an additive save v5, Q3 speed-axis ADR (recommend deciding after Q1), Q4 the Blender mesh batch, Q5 taste sign-off posture, Q6 cadence and per-pass authorisation.
+- Everything from the 2026-07-19 entries still stands.
+
 ## 2026-07-19 (loop closeout addendum: wave 4b audio structure on Opus + the silent-loop fix)
 
 **What happened:**

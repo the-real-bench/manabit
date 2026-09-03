@@ -64,7 +64,36 @@ func _initialize() -> void:
 	var pct := 0.0 if total == 0 else 100.0 * present / total
 	print("coverage: %d/%d real bits (%.1f%%)   off-spec: %d" % [present, total, pct, fails])
 	# "Pipeline proven" = at least one real bit is present and every present bit is spec-legal.
-	var proven := present >= 1 and fails == 0
+	# --- coffer faces stay inside the palette (L-08) ---
+	# The brass lid gem shipped at #7be1ff: hue 194, value 1.00 - matching no
+	# DESIGN.md token and brighter than every one of them, on an entirely warm screen.
+	# The identity line is "soft mana-glow, NOT cyber-circuitry". Cool pixels are
+	# allowed - a mana seal should read cool against brass - but they must sit in the
+	# teal band the palette actually defines (--affinity-mana #3FA890 hue 168,
+	# Glimmer #3FD0C0 hue 172) and must not outshine every token in it.
+	var coffer_ok := true
+	for face in ["brass", "tin"]:
+		var fimg := Image.new()
+		if fimg.load("res://art/props/coffer_face_%s.png" % face) != OK:
+			print("  [FAIL] coffer face %s loads" % face)
+			coffer_ok = false
+			continue
+		var offspec := 0
+		var worst := ""
+		for y in fimg.get_height():
+			for x in fimg.get_width():
+				var c := fimg.get_pixel(x, y)
+				if c.a < 0.5 or c.b <= c.r + 0.10:
+					continue
+				var hue_deg := c.h * 360.0
+				if hue_deg < 155.0 or hue_deg > 190.0 or c.v > 0.85:
+					offspec += 1
+					if worst == "":
+						worst = "  first #%s h%.0f v%.2f at %d,%d" % [c.to_html(false), hue_deg, c.v, x, y]
+		print("  [%s] coffer face %s: %d off-palette cool pixels%s" % ["PASS" if offspec == 0 else "FAIL", face, offspec, worst])
+		coffer_ok = coffer_ok and offspec == 0
+
+	var proven := present >= 1 and fails == 0 and coffer_ok
 	print("ART AUDIT PASS" if proven else "ART AUDIT FAIL")
 	quit(0 if proven else 1)
 

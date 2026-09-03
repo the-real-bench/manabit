@@ -80,6 +80,64 @@ func _initialize() -> void:
     ok = _c("v1 int coffers migrate to brass", int(r.coffers["brass"]) == 3 and int(r.coffers["tin"]) == 0) and ok
     ok = _c("v1 glimmer defaults 0", r.glimmer == 0) and ok
 
+    # --- printed coffer odds match the roll, verbatim ---
+    # Same law the run events hold to (smoke_run.gd T4). The label is DERIVED from
+    # PackRoller's thresholds, so this asserts the derivation, not a copied string:
+    # retune a threshold and the printed line must move with it or this goes red.
+    for kind: String in ["tin", "brass"]:
+        var brass: bool = kind == "brass"
+        var rare_t: float = PackRoller.BRASS_RARE if brass else PackRoller.TIN_RARE
+        var epic_t: float = PackRoller.BRASS_EPIC if brass else PackRoller.TIN_EPIC
+        var count: int = PackRoller.BRASS_COUNT if brass else PackRoller.TIN_COUNT
+        var line := PackRoller.odds_line(kind)
+        var c := int(round(rare_t * 100.0))
+        var e := int(round((1.0 - epic_t) * 100.0))
+        ok = _c("%s odds: common %d%% printed" % [kind, c], line.contains("C%d%%" % c)) and ok
+        ok = _c("%s odds: rare %d%% printed" % [kind, 100 - c - e], line.contains("R%d%%" % (100 - c - e))) and ok
+        ok = _c("%s odds: epic %d%% printed" % [kind, e], line.contains("E%d%%" % e)) and ok
+        ok = _c("%s odds: bit count printed" % kind, line.begins_with("%d bits" % count)) and ok
+        # the three figures must sum to 100 - a label that does not add up is a lie
+        ok = _c("%s odds sum to 100" % kind, c + (100 - c - e) + e == 100) and ok
+        # every figure carries its own unit: no bare trailing %% governing at a distance
+        ok = _c("%s odds: no stray trailing unit" % kind,
+                line.count("%") == 3 and not line.contains(" %")) and ok
+
+    # --- EMPIRICAL: does the printed line match what the coffer actually rolls? ---
+    # The assertions above are structural - label and threshold are derived from the
+    # same constant, so they cannot disagree and cannot go red. This one can. Tin has
+    # no rare+ guarantee and no pity, so its realized mix IS its base rate and is a
+    # true independent check: retune TIN_RARE without the label following and this
+    # fails. (Brass is deliberately NOT asserted here: its pity-at-9 drives realized
+    # EPIC to ~14.8%% against a printed 8%% - see loop/backlog.json L-15, which is
+    # entangled with the unpersisted pity counter, D5, and is owner-gated.)
+    var probe := PackRoller.new(20260711)
+    var tally := {"COMMON": 0, "RARE": 0, "EPIC": 0}
+    var bits := 0
+    for i in range(4000):
+        for pi in probe.roll_tin():
+            tally[pi.data.rarity] = int(tally[pi.data.rarity]) + 1
+            bits += 1
+    var printed_c := int(round(PackRoller.TIN_RARE * 100.0))
+    var printed_e := int(round((1.0 - PackRoller.TIN_EPIC) * 100.0))
+    var real_c := 100.0 * float(tally["COMMON"]) / float(bits)
+    var real_e := 100.0 * float(tally["EPIC"]) / float(bits)
+    ok = _c("tin printed COMMON %d%% matches rolled %.1f%% (+/-2pp)" % [printed_c, real_c],
+            absf(real_c - float(printed_c)) <= 2.0) and ok
+    ok = _c("tin printed EPIC %d%% matches rolled %.1f%% (+/-2pp)" % [printed_e, real_e],
+            absf(real_e - float(printed_e)) <= 2.0) and ok
+    ok = _c("brass prints its rare+ guarantee", PackRoller.odds_line("brass").contains("rare+ guaranteed")) and ok
+    ok = _c("tin claims no guarantee it does not keep", not PackRoller.odds_line("tin").contains("guaranteed")) and ok
+
+    # --- the pity promise is DERIVED from the rule, and tin makes no claim ---
+    # Brass realized EPIC runs ~14.8%% against a printed 8%% because of pity-at-9
+    # (measured, tools/sim/odds_probe.gd). The gap is owner-gated on save v5 (D5,
+    # pity is not persisted), so what ships now is disclosure of the mechanism.
+    # This asserts the WORDS track the CONSTANT: change BRASS_PITY without the copy
+    # following and this goes red.
+    ok = _c("brass discloses its pity at the real threshold",
+            PackRoller.pity_line("brass").contains("%d bits" % PackRoller.BRASS_PITY)) and ok
+    ok = _c("tin promises no pity it does not have", PackRoller.pity_line("tin") == "") and ok
+
     print("SMOKE PASS" if ok else "SMOKE FAIL")
     quit(0 if ok else 1)
 

@@ -154,13 +154,25 @@ func _card(entry: Dictionary, cat: Dictionary) -> Control:
         sl.add_theme_font_size_override("font_size", 12)
         sl.add_theme_color_override("font_color", pair[1])
         stats.add_child(sl)
+    # An informed wager needs BOTH numbers. The stake is printed in scrap; the
+    # spoils were printed as a list of nouns, so there was nothing to weigh it
+    # against. Worth is DERIVED from Broker.salvage_scrap - the same rule the Melt
+    # pays out - so the row cannot advertise a value the bit does not carry.
+    # You loot exactly ONE bit on a win, so the honest figure is the RANGE across
+    # what is lootable, not a total you will never receive.
     var loot := []
+    var worths := []
     for spec in entry["loadout"]:
         var pd: PartData = cat.get(spec[1])
         if pd != null and not pd.is_core:
             loot.append(pd.display_name)
+            worths.append(Broker.salvage_scrap(pd))
     var spoils := Label.new()
     spoils.text = "Spoils: " + " · ".join(loot)
+    if not worths.is_empty():
+        var lo: int = worths.min()
+        var hi: int = worths.max()
+        spoils.text += ("  (melts for ⚙%d)" % lo) if lo == hi else ("  (melts for ⚙%d-%d)" % [lo, hi])
     spoils.add_theme_color_override("font_color", Tokens.BRASS_HI)
     spoils.add_theme_font_size_override("font_size", 12)
     info.add_child(spoils)
