@@ -8,6 +8,61 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 13 - 2026-09-03 - RECONCILE blocked L-21, and caught a hole in iteration 12
+
+**Picked:** L-21 (3.0). **Blocked at reconcile, and the reason invalidates part of the
+finding that created it.**
+
+**What reconcile found.** Before touching a single leg stat I listed the legs roster
+against its measured deltas. Three of seventeen legs bits came back `nan` -
+`larkabout_skyworks_legs_rocketboot`, `larkabout_skyworks_legs_contrail`,
+`steadfast_gallant_legs_gantry`. They are wave-2 Hero Shelf bits, added AFTER
+`roster-post.json` was generated. Checked across the whole catalog:
+
+    HEAD   18 bits,  4 with NO measured delta
+    ARM_L  18 bits,  4
+    ARM_R  19 bits,  5
+    LEGS   17 bits,  3
+    BACK   17 bits,  3
+    TOTAL: 19 of 89 non-core bits unmeasured - 21% of the roster
+
+**My probe silently scored every one of them as 0.0.** `deltas.get(id, 0.0)` - a
+default that turns "never measured" into "worth nothing" without a word. So
+iteration 12's headline numbers were computed with a fifth of the candidates
+artificially valued at zero, and I published them yesterday as measurement.
+
+**This is the fifth silent-failure shape this session, and the first one I shipped as
+a finding rather than as a bug.** The others were gates and guards that failed
+loudly enough to catch. This one produced plausible numbers.
+
+**Whether the LEGS conclusion survives is genuinely open.** Bedrock measures +0.34
+against a next-best +0.1198, a 2.8x gap - but one of the three unmeasured legs is
+`steadfast_gallant_legs_gantry` (hp 22, def 4, weight 30), a tank leg in Bedrock's own
+register and lighter than it. It could plausibly be competitive. LEGS=1 cannot be
+trusted until it is measured.
+
+**Re-measurement turned out to be cheap.** `tools/sim/sim_roster.gd` is the real
+instrument - 5 templates, 30 seeded opponent variants, deterministic resolver - and it
+completes in **112 seconds**: 67,410 fights, ROSTER SIM PASS. There was never a reason
+to run on stale data except that nothing checked.
+
+**CRITERION (stated before writing any code):**
+1. The probe REFUSES to silently default. Any bit with no measured delta is reported,
+   not scored as zero, and the run prints its coverage.
+2. Decision density is recomputed against the FRESH full-coverage roster data.
+3. The LEGS=1 claim from iteration 12 is re-tested and the ledger states plainly
+   whether it survived, whichever way it falls.
+4. L-21 is either confirmed on good evidence or withdrawn - no leg stat is touched
+   this iteration, because the item that justified touching them is now in doubt.
+5. 16/16 gates green.
+
+**Revert trigger:** the fresh data cannot be produced or the probe cannot distinguish
+"unmeasured" from "measured at zero".
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 12 - 2026-09-03 - L-10, the last thing the loop can reach alone
 
 **Picked:** L-10 (1.5), the only live item left. Gate `measure`, evidence 1 - so under
