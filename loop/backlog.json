@@ -325,17 +325,18 @@
   },
   {
    "id": "L-21",
-   "gate": "loop",
+   "gate": "owner",
    "lift": 4,
    "evidence": 3,
    "cost": 2,
    "risk": 2,
-   "priority": 3.0,
+   "priority": 0.0,
    "title": "LEGS is a solved slot: one near-optimal answer on every core",
    "why": "Measured by tools/sim/decision_density.gd across all 11 cores: HEAD offers 2-3 near-optimal bits, ARMS 7-10 each, BACK 5-8 - and LEGS offers exactly 1, every time. 11 of 55 slots offer no choice at 5% tolerance and all 11 are the same slot. Corroborates the playtest's Bedrock Legs +0.34, '3 to 5x every other legs bit'. One of six sockets is a formality on every build the player will ever make. CONFIRMED on 100%% coverage (iteration 13): the previously unmeasured steadfast_gallant_legs_gantry measures +0.18 against Bedrock's +0.34 - the best alternative in the slot is barely half the leader. LEGS remains 1 on all 11 cores.",
    "persona": "Optimizer (P1 - a choice needs more than one live option)",
    "criterion": "PRE-STATE: re-run decision_density.gd and show LEGS offering at least 3 near-optimal bits on a majority of cores, WITHOUT pushing any bit past the existing roster band ceiling. Prefer raising the alternatives over nerfing Bedrock - the playtest calls Bedrock a clean best-in-slot chase target, and removing a satisfying chase to fix a diversity number would trade one enjoyment axis for another. Re-run the roster sim as the tripwire.",
-   "touches": "parts/catalog_extra.json legs stats. Frozen surfaces: the 13 base fixtures are OFF LIMITS."
+   "touches": "parts/catalog_extra.json legs stats. Frozen surfaces: the 13 base fixtures are OFF LIMITS.",
+   "blocked_by": "Its own criterion is unsatisfiable. Measured: LEGS reaches 3 near-optimal bits on a majority of cores only when the best alternatives reach ~0.28, which would make a RARE and a COMMON the #2 and #3 strongest bits in the catalog, ~40% above the current runner-up (girder_fist +0.1906). 'Raise the alternatives' and 'do not breach the band' cannot both hold while Bedrock sits at +0.34, 78% above every other bit in the game. Escalated as Q8."
   },
   {
    "id": "L-22",

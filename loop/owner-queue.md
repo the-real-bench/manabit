@@ -117,6 +117,40 @@ better long-term answer and the more expensive one.
 
 ---
 
+## Q8. What is Bedrock Legs FOR? One bit is twice as strong as anything else
+**Raised by iteration 14, measured.** Bedrock is the strongest bit in the entire
+100-bit catalog, and it is not close:
+
+    cobble_sons_legs_bedrock       +0.3400   rank 1 of 100
+    grumble_co_girder_fist         +0.1906   rank 2, any slot
+    steadfast_gallant_legs_gantry  +0.1800   rank 3
+
+A 78% gap between first and second. The measured LEGS collapse - one near-optimal bit
+on all 11 cores, the only fully solved slot in the game - is a symptom of this, not a
+separate problem.
+
+**Why the loop stopped instead of fixing it.** The item's criterion said to raise the
+alternatives without breaching the roster band. Measured, the buff needed to give LEGS
+three real choices is ~0.28 on the best two alternatives, which would make a RARE and
+a COMMON the #2 and #3 strongest bits in the game. The two constraints cannot both
+hold while Bedrock sits where it is.
+
+**Three options, all yours because they are about intent:**
+1. **Bring Bedrock toward the band** (~0.19-0.22). Restores a normal ceiling and very
+   likely fixes LEGS for free. Costs the chase: the playtest calls Bedrock "a clean
+   best-in-slot chase target" and rates that a genuine source of Optimizer enjoyment.
+2. **Accept LEGS as solved.** Declare Bedrock an intentional apex item. One formality
+   slot out of six, deliberately, in exchange for one great chase.
+3. **Inflate two legs to ~0.28.** Gets the diversity number, breaks the band, and puts
+   a COMMON third in the game. Listed for completeness, not recommended.
+
+**Recommendation: option 1 or 2, and it depends on something only you know** - whether
+the Workshop is meant to be a place of many viable builds, or a place with one famous
+prize worth hunting. Both are coherent games. The measurement cannot choose between
+them.
+
+---
+
 ## Answered
 
 *(nothing yet - this file starts with the first autonomous pass)*

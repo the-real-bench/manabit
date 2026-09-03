@@ -8,6 +8,65 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 14 - 2026-09-03 - L-21 is unsatisfiable as written, and the reason is bigger
+
+**Picked:** L-21 (3.0), confirmed on full coverage last iteration. **Not built.
+Escalated, because measurement showed its own criterion cannot be met without
+breaking the constraint the same criterion imposes.**
+
+**Criterion under test (written in iteration 12):** LEGS offers at least 3
+near-optimal bits on a majority of cores, WITHOUT pushing any bit past the existing
+roster band ceiling, by RAISING THE ALTERNATIVES rather than nerfing Bedrock.
+
+**What reconcile found first.** Bedrock is not merely the best leg. It is **the
+strongest bit in the entire 100-bit catalog**:
+
+    cobble_sons_legs_bedrock       +0.3400   rank 1 of 100
+    grumble_co_girder_fist         +0.1906   rank 2, any slot
+    steadfast_gallant_legs_gantry  +0.1800   rank 3
+
+**A 78% gap between first and second place, across the whole roster.** LEGS
+collapsing is not a legs problem. It is one bit being twice as strong as anything
+else in the game, and the slot it sits in showing the symptom.
+
+**Then I measured the buff the criterion would require**, rather than estimating it -
+by substituting candidate deltas into the probe and reading the slot counts:
+
+    gantry 0.22 / haunch 0.20  ->  LEGS 1 on all 11 cores
+    gantry 0.26 / haunch 0.24  ->  LEGS 3 on 4, LEGS 2 on 5, LEGS 1 on 2
+    gantry 0.28 / haunch 0.26  ->  LEGS 3 on 9 of 11   <- the threshold
+    gantry 0.32 / haunch 0.30  ->  LEGS 3 on all 11
+
+**So the criterion requires making a RARE and a COMMON the #2 and #3 strongest bits
+in the game**, both roughly 40% above the current runner-up. That is not raising
+alternatives; it is manufacturing two more outliers to stand next to the first one.
+The instruction "raise the alternatives, do not nerf Bedrock" and the instruction "do
+not breach the band ceiling" are **mutually unsatisfiable while Bedrock sits at
++0.34**. I wrote both, in the same criterion, before measuring either.
+
+**No stat was changed.** Forcing it would have meant quietly dropping one of my own
+two constraints and reporting the other as met.
+
+**Escalated as Q8 with three real options**, because every one of them is a taste
+call about what Bedrock is FOR, not a number I get to pick:
+1. Bring Bedrock toward the band (~0.19-0.22). Restores a normal ceiling and very
+   likely fixes LEGS as a side effect. Contradicts the playtest's explicit praise of
+   Bedrock as "a clean best-in-slot chase target."
+2. Accept LEGS as solved. Declare Bedrock an intentional apex item and stop counting
+   one dead slot as a defect - a deliberate design choice rather than an oversight.
+3. Inflate two legs to ~0.28. Satisfies the diversity number and breaks the band.
+   **Not recommended** and recorded so the option is visible, not so it is taken.
+
+**The pattern worth naming.** This is the fourth item whose framing did not survive
+measurement, and the second time the unusable part was a criterion I wrote myself.
+The evidence law keeps catching claims; it does not yet catch criteria. A criterion
+is a claim about what is achievable, and it deserves the same scrutiny before it is
+committed to.
+
+**Next iteration picks:** L-22 (3.0), whose own criterion already says MEASURE FIRST.
+
+---
+
 ## Iteration 13 - 2026-09-03 - RECONCILE blocked L-21, and caught a hole in iteration 12
 
 **Picked:** L-21 (3.0). **Blocked at reconcile, and the reason invalidates part of the
