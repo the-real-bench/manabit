@@ -8,6 +8,48 @@ Never rewrite an entry.
 
 ---
 
+## Iteration 11 - 2026-09-03 - L-19, and my own filed claim was wrong
+
+**Picked:** L-19 (2.0), top live item.
+
+**RECONCILE refuted the item as filed.** I wrote L-19 as "the gem is a hard-edged
+rectangle" from a visual impression of a 34px element. Measured, the silhouette is
+already tapered: 28 rows, **13 distinct row widths**, ramping 6, 14, 19, 24, 30, 33,
+34. Not a rectangle. That is the third time an item of mine has been corrected by
+measuring instead of trusting the impression that filed it.
+
+**But something IS wrong, and the measurement names it.**
+
+    gem value          0.451 .. 0.659   median 0.659   <- median EQUALS max
+    surrounding brass  0.565 .. 0.914   median 0.655
+
+Two findings in those numbers. The gem's median is its own maximum, so it is mostly a
+flat plate with a thin darker fringe rather than a graded surface. And its median
+luminance (0.659) is **indistinguishable from the brass it sits on** (0.655), so it
+separates from its background by hue alone. At 34 pixels wide that reads as a sticker
+laid on the lid, not a seal set into it.
+
+**This is a consequence of my own iteration-8 fix.** I capped the gem at the mana
+token's value of 0.66 to stop it out-shouting the screen. That solved the brightness
+problem and created a flatness one: 0.66 happens to be exactly the brightness of the
+surrounding brass. Fixing one axis without checking the neighbouring one.
+
+**CRITERION (stated before touching a pixel):**
+1. The gem's median value sits clearly BELOW the surrounding brass median, so it
+   reads as recessed - an inset seal sits in shadow. A stated number, not "darker".
+2. Its internal shading has a real gradient: median distinctly below its own max,
+   not equal to it.
+3. It still reads as a mana seal in a rendered frame - recessed, not a hole.
+4. `smoke_art`'s palette gate stays green (hue 155-190, value <= 0.85) and 16/16.
+
+**Revert trigger:** the frame reads worse than it does now, or the seal stops reading
+as a seal. Per the item's own criterion: if the honest answer is that this needs real
+art rather than a procedural tweak, say so and escalate rather than approximate.
+
+**Result:** *(pending - filled in at Phase 5)*
+
+---
+
 ## Iteration 10 - 2026-09-02 - L-20, the guard that would have caught last iteration
 
 **Picked:** L-20 (9.0), by a clear margin. This is the hole iteration 9 opened.
