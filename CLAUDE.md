@@ -28,7 +28,7 @@ most about. Locked interaction direction:
 - Combat / economy / run-map / PS1 render stack are **deferred** until the builder feels great.
 
 ## Status
-*Last updated: 2026-07-19 (autonomous depth loop)*
+*Last updated: 2026-09-01 (autonomous loop: self-testing process shipped)*
 - **2026-07-19 OWNER-PRESENT MORNING:** Workshop style direction SIGNED (design/builder/workshop-style-direction.md) -> 14-move reskin shipped (Tokens.sandwich material system, medallion slot rail - NO plates/leader lines, parchment Ledger + steelyard, one hero BIND wax plate, felt drawer tray, dim-and-focus inspect) -> calm/onboarding pass (drawer CLOSED at rest, T1-T8 work-order tag on additive save field binds_total, Ledger hidden on empty bench). Owner: "MUCH MUCH better." Bug fixes with receipts: spar refusal, first-action teleport (warmup guard), beat clock anchor, per-fight camera lock, blind-reveal-under-inspect (z fix at 3 escape points), tag honesty T6/T7/T8, OVERSIZE spacing air. Full-game AUDIO PLAN ratified at design/gdd/audio-full-game.md (owner picked The Wound Spring music direction).
 - **2026-07-19 AUTONOMOUS DEPTH LOOP (owner away, numbers-grounded):** (1) REALITY ENGINE - measurement instruments live at tools/sim/ (sim_roster.gd 52k-fight roster deltas + pentagon_v2, sim_ladder.gd ladder/venture Monte Carlo + D12 cells, economy_sim.py 500x30d, all constants code-cited; outputs in tools/sim/out/). Balance wave: 8/10 council changes shipped, 2 reverted on wrong-way criteria; bout stakes 5/10/20 + forfeit-pays-zero; compendium denominator 73; D-list escalations logged in design/balance/wave1-change-order.md (D11 speed axis + D13 turn cap need OWNER ADRs - section 13 territory). (2) HERO SHELF - 3 new retro-hero families (Carillon Cadets / Larkabout Skyworks / Steadfast Gallantworks), catalog 80 -> 100 bits / 17 branded families, stats priced on measured comparables, 16/20 in band, wheel edges 3/6 (council items logged in design/balance/wave2-stat-notes.md incl. the applied D1 thicket shave); meshes PENDING owner Blender rig per design/art/wave2-mesh-work-order.md (procedural placeholders live). (3) VENTURE DEPTH - Wayside Shrine events + Magpie's Heap rummage as REST FLAVORS (run contract byte-untouched, crack-and-see parity via splitmix64 mix, money-neutral events), Gleaner's Due death salvage (own K halved per measured G9), boss retreat ruled all-or-nothing + honest copy + two-step abandon, second_wind fixed via the measured core-pad rule (tailwind held behind boss softening); spec design/economy/venture-depth-wave3.md. (4) AUDIO - wave 4a: 59 wavs, 15 new seams (snap rarity ladder live), THE UNMAKING silent. Wave 4b (Opus 4.8 after Fable quota) DELIVERED the structural layer: 4-bus tree + stillness gate + 4 duckings (ui/sfx.gd), 8 ambience/state loops in audio/ambience/ + 4 Wound Spring bench stems in audio/music/ (make_sfx.py wave_4b), combat core hums + peril bed + the R1 sustained peril visual (combat_screen), and ui/music_box.gd (AudioStreamSynchronized stems, per-screen mixes). The wave-4b verifier caught a ship-blocking SILENT-loop defect (loops resolved audio/sfx/ but files live in audio/ambience/) that all gates were falsely green on; I fixed it (per-row `dir` key through Sfx._load_stream, corrected basenames, core_hum_0/1 detuned pair panned L/R, amb_nook gain -38) and HARDENED smoke_audio to assert every manifest file resolves at its dir + Sfx.stream_for loads non-null (false-green killer). Proven audible-path via a windowed playing-player probe, not just gate-green. Audio inventory now: 59 sfx + 8 ambience + 4 music = 71 wavs. Gates now: smoke_run 40, smoke_kit 15, smoke_audio hardened; ALL 15 (14 + smoke_kit_sim) verified green independently at every wave boundary incl. post-audio-fix.
 - **AUDIO LESSON (permanent):** gate-green != audible. A loop/stream seam can pass every existence check and still no-op silently if its file dir/basename drifts from the manifest. The net: smoke_audio asserts every MANIFEST row's file resolves at its `dir` key AND Sfx.stream_for(seam) loads a non-null AudioStream; verify runtime audio with a windowed non-inert loop_start->.playing probe, never headless alone (headless is inert by design). Loop dirs: sfx one-shots = res://audio/sfx/, ambience beds + state hums = res://audio/ambience/ (AMB_DIR), music stems = res://audio/music/ (MUS_DIR, loaded by music_box.gd directly).
@@ -64,6 +64,30 @@ most about. Locked interaction direction:
   & "G:\Godot\Godot_v4.7-stable_win64_console.exe" --headless --path . -s "res://tests/smoke_contract.gd"
   ```
   Exit 0 + `SMOKE PASS` = green. Re-run the smoke test yourself after every merge (don't trust a lane's "green").
+
+## The autonomous loop (2026-09-01)
+The project now builds itself between owner sessions. Protocol:
+**`design/process/autonomous-loop.md`** - read it before continuing MANABIT unattended.
+Enjoyment instrument: **`design/process/fun-rubric.md`**. Invocable as `/loop-iteration`.
+
+- **Any Linux session can test the whole game itself** - no Windows PC, no Syncthing:
+  ```bash
+  bash tools/loop/bootstrap.sh    # fetches + caches Godot 4.7, imports the project
+  bash tools/loop/gates.sh        # all 16 gates -> loop/out/gates.json (65s, ALL GREEN)
+  bash tools/loop/shots.sh        # renders all 6 screens under Xvfb -> loop/out/shots/
+  ```
+  `shots.sh` backs up and restores `user://manabit_save.json` around every run.
+- **The loop can SEE.** Headless Godot draws nothing; the Xvfb + software-GL path renders
+  real frames, so fit, contrast, clipping and beauty regressions no longer need the owner.
+  It still cannot HEAR (audio stays structurally verified) and cannot FEEL (persona scores
+  are a labelled proxy, never a substitute for a human playtest).
+- **Work is picked, not discussed:** `loop/backlog.json`, scored `lift * evidence /
+  (cost * risk)`, seeded from the measured D1-D11 / R1-R7 playtest findings. Two laws:
+  `evidence < 2` may only be MEASURED (build the instrument first); `risk: 5` is never
+  picked (section 13, save schema, base fixtures, final taste).
+- **Escalation is a write, never a wait:** `loop/owner-queue.md`. Outcomes: `loop/ledger.md`.
+- **CI re-runs the same suite** (`.github/workflows/gates.yml`) so no green depends on the
+  session that claimed it.
 
 ## The team (this `.claude/`)
 Full studio scaffold copied from the Hollowmere project: **49 agents** (Directors → Leads → Specialists,

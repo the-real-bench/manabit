@@ -1,0 +1,77 @@
+name: gates
+
+# Independent verification. The loop runs the same script locally, but a claim of
+# green that only exists inside the session that made it is not evidence. This job
+# re-runs the identical suite on a machine with no memory of the work.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MANABIT_GODOT_CACHE: ${{ github.workspace }}/.godot-engine
+      MANABIT_GODOT_VERSION: 4.7-stable
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache the engine
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.godot-engine
+          key: godot-${{ env.MANABIT_GODOT_VERSION }}-linux
+
+      - name: Bootstrap engine and import project
+        run: bash tools/loop/bootstrap.sh
+
+      - name: Run the gate suite
+        run: bash tools/loop/gates.sh
+
+      - name: Upload gate report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gates-report
+          path: |
+            loop/out/gates.json
+            loop/out/fail_*.log
+          if-no-files-found: ignore
+
+  shots:
+    # Visual review material for the PR. Advisory: a software-GL capture failing in
+    # CI is not a reason to block a merge, but the frames are worth having attached.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    env:
+      MANABIT_GODOT_CACHE: ${{ github.workspace }}/.godot-engine
+      MANABIT_GODOT_VERSION: 4.7-stable
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache the engine
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.godot-engine
+          key: godot-${{ env.MANABIT_GODOT_VERSION }}-linux
+
+      - name: Install a virtual display
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Bootstrap engine and import project
+        run: bash tools/loop/bootstrap.sh
+
+      - name: Render every screen
+        run: bash tools/loop/shots.sh
+
+      - name: Upload screens
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screens
+          path: loop/out/shots/*.png
+          if-no-files-found: warn

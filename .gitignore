@@ -32,3 +32,7 @@ Desktop.ini
 *~
 *.tmp
 *.bak
+
+# === Autonomous loop artifacts ===
+# Scripts and state are tracked; run output is not.
+loop/out/
