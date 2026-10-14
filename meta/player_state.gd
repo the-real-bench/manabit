@@ -9,6 +9,9 @@ var scrap: int = 0
 var glimmer: int = 0
 var roller: PackRoller
 var menagerie: Array = []                # banked whole Manabits (Array of Dictionary)
+var bench: ManabitState = null           # the Workshop's in-progress build, shared BY REFERENCE with
+                                         # its BuildSession (like `bits`) and saved, so nothing on the
+                                         # bench - a half-build or a Manabit taken out to fight - is lost on reload
 var compendium: Dictionary = {}          # discovered bit id (String) -> true
 var broker_shelf: Array = []             # Today's Finds: [{id, sold}]
 var last_gift_day: int = -1
@@ -244,6 +247,22 @@ func bank_manabit(mname: String, m: ManabitState) -> void:
     entry["mana"] = int(d.energy)
     menagerie.append(entry)
     binds_total += 1
+
+# The inverse of bank_manabit: lift a bound Manabit out of the Menagerie so it can stand on the
+# bench and fight (BUILD_BRIEF §437 - you deploy from the Garage). Returns slot -> PartInstance
+# with carried HP intact. binds_total is untouched (it counts binds ever made, not current ones).
+func unbank_manabit(entry: Dictionary) -> Dictionary:
+    var out := {}
+    var cat := Catalog.by_id()
+    for p in entry.get("parts", []):
+        var pd: PartData = cat.get(String(p.get("id", "")))
+        if pd == null:
+            continue
+        var pi := PartInstance.new(pd)
+        pi.current_hp = int(p.get("current_hp", pd.max_hp))
+        out[String(p.get("slot", ""))] = pi
+    menagerie.erase(entry)
+    return out
 
 func compendium_total() -> int:
     # Honest denominator (wave 1 CH-10): cores the player can never own do not count.

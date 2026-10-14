@@ -81,6 +81,16 @@ static func slot_word(slot: String) -> String:
         "BACK": return "Back"
         _: return slot.capitalize()
 
+# One honest per-bit stat line for hover tooltips (slot plates, loot + forfeit choices).
+static func bit_tip(pd: PartData, slot: String = "") -> String:
+    var t := "%s - %s %s\nAttack %d · Defense %d · Speed %d · Weight %d · HP %d" % [
+        pd.display_name, pd.rarity.capitalize(), slot_word(slot if slot != "" else pd.slot),
+        pd.attack, pd.defense, pd.speed, pd.weight, pd.max_hp]
+    if pd.ability != null and pd.ability.display_name != "":
+        var arch := pd.ability.archetype.capitalize()
+        t += "\nMove: " + (arch if pd.ability.display_name.to_lower() == arch.to_lower() else "%s (%s)" % [pd.ability.display_name, arch])
+    return t
+
 static func slot_glyph(slot: String) -> String:
     match slot:
         "HEAD": return "◉"

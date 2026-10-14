@@ -3,6 +3,7 @@ class_name MenagerieScreen extends Control
 # then click a part to focus that part's stats.
 
 signal done
+signal take_to_bench(entry)          # lift this Manabit back onto the Workshop bench to fight
 
 var player: PlayerState
 var _back: Button
@@ -195,6 +196,16 @@ func _build_detail() -> void:
     agg.add_theme_color_override("font_color", Tokens.PARCHMENT)
     agg.add_theme_font_size_override("font_size", 16)
     info.add_child(agg)
+
+    # Bound Manabits fight from the bench (Spar/Bout/Venture all read it) - this is the way back.
+    var take := Button.new()
+    take.text = "Take to the bench  ▸"
+    Tokens.brass_button(take)
+    Tokens.pad_target(take, 44.0)
+    take.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+    var e := _entry
+    take.pressed.connect(func(): _mode = "list"; _entry = {}; take_to_bench.emit(e))
+    info.add_child(take)
 
     var ph := Label.new()
     ph.text = "PARTS  -  click one to inspect"

@@ -98,6 +98,9 @@ var _auto := false
 var _state := "idle"                        # idle | choose_move | choose_target | busy | over
 
 var _title: Label
+var _card: Control = null                  # the fight title card (build -> fight threshold)
+var _card_skip := false
+const FIGHT_CARD_HOLD := 1.2               # seconds the card holds before the first turn
 var _turn_label: Label
 var _me_stage: ManabitStage
 var _foe_stage: ManabitStage
@@ -208,7 +211,83 @@ func _start(foe_aims_core: bool) -> void:
     _build_rows(_foe_panel, _foe, "foe")
     _start_core_hums()                  # the combat room tone: two detuned souls (me / foe)
     _log_shown = combat.battle_log.size()
+    _run_fight_card(_gen)
+
+# --- the fight title card: a clear threshold between the bench and the arena (playtest
+# 2026-10-14: the screen swap alone didn't read as "you are now fighting"). Holds, then the
+# first turn starts; a click skips it. Lives on the screen itself, never in _fx.
+func _run_fight_card(gen: int) -> void:
+    if not is_inside_tree():
+        _next()
+        return
+    _show_fight_card()
+    # wall clock, not get_process_delta_time(): that read 0 on the web build and the card never lifted
+    var until := Time.get_ticks_msec() + int(FIGHT_CARD_HOLD * 1000.0)
+    while Time.get_ticks_msec() < until and not _card_skip:
+        await get_tree().process_frame
+        if not is_inside_tree() or gen != _gen:
+            return
+    _lift_card()
     _next()
+
+func _show_fight_card() -> void:
+    _lift_card(true)
+    _card_skip = false
+    var card := ColorRect.new()
+    card.color = Color(Tokens.PANEL_DEEP, 0.97)
+    card.set_anchors_preset(Control.PRESET_FULL_RECT)
+    card.mouse_filter = Control.MOUSE_FILTER_STOP
+    card.z_index = 100
+    card.gui_input.connect(_on_card_input)
+    var box := VBoxContainer.new()
+    box.set_anchors_preset(Control.PRESET_CENTER)
+    box.grow_horizontal = Control.GROW_DIRECTION_BOTH
+    box.grow_vertical = Control.GROW_DIRECTION_BOTH
+    box.alignment = BoxContainer.ALIGNMENT_CENTER
+    box.add_theme_constant_override("separation", 10)
+    box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    card.add_child(box)
+    var kind := Label.new()
+    kind.text = "TO THE ARENA"
+    kind.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    kind.add_theme_color_override("font_color", Color(Tokens.PARCHMENT, 0.6))
+    kind.add_theme_font_size_override("font_size", 14)
+    box.add_child(kind)
+    var head := Label.new()
+    head.text = _title.text.strip_edges()
+    head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    head.add_theme_color_override("font_color", Tokens.BRASS_HI)
+    Tokens.display(head, 52)
+    box.add_child(head)
+    var vs := Label.new()
+    vs.text = "Your Manabit   vs   %s" % _foe_name
+    vs.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    vs.add_theme_color_override("font_color", Tokens.PARCHMENT)
+    vs.add_theme_font_size_override("font_size", 20)
+    box.add_child(vs)
+    add_child(card)
+    _card = card
+    if not Juice.reduce_motion:
+        card.modulate.a = 0.0
+        card.create_tween().tween_property(card, "modulate:a", 1.0, 0.18)
+
+func _on_card_input(e: InputEvent) -> void:
+    if (e is InputEventMouseButton or e is InputEventScreenTouch) and e.pressed:
+        _card_skip = true
+
+func _lift_card(instant: bool = false) -> void:
+    if _card == null or not is_instance_valid(_card):
+        _card = null
+        return
+    var c := _card
+    _card = null
+    if instant or Juice.reduce_motion:
+        c.queue_free()
+        return
+    c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    var tw := c.create_tween()
+    tw.tween_property(c, "modulate:a", 0.0, 0.25)
+    tw.tween_callback(c.queue_free)
 
 func _reset_pane(st: Control) -> void:
     st.rotation = 0.0
@@ -1635,6 +1714,7 @@ func _fill_outcome() -> void:
             rows += 1
             var b := Button.new()
             b.text = "%s %s" % [Tokens.slot_glyph(slot), pi.data.display_name]
+            b.tooltip_text = Tokens.bit_tip(pi.data, slot)   # hover = know what you're taking
             b.pressed.connect(_loot.bind(pi.data))
             _moves_box.add_child(b)
         if rows == 0:
@@ -1659,6 +1739,7 @@ func _fill_outcome() -> void:
                     b.text = "%s %s" % [Tokens.slot_glyph(slot), real.data.display_name]
                 else:
                     b.text = "%s %s (+⚙%d)" % [Tokens.slot_glyph(slot), real.data.display_name, Broker.salvage_scrap(real.data)]
+                b.tooltip_text = Tokens.bit_tip(real.data, slot)
                 b.pressed.connect(_forfeit.bind(slot))
                 _moves_box.add_child(b)
         if not any:

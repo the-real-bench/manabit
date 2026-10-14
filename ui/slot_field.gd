@@ -48,9 +48,7 @@ func refresh() -> void:
     if pi != null:
         # honest data relocated, never removed: full per-bit numbers ride the tooltip here
         # and the move-10 inspect chips (the old plate's informational job, per the spec)
-        tooltip_text = "%s - %s %s\nAttack %d · Defense %d · Speed %d · Weight %d" % [
-            pi.data.display_name, pi.data.rarity.capitalize(), Tokens.slot_word(slot_name),
-            pi.data.attack, pi.data.defense, pi.data.speed, pi.data.weight]
+        tooltip_text = Tokens.bit_tip(pi.data, slot_name)
         var icon_path := "res://art/icons/%s.png" % String(pi.data.id)
         if ResourceLoader.exists(icon_path):
             var tex = load(icon_path)

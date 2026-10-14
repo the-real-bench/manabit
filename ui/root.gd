@@ -42,6 +42,7 @@ func _ready() -> void:
 
     menagerie = MenagerieScreen.new().setup(player)
     menagerie.done.connect(func(): _show(workshop))
+    menagerie.take_to_bench.connect(func(entry): _show(workshop); workshop.load_banked(entry))   # show first: load's note must win
 
     compendium = CompendiumScreen.new().setup(player)
     compendium.done.connect(func(): _show(workshop))

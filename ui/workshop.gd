@@ -109,6 +109,10 @@ func _ready() -> void:
         player.grant_starter_kit()
     session = BuildSession.new()
     session.inventory = player.bits          # share the collection by reference
+    if player.bench != null:
+        session.manabit = player.bench       # restore the saved bench build
+    else:
+        player.bench = session.manabit       # ...or hand ours over so it saves
     _build_layout()
     visibility_changed.connect(_on_visibility_changed)
     call_deferred("refresh_from_player")
@@ -1135,6 +1139,22 @@ func _on_venture() -> void:
         venture_requested.emit(_name_edit.text)
     else:
         _refresh_bank()   # shows the ratified block copy (tappable bind-note on no-core)
+
+# A bound Manabit comes back out of the Menagerie to fight. Whatever was on the bench returns to
+# the tray first (nothing is lost); BIND files it away again.
+func load_banked(entry: Dictionary) -> void:
+    get_tree().call_group(&"ws_toast", "queue_free")
+    for s in ManabitState.SLOT_NAMES:
+        session.unequip(s)
+    var parts := player.unbank_manabit(entry)
+    for s in parts:
+        session.add_to_inventory(parts[s])
+        session.equip(s, parts[s])
+    _name_edit.text = String(entry.get("name", _name_edit.text))
+    player.save()
+    selected_card = null
+    refresh_from_player()
+    _set_note("%s is back on the bench - Spar, Bout or Venture." % _name_edit.text, Tokens.BRASS_HI)
 
 func clear_build() -> void:
     session.clear()
@@ -2174,6 +2194,7 @@ func _toast(txt: String) -> void:
     Tokens.display(t, 22)
     _shade(t)
     t.z_index = 40
+    t.add_to_group(&"ws_toast")      # load_banked sweeps stale ones (a BOUND! must not replay on take-out)
     add_child(t)
     t.position = Vector2(size.x * 0.5 - 180, size.y * 0.30)
     var tw := t.create_tween()
