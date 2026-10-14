@@ -437,7 +437,7 @@ func _reveal_sequence(rolled: Array, perfect: bool) -> void:
     elif best == "RARE":
         _status.text = "◆  A rare bit stirs awake."
     else:
-        _status.text = "＋%d bits woken into your collection." % rolled.size()
+        _status.text = "+%d bits woken into your collection." % rolled.size()
 
 func _kindle(card: Control, pi: PartInstance) -> void:
     if card == null:

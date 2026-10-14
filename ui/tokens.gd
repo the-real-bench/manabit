@@ -97,7 +97,21 @@ static var _display_font: Font = null
 static func display_font() -> Font:
     if _display_font == null and ResourceLoader.exists("res://art/fonts/Baloo2.ttf"):
         _display_font = load("res://art/fonts/Baloo2.ttf")
+        _display_font.fallbacks = [ThemeDB.fallback_font]   # default sans already chains to symbol_fonts()
     return _display_font
+
+# Symbol glyphs (⚙ ✦ ▸ ◆ ★ ↳ ▟ …) aren't in Baloo 2 or the default sans. Desktop borrows them from
+# OS fonts; the web build has no OS fonts, so ship explicit fallbacks. Call once at boot.
+static var _symbol_fonts: Array[Font] = []
+
+static func symbol_fonts() -> Array[Font]:
+    if _symbol_fonts.is_empty():
+        for n in ["DejaVuSansMono", "NotoSansSymbols2", "NotoSansSymbols"]:
+            _symbol_fonts.append(load("res://art/fonts/%s.woff2" % n))
+    return _symbol_fonts
+
+static func install_symbol_fallbacks() -> void:
+    ThemeDB.fallback_font.fallbacks = symbol_fonts()
 
 static func display(c: Control, size: int = 0) -> void:
     # apply the warm display face to a header/nameplate control (falls back to default sans)

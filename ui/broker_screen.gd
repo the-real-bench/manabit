@@ -410,7 +410,7 @@ func _on_buy_find(index: int, card: Control) -> void:
     _stamp(card, "TAKEN")
     var price := Broker.find_price(pd)
     _toast("−%s%d" % ["✦" if price["currency"] == "glimmer" else "⚙", int(price["amount"])], Tokens.WAX, card)
-    _toast("＋1 to the bench", Tokens.BRASS_HI, card, 62.0)
+    _toast("+1 to the bench", Tokens.BRASS_HI, card, 62.0)
     _bark_say("Good eye. Off it goes to a maker who'll wake it proper.")
     refresh_from_player()
 
@@ -420,7 +420,7 @@ func _on_claim_doorstep(card: Control) -> void:
         Sfx.play(&"doorstep_untie")
         if _fettle != null:
             _fettle.pulse()
-        _toast("＋◈ Tin", Tokens.BRASS_HI, card)
+        _toast("+◈ Tin", Tokens.BRASS_HI, card)
         _bark_say("Left one on your step this morning. Always do.")
         refresh_from_player()
 
@@ -431,7 +431,7 @@ func _on_melt(pi: PartInstance, card: Control) -> void:
         Sfx.play(&"forge_melt")
         if _fettle != null:
             _fettle.pulse()
-        _toast("＋⚙%d" % g, Tokens.BRASS_HI, card)
+        _toast("+⚙%d" % g, Tokens.BRASS_HI, card)
         _bark_say("Down to warm filings it goes. Nothing's ever wasted here.")
         refresh_from_player()
     else:
@@ -444,7 +444,7 @@ func _on_distill(pi: PartInstance, card: Control) -> void:
         Sfx.play(&"still_drip")
         if _fettle != null:
             _fettle.pulse()
-        _toast("＋✦%d" % g, Tokens.STAT_ENERGY, card)
+        _toast("+✦%d" % g, Tokens.STAT_ENERGY, card)
         _bark_say("There's a little bound-light in this one. Caught it proper.")
         refresh_from_player()
     else:
@@ -457,7 +457,7 @@ func _on_melt_all() -> void:
         Sfx.play(&"forge_melt")
         if _fettle != null:
             _fettle.pulse()
-        _bark_say("Melted %d common spares down.  (＋⚙%d)" % [int(r["count"]), int(r["scrap"])])
+        _bark_say("Melted %d common spares down.  (+⚙%d)" % [int(r["count"]), int(r["scrap"])])
         refresh_from_player()
     else:
         _refuse("No common spares to melt, maker - you keep a tidy bench.")

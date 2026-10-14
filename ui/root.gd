@@ -19,6 +19,7 @@ var _music_mourning := false        # a DEATH this session: the Workshop reopens
 
 func _ready() -> void:
     set_anchors_preset(Control.PRESET_FULL_RECT)
+    Tokens.install_symbol_fallbacks()
     get_window().min_size = Vector2i(640, 360)   # canvas_items+expand scales below this instead of clipping
     player = PlayerState.new()
     if not SaveManager.load_into(player):

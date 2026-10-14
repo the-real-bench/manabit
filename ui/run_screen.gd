@@ -656,7 +656,7 @@ func _on_rummage() -> void:
     refresh()
     if String(res["kind"]) == "filings":
         Sfx.play(&"coin_scrap")
-        _status.text = "Mostly rust. ＋⚙4 in filings, at least."
+        _status.text = "Mostly rust. +⚙4 in filings, at least."
     else:
         Sfx.play(&"reveal_rare")
         _status.text = "Buried treasure - a %s! It rides with the box til home." % String(res["name"])
@@ -849,7 +849,7 @@ func _resolve_kit_fight(result: int) -> void:
             _finish_kit(true, "You haul the box home, salvage rattling - clean run!")
         else:
             refresh()
-            var msg := "＋⚙%d to your salvage." % purse
+            var msg := "+⚙%d to your salvage." % purse
             if pad > 0:
                 msg += "  Second Wind - your core will carry +%d HP into the next bell." % pad
             _status.text = msg

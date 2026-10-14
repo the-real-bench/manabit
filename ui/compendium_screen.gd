@@ -116,7 +116,7 @@ func _make_card(pd: PartData, known: bool) -> Control:
     glyph.add_theme_font_size_override("font_size", 20)
     head.add_child(glyph)
     var nm := Label.new()
-    nm.text = pd.display_name if known else "？ ？ ？"
+    nm.text = pd.display_name if known else "? ? ?"
     nm.add_theme_color_override("font_color", Tokens.PARCHMENT if known else Color(Tokens.PARCHMENT, 0.3))
     v.add_child(nm)
     var sub := Label.new()

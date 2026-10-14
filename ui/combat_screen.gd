@@ -1404,7 +1404,7 @@ func _forfeit(slot: String) -> void:
     player.scrap += sc
     player.save()
     _resolved = true
-    _banner.text = "You forfeit the %s to the victor.  (＋⚙%d salvage)" % [pi.data.display_name, sc]
+    _banner.text = "You forfeit the %s to the victor.  (+⚙%d salvage)" % [pi.data.display_name, sc]
     _refresh()
 
 # --- rendering: persistent HP rows (built once per fight; provably fixed row set) ---
